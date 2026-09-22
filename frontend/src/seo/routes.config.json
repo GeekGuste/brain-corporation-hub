@@ -1,0 +1,27 @@
+{
+  "$commentaire": [
+    "Configuration centralisee des URL du site (CLAUDE.md §12 et §16).",
+    "Le referenceur confirmera ces chemins : ils se modifient ici, sans toucher",
+    "au code. La cle ne change jamais, c'est elle qui relie une page a son",
+    "contenu (content/fr/<cle>.json) et a ses metadonnees (seo.config.json).",
+    "Les pages legales, le referentiel territorial et la page de suivi seront",
+    "ajoutes ici a leur etape respective."
+  ],
+  "pages": [
+    {
+      "cle": "accueil",
+      "chemin": "",
+      "indexable": true
+    },
+    {
+      "cle": "brain-corporation-hub",
+      "chemin": "brain-corporation-hub",
+      "indexable": true
+    },
+    {
+      "cle": "lignes-rouges",
+      "chemin": "lignes-rouges",
+      "indexable": true
+    }
+  ]
+}

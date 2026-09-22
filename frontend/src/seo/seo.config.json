@@ -1,0 +1,36 @@
+{
+  "$commentaire": [
+    "Titre, meta description et Open Graph par page (CLAUDE.md §12).",
+    "Ces valeurs sont PROVISOIRES : le plan du referenceur les remplacera, en",
+    "modifiant ce seul fichier. Les libelles actuels reprennent les titres et",
+    "les phrases du document de contenus du client, sans rien inventer.",
+    "La cle de chaque entree correspond a la cle de routes.config.json."
+  ],
+  "commun": {
+    "nomDuSite": "Brain Corporation Hub",
+    "separateurDeTitre": " | ",
+    "locale": "fr_FR",
+    "imagePartageParDefaut": "[À FOURNIR PAR LE CLIENT]",
+    "imagePartageTexteAlternatif": "[À FOURNIR PAR LE CLIENT]"
+  },
+  "pages": {
+    "accueil": {
+      "titre": "Mieux comprendre les risques pour décider plus tôt",
+      "description": "Brain Corporation Hub conçoit des formations et des accompagnements qui font de la connaissance un outil d'anticipation.",
+      "ogTitre": "Brain Corporation Hub",
+      "ogDescription": "Mieux comprendre les risques pour décider plus tôt."
+    },
+    "brain-corporation-hub": {
+      "titre": "Faire de la formation un instrument de prévention",
+      "description": "Brain Corporation Hub est une plateforme de formation et de coaching appelée à intervenir dans des domaines variés.",
+      "ogTitre": "Notre vision",
+      "ogDescription": "Faire de la formation un instrument de prévention."
+    },
+    "lignes-rouges": {
+      "titre": "Lignes Rouges : détecter le risque avant qu'il ne devienne une crise",
+      "description": "Programme de formation consacré à la prévention des situations susceptibles de fragiliser le droit au séjour des personnes étrangères en France. 1 h 30, à distance, 100 € TTC.",
+      "ogTitre": "Lignes Rouges",
+      "ogDescription": "Prévenir les risques liés au droit au séjour."
+    }
+  }
+}

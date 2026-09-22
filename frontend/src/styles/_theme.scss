@@ -1,0 +1,113 @@
+// =============================================================================
+// FICHIER UNIQUE DE VARIABLES DE THEME
+// -----------------------------------------------------------------------------
+// Toutes les couleurs, la typographie et les rayons du projet sont ici, et
+// nulle part ailleurs (CLAUDE.md §14). Aucune couleur ne doit etre ecrite en
+// dur dans un composant, un template ou une feuille de style de composant.
+//
+// La charte graphique du client n'est pas encore fournie. Les valeurs
+// ci-dessous sont une palette PROVISOIRE, sobre et institutionnelle, choisie
+// pour ses contrastes accessibles. Le remplacement de la charte consiste a
+// modifier ce seul fichier.
+//
+// Comment consommer ces valeurs ailleurs dans le projet :
+//   - classes utilitaires Bootstrap (.text-primary, .bg-light, .btn-primary)
+//   - variables CSS de Bootstrap : var(--bs-primary), var(--bs-body-color)
+//   - variables CSS du projet declarees en bas de ce fichier : var(--bch-...)
+// =============================================================================
+
+@use 'bootstrap/scss/bootstrap' with (
+  // ---------------------------------------------------------------------------
+  // Couleurs de marque (provisoires)
+  // ---------------------------------------------------------------------------
+  // Bleu encre : registre institutionnel, proche d'un organisme de formation.
+  $primary: #1b3a5c,
+  // Ardoise : elements secondaires, texte d'appui.
+  $secondary: #566573,
+  // Vert sobre : confirmation de paiement, etat valide.
+  $success: #2e6b4f,
+  // Rouge brique : erreurs de formulaire. Assez fonce pour rester lisible sur
+  // fond clair, sans virer au rouge d'alerte agressif.
+  $danger: #a5352b,
+  // Ocre : avertissements et mentions de vigilance.
+  $warning: #8a6d3b,
+  // Bleu clair : encarts d'information neutre.
+  $info: #2c5f7c,
+  // Fonds neutres.
+  $light: #f4f6f8,
+  $dark: #14202f,
+
+  // ---------------------------------------------------------------------------
+  // Corps de page
+  // ---------------------------------------------------------------------------
+  $body-bg: #ffffff,
+  $body-color: #1c2430,
+  $body-secondary-color: #566573,
+  $border-color: #d6dae0,
+  $link-color: #1b3a5c,
+  $link-hover-color: #14202f,
+
+  // ---------------------------------------------------------------------------
+  // Typographie
+  // ---------------------------------------------------------------------------
+  // Pile systeme : aucune police distante a telecharger. Le public est souvent
+  // en connexion lente (CLAUDE.md §13) et le §12 demande de limiter les polices.
+  // Si la charte impose une police de marque, elle se declare ici et ici seul.
+  $font-family-sans-serif: (
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif
+  ),
+  $font-size-base: 1rem,
+  $line-height-base: 1.6,
+  $headings-font-weight: 600,
+  $headings-line-height: 1.25,
+  $h1-font-size: 2rem,
+  $h2-font-size: 1.5rem,
+  $h3-font-size: 1.25rem,
+
+  // ---------------------------------------------------------------------------
+  // Rayons
+  // ---------------------------------------------------------------------------
+  $border-radius: 0.375rem,
+  $border-radius-sm: 0.25rem,
+  $border-radius-lg: 0.5rem,
+
+  // ---------------------------------------------------------------------------
+  // Accessibilite (CLAUDE.md §13)
+  // ---------------------------------------------------------------------------
+  // Bootstrap choisit automatiquement un texte clair ou fonce sur une couleur
+  // de fond. Ce seuil l'oblige a respecter le rapport de contraste WCAG AA.
+  $min-contrast-ratio: 4.5,
+  // Cibles tactiles genereuses et champs lisibles sur petit ecran.
+  $input-btn-padding-y: 0.625rem,
+  $input-btn-padding-x: 1rem,
+  $input-btn-focus-width: 0.25rem,
+  // Le focus clavier doit rester visible, y compris sur fond colore.
+  $input-btn-focus-color-opacity: 0.35
+);
+
+// =============================================================================
+// Variables CSS propres au projet
+// -----------------------------------------------------------------------------
+// Pour les rares valeurs qui n'ont pas d'equivalent Bootstrap. Elles restent
+// dans ce fichier pour que la regle « une seule source de couleurs » tienne.
+// =============================================================================
+:root {
+  // Anneau de focus clavier, utilise sur les elements non Bootstrap.
+  --bch-focus-ring: var(--bs-primary);
+  // Fond des encarts de mention legale ou de vigilance.
+  --bch-encart-bg: #f4f6f8;
+  // Hauteur minimale des cibles tactiles.
+  --bch-cible-tactile-min: 44px;
+}
+
+// Focus clavier toujours visible, partout (CLAUDE.md §13).
+:focus-visible {
+  outline: 3px solid var(--bch-focus-ring);
+  outline-offset: 2px;
+}

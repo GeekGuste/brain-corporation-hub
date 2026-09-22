@@ -1,0 +1,54 @@
+<!-- Ossature du site. Aucun texte editorial ici : les libelles viennent de
+     content/fr/navigation.json, les chemins de seo/routes.config.json.
+
+     La navigation est une liste simple qui passe a la ligne sur petit ecran,
+     sans menu deroulant. Trois liens seulement, et surtout : elle reste
+     utilisable quand JavaScript est desactive, ce qui n'est pas le cas d'un
+     menu replie Bootstrap. Aucun script Bootstrap n'est charge (CLAUDE.md §13,
+     public souvent en connexion lente). -->
+
+<a class="lien-evitement btn btn-primary" href="#contenu-principal">
+  {{ navigation.lienEvitement }}
+</a>
+
+<header class="border-bottom bg-body">
+  <div
+    class="container d-flex flex-wrap align-items-center justify-content-between gap-2 py-3"
+  >
+    <a class="navbar-brand fw-semibold fs-5 text-body" [routerLink]="liens[0].chemin">
+      <!-- Emplacement du logo. Le fichier n'est pas encore fourni : tant qu'il
+           manque, la marque s'affiche en texte. Le texte alternatif est
+           parametrable dans navigation.json (CLAUDE.md §14). -->
+      {{ navigation.marque }}
+    </a>
+
+    <nav aria-label="Navigation principale">
+      <ul class="nav">
+        @for (lien of liens; track lien.cle) {
+          <li class="nav-item">
+            <a
+              class="nav-link px-2 px-sm-3"
+              [routerLink]="lien.chemin"
+              routerLinkActive="active fw-semibold"
+              [routerLinkActiveOptions]="{ exact: lien.chemin === '/' }"
+            >
+              {{ lien.libelle }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="contenu-principal" tabindex="-1">
+  <router-outlet />
+</main>
+
+<footer class="border-top bg-body-tertiary mt-5">
+  <div class="container py-4 small text-body-secondary">
+    <p class="mb-0">&copy; {{ anneeCourante }} {{ navigation.piedDePage.mention }}</p>
+    <!-- Les liens vers les pages legales sont ajoutes a l'etape 9, depuis
+         navigation.json. -->
+  </div>
+</footer>

@@ -1,0 +1,21 @@
+{
+  "$commentaire": [
+    "Developpement local uniquement.",
+    "En preprod et en production, c'est Apache qui achemine /api vers le",
+    "conteneur de l'API : le navigateur appelle toujours des URL relatives et",
+    "ne connait jamais l'adresse de l'API (CLAUDE.md §11).",
+    "Ici, ng serve joue ce role a la place d'Apache.",
+    "Le port 5080 est choisi parce que 8080 est souvent deja pris sur un poste",
+    "de developpement, notamment par Docker Desktop."
+  ],
+  "/api": {
+    "target": "http://localhost:5080",
+    "secure": false,
+    "changeOrigin": false
+  },
+  "/sante": {
+    "target": "http://localhost:5080",
+    "secure": false,
+    "changeOrigin": false
+  }
+}

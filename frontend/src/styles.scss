@@ -1,0 +1,28 @@
+// Feuille de style globale.
+//
+// Elle ne contient aucune couleur : tout est dans styles/_theme.scss, qui
+// charge lui-meme Bootstrap avec nos variables (CLAUDE.md §14).
+
+@use 'styles/theme';
+
+// Un saut de ligne de courtoisie pour les lecteurs d'ecran : le lien d'evitement
+// n'est visible qu'au focus clavier.
+.lien-evitement {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1080;
+
+  &:focus {
+    left: 0.5rem;
+    top: 0.5rem;
+    padding: 0.75rem 1rem;
+  }
+}
+
+// Cibles tactiles genereuses sur mobile (CLAUDE.md §13).
+.btn,
+.form-select,
+.form-control {
+  min-height: var(--bch-cible-tactile-min);
+}

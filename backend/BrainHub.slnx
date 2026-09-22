@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/BrainHub.Api/BrainHub.Api.csproj" />
+    <Project Path="src/BrainHub.Domain/BrainHub.Domain.csproj" />
+    <Project Path="src/BrainHub.Infrastructure/BrainHub.Infrastructure.csproj" />
+  </Folder>
+</Solution>

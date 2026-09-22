@@ -1,0 +1,41 @@
+# PostgreSQL de DEVELOPPEMENT uniquement.
+#
+# En preprod et en production, PostgreSQL est installe sur l'hote, pas en
+# conteneur (CLAUDE.md §10). Ce fichier ne sert donc qu'a la machine du
+# developpeur.
+#
+#   docker compose -f backend/database/docker-compose.yml up -d
+#
+# Le port publie est 5433 et non 5432 : une instance PostgreSQL deja installee
+# sur le poste garde ainsi son port par defaut.
+
+name: brainhub-dev
+
+services:
+  postgres:
+    image: postgres:18-alpine
+    container_name: brainhub-postgres-dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: brainhub_dev
+      POSTGRES_USER: brainhub_dev
+      POSTGRES_PASSWORD: brainhub_dev
+      # Collation francaise, pour que les tris de noms et de villes se
+      # comportent en local comme en production.
+      POSTGRES_INITDB_ARGS: '--locale-provider=icu --icu-locale=fr-FR --encoding=UTF8'
+    ports:
+      # Publie sur la boucle locale seulement.
+      - '127.0.0.1:5433:5432'
+    volumes:
+      # Depuis PostgreSQL 18, l'image attend le montage sur /var/lib/postgresql
+      # et non sur son sous-repertoire data : c'est ce qui permet une montee de
+      # version par pg_upgrade sans franchir une frontiere de montage.
+      - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U brainhub_dev -d brainhub_dev']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres-data:

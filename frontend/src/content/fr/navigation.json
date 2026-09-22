@@ -1,0 +1,25 @@
+{
+  "$commentaire": [
+    "Libelles de l'ossature du site : navigation, pied de page, liens d'aide.",
+    "Ils sont ici et non dans les composants, pour permettre une version",
+    "anglaise plus tard sans refactorisation (CLAUDE.md §13). L'i18n n'est PAS",
+    "implementee en V1.",
+    "La cle de chaque lien renvoie a seo/routes.config.json : le chemin d'URL",
+    "n'est jamais recopie ici."
+  ],
+  "lienEvitement": "Aller au contenu principal",
+  "marque": "Brain Corporation Hub",
+  "logo": {
+    "source": null,
+    "texteAlternatif": "[À FOURNIR PAR LE CLIENT]"
+  },
+  "liens": [
+    { "cle": "accueil", "libelle": "Accueil" },
+    { "cle": "brain-corporation-hub", "libelle": "Brain Corporation Hub" },
+    { "cle": "lignes-rouges", "libelle": "Lignes Rouges" }
+  ],
+  "piedDePage": {
+    "mention": "Brain Corporation Hub",
+    "liens": []
+  }
+}
