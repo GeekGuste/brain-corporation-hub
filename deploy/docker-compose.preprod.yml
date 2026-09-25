@@ -12,7 +12,7 @@ name: brainhub-preprod
 
 services:
   api:
-    image: ghcr.io/geekguste/brain-corporation-hub-api:${TAG_IMAGE}
+    image: ${REGISTRE_IMAGES}/brain-corporation-hub-api:${TAG_IMAGE}
     container_name: brainhub-preprod-api
     restart: unless-stopped
     env_file: .env
@@ -28,7 +28,7 @@ services:
       - interne
 
   ssr:
-    image: ghcr.io/geekguste/brain-corporation-hub-ssr:${TAG_IMAGE}
+    image: ${REGISTRE_IMAGES}/brain-corporation-hub-ssr:${TAG_IMAGE}
     container_name: brainhub-preprod-ssr
     restart: unless-stopped
     env_file: .env

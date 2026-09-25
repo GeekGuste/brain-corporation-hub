@@ -75,9 +75,21 @@ BASE_MOT_DE_PASSE="$(extraire_champ 'Password')"
 
 PORT_API_HOTE="$(lire_variable 'PORT_API_HOTE')"
 PORT_SSR_HOTE="$(lire_variable 'PORT_SSR_HOTE')"
+REGISTRE_IMAGES="$(lire_variable 'REGISTRE_IMAGES')"
 
-if [[ -z "$BASE_NOM" || -z "$PORT_API_HOTE" || -z "$PORT_SSR_HOTE" ]]; then
-  echo "Configuration incomplete dans $FICHIER_ENV" >&2
+for variable in BASE_NOM PORT_API_HOTE PORT_SSR_HOTE REGISTRE_IMAGES; do
+  if [[ -z "${!variable}" ]]; then
+    echo "Configuration incomplete dans $FICHIER_ENV : $variable manquant" >&2
+    exit 1
+  fi
+done
+
+# Docker refuse toute majuscule dans un nom de depot d'images. Autant le dire
+# ici, clairement, plutot que de laisser « docker compose pull » echouer sur un
+# message obscur.
+if [[ "$REGISTRE_IMAGES" != "$(printf '%s' "$REGISTRE_IMAGES" | tr '[:upper:]' '[:lower:]')" ]]; then
+  echo "REGISTRE_IMAGES contient des majuscules : $REGISTRE_IMAGES" >&2
+  echo "Docker exige un nom entierement en minuscules." >&2
   exit 1
 fi
 

@@ -32,8 +32,12 @@ concurrency:
 
 env:
   REGISTRE: ghcr.io
-  IMAGE_API: ghcr.io/${{ github.repository_owner }}/brain-corporation-hub-api
-  IMAGE_SSR: ghcr.io/${{ github.repository_owner }}/brain-corporation-hub-ssr
+  # Le nom du compte proprietaire n'est ecrit nulle part en dur : il est deduit
+  # du depot, et mis en minuscules a l'execution (voir le job « images »).
+  # Le depot peut ainsi etre transfere a un autre compte sans modifier ce
+  # fichier.
+  NOM_IMAGE_API: brain-corporation-hub-api
+  NOM_IMAGE_SSR: brain-corporation-hub-ssr
 
 jobs:
   # ---------------------------------------------------------------------------
@@ -88,6 +92,22 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      # Docker exige des noms de depot entierement en minuscules, alors que
+      # github.repository_owner restitue la casse exacte du compte
+      # (« GeekGuste »). Les expressions GitHub Actions n'ont pas de fonction de
+      # mise en minuscules, on la fait donc ici, en shell.
+      #
+      # C'est ce qui permet de transferer le depot vers un autre compte, celui
+      # du client par exemple, sans toucher a ce fichier.
+      - name: Deduire le prefixe des images
+        id: prefixe
+        env:
+          PROPRIETAIRE: ${{ github.repository_owner }}
+        run: |
+          set -euo pipefail
+          echo "valeur=${REGISTRE}/${PROPRIETAIRE,,}" >> "$GITHUB_OUTPUT"
+          echo "Prefixe des images : ${REGISTRE}/${PROPRIETAIRE,,}"
+
       - name: Image de l'API
         uses: docker/build-push-action@v6
         with:
@@ -95,7 +115,7 @@ jobs:
           push: true
           # Tague par SHA, et par SHA seulement. Pas de « latest » : on doit
           # toujours savoir quel commit tourne, et pouvoir revenir en arriere.
-          tags: ${{ env.IMAGE_API }}:${{ github.sha }}
+          tags: ${{ steps.prefixe.outputs.valeur }}/${{ env.NOM_IMAGE_API }}:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -104,7 +124,7 @@ jobs:
         with:
           context: frontend
           push: true
-          tags: ${{ env.IMAGE_SSR }}:${{ github.sha }}
+          tags: ${{ steps.prefixe.outputs.valeur }}/${{ env.NOM_IMAGE_SSR }}:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -129,15 +149,22 @@ jobs:
       packages: write
     continue-on-error: true
     steps:
-      - name: Ne garder que les dix dernieres versions
+      # Une etape par image, avec « package-name » au singulier : c'est l'entree
+      # que l'action garantit. Le nom du proprietaire n'apparait pas, l'action
+      # travaille sur les paquets du depot courant.
+      - name: Purge des images de l'API
         uses: actions/delete-package-versions@v5
         with:
-          package-names: 'brain-corporation-hub-api, brain-corporation-hub-ssr'
+          package-name: ${{ env.NOM_IMAGE_API }}
           package-type: container
           min-versions-to-keep: 10
-          # Une version sans etiquette est un residu de construction : elle part
-          # en priorite.
-          delete-only-untagged-versions: false
+
+      - name: Purge des images du serveur de rendu
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: ${{ env.NOM_IMAGE_SSR }}
+          package-type: container
+          min-versions-to-keep: 10
 
   # ---------------------------------------------------------------------------
   # Preprod : automatique

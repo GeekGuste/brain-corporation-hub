@@ -25,6 +25,16 @@ journal() { echo "[$(date '+%H:%M:%S')] $*"; }
 RACINE="/opt/brainhub"
 UTILISATEUR_DEPLOIEMENT="deploy"
 
+# Compte GitHub qui heberge les images. Il est ecrit dans les fichiers .env, et
+# nulle part dans le depot : le jour ou le depot est transfere au client, seuls
+# ces deux fichiers changent, sur le serveur.
+#
+#   PROPRIETAIRE_GITHUB=compte-du-client ./install-serveur.sh
+#
+# Docker exige des minuscules, la conversion est faite ici.
+PROPRIETAIRE_GITHUB="${PROPRIETAIRE_GITHUB:-geekguste}"
+REGISTRE_IMAGES="ghcr.io/$(printf '%s' "$PROPRIETAIRE_GITHUB" | tr '[:upper:]' '[:lower:]')"
+
 # -----------------------------------------------------------------------------
 # 1. Prerequis
 # -----------------------------------------------------------------------------
@@ -130,6 +140,11 @@ ecrire_modele_env() {
 # Environnement : $environnement
 # Ecrit a la main, jamais versionne, jamais copie dans une image.
 # Les valeurs vides sont a completer avant le premier deploiement.
+
+# --- Images -------------------------------------------------------------------
+# Prefixe des images a tirer. Seule ligne a changer si le depot est transfere
+# vers un autre compte GitHub : le depot lui-meme n'a alors rien a modifier.
+REGISTRE_IMAGES=$REGISTRE_IMAGES
 
 # --- Ports publies sur 127.0.0.1 ---------------------------------------------
 PORT_API_HOTE=$port_api

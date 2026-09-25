@@ -193,7 +193,8 @@ for environnement in preprod prod; do
     echec "Mot de passe de base VIDE pour $environnement"
   fi
 
-  for variable in SITE_ALLOWED_HOSTS SITE_INDEXABLE PORT_API_HOTE PORT_SSR_HOTE; do
+  for variable in SITE_ALLOWED_HOSTS SITE_INDEXABLE PORT_API_HOTE PORT_SSR_HOTE \
+    REGISTRE_IMAGES; do
     valeur="$(sed -n "s/^$variable=//p" "$fichier_env")"
     if [[ -n "$valeur" ]]; then
       ok "$environnement : $variable=$valeur"
@@ -201,6 +202,16 @@ for environnement in preprod prod; do
       echec "$environnement : $variable non renseignee"
     fi
   done
+
+  # Docker refuse toute majuscule dans un nom de depot d'images.
+  registre="$(sed -n 's/^REGISTRE_IMAGES=//p' "$fichier_env")"
+  if [[ -n "$registre" ]]; then
+    if [[ "$registre" == "$(printf '%s' "$registre" | tr '[:upper:]' '[:lower:]')" ]]; then
+      ok "$environnement : REGISTRE_IMAGES en minuscules"
+    else
+      echec "$environnement : REGISTRE_IMAGES contient des majuscules"
+    fi
+  fi
 done
 
 # La production doit rester non indexable tant que les contenus du client ne

@@ -119,6 +119,54 @@ curl -I http://<ip-du-vps>/
 ss -lnt | grep 5432
 ```
 
+## Transférer le dépôt vers le compte du client
+
+Le nom du compte GitHub n'est écrit nulle part dans le dépôt. Le workflow le
+déduit du dépôt qui l'exécute et le met en minuscules, et les fichiers Compose
+lisent le préfixe des images dans la variable `REGISTRE_IMAGES` du `.env`.
+
+Un transfert ne demande donc aucune modification de code.
+
+**Sur GitHub, côté client**
+
+1. Transférer le dépôt (Settings, Danger Zone, Transfer ownership), ou le
+   pousser vers un nouveau dépôt lui appartenant.
+2. Recréer les secrets : `VPS_HOTE`, `VPS_UTILISATEUR`, `VPS_CLE_SSH`, et
+   `VPS_PORT_SSH` si nécessaire.
+3. Recréer les environnements `preprod` et `production`, avec l'approbation
+   obligatoire sur `production`.
+
+**Sur le VPS**
+
+4. Changer une ligne dans chacun des deux `.env` :
+
+   ```bash
+   sed -i 's|^REGISTRE_IMAGES=.*|REGISTRE_IMAGES=ghcr.io/compte-du-client|' \
+     /opt/brainhub/preprod/.env /opt/brainhub/prod/.env
+   ```
+
+   En minuscules : Docker refuse les majuscules dans un nom de dépôt d'images,
+   et `deploy.sh` vérifie ce point avant de tirer quoi que ce soit.
+
+5. Reconnecter `deploy` au registre, avec un jeton du compte du client :
+
+   ```bash
+   sudo -iu deploy
+   docker logout ghcr.io
+   docker login ghcr.io -u compte-du-client
+   exit
+   ```
+
+6. Relancer `./verifier-serveur.sh`, puis pousser un commit pour reconstruire
+   les images sous le nouveau compte.
+
+**Ensuite**
+
+Les anciennes images restées sur votre compte peuvent être supprimées, ce qui
+libère l'espace de stockage. Gardez-les le temps de confirmer qu'un déploiement
+complet passe sous le nouveau compte : jusque-là, elles sont votre seul retour
+arrière.
+
 ## Retour arrière manuel
 
 ```bash
