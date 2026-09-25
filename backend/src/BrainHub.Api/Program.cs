@@ -1,6 +1,7 @@
 using BrainHub.Infrastructure;
 using BrainHub.Infrastructure.Persistence;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +31,7 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
     // Le proxy est sur la machine, sur le reseau bridge Docker. On ne connait
     // pas son adresse à l'avance, mais on sait qu'il n'y en a qu'un seul devant
     // nous, et que le port n'est publié que sur la boucle locale.
-    options.KnownNetworks.Clear();
+    options.KnownIPNetworks.Clear();
     options.KnownProxies.Clear();
 });
 
@@ -73,6 +74,24 @@ builder.Services
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+// -----------------------------------------------------------------------------
+// Migrations
+// -----------------------------------------------------------------------------
+// Appliquees au demarrage du conteneur, sur le serveur, jamais depuis la CI
+// (CLAUDE.md §11). Le script de deploiement prend une sauvegarde de la base
+// juste avant de lancer le conteneur : si une migration se passe mal, le
+// controle de sante echoue, le script revient au tag precedent, et la
+// sauvegarde est la.
+//
+// Le drapeau est pose par le compose du serveur uniquement. En local, on
+// applique les migrations a la main.
+if (app.Configuration.GetValue<bool>("AppliquerMigrationsAuDemarrage"))
+{
+    using var portee = app.Services.CreateScope();
+    var contexte = portee.ServiceProvider.GetRequiredService<BrainHubDbContext>();
+    await contexte.Database.MigrateAsync();
+}
 
 app.UseForwardedHeaders();
 

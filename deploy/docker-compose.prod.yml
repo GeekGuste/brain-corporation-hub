@@ -1,0 +1,54 @@
+# =============================================================================
+# PRODUCTION
+# -----------------------------------------------------------------------------
+# Deploye sur /opt/brainhub/prod/ par la CI, a cote du fichier .env ecrit a la
+# main lors de l'installation.
+#
+# La preprod et la production tournent sur le MEME serveur : projets Compose,
+# reseaux, sous-reseaux, ports et bases distincts (CLAUDE.md §11).
+# =============================================================================
+
+name: brainhub-prod
+
+services:
+  api:
+    image: ghcr.io/geekguste/brain-corporation-hub-api:${TAG_IMAGE}
+    container_name: brainhub-prod-api
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      # Les migrations s'appliquent au demarrage, sur le serveur, jamais depuis
+      # la CI. Le script de deploiement sauvegarde la base juste avant.
+      AppliquerMigrationsAuDemarrage: 'true'
+    ports:
+      # Publie sur la boucle locale uniquement : Apache est le seul a y acceder.
+      # Sans cette restriction, le conteneur serait joignable par l'IP du
+      # serveur et contournerait tout ce que Plesk protege (CLAUDE.md §12.5).
+      - '127.0.0.1:${PORT_API_HOTE}:8080'
+    networks:
+      - interne
+
+  ssr:
+    image: ghcr.io/geekguste/brain-corporation-hub-ssr:${TAG_IMAGE}
+    container_name: brainhub-prod-ssr
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - '127.0.0.1:${PORT_SSR_HOTE}:3000'
+    networks:
+      - interne
+    depends_on:
+      - api
+
+networks:
+  interne:
+    # Reseau cree une fois pour toutes par install-serveur.sh, avec un
+    # sous-reseau FIXE (172.29.0.0/24, passerelle 172.29.0.1).
+    #
+    # Il est declare externe et non gere par Compose pour une raison precise :
+    # PostgreSQL tourne sur l'HOTE et ecoute sur cette passerelle. Si un
+    # « docker compose down » supprimait le reseau, la passerelle
+    # disparaitrait et PostgreSQL refuserait de redemarrer.
+    name: brainhub-prod-net
+    external: true

@@ -1,0 +1,11 @@
+# Les dependances sont installees dans l'image, pas copiees depuis le poste.
+node_modules/
+dist/
+.angular/
+out-tsc/
+coverage/
+
+# Jamais de secret dans le contexte de build.
+.env
+.env.*
+!.env.example

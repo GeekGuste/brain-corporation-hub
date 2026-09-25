@@ -1,0 +1,56 @@
+# =============================================================================
+# PREPROD
+# -----------------------------------------------------------------------------
+# Deploye sur /opt/brainhub/preprod/ par la CI, a cote du fichier .env ecrit a
+# la main lors de l'installation.
+#
+# Meme image que la production, tag identique une fois la promotion faite.
+# Seules les variables du fichier .env different (CLAUDE.md §11).
+# =============================================================================
+
+name: brainhub-preprod
+
+services:
+  api:
+    image: ghcr.io/geekguste/brain-corporation-hub-api:${TAG_IMAGE}
+    container_name: brainhub-preprod-api
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      # Environnement ASP.NET dedie : il charge appsettings.Preprod.json s'il
+      # existe, et surtout il n'active jamais les pages d'erreur detaillees du
+      # mode Development.
+      ASPNETCORE_ENVIRONMENT: Preprod
+      AppliquerMigrationsAuDemarrage: 'true'
+    ports:
+      - '127.0.0.1:${PORT_API_HOTE}:8080'
+    networks:
+      - interne
+
+  ssr:
+    image: ghcr.io/geekguste/brain-corporation-hub-ssr:${TAG_IMAGE}
+    container_name: brainhub-preprod-ssr
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - '127.0.0.1:${PORT_SSR_HOTE}:3000'
+    networks:
+      - interne
+    depends_on:
+      - api
+
+networks:
+  interne:
+    # Reseau cree une fois pour toutes par install-serveur.sh, sous-reseau fixe
+    # 172.28.0.0/24, passerelle 172.28.0.1. Distinct de celui de la production :
+    # pg_hba.conf n'autorise ce sous-reseau que pour l'utilisateur de preprod,
+    # donc un conteneur de preprod ne peut pas atteindre la base de production,
+    # meme en cas d'erreur de configuration.
+    #
+    # Declare externe, comme en production, pour deux raisons :
+    #   - un « docker compose down » ne doit pas detruire la passerelle sur
+    #     laquelle PostgreSQL ecoute, sinon il refuse de redemarrer ;
+    #   - Compose refuse de gerer un reseau qu'il n'a pas cree lui-meme, et
+    #     s'arrete sur « network was found but has incorrect label ».
+    name: brainhub-preprod-net
+    external: true
