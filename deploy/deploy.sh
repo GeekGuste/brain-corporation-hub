@@ -67,11 +67,26 @@ extraire_champ() {
   echo "$CHAINE_CONNEXION" | tr ';' '\n' | sed -n "s/^ *$1 *= *//Ip" | tail -n 1
 }
 
-BASE_HOTE="$(extraire_champ 'Host')"
 BASE_PORT="$(extraire_champ 'Port')"
 BASE_NOM="$(extraire_champ 'Database')"
 BASE_UTILISATEUR="$(extraire_champ 'Username')"
 BASE_MOT_DE_PASSE="$(extraire_champ 'Password')"
+
+# On ne reprend PAS le champ Host de la chaine de connexion.
+#
+# Cette chaine est ecrite pour les CONTENEURS : elle pointe la passerelle du
+# reseau Docker de l'environnement (172.28.0.1 en preprod, 172.29.0.1 en prod),
+# et pg_hba.conf n'autorise ces adresses que depuis le sous-reseau
+# correspondant.
+#
+# Or pg_dump tourne ici, sur l'hote, sous l'utilisateur deploy. PostgreSQL voit
+# alors arriver la connexion depuis une adresse de l'hote et non depuis le
+# sous-reseau du conteneur : aucune regle ne correspond, et la sauvegarde echoue
+# sur « no pg_hba.conf entry for host ».
+#
+# La boucle locale est la bonne adresse pour un outil qui tourne sur la machine,
+# et pg_hba.conf l'autorise explicitement.
+BASE_HOTE="127.0.0.1"
 
 PORT_API_HOTE="$(lire_variable 'PORT_API_HOTE')"
 PORT_SSR_HOTE="$(lire_variable 'PORT_SSR_HOTE')"
