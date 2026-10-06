@@ -1,0 +1,123 @@
+<!-- Gabarit generique des pages editoriales.
+     Aucun texte ici : tout vient du fichier de contenu passe en entree.
+     Aucune couleur non plus : uniquement des classes Bootstrap et les variables
+     du fichier de theme unique (CLAUDE.md §14). -->
+
+<!-- =========================================================================
+     BANDEAU DE TETE
+     -------------------------------------------------------------------------
+     Sur papier froid, pour detacher la tete du corps sans ajouter de filet.
+     Le visuel est a droite sur grand ecran, dessous sur telephone : le texte
+     passe toujours avant l'image (CLAUDE.md §13, mobile d'abord).
+     ========================================================================= -->
+<header class="bandeau">
+  <div class="container">
+    <div class="row align-items-center g-4 g-lg-5">
+      <div class="col-12 col-lg-7">
+        <!-- Le surtitre est une accroche, pas un titre : pas de balise de
+             titre, pour ne pas casser la hierarchie h1/h2/h3. Il est en
+             capitales dans le document du client, on ne le transforme pas, et
+             on ne le pistonne pas davantage : des capitales espacees sont
+             penibles a lire pour un lecteur non francophone de naissance. -->
+        <p class="surtitre mb-3">{{ contenu().surtitre }}</p>
+
+        <h1 class="mb-4">{{ contenu().titre }}</h1>
+
+        <div class="mesure">
+          @for (paragraphe of contenu().introduction; track $index) {
+            <p class="chapo">{{ paragraphe }}</p>
+          }
+        </div>
+
+        @if (contenu().faitsCles?.length) {
+          <!-- Faits pratiques. Un tableau de definitions, pas des cartes :
+               ce sont des couples libelle-valeur, la structure le dit. -->
+          <dl class="faits mt-4 mb-0">
+            @for (fait of contenu().faitsCles; track fait.libelle) {
+              <div class="faits__item">
+                <dt>{{ fait.libelle }}</dt>
+                <dd>{{ fait.valeur }}</dd>
+              </div>
+            }
+          </dl>
+        }
+
+        @if (contenu().appelAction) {
+          <p class="mt-4 mb-0">
+            <a class="btn btn-primary btn-lg" [href]="contenu().appelAction!.ancre">
+              {{ contenu().appelAction!.libelle }}
+            </a>
+          </p>
+        }
+      </div>
+
+      <div class="col-12 col-lg-5">
+        <app-visuel
+          [fichier]="contenu().visuel.fichier"
+          [texteAlternatif]="contenu().visuel.texteAlternatif"
+          [largeur]="contenu().visuel.largeur"
+          [hauteur]="contenu().visuel.hauteur"
+          [motif]="contenu().visuel.motif"
+          rapport="4 / 3"
+          [premierEcran]="true"
+        />
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- =========================================================================
+     CORPS
+     ========================================================================= -->
+<div class="container corps">
+  <div class="row">
+    <div class="col-12 col-lg-9 col-xl-8">
+      @for (section of contenu().sections; track section.titre) {
+        <section class="section">
+          @if (section.niveau === 2) {
+            <h2 class="section__titre">{{ section.titre }}</h2>
+          } @else {
+            <h3 class="section__titre section__titre--mineur">{{ section.titre }}</h3>
+          }
+
+          @for (bloc of section.blocs; track $index) {
+            @switch (bloc.type) {
+              @case ('paragraphe') {
+                <p class="mesure">{{ bloc.texte }}</p>
+              }
+              @case ('liste') {
+                <ul class="liste mesure">
+                  @for (element of bloc.elements; track $index) {
+                    <li>{{ element }}</li>
+                  }
+                </ul>
+              }
+              @case ('exergue') {
+                <!-- Phrase mise en avant par le client dans son document.
+                     Rendue en grand serif, sans guillemets ni encadre : c'est
+                     la taille qui porte, pas la decoration (CLAUDE.md §14). -->
+                <blockquote class="exergue">
+                  <p>{{ bloc.texte }}</p>
+                </blockquote>
+              }
+            }
+          }
+
+          @if (section.cartes?.length) {
+            <ul class="cartes list-unstyled">
+              @for (carte of section.cartes; track carte.titre) {
+                <li class="carte">
+                  @if (carte.pictogramme) {
+                    <app-motif class="carte__picto" [nom]="carte.pictogramme" />
+                  }
+                  <h3 class="carte__titre">{{ carte.titre }}</h3>
+                  <p class="carte__texte mb-0">{{ carte.texte }}</p>
+                </li>
+              }
+            </ul>
+          }
+        </section>
+      }
+    </div>
+  </div>
+</div>

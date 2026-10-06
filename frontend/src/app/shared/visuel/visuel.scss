@@ -1,0 +1,31 @@
+// Aucune couleur ici : les fonds et les filets viennent des classes Bootstrap
+// et des variables du theme (CLAUDE.md §14).
+
+.visuel {
+  position: relative;
+  overflow: hidden;
+  // Le rapport est pose en ligne depuis le composant : la hauteur est donc
+  // reservee avant tout chargement, et la page ne sursaute pas.
+  width: 100%;
+  background-color: var(--bch-papier);
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+}
+
+.visuel__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.visuel__motif {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+  // Les filets du motif heritent de cette couleur par currentColor.
+  color: var(--bs-primary);
+}

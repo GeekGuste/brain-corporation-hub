@@ -1,0 +1,153 @@
+<!-- Aucune couleur ecrite ici : « currentColor » herite de la couleur de texte
+     posee par le theme, et var(--bch-seuil) vient du fichier de theme unique
+     (CLAUDE.md §14). -->
+
+@switch (nom()) {
+  @case ('seuil') {
+    <!-- LE SEUIL. Page Lignes Rouges.
+         Des filets regulierement espaces, puis la ligne, puis des filets qui se
+         resserrent. Les marges de manoeuvre qui se reduisent apres le
+         franchissement, sans un chiffre ni une fleche. C'est le seul endroit du
+         site ou le rouge apparait en grand. -->
+    <svg
+      viewBox="0 0 420 260"
+      fill="none"
+      aria-hidden="true"
+      class="w-100 h-auto"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <g stroke="currentColor" stroke-width="1" opacity="0.28">
+        <line x1="0" y1="14" x2="420" y2="14" />
+        <line x1="0" y1="42" x2="420" y2="42" />
+        <line x1="0" y1="70" x2="420" y2="70" />
+        <line x1="0" y1="98" x2="420" y2="98" />
+        <line x1="0" y1="126" x2="420" y2="126" />
+      </g>
+
+      <!-- La ligne. Plus epaisse, pleine opacite : c'est elle qu'on regarde. -->
+      <line
+        x1="0"
+        y1="154"
+        x2="420"
+        y2="154"
+        stroke="var(--bch-seuil)"
+        stroke-width="3"
+      />
+
+      <g stroke="currentColor" stroke-width="1" opacity="0.28">
+        <line x1="0" y1="176" x2="420" y2="176" />
+        <line x1="0" y1="194" x2="420" y2="194" />
+        <line x1="0" y1="208" x2="420" y2="208" />
+        <line x1="0" y1="219" x2="420" y2="219" />
+        <line x1="0" y1="228" x2="420" y2="228" />
+        <line x1="0" y1="235" x2="420" y2="235" />
+        <line x1="0" y1="240" x2="420" y2="240" />
+        <line x1="0" y1="244" x2="420" y2="244" />
+        <line x1="0" y1="247" x2="420" y2="247" />
+      </g>
+    </svg>
+  }
+
+  @case ('anticipation') {
+    <!-- L'ANTICIPATION. Page d'accueil.
+         Deux filets qui divergent vers la droite : plus on decide tot, plus
+         l'ecart entre les trajectoires est grand. Le repere est pose au point
+         de separation, tot. -->
+    <svg
+      viewBox="0 0 420 260"
+      fill="none"
+      aria-hidden="true"
+      class="w-100 h-auto"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <g stroke="currentColor" stroke-width="1" opacity="0.18">
+        <line x1="0" y1="130" x2="420" y2="130" />
+        <line x1="112" y1="0" x2="112" y2="260" />
+      </g>
+
+      <path
+        d="M0 130 H112 C200 130 280 104 420 46"
+        stroke="currentColor"
+        stroke-width="2"
+        opacity="0.85"
+      />
+      <path
+        d="M112 130 C200 130 280 158 420 214"
+        stroke="currentColor"
+        stroke-width="1"
+        opacity="0.35"
+        stroke-dasharray="4 5"
+      />
+
+      <!-- Le point de decision, tot sur la trajectoire. -->
+      <circle cx="112" cy="130" r="5" fill="var(--bch-seuil)" />
+    </svg>
+  }
+
+  @case ('exigence') {
+    <!-- L'EXIGENCE. Page Brain Corporation Hub.
+         Des cadres emboites, decales : les passes successifs de conception, de
+         selection, d'evaluation et d'amelioration decrits par le client. -->
+    <svg
+      viewBox="0 0 420 260"
+      fill="none"
+      aria-hidden="true"
+      class="w-100 h-auto"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <g stroke="currentColor" fill="none">
+        <rect x="10" y="16" width="300" height="190" stroke-width="1" opacity="0.2" />
+        <rect x="40" y="34" width="300" height="190" stroke-width="1" opacity="0.3" />
+        <rect x="70" y="52" width="300" height="190" stroke-width="1.5" opacity="0.5" />
+      </g>
+      <line
+        x1="70"
+        y1="52"
+        x2="370"
+        y2="52"
+        stroke="var(--bch-seuil)"
+        stroke-width="3"
+      />
+    </svg>
+  }
+
+  @case ('picto-vigilance') {
+    <!-- Reperer tot. Un balayage, et le point detecte avant le bord. -->
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" class="picto">
+      <circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="1.25" opacity="0.3" />
+      <circle cx="16" cy="16" r="7" stroke="currentColor" stroke-width="1.25" opacity="0.55" />
+      <circle cx="16" cy="16" r="1.5" fill="currentColor" />
+      <circle cx="23.5" cy="10" r="2.5" fill="var(--bch-seuil)" />
+    </svg>
+  }
+
+  @case ('picto-intervenants') {
+    <!-- La selection. Des mesures inegales, et le niveau retenu. -->
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" class="picto">
+      <g stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <line x1="6" y1="26" x2="6" y2="17" opacity="0.35" />
+        <line x1="12" y1="26" x2="12" y2="21" opacity="0.35" />
+        <line x1="18" y1="26" x2="18" y2="12" opacity="0.8" />
+        <line x1="24" y1="26" x2="24" y2="19" opacity="0.35" />
+      </g>
+      <line x1="3" y1="8" x2="29" y2="8" stroke="var(--bch-seuil)" stroke-width="2" />
+    </svg>
+  }
+
+  @case ('picto-pedagogie') {
+    <!-- La structure. Des rangs tenus par une accolade, pas une pile en vrac. -->
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" class="picto">
+      <g stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
+        <line x1="13" y1="9" x2="28" y2="9" opacity="0.8" />
+        <line x1="13" y1="16" x2="24" y2="16" opacity="0.5" />
+        <line x1="13" y1="23" x2="26" y2="23" opacity="0.5" />
+      </g>
+      <path
+        d="M8 6 C5 6 5 15 4 16 C5 17 5 26 8 26"
+        stroke="var(--bch-seuil)"
+        stroke-width="1.75"
+        fill="none"
+      />
+    </svg>
+  }
+}

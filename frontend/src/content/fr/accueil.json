@@ -1,0 +1,67 @@
+{
+  "$commentaire": [
+    "TEXTES FOURNIS PAR LE CLIENT, integres tels quels.",
+    "Source : « Contenus editoriaux du site web », version du 15 septembre 2026,",
+    "section « Page Accueil ».",
+    "",
+    "Ne pas reecrire, ne pas optimiser, ne pas ajouter (CLAUDE.md §3). Le client",
+    "est juriste, la formulation est volontairement prudente et engage sa",
+    "responsabilite.",
+    "",
+    "Les niveaux de titre reprennent la hierarchie du document : un seul h1, puis",
+    "h2 et h3 sans saut de niveau."
+  ],
+  "surtitre": "BRAIN CORPORATION HUB",
+  "titre": "Mieux comprendre les risques pour décider plus tôt",
+  "introduction": [
+    "Brain Corporation Hub conçoit des formations et des accompagnements qui font de la connaissance un outil d’anticipation. Notre objectif est d’aider chacun à reconnaître les situations sensibles, à mesurer les conséquences possibles de ses choix et à agir avant qu’une difficulté ne devienne une crise."
+  ],
+  "sections": [
+    {
+      "niveau": 2,
+      "titre": "Former pour prévenir",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Dans la vie personnelle comme dans la vie professionnelle, certaines difficultés peuvent être évitées ou mieux maîtrisées lorsque les risques sont identifiés suffisamment tôt. La formation ne sert donc pas seulement à acquérir des compétences : elle permet aussi de comprendre une situation, d’adopter des réflexes de vigilance et de prendre des décisions plus éclairées."
+        }
+      ]
+    },
+    {
+      "niveau": 2,
+      "titre": "Notre approche repose sur trois piliers",
+      "blocs": [],
+      "cartes": [
+        {
+          "titre": "Prévention des risques",
+          "texte": "Nous transformons des informations complexes en repères concrets afin d’aider les participants à détecter les situations qui exigent une vigilance particulière.",
+          "pictogramme": "picto-vigilance"
+        },
+        {
+          "titre": "Excellence des intervenants",
+          "texte": "Nous sélectionnons des professionnels pour leur expertise, leur expérience, leurs qualités pédagogiques et leur capacité à apporter une réelle valeur ajoutée.",
+          "pictogramme": "picto-intervenants"
+        },
+        {
+          "titre": "Exigence pédagogique",
+          "texte": "Nos formations sont conçues, actualisées et améliorées pour répondre aux besoins réels des publics et rendre les connaissances directement utilisables.",
+          "pictogramme": "picto-pedagogie"
+        }
+      ]
+    }
+  ],
+  "visuel": {
+    "$commentaire": [
+      "Emplacement de visuel. Tant que « fichier » vaut null, l’illustration du",
+      "site occupe la place, au meme rapport : la mise en page ne bougera pas le",
+      "jour ou le client livrera ses photographies (CLAUDE.md §14 et §17).",
+      "Pour l’activer : deposer le fichier dans frontend/public/ et renseigner",
+      "fichier, largeur, hauteur et texteAlternatif."
+    ],
+    "fichier": null,
+    "largeur": null,
+    "hauteur": null,
+    "texteAlternatif": "[À FOURNIR PAR LE CLIENT]",
+    "motif": "anticipation"
+  }
+}

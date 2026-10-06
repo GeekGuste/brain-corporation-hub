@@ -1,0 +1,8 @@
+// Taille des pictogrammes. Pilotable par le parent via la variable, parce que
+// les variables CSS traversent l'encapsulation des composants, contrairement
+// aux selecteurs.
+.picto {
+  display: block;
+  width: var(--bch-taille-picto, 2rem);
+  height: var(--bch-taille-picto, 2rem);
+}

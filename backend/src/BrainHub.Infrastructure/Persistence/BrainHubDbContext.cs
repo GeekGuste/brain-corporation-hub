@@ -1,3 +1,4 @@
+using BrainHub.Domain.Referentiels;
 using Microsoft.EntityFrameworkCore;
 
 namespace BrainHub.Infrastructure.Persistence;
@@ -5,13 +6,19 @@ namespace BrainHub.Infrastructure.Persistence;
 /// <summary>
 /// Contexte de persistance de l'application.
 ///
-/// A l'etape 1, il ne porte aucune entite : il sert a etablir et a verifier la
-/// connexion a PostgreSQL. Les referentiels (grille territoriale, categories de
-/// titre de sejour) arrivent a l'etape 2, l'inscription a l'etape 4.
+/// Il porte pour l'instant les referentiels, charges depuis le fichier versionne
+/// data/referentiels.json au demarrage (CLAUDE.md §7). L'inscription arrive a
+/// l'etape 4.
 /// </summary>
 public sealed class BrainHubDbContext(DbContextOptions<BrainHubDbContext> options)
     : DbContext(options)
 {
+    public DbSet<LigneReferentielTerritorial> ReferentielTerritorial => Set<LigneReferentielTerritorial>();
+
+    public DbSet<CategorieTitreSejour> CategoriesTitreSejour => Set<CategorieTitreSejour>();
+
+    public DbSet<SousCategorieTitreSejour> SousCategoriesTitreSejour => Set<SousCategorieTitreSejour>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

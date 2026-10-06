@@ -11,25 +11,40 @@
   {{ navigation.lienEvitement }}
 </a>
 
-<header class="border-bottom bg-body">
-  <div
-    class="container d-flex flex-wrap align-items-center justify-content-between gap-2 py-3"
-  >
-    <a class="navbar-brand fw-semibold fs-5 text-body" [routerLink]="liens[0].chemin">
-      <!-- Emplacement du logo. Le fichier n'est pas encore fourni : tant qu'il
-           manque, la marque s'affiche en texte. Le texte alternatif est
-           parametrable dans navigation.json (CLAUDE.md §14). -->
-      {{ navigation.marque }}
+<header class="entete">
+  <div class="container entete__barre">
+    <!-- Emplacement du logo.
+         La hauteur est reservee dans tous les cas, logo present ou non : la
+         mise en page ne bougera pas le jour ou le fichier arrivera. Les
+         dimensions et le texte alternatif sont parametrables dans
+         navigation.json (CLAUDE.md §14). -->
+    <a class="entete__marque" [routerLink]="liens[0].chemin">
+      @if (logo.fichier) {
+        <!-- Les attributs width et height portent les dimensions INTRINSEQUES
+             du fichier. Ils reservent la place avant le chargement de l'image.
+             En « attr. » plutot qu'en propriete, pour qu'ils disparaissent
+             simplement s'ils ne sont pas renseignes. -->
+        <img
+          class="emplacement-logo"
+          [src]="logo.fichier"
+          [alt]="logo.texteAlternatif"
+          [attr.width]="logo.largeur"
+          [attr.height]="logo.hauteur"
+        />
+      } @else {
+        <span class="emplacement-logo entete__marque-texte">
+          {{ navigation.marque }}
+        </span>
+      }
     </a>
 
     <nav aria-label="Navigation principale">
-      <ul class="nav">
+      <ul class="entete__liens">
         @for (lien of liens; track lien.cle) {
-          <li class="nav-item">
+          <li>
             <a
-              class="nav-link px-2 px-sm-3"
               [routerLink]="lien.chemin"
-              routerLinkActive="active fw-semibold"
+              routerLinkActive="est-active"
               [routerLinkActiveOptions]="{ exact: lien.chemin === '/' }"
             >
               {{ lien.libelle }}
@@ -45,9 +60,9 @@
   <router-outlet />
 </main>
 
-<footer class="border-top bg-body-tertiary mt-5">
-  <div class="container py-4 small text-body-secondary">
-    <p class="mb-0">&copy; {{ anneeCourante }} {{ navigation.piedDePage.mention }}</p>
+<footer class="pied">
+  <div class="container pied__contenu">
+    <p class="pied__mention">&copy; {{ anneeCourante }} {{ navigation.piedDePage.mention }}</p>
     <!-- Les liens vers les pages legales sont ajoutes a l'etape 9, depuis
          navigation.json. -->
   </div>

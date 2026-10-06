@@ -1,0 +1,213 @@
+{
+  "$commentaire": [
+    "TEXTES FOURNIS PAR LE CLIENT, integres tels quels.",
+    "Source : « Contenus editoriaux du site web », version du 15 septembre 2026,",
+    "section « Page Lignes Rouges ».",
+    "",
+    "Ne pas reecrire, ne pas optimiser, ne pas ajouter (CLAUDE.md §3).",
+    "Ne jamais amplifier le registre : pas de peur ajoutee, pas d'urgence",
+    "artificielle, pas de promesse de resultat."
+  ],
+  "$coquillesCorrigees": [
+    "« dépresssion » corrige en « dépression » (trois s dans l'original).",
+    "« etc.. » corrige en « etc. » (deux points dans l'original).",
+    "« non anticipée non anticipée » corrige en « non anticipée » (repetition).",
+    "",
+    "Ces trois corrections sont celles autorisees par CLAUDE.md §3, qui cite",
+    "nommement les deux premieres. Signalees, jamais faites en silence.",
+    "",
+    "NON corrige, en attente de la decision du client : le titre « Les",
+    "formateurs lignes rouges » est la seule occurrence ou « Lignes Rouges »",
+    "n'est pas capitalise. Ce n'est pas une coquille manifeste, le texte reste",
+    "donc tel que le client l'a ecrit."
+  ],
+  "surtitre": "PRÉVENIR LES RISQUES LIÉS AU DROIT AU SÉJOUR",
+  "titre": "Détecter le risque avant qu’il ne devienne une crise",
+  "introduction": [
+    "Lignes Rouges est un programme de formation consacré à la prévention des situations susceptibles de fragiliser le droit au séjour des personnes étrangères en France.",
+    "En 1 h 30, la formation aide le participant à mieux comprendre ses principales obligations, à reconnaître les décisions de vie qui appellent une vigilance particulière et à savoir quand solliciter un accompagnement professionnel adapté."
+  ],
+  "sections": [
+    {
+      "niveau": 2,
+      "titre": "Pourquoi cette formation existe",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "En matière de séjour, le risque est souvent découvert lorsque la difficulté est déjà installée : refus de titre, obligation de quitter le territoire français, perte d’emploi, interruption d’études ou fragilisation d’un projet professionnel, entrepreneurial ou familial."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Les conséquences peuvent être importantes : frais de conseil ou de contentieux importants, perte de revenus, difficultés de logement, rupture d’un parcours universitaire, tensions familiales et longue période d’incertitude, dépression etc."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Depuis la loi du 26 janvier 2024, une obligation de quitter le territoire français peut produire ses effets pendant trois ans et compliquer fortement toute démarche de régularisation. À l’issue de cette période, les délais nécessaires pour déposer une nouvelle demande et espérer obtenir un titre de séjour peuvent encore être très longs. Au total, une personne peut ainsi passer près de cinq années en situation irrégulière avant d’espérer une régularisation."
+        }
+      ]
+    },
+    {
+      "niveau": 2,
+      "titre": "Ce que Lignes Rouges propose",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "La formation donne au participant une méthode de vigilance. Elle ne consiste pas à prédire toutes les décisions administratives, mais à repérer plus tôt les situations sensibles et à préserver, lorsque cela est possible, davantage de possibilités d’action."
+        }
+      ]
+    },
+    {
+      "niveau": 2,
+      "titre": "Les objectifs de la formation",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "À l’issue de la session, le participant doit être mieux en mesure de :"
+        },
+        {
+          "type": "liste",
+          "elements": [
+            "comprendre les principales obligations associées à sa situation de séjour ;",
+            "identifier les changements personnels ou professionnels susceptibles d’avoir une incidence sur son dossier ;",
+            "repérer des signaux de vigilance avant une demande, un renouvellement ou un changement de statut ;",
+            "éviter certains comportements ou retards pouvant accroître le risque ;",
+            "conserver et organiser les informations utiles à son suivi ;",
+            "savoir quand une situation nécessite l’intervention rapide d’un avocat ou d’un autre professionnel compétent."
+          ]
+        }
+      ]
+    },
+    {
+      "niveau": 2,
+      "titre": "Le tableau de bord de sécurisation du titre de séjour",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Le cœur de la méthode repose sur un tableau de bord pédagogique. Il rassemble et organise des points de vigilance construits à partir des textes applicables, de la jurisprudence et, lorsque des informations suffisamment fiables peuvent être établies, des pratiques administratives observées."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Ce tableau de bord a vocation à aider le participant à suivre sa situation dans le temps : échéances, changements de circonstances, documents à conserver, démarches à anticiper et événements justifiant une consultation professionnelle."
+        }
+      ]
+    },
+    {
+      "niveau": 2,
+      "titre": "Une formation structurée, pas une accumulation d’informations",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Les informations sur le droit des étrangers sont nombreuses : sites institutionnels, associations spécialisées, contenus d’avocats, réseaux sociaux, forums et outils d’intelligence artificielle. Ces ressources peuvent être utiles, mais elles sont dispersées, de qualité variable et parfois difficiles à relier à une démarche durable de prévention."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Lignes Rouges apporte une méthode : sélectionner, vérifier, actualiser, croiser, hiérarchiser et rendre l’information compréhensible. Le participant ne paie donc pas pour l’accès à une information brute. Il bénéficie d’un travail de veille, d’ingénierie pédagogique et de transformation de l’information en repères utilisables."
+        },
+        {
+          "type": "exergue",
+          "texte": "L’information peut être accessible. La méthode, la vérification et la finesse de l’analyse créent la valeur."
+        }
+      ]
+    },
+    {
+      "niveau": 2,
+      "titre": "Pourquoi investir dans la prévention",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Une perte de séjour non anticipée peut entraîner des démarches urgentes, des frais de contentieux importants, une perte de revenus, une interruption d’études, un projet entrepreneurial compromis et des conséquences familiales ou psychologiques durables."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "La formation cherche à réduire l’exposition aux erreurs évitables, à faire apparaître plus tôt les situations sensibles et à encourager le recours au bon professionnel avant que les marges de manœuvre ne se réduisent."
+        },
+        {
+          "type": "exergue",
+          "texte": "Plus le coût potentiel d’une erreur est élevé, plus sa prévention mérite d’être organisée."
+        }
+      ]
+    },
+    {
+      "niveau": 2,
+      "titre": "À qui s’adresse Lignes Rouges",
+      "blocs": [],
+      "cartes": [
+        {
+          "titre": "Personnes étrangères résidant en France métropolitaine",
+          "texte": "Le programme s’adresse notamment aux titulaires d’un titre de séjour étudiant ou salarié, ainsi qu’aux personnes dont le droit au séjour est lié à une vie privée et familiale, notamment un mariage ou un pacte civil de solidarité avec une personne française. Les catégories exactes proposées lors de chaque campagne d’inscription devront être indiquées sur le formulaire."
+        },
+        {
+          "titre": "Personnes résidant à l’étranger",
+          "texte": "Le programme concerne également les personnes qui préparent un projet d’installation en France et souhaitent comprendre, avant leur arrivée, les points de vigilance associés au titre de séjour envisagé."
+        }
+      ]
+    },
+    {
+      "niveau": 2,
+      "titre": "Les formateurs lignes rouges",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Les formateurs de la méthode Lignes Rouges sont des avocats sélectionnés selon des critères exigeants tenant notamment à leur expertise en droit des étrangers, à leur expérience professionnelle, à leur maîtrise des pratiques administratives territoriales et à leurs qualités pédagogiques."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Afin de garantir une formation aussi précise et concrète que possible, chaque avocat-formateur intervient exclusivement auprès des stagiaires dont la préfecture de résidence est située dans le ressort de la cour d’appel auquel appartient son barreau d’inscription."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Cette organisation territoriale permet au formateur d’intégrer, au-delà des règles nationales applicables, les particularités susceptibles d’être observées localement : modalités de dépôt des demandes, exigences documentaires, pratiques d’instruction, difficultés récurrentes et jurisprudence administrative pertinente."
+        }
+      ]
+    }
+  ],
+  "visuel": {
+    "$commentaire": [
+      "Emplacement de visuel. Tant que « fichier » vaut null, l’illustration du",
+      "site occupe la place, au meme rapport : la mise en page ne bougera pas le",
+      "jour ou le client livrera ses photographies (CLAUDE.md §14 et §17).",
+      "Pour l’activer : deposer le fichier dans frontend/public/ et renseigner",
+      "fichier, largeur, hauteur et texteAlternatif."
+    ],
+    "fichier": null,
+    "largeur": null,
+    "hauteur": null,
+    "texteAlternatif": "[À FOURNIR PAR LE CLIENT]",
+    "motif": "seuil"
+  },
+  "faitsCles": [
+    {
+      "libelle": "Durée",
+      "valeur": "1 h 30"
+    },
+    {
+      "libelle": "Format",
+      "valeur": "À distance"
+    },
+    {
+      "libelle": "Tarif",
+      "valeur": "100 € TTC"
+    }
+  ],
+  "appelAction": {
+    "libelle": "S’inscrire à la formation",
+    "ancre": "#inscription"
+  },
+  "$blocsNonFournisParLeClient": [
+    "DEUX BLOCS DE CETTE PAGE NE VIENNENT PAS DU CLIENT : « faitsCles » et",
+    "« inscription ». Ils sont produits d’après CLAUDE.md §4, parce que la page",
+    "de vente doit afficher le prix et que le document de contenus ne le",
+    "mentionne pas. A faire valider par le client.",
+    "",
+    "Aucun chiffre n’est inventé : 1 h 30, a distance et 100 € TTC viennent du",
+    "cahier des charges. Aucune date de session n’est annoncée (CLAUDE.md §16).",
+    "La mention de TVA est obligatoire en auto-entreprise (CLAUDE.md §4) et doit",
+    "figurer au point de paiement."
+  ],
+  "inscription": {
+    "titre": "S’inscrire",
+    "recapitulatif": "1 h 30, à distance. 100 € TTC par stagiaire.",
+    "mentionTva": "TVA non applicable, article 293 B du CGI.",
+    "attente": "Le formulaire d’inscription et le paiement seront intégrés ici."
+  }
+}

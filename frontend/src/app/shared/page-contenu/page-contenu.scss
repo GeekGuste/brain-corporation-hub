@@ -1,0 +1,188 @@
+// Mise en page des pages editoriales.
+//
+// Aucune couleur et aucune taille de caractere ecrites ici : tout vient des
+// variables du fichier de theme unique et des classes Bootstrap
+// (CLAUDE.md §14).
+
+// =============================================================================
+// Bandeau de tete
+// =============================================================================
+.bandeau {
+  background-color: var(--bch-papier);
+  border-bottom: 1px solid var(--bs-border-color);
+  padding-block: var(--bch-espace-bandeau);
+  // Le bandeau remonte sous l'en-tete sans filet intermediaire.
+  margin-block-start: -1px;
+}
+
+// Accroche au-dessus du titre. Volontairement sans espacement de lettres : le
+// texte du client est en capitales, et des capitales pistonnees sont penibles a
+// lire pour un lecteur non francophone de naissance (CLAUDE.md §13).
+.surtitre {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--bs-primary);
+  max-width: 40ch;
+  // Un filet court plutot qu'une pastille : c'est le motif du site.
+  padding-inline-start: 0.875rem;
+  border-inline-start: 3px solid var(--bch-seuil);
+}
+
+// =============================================================================
+// Faits pratiques du bandeau
+// -----------------------------------------------------------------------------
+// Des couples libelle-valeur, separes par des filets verticaux. Pas de cartes :
+// la donnee est trop courte pour meriter un cadre chacune.
+// =============================================================================
+.faits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2rem;
+
+  &__item {
+    padding-inline-end: 2rem;
+    border-inline-end: 1px solid var(--bs-border-color);
+
+    &:last-child {
+      padding-inline-end: 0;
+      border-inline-end: 0;
+    }
+  }
+
+  dt {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--bs-secondary-color);
+  }
+
+  dd {
+    margin-block-end: 0;
+    font-family: var(--bch-police-titres);
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--bs-heading-color);
+  }
+}
+
+// =============================================================================
+// Corps
+// =============================================================================
+.corps {
+  padding-block: var(--bch-espace-section);
+}
+
+.section {
+  // Le rythme vertical est porte ici, en un seul endroit, pour eviter les
+  // marges qui se neutralisent entre selecteurs.
+  & + & {
+    margin-block-start: var(--bch-espace-section);
+  }
+
+  &__titre {
+    margin-block-end: 1rem;
+  }
+
+  // Un titre de niveau 3 isole dans le flux, pas dans une carte.
+  &__titre--mineur {
+    margin-block-start: 2rem;
+  }
+}
+
+// =============================================================================
+// Listes
+// -----------------------------------------------------------------------------
+// Puce remplacee par un court filet : le motif du site, decline jusqu'ici.
+// =============================================================================
+.liste {
+  list-style: none;
+  padding-inline-start: 0;
+
+  li {
+    position: relative;
+    padding-inline-start: 1.5rem;
+    margin-block-end: 0.625rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset-inline-start: 0;
+      // Aligne sur la premiere ligne de texte, quelle que soit sa taille.
+      top: calc(var(--bch-corps) * 1.7 / 2);
+      width: 0.75rem;
+      height: 1px;
+      background-color: var(--bch-seuil);
+    }
+  }
+}
+
+// =============================================================================
+// Exergue
+// -----------------------------------------------------------------------------
+// Pas de guillemets, pas d'encadre, pas de fond. C'est le corps du caractere
+// qui porte la mise en avant, et un filet qui la tient.
+// =============================================================================
+.exergue {
+  margin-block: 2rem;
+  padding-inline-start: 1.5rem;
+  border-inline-start: 3px solid var(--bch-seuil);
+  max-width: var(--bch-mesure);
+
+  p {
+    margin-block-end: 0;
+    font-family: var(--bch-police-titres);
+    font-size: var(--bch-exergue);
+    line-height: 1.4;
+    color: var(--bs-heading-color);
+  }
+}
+
+// =============================================================================
+// Cartes
+// -----------------------------------------------------------------------------
+// Utilisees seulement la ou le contenu est reellement parallele : les trois
+// piliers de l'accueil, les deux publics de la page de vente. Un filet et du
+// papier, pas d'ombre portee.
+// =============================================================================
+.cartes {
+  display: grid;
+  gap: 1px;
+  margin-block: 1.5rem 0;
+  // Le fond fait office de filet entre les cartes : une seule ligne partout,
+  // jamais deux qui se superposent.
+  background-color: var(--bs-border-color);
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  overflow: hidden;
+
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  }
+}
+
+.carte {
+  background-color: var(--bs-body-bg);
+  padding: 1.5rem;
+
+  &__picto {
+    color: var(--bs-primary);
+    margin-block-end: 0.875rem;
+    // Les variables CSS traversent l'encapsulation, les selecteurs non : c'est
+    // donc par la que le parent dimensionne le pictogramme.
+    --bch-taille-picto: 2rem;
+  }
+
+  &__titre {
+    font-size: var(--bch-h3);
+    margin-block-end: 0.5rem;
+  }
+
+  &__texte {
+    font-size: 1rem;
+    color: var(--bs-body-color);
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "$commentaire": [
+    "TEXTES FOURNIS PAR LE CLIENT, integres tels quels.",
+    "Source : « Contenus editoriaux du site web », version du 15 septembre 2026,",
+    "section « Page Brain Corporation Hub ».",
+    "",
+    "Ne pas reecrire, ne pas optimiser, ne pas ajouter (CLAUDE.md §3)."
+  ],
+  "surtitre": "NOTRE VISION",
+  "titre": "Faire de la formation un instrument de prévention",
+  "introduction": [
+    "Brain Corporation Hub est une plateforme de formation et de coaching appelée à intervenir dans des domaines variés. Son identité repose sur une idée simple : une connaissance acquise au bon moment peut permettre d’anticiper un risque, de mieux évaluer une décision et d’éviter que certaines difficultés ne s’aggravent."
+  ],
+  "sections": [
+    {
+      "niveau": 2,
+      "titre": "Une autre manière de concevoir la formation",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Nous ne réduisons pas la formation à la transmission d’un contenu ou à l’acquisition d’une compétence technique. Nous la concevons également comme un outil de compréhension, d’anticipation et de gestion des risques. Cette approche peut s’appliquer chaque fois qu’une décision personnelle ou professionnelle produit des conséquences juridiques, économiques, matérielles, familiales ou psychologiques importantes."
+        }
+      ]
+    },
+    {
+      "niveau": 2,
+      "titre": "Un creuset de talents",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "La qualité d’une formation dépend aussi de celles et ceux qui l’animent. Brain Corporation Hub entend réunir des intervenants sélectionnés selon des critères exigeants : maîtrise du sujet, expérience, précision, capacité de transmission et attention portée aux besoins du public."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Nos formateurs ne sont pas considérés comme de simples exécutants d’un contenu standardisé. Ils participent à la qualité de l’expérience pédagogique et à la confiance attachée à la marque."
+        }
+      ]
+    },
+    {
+      "niveau": 2,
+      "titre": "Une exigence pédagogique constante",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Chaque programme a vocation à suivre un processus rigoureux de conception, de sélection, d’évaluation et d’amélioration."
+        },
+        {
+          "type": "liste",
+          "elements": [
+            "Des contenus pertinents, précis et structurés.",
+            "Une réponse adaptée aux besoins réels du public.",
+            "Une pédagogie claire, accessible et participative.",
+            "Des connaissances concrètes et utilisables.",
+            "Une actualisation lorsque la matière évolue.",
+            "Une évaluation de l’efficacité de la formation au regard de son objectif."
+          ]
+        }
+      ]
+    },
+    {
+      "niveau": 2,
+      "titre": "Notre ambition",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Construire progressivement une marque de confiance fondée sur la prévention des risques, la qualité des intervenants et l’exigence pédagogique."
+        }
+      ]
+    }
+  ],
+  "visuel": {
+    "$commentaire": [
+      "Emplacement de visuel. Tant que « fichier » vaut null, l’illustration du",
+      "site occupe la place, au meme rapport : la mise en page ne bougera pas le",
+      "jour ou le client livrera ses photographies (CLAUDE.md §14 et §17).",
+      "Pour l’activer : deposer le fichier dans frontend/public/ et renseigner",
+      "fichier, largeur, hauteur et texteAlternatif."
+    ],
+    "fichier": null,
+    "largeur": null,
+    "hauteur": null,
+    "texteAlternatif": "[À FOURNIR PAR LE CLIENT]",
+    "motif": "exigence"
+  }
+}

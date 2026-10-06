@@ -1,0 +1,20 @@
+<div class="visuel" [style.aspect-ratio]="rapport()">
+  @if (fichier()) {
+    <img
+      class="visuel__image"
+      [src]="fichier()"
+      [alt]="texteAlternatif()"
+      [attr.width]="largeur()"
+      [attr.height]="hauteur()"
+      [attr.loading]="premierEcran() ? 'eager' : 'lazy'"
+      [attr.fetchpriority]="premierEcran() ? 'high' : null"
+      decoding="async"
+    />
+  } @else {
+    <!-- En attente des visuels du client. L'illustration du site occupe la
+         place, au meme rapport. -->
+    <div class="visuel__motif">
+      <app-motif [nom]="motif()" />
+    </div>
+  }
+</div>

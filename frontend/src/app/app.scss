@@ -1,0 +1,105 @@
+// Styles de l'ossature. Aucune couleur et aucune taille de caractere ecrites
+// ici : tout vient des variables du fichier de theme unique (CLAUDE.md §14).
+
+// =============================================================================
+// En-tete
+// -----------------------------------------------------------------------------
+// Un filet, du blanc, rien d'autre. L'en-tete d'un site institutionnel n'a pas
+// a attirer l'oeil : il doit situer et laisser passer.
+// =============================================================================
+.entete {
+  background-color: var(--bs-body-bg);
+  border-block-end: 1px solid var(--bs-border-color);
+
+  &__barre {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    padding-block: 0.875rem;
+  }
+
+  &__marque {
+    display: flex;
+    align-items: center;
+    color: var(--bs-heading-color);
+    text-decoration: none;
+  }
+
+  &__marque-texte {
+    font-family: var(--bch-police-titres);
+    font-size: 1.125rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  &__liens {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      // Cible tactile genereuse (CLAUDE.md §13), sans gonfler la barre.
+      min-height: var(--bch-cible-tactile-min);
+      padding-inline: 0.75rem;
+      color: var(--bs-body-color);
+      text-decoration: none;
+      border-block-end: 2px solid transparent;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--bs-primary);
+      }
+    }
+
+    // La page courante est marquee par le filet de seuil, pas par une pastille
+    // ni un fond : c'est le motif du site.
+    .est-active {
+      color: var(--bs-heading-color);
+      font-weight: 600;
+      border-block-end-color: var(--bch-seuil);
+    }
+  }
+}
+
+// Emplacement du logo dans l'en-tete.
+//
+// La hauteur est imposee et la largeur libre : l'espace est donc reserve avant
+// meme que le fichier soit fourni, et il le restera a l'identique quand il
+// arrivera. La page ne sursautera pas au chargement.
+.emplacement-logo {
+  display: flex;
+  align-items: center;
+  height: var(--bch-hauteur-logo);
+  width: auto;
+  // Un logo tres large ne doit pas pousser la navigation hors de l'ecran sur
+  // un petit telephone.
+  max-width: 60vw;
+  object-fit: contain;
+}
+
+// =============================================================================
+// Pied de page
+// =============================================================================
+.pied {
+  margin-block-start: var(--bch-espace-section);
+  background-color: var(--bch-papier);
+  border-block-start: 1px solid var(--bs-border-color);
+
+  &__contenu {
+    padding-block: 2rem;
+  }
+
+  &__mention {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--bs-secondary-color);
+  }
+}

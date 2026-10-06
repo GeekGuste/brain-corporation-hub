@@ -1,9 +1,36 @@
-<!-- Squelette d'etape 1. Textes du client integres a l'etape 3, depuis
-     src/content/fr/lignes-rouges.json. Le formulaire d'inscription arrive a
-     l'etape 4 et le paiement Stripe a l'etape 5. -->
-<section class="container py-5">
-  <h1 class="h1">Lignes Rouges</h1>
-  <p class="lead text-body-secondary">
-    Page en place. Contenu éditorial intégré à l'étape 3.
-  </p>
+<app-page-contenu [contenu]="contenu" />
+
+<!-- =========================================================================
+     INSCRIPTION
+     -------------------------------------------------------------------------
+     Ce bloc ne fait pas partie des textes du client : il est produit d'apres
+     CLAUDE.md §4.
+
+     Le prix est rappele ici, au point ou le visiteur decide, et non repete en
+     tableau : les trois faits sont deja dans le bandeau de tete. La mention de
+     TVA est obligatoire en auto-entreprise et doit figurer a cet endroit.
+
+     Aucune date de session (CLAUDE.md §16), aucun compteur, aucune urgence
+     fabriquee (§14).
+     ========================================================================= -->
+<section class="inscription" aria-labelledby="titre-inscription">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-9 col-xl-8">
+        <div id="inscription" class="inscription__panneau">
+          <h2 id="titre-inscription" class="inscription__titre">
+            {{ inscription.titre }}
+          </h2>
+
+          <p class="inscription__recapitulatif">{{ inscription.recapitulatif }}</p>
+          <p class="inscription__mention">{{ inscription.mentionTva }}</p>
+
+          <!-- Le formulaire arrive a l'etape 4, le paiement Stripe integre a
+               l'etape 5. L'ancre est posee des maintenant pour que les liens
+               vers l'inscription n'aient pas a changer ensuite. -->
+          <p class="inscription__attente mb-0">{{ inscription.attente }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

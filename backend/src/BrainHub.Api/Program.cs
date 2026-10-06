@@ -1,5 +1,6 @@
 using BrainHub.Infrastructure;
 using BrainHub.Infrastructure.Persistence;
+using BrainHub.Infrastructure.Persistence.Seed;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 
@@ -86,11 +87,33 @@ var app = builder.Build();
 //
 // Le drapeau est pose par le compose du serveur uniquement. En local, on
 // applique les migrations a la main.
-if (app.Configuration.GetValue<bool>("AppliquerMigrationsAuDemarrage"))
+using (var portee = app.Services.CreateScope())
 {
-    using var portee = app.Services.CreateScope();
-    var contexte = portee.ServiceProvider.GetRequiredService<BrainHubDbContext>();
-    await contexte.Database.MigrateAsync();
+    var fournisseur = portee.ServiceProvider;
+
+    if (app.Configuration.GetValue<bool>("AppliquerMigrationsAuDemarrage"))
+    {
+        var contexte = fournisseur.GetRequiredService<BrainHubDbContext>();
+        await contexte.Database.MigrateAsync();
+    }
+
+    // -------------------------------------------------------------------------
+    // Referentiels
+    // -------------------------------------------------------------------------
+    // Charges a CHAQUE demarrage, de facon idempotente (CLAUDE.md §7). Ce n'est
+    // pas conditionne par le drapeau des migrations : le referentiel doit etre
+    // present et a jour en local comme sur le serveur.
+    //
+    // Si le chargement echoue, l'application ne demarre pas. C'est voulu : un
+    // formulaire d'inscription dont la liste des prefectures est vide ou
+    // tronquee ferait plus de degats qu'une indisponibilite visible.
+    var cheminReferentiels = Path.Combine(
+        app.Environment.ContentRootPath,
+        app.Configuration.GetValue<string>("Referentiels:CheminFichier")
+            ?? "data/referentiels.json");
+
+    var chargeur = fournisseur.GetRequiredService<ChargeurReferentiels>();
+    await chargeur.ChargerAsync(cheminReferentiels);
 }
 
 app.UseForwardedHeaders();
