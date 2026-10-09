@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+  <rect width="1200" height="900" fill="#112232"/>
+  <g opacity="0.12"><circle cx="980" cy="760" r="320" fill="#2c5f7c"/><circle cx="200" cy="140" r="200" fill="#1b3a5c"/></g>
+  <rect x="148" y="190" width="800" height="300" rx="8" fill="#ffffff" opacity="0.12" stroke="#ffffff" stroke-opacity="0.2" stroke-width="2"/>
+  <rect x="174" y="170" width="780" height="300" rx="8" fill="#ffffff" opacity="0.1" stroke="#ffffff" stroke-opacity="0.2" stroke-width="2"/>
+  <rect x="200" y="150" width="760" height="300" rx="8" fill="#ffffff" opacity="0.14" stroke="#ffffff" stroke-opacity="0.4" stroke-width="3"/>
+  <rect x="250" y="200" width="620" height="12" rx="6" fill="#ffffff" opacity="0.4"/>
+  <rect x="250" y="248" width="520" height="12" rx="6" fill="#ffffff" opacity="0.4"/>
+  <rect x="250" y="296" width="580" height="12" rx="6" fill="#ffffff" opacity="0.4"/>
+  <rect x="250" y="344" width="470" height="12" rx="6" fill="#ffffff" opacity="0.4"/>
+  <rect x="250" y="392" width="540" height="12" rx="6" fill="#ffffff" opacity="0.4"/>
+  <line x1="0" y1="520" x2="1200" y2="520" stroke="#d9533b" stroke-width="10"/>
+  <circle cx="240" cy="520" r="22" fill="#d9533b"/>
+  <rect x="200" y="580" width="660" height="34" rx="6" fill="#ffffff" opacity="0.120" stroke="#ffffff" stroke-opacity="0.22" stroke-width="2"/>
+  <rect x="200" y="636" width="550" height="30" rx="6" fill="#ffffff" opacity="0.105" stroke="#ffffff" stroke-opacity="0.19" stroke-width="2"/>
+  <rect x="200" y="692" width="440" height="26" rx="6" fill="#ffffff" opacity="0.090" stroke="#ffffff" stroke-opacity="0.16" stroke-width="2"/>
+  <rect x="200" y="748" width="330" height="22" rx="6" fill="#ffffff" opacity="0.075" stroke="#ffffff" stroke-opacity="0.13" stroke-width="2"/>
+  <rect x="200" y="804" width="220" height="18" rx="6" fill="#ffffff" opacity="0.060" stroke="#ffffff" stroke-opacity="0.10" stroke-width="2"/>
+</svg>

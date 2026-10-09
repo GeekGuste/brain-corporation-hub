@@ -15,8 +15,11 @@
      ========================================================================= -->
 <section class="inscription" aria-labelledby="titre-inscription">
   <div class="container">
-    <div class="row">
-      <div class="col-12 col-lg-9 col-xl-8">
+    <div class="row justify-content-center">
+      <!-- Centre, et non cale a gauche : le panneau est le point d'arrivee de
+           la page, pas une section de lecture. C'est aussi lui qui accueillera
+           le formulaire et le paiement (etapes 4 et 5). -->
+      <div class="col-12 col-lg-10 col-xl-8">
         <div id="inscription" class="inscription__panneau">
           <h2 id="titre-inscription" class="inscription__titre">
             {{ inscription.titre }}

@@ -1,15 +1,16 @@
-// Aucune couleur ici : les fonds et les filets viennent des classes Bootstrap
-// et des variables du theme (CLAUDE.md §14).
+// Aucune couleur ecrite ici : tout vient des variables du fichier de theme
+// unique (CLAUDE.md §14).
 
 .visuel {
   position: relative;
   overflow: hidden;
+  margin: 0;
   // Le rapport est pose en ligne depuis le composant : la hauteur est donc
   // reservee avant tout chargement, et la page ne sursaute pas.
   width: 100%;
   background-color: var(--bch-papier);
   border: 1px solid var(--bs-border-color);
-  border-radius: var(--bs-border-radius);
+  border-radius: var(--bs-border-radius-lg);
 }
 
 .visuel__image {
@@ -25,7 +26,43 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  padding: 1.5rem;
-  // Les filets du motif heritent de cette couleur par currentColor.
+  padding: 1.75rem;
+  // Les filets et les aplats du motif heritent de cette couleur par
+  // currentColor.
   color: var(--bs-primary);
+}
+
+// Etiquette de l'emplacement provisoire.
+//
+// Volontairement visible, pas discrete : son role est d'empecher qu'un visuel
+// de remplissage parte en production par oubli. Elle disparait d'elle-meme des
+// qu'un fichier est renseigne.
+.visuel__etiquette {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--bch-sur-encre);
+  background-color: var(--bch-seuil);
+}
+
+// Variante posee sur une bande de papier : le cadre passe au blanc, sinon il
+// se confondrait avec sa bande.
+.visuel--blanc {
+  background-color: var(--bs-body-bg);
+}
+
+// Variante posee sur l'encre profonde du bandeau de tete.
+.visuel--sur-encre {
+  background-color: var(--bch-aplat-sur-encre);
+  border-color: var(--bch-filet-sur-encre);
+
+  .visuel__motif {
+    // Sur fond sombre, le motif se dessine en clair.
+    color: var(--bch-sur-encre);
+  }
 }

@@ -36,6 +36,8 @@ export interface SectionContenu {
   readonly blocs: readonly BlocContenu[];
   /** Sous-parties rendues en colonnes plutot qu'a la suite. */
   readonly cartes?: readonly CarteContenu[];
+  /** Illustration placee apres le texte de la section. */
+  readonly visuel?: VisuelDePage;
 }
 
 /**

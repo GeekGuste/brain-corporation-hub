@@ -38,10 +38,17 @@
       }
     </a>
 
-    <nav aria-label="Navigation principale">
+    <nav class="entete__navigation" aria-label="Navigation principale">
       <ul class="entete__liens">
         @for (lien of liens; track lien.cle) {
-          <li>
+          <!-- Le lien que la marque dessert deja est masque sur telephone : les
+               trois libelles n'y tiennent pas sur une ligne, et c'est le
+               dernier, « Lignes Rouges », qui se faisait couper. Le logo reste
+               cliquable et porte un nom accessible, la page n'est donc jamais
+               hors d'atteinte. La condition porte sur le chemin de la marque,
+               pas sur un rang : reordonner navigation.json reste sans effet
+               sur le code. -->
+          <li [class.entete__lien-redondant]="lien.chemin === liens[0].chemin">
             <a
               [routerLink]="lien.chemin"
               routerLinkActive="est-active"

@@ -7,6 +7,18 @@
 @use 'styles/theme';
 
 // =============================================================================
+// Ancres et en-tete fixe
+// -----------------------------------------------------------------------------
+// L'en-tete reste colle en haut de l'ecran. Sans ce decalage, un lien d'ancre
+// (« S'inscrire a la formation » vers #inscription) amenerait le titre vise
+// SOUS la barre de navigation. Pose sur la racine, il vaut pour toutes les
+// ancres du site, presentes et futures, sans rien ajouter sur chacune.
+// =============================================================================
+html {
+  scroll-padding-block-start: calc(var(--bch-hauteur-entete) + 1rem);
+}
+
+// =============================================================================
 // Echelle typographique
 // -----------------------------------------------------------------------------
 // Les tailles viennent des variables CSS du theme, qui changent selon la
@@ -14,43 +26,64 @@
 // =============================================================================
 body {
   font-size: var(--bch-corps);
-  // Evite que le texte ne s'etire sur toute la largeur d'un grand ecran.
+  // Evite les lignes orphelines en fin de paragraphe.
   text-wrap: pretty;
 }
 
 h1 {
   font-size: var(--bch-h1);
-  // Un titre serre lit mieux en grand corps.
-  letter-spacing: -0.015em;
+  font-weight: 700;
+  letter-spacing: var(--bch-serrage-titre);
+  line-height: 1.08;
   max-width: var(--bch-mesure-titre);
   text-wrap: balance;
 }
 
 h2 {
   font-size: var(--bch-h2);
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  letter-spacing: var(--bch-serrage-titre);
+  line-height: 1.2;
   max-width: var(--bch-mesure);
   text-wrap: balance;
 }
 
 h3 {
   font-size: var(--bch-h3);
+  font-weight: 600;
+  line-height: 1.35;
   max-width: var(--bch-mesure);
 }
 
 .lead,
 .chapo {
   font-size: var(--bch-chapo);
-  line-height: 1.6;
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+// Les liens du corps de texte sont soulignes : c'est le seul indice fiable pour
+// un lecteur qui ne distingue pas bien les nuances de couleur.
+main p a,
+main li a {
+  text-underline-offset: 0.2em;
 }
 
 // =============================================================================
 // Mesure de lecture
-// -----------------------------------------------------------------------------
-// Moins de 80 caracteres par ligne, quelle que soit la largeur de l'ecran.
 // =============================================================================
 .mesure {
   max-width: var(--bch-mesure);
+}
+
+// =============================================================================
+// Boutons
+// -----------------------------------------------------------------------------
+// Montserrat en 600 sur un bouton demande un peu d'air entre les lettres,
+// sinon les capitales se collent.
+// =============================================================================
+.btn {
+  letter-spacing: 0.01em;
 }
 
 // =============================================================================

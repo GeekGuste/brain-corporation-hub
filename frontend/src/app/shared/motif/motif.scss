@@ -1,6 +1,16 @@
-// Taille des pictogrammes. Pilotable par le parent via la variable, parce que
-// les variables CSS traversent l'encapsulation des composants, contrairement
-// aux selecteurs.
+// Taille des illustrations et des pictogrammes.
+//
+// Pilotables par le parent via les variables, parce que les variables CSS
+// traversent l'encapsulation des composants, contrairement aux selecteurs.
+
+// Grande illustration : occupe la largeur qu'on lui donne.
+.motif {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+// Pictogramme : taille fixe, imposee par le parent.
 .picto {
   display: block;
   width: var(--bch-taille-picto, 2rem);

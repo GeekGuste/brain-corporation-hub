@@ -34,7 +34,26 @@
           "type": "paragraphe",
           "texte": "Nos formateurs ne sont pas considérés comme de simples exécutants d’un contenu standardisé. Ils participent à la qualité de l’expérience pédagogique et à la confiance attachée à la marque."
         }
-      ]
+      ],
+      "visuel": {
+        "$commentaire": [
+          "IMAGE PROVISOIRE, a remplacer par celle du client.",
+          "Le fichier se trouve dans frontend/public/visuels-provisoires/.",
+          "",
+          "Pour poser l’image definitive : deposer le fichier dans frontend/public/,",
+          "puis remplacer ici « fichier », « largeur », « hauteur » et",
+          "« texteAlternatif ». Rien a modifier dans le code (CLAUDE.md §14).",
+          "Garder le meme rapport largeur/hauteur, sinon l’image sera recadree.",
+          "",
+          "« motif » reste renseigne : c’est le dessin de repli, affiche si",
+          "« fichier » repasse a null."
+        ],
+        "fichier": "/visuels-provisoires/bch-creuset.svg",
+        "largeur": 1200,
+        "hauteur": 900,
+        "texteAlternatif": "Six candidatures de hauteurs inegales : seules celles qui depassent la ligne rouge du niveau exige sont retenues.",
+        "motif": "creuset"
+      }
     },
     {
       "niveau": 2,
@@ -55,7 +74,26 @@
             "Une évaluation de l’efficacité de la formation au regard de son objectif."
           ]
         }
-      ]
+      ],
+      "visuel": {
+        "$commentaire": [
+          "IMAGE PROVISOIRE, a remplacer par celle du client.",
+          "Le fichier se trouve dans frontend/public/visuels-provisoires/.",
+          "",
+          "Pour poser l’image definitive : deposer le fichier dans frontend/public/,",
+          "puis remplacer ici « fichier », « largeur », « hauteur » et",
+          "« texteAlternatif ». Rien a modifier dans le code (CLAUDE.md §14).",
+          "Garder le meme rapport largeur/hauteur, sinon l’image sera recadree.",
+          "",
+          "« motif » reste renseigne : c’est le dessin de repli, affiche si",
+          "« fichier » repasse a null."
+        ],
+        "fichier": "/visuels-provisoires/bch-cycle.svg",
+        "largeur": 1200,
+        "hauteur": 900,
+        "texteAlternatif": "Une boucle de quatre etapes autour d’un document, dont l’etape rouge referme le cycle.",
+        "motif": "cycle"
+      }
     },
     {
       "niveau": 2,
@@ -65,21 +103,45 @@
           "type": "paragraphe",
           "texte": "Construire progressivement une marque de confiance fondée sur la prévention des risques, la qualité des intervenants et l’exigence pédagogique."
         }
-      ]
+      ],
+      "visuel": {
+        "$commentaire": [
+          "IMAGE PROVISOIRE, a remplacer par celle du client.",
+          "Le fichier se trouve dans frontend/public/visuels-provisoires/.",
+          "",
+          "Pour poser l’image definitive : deposer le fichier dans frontend/public/,",
+          "puis remplacer ici « fichier », « largeur », « hauteur » et",
+          "« texteAlternatif ». Rien a modifier dans le code (CLAUDE.md §14).",
+          "Garder le meme rapport largeur/hauteur, sinon l’image sera recadree.",
+          "",
+          "« motif » reste renseigne : c’est le dessin de repli, affiche si",
+          "« fichier » repasse a null."
+        ],
+        "fichier": "/visuels-provisoires/bch-ambition.svg",
+        "largeur": 1200,
+        "hauteur": 900,
+        "texteAlternatif": "Trois niveaux construits, surmontes de deux niveaux en pointilles restant a construire.",
+        "motif": "ambition"
+      }
     }
   ],
   "visuel": {
     "$commentaire": [
-      "Emplacement de visuel. Tant que « fichier » vaut null, l’illustration du",
-      "site occupe la place, au meme rapport : la mise en page ne bougera pas le",
-      "jour ou le client livrera ses photographies (CLAUDE.md §14 et §17).",
-      "Pour l’activer : deposer le fichier dans frontend/public/ et renseigner",
-      "fichier, largeur, hauteur et texteAlternatif."
+      "IMAGE PROVISOIRE, a remplacer par celle du client.",
+      "Le fichier se trouve dans frontend/public/visuels-provisoires/.",
+      "",
+      "Pour poser l’image definitive : deposer le fichier dans frontend/public/,",
+      "puis remplacer ici « fichier », « largeur », « hauteur » et",
+      "« texteAlternatif ». Rien a modifier dans le code (CLAUDE.md §14).",
+      "Garder le meme rapport largeur/hauteur, sinon l’image sera recadree.",
+      "",
+      "« motif » reste renseigne : c’est le dessin de repli, affiche si",
+      "« fichier » repasse a null."
     ],
-    "fichier": null,
-    "largeur": null,
-    "hauteur": null,
-    "texteAlternatif": "[À FOURNIR PAR LE CLIENT]",
+    "fichier": "/visuels-provisoires/bch-bandeau.svg",
+    "largeur": 1200,
+    "hauteur": 900,
+    "texteAlternatif": "Une facade institutionnelle a colonnes, dont le fronton est souligne d’une ligne rouge.",
     "motif": "exigence"
   }
 }

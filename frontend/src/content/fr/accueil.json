@@ -25,7 +25,26 @@
           "type": "paragraphe",
           "texte": "Dans la vie personnelle comme dans la vie professionnelle, certaines difficultés peuvent être évitées ou mieux maîtrisées lorsque les risques sont identifiés suffisamment tôt. La formation ne sert donc pas seulement à acquérir des compétences : elle permet aussi de comprendre une situation, d’adopter des réflexes de vigilance et de prendre des décisions plus éclairées."
         }
-      ]
+      ],
+      "visuel": {
+        "$commentaire": [
+          "IMAGE PROVISOIRE, a remplacer par celle du client.",
+          "Le fichier se trouve dans frontend/public/visuels-provisoires/.",
+          "",
+          "Pour poser l’image definitive : deposer le fichier dans frontend/public/,",
+          "puis remplacer ici « fichier », « largeur », « hauteur » et",
+          "« texteAlternatif ». Rien a modifier dans le code (CLAUDE.md §14).",
+          "Garder le meme rapport largeur/hauteur, sinon l’image sera recadree.",
+          "",
+          "« motif » reste renseigne : c’est le dessin de repli, affiche si",
+          "« fichier » repasse a null."
+        ],
+        "fichier": "/visuels-provisoires/accueil-prevenir.svg",
+        "largeur": 1200,
+        "hauteur": 900,
+        "texteAlternatif": "Un dossier ouvert sur deux feuillets, dont celui du dessus porte une ligne rouge marquant un point de vigilance.",
+        "motif": "seuil"
+      }
     },
     {
       "niveau": 2,
@@ -52,16 +71,21 @@
   ],
   "visuel": {
     "$commentaire": [
-      "Emplacement de visuel. Tant que « fichier » vaut null, l’illustration du",
-      "site occupe la place, au meme rapport : la mise en page ne bougera pas le",
-      "jour ou le client livrera ses photographies (CLAUDE.md §14 et §17).",
-      "Pour l’activer : deposer le fichier dans frontend/public/ et renseigner",
-      "fichier, largeur, hauteur et texteAlternatif."
+      "IMAGE PROVISOIRE, a remplacer par celle du client.",
+      "Le fichier se trouve dans frontend/public/visuels-provisoires/.",
+      "",
+      "Pour poser l’image definitive : deposer le fichier dans frontend/public/,",
+      "puis remplacer ici « fichier », « largeur », « hauteur » et",
+      "« texteAlternatif ». Rien a modifier dans le code (CLAUDE.md §14).",
+      "Garder le meme rapport largeur/hauteur, sinon l’image sera recadree.",
+      "",
+      "« motif » reste renseigne : c’est le dessin de repli, affiche si",
+      "« fichier » repasse a null."
     ],
-    "fichier": null,
-    "largeur": null,
-    "hauteur": null,
-    "texteAlternatif": "[À FOURNIR PAR LE CLIENT]",
+    "fichier": "/visuels-provisoires/accueil-bandeau.svg",
+    "largeur": 1200,
+    "hauteur": 675,
+    "texteAlternatif": "Deux trajectoires qui se separent a partir d’un meme point : celle d’une decision prise tot s’eleve, celle d’une difficulte subie decline.",
     "motif": "anticipation"
   }
 }

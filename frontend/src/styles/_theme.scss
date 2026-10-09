@@ -17,16 +17,33 @@
 //   appartient au registre des applications grand public, pas a celui d'un
 //   organisme de formation.
 //
-//   Deux familles de caracteres nettement distinctes, toutes deux presentes sur
-//   les appareils : aucune police a telecharger. Le public est majoritairement
-//   sur mobile, parfois en connexion lente (CLAUDE.md §13), et le §12 demande
-//   de limiter les polices. Un empilement serif pour les titres donne le
-//   registre attendu pour zero octet. Si la charte impose une police de marque,
-//   elle se declare ici, et ici seul.
+//   UNE seule famille de caracteres, Montserrat, en fonte variable : un seul
+//   fichier de 38 Ko couvre toutes les graisses de 100 a 900. Le §12 demande de
+//   limiter les polices et le public est parfois en connexion lente
+//   (CLAUDE.md §13) : une famille, un fichier, pas d'italique.
+//
+//   Elle est HEBERGEE PAR NOUS, pas chargee depuis le CDN de Google. Passer par
+//   Google transmettrait l'adresse IP de chaque visiteur a un tiers, ce qui
+//   n'est pas defendable sur un site qui traite des situations administratives
+//   d'etrangers (CLAUDE.md §15). Le fichier est fourni par le paquet
+//   @fontsource-variable/montserrat, declare dans angular.json.
+//
+//   Montserrat est large : les titres demandent un interlettrage negatif et une
+//   mesure courte, sinon ils s'etalent. C'est fait plus bas.
 //
 //   Le rouge n'est jamais un aplat. Il ne sert qu'aux filets de seuil, qui
 //   portent le nom de la marque. Une page qui parle de perte de droit au sejour
 //   ne doit pas crier.
+//
+//   Le bandeau de tete est sur fond encre profonde, texte blanc. C'est le seul
+//   contraste fort du site : il situe la marque et donne du relief sans ajouter
+//   ni degrade ni ombre.
+//
+//   Le corps de page est decoupe en BANDES pleine largeur qui alternent entre le
+//   blanc et le papier froid. C'est ce qui donne le rythme vertical, a la place
+//   d'une colonne de texte unique qui laissait un tiers de l'ecran vide a droite
+//   sur grand ecran. Deux valeurs suffisent : pas de troisieme fond, pas de
+//   degrade d'une bande a l'autre.
 // =============================================================================
 
 @use 'bootstrap/scss/bootstrap' with (
@@ -66,38 +83,31 @@
   // ---------------------------------------------------------------------------
   // Typographie
   // ---------------------------------------------------------------------------
-  // Texte courant : pile sans-serif systeme.
+  // Montserrat, fonte variable, hebergee par nous. Le repli systeme couvre le
+  // temps de chargement et le cas ou la police echoue.
   $font-family-sans-serif: (
+    'Montserrat Variable',
+    'Montserrat',
     system-ui,
     -apple-system,
     'Segoe UI',
     Roboto,
-    'Helvetica Neue',
-    Arial,
     sans-serif
   ),
-  // Titres : pile serif systeme. Georgia sur Windows et macOS, Noto Serif sur
-  // Android, Times en dernier recours. Aucun telechargement.
-  $headings-font-family: (
-    Georgia,
-    'Iowan Old Style',
-    'Times New Roman',
-    Times,
-    serif
-  ),
-  $font-size-base: 1.0625rem,
+  $font-size-base: 1.125rem,
   // Interligne genereux : textes longs, lus par un public souvent non
-  // francophone de naissance (CLAUDE.md §13).
-  $line-height-base: 1.7,
-  $headings-font-weight: 600,
-  $headings-line-height: 1.2,
-  $headings-color: #16263b,
+  // francophone de naissance (CLAUDE.md §13). Montserrat a une grande hauteur
+  // d'x, elle en demande encore un peu plus que la moyenne.
+  $line-height-base: 1.75,
+  $headings-font-weight: 700,
+  $headings-line-height: 1.15,
+  $headings-color: #112232,
   // Les tailles reelles sont posees plus bas, en variables CSS, parce qu'elles
   // varient selon la largeur de l'ecran. Ces valeurs servent de repli.
-  $h1-font-size: 2rem,
-  $h2-font-size: 1.5rem,
-  $h3-font-size: 1.1875rem,
-  $lead-font-size: 1.1875rem,
+  $h1-font-size: 2.5rem,
+  $h2-font-size: 1.75rem,
+  $h3-font-size: 1.25rem,
+  $lead-font-size: 1.3125rem,
   $lead-font-weight: 400,
 
   // ---------------------------------------------------------------------------
@@ -137,57 +147,84 @@
 // =============================================================================
 :root {
   // --- Polices -------------------------------------------------------------
-  // Exposees en variables pour que rien, ailleurs dans le projet, n'ait a
-  // recopier un empilement de polices. Si la charte impose une police de
-  // marque, elle se declare dans le bloc Bootstrap ci-dessus et ici.
-  --bch-police-titres: Georgia, 'Iowan Old Style', 'Times New Roman', Times, serif;
-  --bch-police-texte: var(--bs-font-sans-serif);
+  // Exposee en variable pour que rien, ailleurs dans le projet, n'ait a
+  // recopier l'empilement. Si la charte impose une autre police de marque, elle
+  // se declare dans le bloc Bootstrap ci-dessus et ici.
+  --bch-police: var(--bs-font-sans-serif);
 
   // --- Couleurs ------------------------------------------------------------
   // Anneau de focus clavier, utilise sur les elements non Bootstrap.
   --bch-focus-ring: var(--bs-primary);
-  // Papier froid des bandeaux de tete.
-  --bch-papier: #eef2f6;
-  // Filet de seuil. Jamais en aplat, jamais sur plus de trois pixels.
-  --bch-seuil: var(--bs-danger);
+  // Papier froid : fond des encarts et des cartes.
+  --bch-papier: #f1f4f7;
+  // Encre profonde : surface du bandeau de tete et du pied de page. Le seul
+  // contraste fort du site.
+  --bch-encre: #112232;
+  // Texte sur encre profonde. Blanc franc pour les titres, voile pour le texte
+  // courant : un blanc pur sur fond sombre en long paragraphe fatigue l'oeil.
+  --bch-sur-encre: #ffffff;
+  --bch-sur-encre-voile: #c3cfdb;
+  // Aplats et filets poses SUR l'encre profonde. Du blanc tres dilue plutot
+  // qu'une teinte fixe : ils restent justes si l'encre change de valeur.
+  --bch-aplat-sur-encre: rgb(255 255 255 / 4%);
+  --bch-filet-sur-encre: rgb(255 255 255 / 16%);
+  // Filet de seuil. DECORATIF UNIQUEMENT : jamais utilise pour du texte, donc
+  // non soumis a un rapport de contraste. Plus clair que le rouge des erreurs
+  // de formulaire, pour rester visible sur l'encre profonde comme sur le blanc.
+  --bch-seuil: #d9533b;
 
   // --- Mesures de lecture --------------------------------------------------
-  // Moins de 80 caracteres par ligne. Le texte courant est plus etroit que les
-  // titres : c'est le confort de lecture qui commande, pas la largeur de
-  // l'ecran.
-  --bch-mesure: 64ch;
-  --bch-mesure-titre: 26ch;
+  // Moins de 80 caracteres par ligne. Le titre est plus etroit que le texte :
+  // Montserrat est large, un titre non bride s'etale sur toute la page.
+  --bch-mesure: 58ch;
+  --bch-mesure-titre: 20ch;
 
   // --- Echelle typographique ----------------------------------------------
-  --bch-corps: 1.0625rem;
-  --bch-chapo: 1.1875rem;
-  --bch-h1: 2rem;
-  --bch-h2: 1.5rem;
-  --bch-h3: 1.1875rem;
-  --bch-exergue: 1.375rem;
+  // Relevee d'un cran par rapport a la version precedente : le public lit
+  // souvent sur petit ecran et n'est pas toujours francophone de naissance
+  // (CLAUDE.md §13). Un corps genereux coute moins qu'un texte survole.
+  --bch-corps: 1.125rem;
+  --bch-chapo: 1.3125rem;
+  --bch-h1: 2.5rem;
+  --bch-h2: 1.75rem;
+  --bch-h3: 1.25rem;
+  --bch-exergue: 1.5rem;
+  // Interlettrage des titres. Montserrat est geometrique et large : sans
+  // resserrage, un grand titre se delite.
+  --bch-serrage-titre: -0.02em;
 
   // --- Rythme vertical ----------------------------------------------------
-  --bch-espace-section: 2.5rem;
-  --bch-espace-bandeau: 2.5rem;
+  // Un seul reglage commande la respiration : c'est l'espace interieur d'une
+  // bande du corps de page. Les bandes se succedent sans marge, elles ne
+  // portent que leur propre espace, donc deux reglages ne peuvent plus
+  // s'additionner ni se neutraliser.
+  --bch-espace-section: 3.25rem;
+  --bch-espace-bandeau: 3rem;
 
   // --- Divers -------------------------------------------------------------
   --bch-cible-tactile-min: 44px;
   --bch-hauteur-logo: 32px;
+  // Hauteur de l'en-tete fixe. Elle sert a deux choses : decaler les ancres
+  // pour qu'un titre vise ne se retrouve pas sous la barre, et poser le titre
+  // collant des sections de texte. Deux lignes sur telephone (la marque, puis
+  // la navigation), une seule a partir de la tablette.
+  --bch-hauteur-entete: 92px;
 }
 
 @media (min-width: 768px) {
   :root {
-    --bch-corps: 1.125rem;
-    --bch-chapo: 1.3125rem;
-    --bch-h1: 2.75rem;
-    --bch-h2: 1.875rem;
-    --bch-h3: 1.3125rem;
-    --bch-exergue: 1.625rem;
+    --bch-corps: 1.1875rem;
+    --bch-chapo: 1.5rem;
+    --bch-h1: 3.5rem;
+    --bch-h2: 2.375rem;
+    --bch-h3: 1.4375rem;
+    --bch-exergue: 2rem;
 
-    --bch-espace-section: 3.5rem;
+    --bch-espace-section: 5.5rem;
     --bch-espace-bandeau: 4.5rem;
 
     --bch-hauteur-logo: 40px;
+    --bch-hauteur-entete: 68px;
   }
 }
 

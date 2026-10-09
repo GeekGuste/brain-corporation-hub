@@ -44,7 +44,26 @@
           "type": "paragraphe",
           "texte": "Depuis la loi du 26 janvier 2024, une obligation de quitter le territoire français peut produire ses effets pendant trois ans et compliquer fortement toute démarche de régularisation. À l’issue de cette période, les délais nécessaires pour déposer une nouvelle demande et espérer obtenir un titre de séjour peuvent encore être très longs. Au total, une personne peut ainsi passer près de cinq années en situation irrégulière avant d’espérer une régularisation."
         }
-      ]
+      ],
+      "visuel": {
+        "$commentaire": [
+          "IMAGE PROVISOIRE, a remplacer par celle du client.",
+          "Le fichier se trouve dans frontend/public/visuels-provisoires/.",
+          "",
+          "Pour poser l’image definitive : deposer le fichier dans frontend/public/,",
+          "puis remplacer ici « fichier », « largeur », « hauteur » et",
+          "« texteAlternatif ». Rien a modifier dans le code (CLAUDE.md §14).",
+          "Garder le meme rapport largeur/hauteur, sinon l’image sera recadree.",
+          "",
+          "« motif » reste renseigne : c’est le dessin de repli, affiche si",
+          "« fichier » repasse a null."
+        ],
+        "fichier": "/visuels-provisoires/lr-echeances.svg",
+        "largeur": 1200,
+        "hauteur": 900,
+        "texteAlternatif": "Un calendrier dont une case est marquee en rouge, suivie d’une longue periode hachuree.",
+        "motif": "echeances"
+      }
     },
     {
       "niveau": 2,
@@ -89,7 +108,26 @@
           "type": "paragraphe",
           "texte": "Ce tableau de bord a vocation à aider le participant à suivre sa situation dans le temps : échéances, changements de circonstances, documents à conserver, démarches à anticiper et événements justifiant une consultation professionnelle."
         }
-      ]
+      ],
+      "visuel": {
+        "$commentaire": [
+          "IMAGE PROVISOIRE, a remplacer par celle du client.",
+          "Le fichier se trouve dans frontend/public/visuels-provisoires/.",
+          "",
+          "Pour poser l’image definitive : deposer le fichier dans frontend/public/,",
+          "puis remplacer ici « fichier », « largeur », « hauteur » et",
+          "« texteAlternatif ». Rien a modifier dans le code (CLAUDE.md §14).",
+          "Garder le meme rapport largeur/hauteur, sinon l’image sera recadree.",
+          "",
+          "« motif » reste renseigne : c’est le dessin de repli, affiche si",
+          "« fichier » repasse a null."
+        ],
+        "fichier": "/visuels-provisoires/lr-tableau-de-bord.svg",
+        "largeur": 1200,
+        "hauteur": 900,
+        "texteAlternatif": "Une feuille de suivi : des points de vigilance alignes dans le temps, et un repere rouge marquant le moment d’une consultation.",
+        "motif": "suivi"
+      }
     },
     {
       "niveau": 2,
@@ -107,7 +145,26 @@
           "type": "exergue",
           "texte": "L’information peut être accessible. La méthode, la vérification et la finesse de l’analyse créent la valeur."
         }
-      ]
+      ],
+      "visuel": {
+        "$commentaire": [
+          "IMAGE PROVISOIRE, a remplacer par celle du client.",
+          "Le fichier se trouve dans frontend/public/visuels-provisoires/.",
+          "",
+          "Pour poser l’image definitive : deposer le fichier dans frontend/public/,",
+          "puis remplacer ici « fichier », « largeur », « hauteur » et",
+          "« texteAlternatif ». Rien a modifier dans le code (CLAUDE.md §14).",
+          "Garder le meme rapport largeur/hauteur, sinon l’image sera recadree.",
+          "",
+          "« motif » reste renseigne : c’est le dessin de repli, affiche si",
+          "« fichier » repasse a null."
+        ],
+        "fichier": "/visuels-provisoires/lr-methode.svg",
+        "largeur": 1200,
+        "hauteur": 900,
+        "texteAlternatif": "Des feuilles dispersees passant par des filtres resserres pour ressortir en trois documents nets.",
+        "motif": "methode"
+      }
     },
     {
       "niveau": 2,
@@ -125,7 +182,26 @@
           "type": "exergue",
           "texte": "Plus le coût potentiel d’une erreur est élevé, plus sa prévention mérite d’être organisée."
         }
-      ]
+      ],
+      "visuel": {
+        "$commentaire": [
+          "IMAGE PROVISOIRE, a remplacer par celle du client.",
+          "Le fichier se trouve dans frontend/public/visuels-provisoires/.",
+          "",
+          "Pour poser l’image definitive : deposer le fichier dans frontend/public/,",
+          "puis remplacer ici « fichier », « largeur », « hauteur » et",
+          "« texteAlternatif ». Rien a modifier dans le code (CLAUDE.md §14).",
+          "Garder le meme rapport largeur/hauteur, sinon l’image sera recadree.",
+          "",
+          "« motif » reste renseigne : c’est le dessin de repli, affiche si",
+          "« fichier » repasse a null."
+        ],
+        "fichier": "/visuels-provisoires/lr-cout.svg",
+        "largeur": 1200,
+        "hauteur": 900,
+        "texteAlternatif": "Deux empilements de blocs de hauteurs tres differentes, sans aucun chiffre ni aucune legende.",
+        "motif": "cout"
+      }
     },
     {
       "niveau": 2,
@@ -158,21 +234,45 @@
           "type": "paragraphe",
           "texte": "Cette organisation territoriale permet au formateur d’intégrer, au-delà des règles nationales applicables, les particularités susceptibles d’être observées localement : modalités de dépôt des demandes, exigences documentaires, pratiques d’instruction, difficultés récurrentes et jurisprudence administrative pertinente."
         }
-      ]
+      ],
+      "visuel": {
+        "$commentaire": [
+          "IMAGE PROVISOIRE, a remplacer par celle du client.",
+          "Le fichier se trouve dans frontend/public/visuels-provisoires/.",
+          "",
+          "Pour poser l’image definitive : deposer le fichier dans frontend/public/,",
+          "puis remplacer ici « fichier », « largeur », « hauteur » et",
+          "« texteAlternatif ». Rien a modifier dans le code (CLAUDE.md §14).",
+          "Garder le meme rapport largeur/hauteur, sinon l’image sera recadree.",
+          "",
+          "« motif » reste renseigne : c’est le dessin de repli, affiche si",
+          "« fichier » repasse a null."
+        ],
+        "fichier": "/visuels-provisoires/lr-formateurs.svg",
+        "largeur": 1200,
+        "hauteur": 900,
+        "texteAlternatif": "Une grille de territoires dont un groupe contigu est entoure en rouge, avec un point marquant la ville-prefecture.",
+        "motif": "territoire"
+      }
     }
   ],
   "visuel": {
     "$commentaire": [
-      "Emplacement de visuel. Tant que « fichier » vaut null, l’illustration du",
-      "site occupe la place, au meme rapport : la mise en page ne bougera pas le",
-      "jour ou le client livrera ses photographies (CLAUDE.md §14 et §17).",
-      "Pour l’activer : deposer le fichier dans frontend/public/ et renseigner",
-      "fichier, largeur, hauteur et texteAlternatif."
+      "IMAGE PROVISOIRE, a remplacer par celle du client.",
+      "Le fichier se trouve dans frontend/public/visuels-provisoires/.",
+      "",
+      "Pour poser l’image definitive : deposer le fichier dans frontend/public/,",
+      "puis remplacer ici « fichier », « largeur », « hauteur » et",
+      "« texteAlternatif ». Rien a modifier dans le code (CLAUDE.md §14).",
+      "Garder le meme rapport largeur/hauteur, sinon l’image sera recadree.",
+      "",
+      "« motif » reste renseigne : c’est le dessin de repli, affiche si",
+      "« fichier » repasse a null."
     ],
-    "fichier": null,
-    "largeur": null,
-    "hauteur": null,
-    "texteAlternatif": "[À FOURNIR PAR LE CLIENT]",
+    "fichier": "/visuels-provisoires/lr-bandeau.svg",
+    "largeur": 1200,
+    "hauteur": 900,
+    "texteAlternatif": "Un dossier dont les feuillets sont larges au-dessus d’une ligne rouge, et de plus en plus etroits en dessous.",
     "motif": "seuil"
   },
   "faitsCles": [

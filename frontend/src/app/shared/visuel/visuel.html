@@ -1,4 +1,9 @@
-<div class="visuel" [style.aspect-ratio]="rapport()">
+<figure
+  class="visuel"
+  [class.visuel--blanc]="fond() === 'blanc'"
+  [class.visuel--sur-encre]="fond() === 'encre'"
+  [style.aspect-ratio]="rapport()"
+>
   @if (fichier()) {
     <img
       class="visuel__image"
@@ -11,10 +16,12 @@
       decoding="async"
     />
   } @else {
-    <!-- En attente des visuels du client. L'illustration du site occupe la
-         place, au meme rapport. -->
+    <!-- Emplacement provisoire. L'illustration du site occupe la place, au
+         rapport final, et l'etiquette rappelle qu'elle est a remplacer. -->
     <div class="visuel__motif">
       <app-motif [nom]="motif()" />
     </div>
+
+    <figcaption class="visuel__etiquette">{{ etiquetteProvisoire() }}</figcaption>
   }
-</div>
+</figure>
