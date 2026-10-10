@@ -1,0 +1,165 @@
+// Styles de l'ossature. Aucune couleur et aucune taille de caractere ecrites
+// ici : tout vient des variables du fichier de theme unique (CLAUDE.md §14).
+
+// =============================================================================
+// En-tete
+// -----------------------------------------------------------------------------
+// Un filet, du blanc, rien d'autre. L'en-tete d'un site institutionnel n'a pas
+// a attirer l'oeil : il doit situer et laisser passer.
+//
+// Elle est COLLEE en haut de l'ecran, a toutes les largeurs : les pages sont
+// longues et le public navigue surtout au pouce. « sticky » et non « fixed » :
+// l'element garde sa place dans le flux, donc rien n'a besoin d'etre decale
+// sous lui, et le comportement ne depend d'aucun script. La hauteur est
+// annoncee dans le theme (--bch-hauteur-entete) pour que les ancres et les
+// titres collants s'y referent.
+// =============================================================================
+.entete {
+  position: sticky;
+  inset-block-start: 0;
+  // Au-dessus du contenu de page, sous le lien d'evitement.
+  z-index: 1030;
+  background-color: var(--bs-body-bg);
+  border-block-end: 1px solid var(--bs-border-color);
+
+  &__barre {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.25rem 1.5rem;
+    padding-block: 0.5rem;
+
+    @media (min-width: 768px) {
+      padding-block: 0.75rem;
+    }
+  }
+
+  &__marque {
+    display: flex;
+    align-items: center;
+    color: var(--bs-heading-color);
+    text-decoration: none;
+  }
+
+  &__marque-texte {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    letter-spacing: var(--bch-serrage-titre);
+    white-space: nowrap;
+  }
+
+  // Sur telephone, la navigation occupe sa propre ligne sous la marque : les
+  // trois libelles ne tiennent pas a cote d'elle. Elle defile horizontalement
+  // plutot que de passer a la ligne, pour que l'en-tete fixe garde une hauteur
+  // previsible (deux lignes, jamais trois).
+  &__navigation {
+    width: 100%;
+    overflow-x: auto;
+
+    @media (min-width: 768px) {
+      width: auto;
+      overflow-x: visible;
+    }
+  }
+
+  &__liens {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      // Cible tactile genereuse (CLAUDE.md §13), sans gonfler la barre.
+      min-height: var(--bch-cible-tactile-min);
+      padding-inline: 0.625rem;
+      // Un cran sous le corps de texte : la navigation situe, elle ne se lit
+      // pas. Sans cela, le corps releve a 1,1875 rem en ferait un titre.
+      font-size: 1rem;
+      white-space: nowrap;
+      color: var(--bs-body-color);
+      text-decoration: none;
+      border-block-end: 2px solid transparent;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--bs-primary);
+      }
+
+      @media (min-width: 768px) {
+        padding-inline: 0.875rem;
+      }
+    }
+
+    // Masque sur telephone seulement : la marque mene deja a cette page.
+    .entete__lien-redondant {
+      display: none;
+
+      @media (min-width: 768px) {
+        display: block;
+      }
+    }
+
+    // Le premier lien VISIBLE s'aligne sur le bord du conteneur, pas sur son
+    // creux : la navigation se cale ainsi sur la marque, juste au-dessus.
+    // Designe par voisinage avec le lien masque, parce qu'aucun selecteur ne
+    // sait dire « le premier qui s'affiche ».
+    .entete__lien-redondant + li a {
+      padding-inline-start: 0;
+
+      @media (min-width: 768px) {
+        padding-inline-start: 0.875rem;
+      }
+    }
+
+    // La page courante est marquee par le filet de seuil, pas par une pastille
+    // ni un fond : c'est le motif du site.
+    .est-active {
+      color: var(--bs-heading-color);
+      font-weight: 600;
+      border-block-end-color: var(--bch-seuil);
+    }
+  }
+}
+
+// Emplacement du logo dans l'en-tete.
+//
+// La hauteur est imposee et la largeur libre : l'espace est donc reserve avant
+// meme que le fichier soit fourni, et il le restera a l'identique quand il
+// arrivera. La page ne sursautera pas au chargement.
+.emplacement-logo {
+  display: flex;
+  align-items: center;
+  height: var(--bch-hauteur-logo);
+  width: auto;
+  // Un logo tres large ne doit pas pousser la navigation hors de l'ecran sur
+  // un petit telephone.
+  max-width: 60vw;
+  object-fit: contain;
+}
+
+// =============================================================================
+// Pied de page
+// =============================================================================
+// Sur la meme encre profonde que le bandeau de tete : la page est tenue par ses
+// deux extremites, et le corps reste clair et lisible entre les deux.
+.pied {
+  background-color: var(--bch-encre);
+  // Le filet de seuil, une derniere fois, sur toute la largeur. Pose ici et non
+  // sur le contenu, qui est dans un conteneur centre et ne va pas bord a bord.
+  border-block-start: 3px solid var(--bch-seuil);
+
+  &__contenu {
+    padding-block: 2.5rem;
+  }
+
+  &__mention {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--bch-sur-encre-voile);
+  }
+}

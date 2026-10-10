@@ -1,0 +1,91 @@
+{
+  "$commentaire": [
+    "TEXTES FOURNIS PAR LE CLIENT, integres tels quels.",
+    "Source : « Contenus editoriaux du site web », version du 15 septembre 2026,",
+    "section « Page Accueil ».",
+    "",
+    "Ne pas reecrire, ne pas optimiser, ne pas ajouter (CLAUDE.md §3). Le client",
+    "est juriste, la formulation est volontairement prudente et engage sa",
+    "responsabilite.",
+    "",
+    "Les niveaux de titre reprennent la hierarchie du document : un seul h1, puis",
+    "h2 et h3 sans saut de niveau."
+  ],
+  "surtitre": "BRAIN CORPORATION HUB",
+  "titre": "Mieux comprendre les risques pour décider plus tôt",
+  "introduction": [
+    "Brain Corporation Hub conçoit des formations et des accompagnements qui font de la connaissance un outil d’anticipation. Notre objectif est d’aider chacun à reconnaître les situations sensibles, à mesurer les conséquences possibles de ses choix et à agir avant qu’une difficulté ne devienne une crise."
+  ],
+  "sections": [
+    {
+      "niveau": 2,
+      "titre": "Former pour prévenir",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Dans la vie personnelle comme dans la vie professionnelle, certaines difficultés peuvent être évitées ou mieux maîtrisées lorsque les risques sont identifiés suffisamment tôt. La formation ne sert donc pas seulement à acquérir des compétences : elle permet aussi de comprendre une situation, d’adopter des réflexes de vigilance et de prendre des décisions plus éclairées."
+        }
+      ],
+      "visuel": {
+        "$commentaire": [
+          "IMAGE PROVISOIRE, a remplacer par celle du client.",
+          "Le fichier se trouve dans frontend/public/visuels-provisoires/.",
+          "",
+          "Pour poser l’image definitive : deposer le fichier dans frontend/public/,",
+          "puis remplacer ici « fichier », « largeur », « hauteur » et",
+          "« texteAlternatif ». Rien a modifier dans le code (CLAUDE.md §14).",
+          "Garder le meme rapport largeur/hauteur, sinon l’image sera recadree.",
+          "",
+          "« motif » reste renseigne : c’est le dessin de repli, affiche si",
+          "« fichier » repasse a null."
+        ],
+        "fichier": "/visuels-provisoires/accueil-prevenir.svg",
+        "largeur": 1200,
+        "hauteur": 900,
+        "texteAlternatif": "Un dossier ouvert sur deux feuillets, dont celui du dessus porte une ligne rouge marquant un point de vigilance.",
+        "motif": "seuil"
+      }
+    },
+    {
+      "niveau": 2,
+      "titre": "Notre approche repose sur trois piliers",
+      "blocs": [],
+      "cartes": [
+        {
+          "titre": "Prévention des risques",
+          "texte": "Nous transformons des informations complexes en repères concrets afin d’aider les participants à détecter les situations qui exigent une vigilance particulière.",
+          "pictogramme": "picto-vigilance"
+        },
+        {
+          "titre": "Excellence des intervenants",
+          "texte": "Nous sélectionnons des professionnels pour leur expertise, leur expérience, leurs qualités pédagogiques et leur capacité à apporter une réelle valeur ajoutée.",
+          "pictogramme": "picto-intervenants"
+        },
+        {
+          "titre": "Exigence pédagogique",
+          "texte": "Nos formations sont conçues, actualisées et améliorées pour répondre aux besoins réels des publics et rendre les connaissances directement utilisables.",
+          "pictogramme": "picto-pedagogie"
+        }
+      ]
+    }
+  ],
+  "visuel": {
+    "$commentaire": [
+      "IMAGE PROVISOIRE, a remplacer par celle du client.",
+      "Le fichier se trouve dans frontend/public/visuels-provisoires/.",
+      "",
+      "Pour poser l’image definitive : deposer le fichier dans frontend/public/,",
+      "puis remplacer ici « fichier », « largeur », « hauteur » et",
+      "« texteAlternatif ». Rien a modifier dans le code (CLAUDE.md §14).",
+      "Garder le meme rapport largeur/hauteur, sinon l’image sera recadree.",
+      "",
+      "« motif » reste renseigne : c’est le dessin de repli, affiche si",
+      "« fichier » repasse a null."
+    ],
+    "fichier": "/visuels-provisoires/accueil-bandeau.svg",
+    "largeur": 1200,
+    "hauteur": 675,
+    "texteAlternatif": "Deux trajectoires qui se separent a partir d’un meme point : celle d’une decision prise tot s’eleve, celle d’une difficulte subie decline.",
+    "motif": "anticipation"
+  }
+}

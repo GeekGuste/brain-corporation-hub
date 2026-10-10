@@ -1,0 +1,274 @@
+// Mise en page des pages editoriales.
+//
+// Aucune couleur et aucune taille de caractere ecrites ici : tout vient des
+// variables du fichier de theme unique et des classes Bootstrap
+// (CLAUDE.md §14).
+
+// =============================================================================
+// Bandeau de tete
+// -----------------------------------------------------------------------------
+// Sur encre profonde, texte clair. C'est le seul contraste fort du site.
+// =============================================================================
+.bandeau {
+  background-color: var(--bch-encre);
+  color: var(--bch-sur-encre-voile);
+  padding-block: var(--bch-espace-bandeau);
+
+  // Version resserree, utilisee par l'accueil. Le visuel passe en meme temps
+  // au format large, cote gabarit : c'est lui qui commande la hauteur de la
+  // bande, la reduire sans le reduire ne servirait a rien.
+  &--compact {
+    padding-block: calc(var(--bch-espace-bandeau) * 0.625);
+  }
+
+  &__titre {
+    color: var(--bch-sur-encre);
+    margin-block-end: 1.25rem;
+  }
+
+  &__chapo {
+    max-width: var(--bch-mesure);
+
+    p:last-child {
+      margin-block-end: 0;
+    }
+  }
+
+  &__action {
+    margin-block: 2rem 0;
+  }
+}
+
+// Accroche au-dessus du titre. Volontairement sans espacement de lettres : le
+// texte du client est en capitales, et des capitales pistonnees sont penibles a
+// lire pour un lecteur non francophone de naissance (CLAUDE.md §13).
+.surtitre {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--bch-sur-encre-voile);
+  max-width: 44ch;
+  margin-block-end: 1.5rem;
+  // Un filet court plutot qu'une pastille : c'est le motif du site.
+  padding-inline-start: 0.875rem;
+  border-inline-start: 3px solid var(--bch-seuil);
+}
+
+// =============================================================================
+// Faits pratiques du bandeau
+// -----------------------------------------------------------------------------
+// Des couples libelle-valeur, separes par des filets verticaux. Pas de cartes :
+// la donnee est trop courte pour meriter un cadre chacune.
+// =============================================================================
+.faits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  margin-block: 2rem 0;
+
+  &__item {
+    padding-inline-end: 2rem;
+    border-inline-end: 1px solid var(--bch-filet-sur-encre);
+
+    &:last-child {
+      padding-inline-end: 0;
+      border-inline-end: 0;
+    }
+  }
+
+  dt {
+    font-size: 0.9375rem;
+    font-weight: 400;
+    color: var(--bch-sur-encre-voile);
+    margin-block-end: 0.125rem;
+  }
+
+  dd {
+    margin-block-end: 0;
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: var(--bch-serrage-titre);
+    color: var(--bch-sur-encre);
+  }
+}
+
+// =============================================================================
+// Bandes du corps
+// -----------------------------------------------------------------------------
+// Une bande par section, pleine largeur, fond alterne. Tout l'espace vertical
+// est porte ici, en un seul endroit : les bandes se succedent sans marge, donc
+// deux reglages ne peuvent ni s'additionner ni se neutraliser.
+// =============================================================================
+.bande {
+  padding-block: var(--bch-espace-section);
+
+  &--papier {
+    background-color: var(--bch-papier);
+  }
+
+  // Titre d'une bande de cartes : centre, sur une mesure courte.
+  //
+  // Le « max-width » doit etre repris sur le titre lui-meme : la regle globale
+  // lui impose la mesure de lecture, qui est plus large que ce bloc et le
+  // decalerait a gauche malgre la marge automatique.
+  &__intro {
+    max-width: 54ch;
+    margin-inline: auto;
+    text-align: center;
+
+    h2,
+    h3,
+    p {
+      max-width: none;
+      margin-inline: auto;
+    }
+  }
+
+  // Colonne du titre, dans la disposition « titre en regard ».
+  //
+  // « align-self » est indispensable : sans lui, la colonne Bootstrap est
+  // etiree sur toute la hauteur de la rangee et le titre n'a aucune course
+  // pour se deplacer. En la laissant a sa hauteur de contenu, le titre peut
+  // suivre la lecture, et il s'arrete sous l'en-tete fixe.
+  &__regard {
+    @media (min-width: 992px) {
+      align-self: flex-start;
+      position: sticky;
+      inset-block-start: calc(var(--bch-hauteur-entete) + 2rem);
+    }
+  }
+}
+
+.section {
+  &__titre {
+    margin-block-end: 1.25rem;
+  }
+
+  // Un titre de niveau 3 isole dans le flux, pas dans une carte.
+  &__titre--mineur {
+    margin-block-start: 0;
+  }
+}
+
+// Le dernier paragraphe d'une section ne traine pas de marge : c'est la bande
+// qui donne l'espace.
+.bande p:last-child,
+.bande ul:last-child,
+.bande blockquote:last-child {
+  margin-block-end: 0;
+}
+
+// =============================================================================
+// Listes
+// -----------------------------------------------------------------------------
+// Puce remplacee par un court filet : le motif du site, decline jusqu'ici.
+// =============================================================================
+.liste {
+  list-style: none;
+  padding-inline-start: 0;
+
+  li {
+    position: relative;
+    padding-inline-start: 1.75rem;
+    margin-block-end: 0.875rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset-inline-start: 0;
+      // Aligne sur la premiere ligne de texte, quelle que soit sa taille.
+      top: calc(var(--bch-corps) * 1.75 / 2);
+      width: 0.875rem;
+      height: 2px;
+      background-color: var(--bch-seuil);
+    }
+  }
+}
+
+// =============================================================================
+// Exergue
+// -----------------------------------------------------------------------------
+// Pas de guillemets, pas d'encadre, pas de fond. C'est le corps du caractere
+// qui porte la mise en avant, et un filet qui la tient.
+// =============================================================================
+.exergue {
+  margin-block: 2.5rem 0;
+  padding-inline-start: 1.75rem;
+  border-inline-start: 3px solid var(--bch-seuil);
+  max-width: var(--bch-mesure);
+
+  p {
+    margin-block-end: 0;
+    font-size: var(--bch-exergue);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: var(--bch-serrage-titre);
+    color: var(--bs-heading-color);
+  }
+}
+
+// =============================================================================
+// Cartes
+// -----------------------------------------------------------------------------
+// Utilisees seulement la ou le contenu est reellement parallele : les trois
+// piliers de l'accueil, les deux publics de la page de vente.
+//
+// Elles etaient auparavant collees les unes aux autres dans une grille a filet
+// partage, ce qui les faisait lire comme un tableau. Elles sont maintenant
+// SEPAREES : trois objets distincts, chacun avec son cadre et son filet de
+// seuil en tete. Toujours aucune ombre portee ni degrade (CLAUDE.md §14) :
+// c'est l'ecart entre les cartes et le filet rouge qui donnent le relief.
+// =============================================================================
+.cartes {
+  display: grid;
+  gap: 1.5rem;
+  margin-block: 3rem 0;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  }
+}
+
+.carte {
+  // Les cartes se detachent de leur bande, blanche ou papier : elles prennent
+  // donc le fond de page, jamais celui de la bande.
+  background-color: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius-lg);
+  // Le filet de seuil en tete : le motif du site, qui fait aussi office de
+  // point d'entree de lecture.
+  border-block-start: 3px solid var(--bch-seuil);
+  padding: 2.25rem 2rem;
+  // Les cartes d'une meme rangee s'alignent en haut et occupent la meme
+  // hauteur : le titre de l'une ne doit pas flotter au milieu.
+  display: flex;
+  flex-direction: column;
+
+  // Cartouche du pictogramme. Un aplat de papier derriere le dessin, pour
+  // qu'il pese dans la carte au lieu d'y flotter.
+  &__cartouche {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 4rem;
+    block-size: 4rem;
+    margin-block-end: 1.5rem;
+    background-color: var(--bch-papier);
+    border-radius: var(--bs-border-radius);
+    color: var(--bs-primary);
+    // Dimensionne le dessin a l'interieur du composant encapsule.
+    --bch-taille-picto: 2rem;
+  }
+
+  &__titre {
+    font-size: var(--bch-h3);
+    margin-block-end: 0.75rem;
+  }
+
+  &__texte {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--bs-body-color);
+    margin-block-end: 0;
+  }
+}

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+  <rect width="1200" height="900" fill="#f1f4f7"/>
+  <rect x="0" y="700" width="1200" height="200" fill="#e4eaf0"/>
+  <rect x="210" y="560" width="780" height="140" rx="6" fill="#1b3a5c"/>
+  <rect x="233" y="604" width="46" height="52" rx="3" fill="#ffffff" opacity="0.45"/>
+  <rect x="405" y="604" width="46" height="52" rx="3" fill="#ffffff" opacity="0.45"/>
+  <rect x="577" y="604" width="46" height="52" rx="3" fill="#ffffff" opacity="0.45"/>
+  <rect x="749" y="604" width="46" height="52" rx="3" fill="#ffffff" opacity="0.45"/>
+  <rect x="921" y="604" width="46" height="52" rx="3" fill="#ffffff" opacity="0.45"/>
+  <rect x="280" y="420" width="640" height="140" rx="6" fill="#2c5f7c"/>
+  <rect x="303" y="464" width="46" height="52" rx="3" fill="#ffffff" opacity="0.45"/>
+  <rect x="440" y="464" width="46" height="52" rx="3" fill="#ffffff" opacity="0.45"/>
+  <rect x="577" y="464" width="46" height="52" rx="3" fill="#ffffff" opacity="0.45"/>
+  <rect x="714" y="464" width="46" height="52" rx="3" fill="#ffffff" opacity="0.45"/>
+  <rect x="851" y="464" width="46" height="52" rx="3" fill="#ffffff" opacity="0.45"/>
+  <rect x="350" y="280" width="500" height="140" rx="6" fill="#112232"/>
+  <rect x="373" y="324" width="46" height="52" rx="3" fill="#ffffff" opacity="0.45"/>
+  <rect x="475" y="324" width="46" height="52" rx="3" fill="#ffffff" opacity="0.45"/>
+  <rect x="577" y="324" width="46" height="52" rx="3" fill="#ffffff" opacity="0.45"/>
+  <rect x="679" y="324" width="46" height="52" rx="3" fill="#ffffff" opacity="0.45"/>
+  <rect x="781" y="324" width="46" height="52" rx="3" fill="#ffffff" opacity="0.45"/>
+  <line x1="350" y1="276" x2="850" y2="276" stroke="#d9533b" stroke-width="9"/>
+  <g stroke="#cdd4dc" stroke-width="5" stroke-dasharray="18 16" fill="none">
+    <rect x="420" y="136" width="360" height="140" rx="6"/>
+    <rect x="490" y="26" width="220" height="110" rx="6"/>
+  </g>
+  <line x1="90" y1="700" x2="1110" y2="700" stroke="#cdd4dc" stroke-width="4"/>
+</svg>

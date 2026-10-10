@@ -1,4 +1,5 @@
 using BrainHub.Infrastructure.Persistence;
+using BrainHub.Infrastructure.Persistence.Seed;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,6 +35,8 @@ public static class DependencyInjection
                     maxRetryDelay: TimeSpan.FromSeconds(5),
                     errorCodesToAdd: null);
             }));
+
+        services.AddScoped<ChargeurReferentiels>();
 
         return services;
     }

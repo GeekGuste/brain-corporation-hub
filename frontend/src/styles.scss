@@ -1,12 +1,96 @@
 // Feuille de style globale.
 //
-// Elle ne contient aucune couleur : tout est dans styles/_theme.scss, qui
-// charge lui-meme Bootstrap avec nos variables (CLAUDE.md §14).
+// Elle ne contient aucune couleur et aucune taille de caractere : tout vient de
+// styles/_theme.scss, qui charge lui-meme Bootstrap avec nos variables
+// (CLAUDE.md §14). Ici, uniquement du rythme et de la structure.
 
 @use 'styles/theme';
 
-// Un saut de ligne de courtoisie pour les lecteurs d'ecran : le lien d'evitement
-// n'est visible qu'au focus clavier.
+// =============================================================================
+// Ancres et en-tete fixe
+// -----------------------------------------------------------------------------
+// L'en-tete reste colle en haut de l'ecran. Sans ce decalage, un lien d'ancre
+// (« S'inscrire a la formation » vers #inscription) amenerait le titre vise
+// SOUS la barre de navigation. Pose sur la racine, il vaut pour toutes les
+// ancres du site, presentes et futures, sans rien ajouter sur chacune.
+// =============================================================================
+html {
+  scroll-padding-block-start: calc(var(--bch-hauteur-entete) + 1rem);
+}
+
+// =============================================================================
+// Echelle typographique
+// -----------------------------------------------------------------------------
+// Les tailles viennent des variables CSS du theme, qui changent selon la
+// largeur de l'ecran. Mobile d'abord (CLAUDE.md §13).
+// =============================================================================
+body {
+  font-size: var(--bch-corps);
+  // Evite les lignes orphelines en fin de paragraphe.
+  text-wrap: pretty;
+}
+
+h1 {
+  font-size: var(--bch-h1);
+  font-weight: 700;
+  letter-spacing: var(--bch-serrage-titre);
+  line-height: 1.08;
+  max-width: var(--bch-mesure-titre);
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: var(--bch-h2);
+  font-weight: 700;
+  letter-spacing: var(--bch-serrage-titre);
+  line-height: 1.2;
+  max-width: var(--bch-mesure);
+  text-wrap: balance;
+}
+
+h3 {
+  font-size: var(--bch-h3);
+  font-weight: 600;
+  line-height: 1.35;
+  max-width: var(--bch-mesure);
+}
+
+.lead,
+.chapo {
+  font-size: var(--bch-chapo);
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+// Les liens du corps de texte sont soulignes : c'est le seul indice fiable pour
+// un lecteur qui ne distingue pas bien les nuances de couleur.
+main p a,
+main li a {
+  text-underline-offset: 0.2em;
+}
+
+// =============================================================================
+// Mesure de lecture
+// =============================================================================
+.mesure {
+  max-width: var(--bch-mesure);
+}
+
+// =============================================================================
+// Boutons
+// -----------------------------------------------------------------------------
+// Montserrat en 600 sur un bouton demande un peu d'air entre les lettres,
+// sinon les capitales se collent.
+// =============================================================================
+.btn {
+  letter-spacing: 0.01em;
+}
+
+// =============================================================================
+// Accessibilite
+// =============================================================================
+
+// Lien d'evitement, visible seulement au focus clavier.
 .lien-evitement {
   position: absolute;
   left: -9999px;
@@ -25,4 +109,17 @@
 .form-select,
 .form-control {
   min-height: var(--bch-cible-tactile-min);
+}
+
+// Le registre est institutionnel : aucune animation decorative. On respecte en
+// plus la preference systeme de ceux qui les desactivent.
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

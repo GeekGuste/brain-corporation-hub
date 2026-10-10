@@ -1,0 +1,10 @@
+# Artefacts de compilation locale : l'image se construit a partir des sources.
+**/bin/
+**/obj/
+**/.vs/
+**/*.user
+
+# Jamais de secret dans le contexte de build.
+**/.env
+**/.env.*
+!**/.env.example

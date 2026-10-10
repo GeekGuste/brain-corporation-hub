@@ -1,0 +1,223 @@
+<!-- Gabarit generique des pages editoriales.
+     Aucun texte ici : tout vient du fichier de contenu passe en entree.
+     Aucune couleur non plus : uniquement des classes Bootstrap et les variables
+     du fichier de theme unique (CLAUDE.md §14).
+
+     PRINCIPE DE MISE EN PAGE
+     -------------------------------------------------------------------------
+     Le corps n'est plus une colonne de texte unique : sur grand ecran, elle
+     laissait un tiers de la page vide a droite sur chaque section. Chaque
+     section devient une BANDE pleine largeur, qui choisit sa disposition
+     d'apres ce que la section contient, et dont le fond alterne entre le blanc
+     et le papier froid :
+
+       section avec un visuel  -> texte et visuel en vis-a-vis, cotes inverses
+                                  d'une bande a l'autre ;
+       section avec des cartes -> titre sur la mesure de lecture, cartes sur
+                                  toute la largeur ;
+       section de texte seul   -> titre en regard a gauche, collant, et texte a
+                                  droite. Le titre reste visible pendant la
+                                  lecture d'une section longue.
+
+     Rien de tout cela ne demande une modification des fichiers de contenu :
+     ajouter un visuel a une section suffit a la faire passer en vis-a-vis. -->
+
+<!-- Fragments communs aux trois dispositions, pour que le titre et les blocs
+     ne soient ecrits qu'une fois. -->
+<ng-template #titreSection let-section>
+  @if (section.niveau === 2) {
+    <h2 class="section__titre">{{ section.titre }}</h2>
+  } @else {
+    <h3 class="section__titre section__titre--mineur">{{ section.titre }}</h3>
+  }
+</ng-template>
+
+<ng-template #blocsSection let-section>
+  @for (bloc of section.blocs; track $index) {
+    @switch (bloc.type) {
+      @case ('paragraphe') {
+        <p class="mesure">{{ bloc.texte }}</p>
+      }
+      @case ('liste') {
+        <ul class="liste mesure">
+          @for (element of bloc.elements; track $index) {
+            <li>{{ element }}</li>
+          }
+        </ul>
+      }
+      @case ('exergue') {
+        <!-- Phrase mise en avant par le client dans son document.
+             Rendue en grand, sans guillemets ni encadre : c'est le
+             corps du caractere qui porte (CLAUDE.md §14). -->
+        <blockquote class="exergue">
+          <p>{{ bloc.texte }}</p>
+        </blockquote>
+      }
+    }
+  }
+</ng-template>
+
+<!-- =========================================================================
+     BANDEAU DE TETE
+     -------------------------------------------------------------------------
+     Sur encre profonde. C'est le seul contraste fort du site : il situe la
+     marque et donne du relief sans degrade ni ombre.
+
+     Le visuel est a droite sur grand ecran, dessous sur telephone : le texte
+     passe toujours avant l'image (CLAUDE.md §13, mobile d'abord).
+
+     En version compacte (accueil), le bandeau se resserre et le visuel passe
+     au format large : la hauteur de la bande suit celle du visuel, c'est donc
+     par lui qu'on la reduit.
+     ========================================================================= -->
+<header class="bandeau" [class.bandeau--compact]="bandeauCompact()">
+  <div class="container">
+    <div class="row align-items-center g-4 g-lg-5">
+      <div class="col-12 col-lg-7">
+        <!-- Le surtitre est une accroche, pas un titre : pas de balise de
+             titre, pour ne pas casser la hierarchie h1/h2/h3. Il est en
+             capitales dans le document du client, on ne le transforme pas, et
+             on ne l'espace pas davantage : des capitales pistonnees sont
+             penibles a lire pour un lecteur non francophone de naissance. -->
+        <p class="surtitre">{{ contenu().surtitre }}</p>
+
+        <h1 class="bandeau__titre">{{ contenu().titre }}</h1>
+
+        <div class="bandeau__chapo">
+          @for (paragraphe of contenu().introduction; track $index) {
+            <p class="chapo">{{ paragraphe }}</p>
+          }
+        </div>
+
+        @if (contenu().faitsCles?.length) {
+          <!-- Faits pratiques. Un tableau de definitions, pas des cartes : ce
+               sont des couples libelle-valeur, la structure le dit. -->
+          <dl class="faits">
+            @for (fait of contenu().faitsCles; track fait.libelle) {
+              <div class="faits__item">
+                <dt>{{ fait.libelle }}</dt>
+                <dd>{{ fait.valeur }}</dd>
+              </div>
+            }
+          </dl>
+        }
+
+        @if (contenu().appelAction) {
+          <p class="bandeau__action">
+            <a class="btn btn-light btn-lg" [href]="contenu().appelAction!.ancre">
+              {{ contenu().appelAction!.libelle }}
+            </a>
+          </p>
+        }
+      </div>
+
+      <div class="col-12 col-lg-5">
+        <app-visuel
+          [fichier]="contenu().visuel.fichier"
+          [texteAlternatif]="contenu().visuel.texteAlternatif"
+          [largeur]="contenu().visuel.largeur"
+          [hauteur]="contenu().visuel.hauteur"
+          [motif]="contenu().visuel.motif"
+          [rapport]="bandeauCompact() ? '16 / 9' : '4 / 3'"
+          [premierEcran]="true"
+          fond="encre"
+        />
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- =========================================================================
+     CORPS : UNE BANDE PAR SECTION
+     ========================================================================= -->
+@for (section of contenu().sections; track section.titre; let indice = $index) {
+  <!-- Le fond alterne, et le cote du visuel avec lui : deux bandes voisines ne
+       se ressemblent jamais. -->
+  <section class="bande" [class.bande--papier]="indice % 2 === 1">
+    <div class="container">
+      @if (section.visuel) {
+        <!-- VIS-A-VIS : texte et visuel cote a cote. -->
+        <div
+          class="row align-items-center g-4 g-lg-5"
+          [class.flex-lg-row-reverse]="indice % 2 === 1"
+        >
+          <div class="col-12 col-lg-6">
+            <ng-container
+              [ngTemplateOutlet]="titreSection"
+              [ngTemplateOutletContext]="{ $implicit: section }"
+            />
+            <ng-container
+              [ngTemplateOutlet]="blocsSection"
+              [ngTemplateOutletContext]="{ $implicit: section }"
+            />
+          </div>
+
+          <div class="col-12 col-lg-6">
+            <app-visuel
+              [fichier]="section.visuel!.fichier"
+              [texteAlternatif]="section.visuel!.texteAlternatif"
+              [largeur]="section.visuel!.largeur"
+              [hauteur]="section.visuel!.hauteur"
+              [motif]="section.visuel!.motif"
+              rapport="4 / 3"
+              [fond]="indice % 2 === 1 ? 'blanc' : 'papier'"
+            />
+          </div>
+        </div>
+      } @else if (section.cartes?.length) {
+        <!-- CARTES : titre centre au-dessus d'une rangee de cartes, qui prend
+             toute la largeur. Centrer le titre plutot que le caler a gauche
+             est ce qui supprime le vide a droite sur grand ecran : une rangee
+             de cartes est une composition symetrique, un titre cale a gauche
+             au-dessus d'elle laisse forcement un cote creux. -->
+        <div class="bande__intro">
+          <ng-container
+            [ngTemplateOutlet]="titreSection"
+            [ngTemplateOutletContext]="{ $implicit: section }"
+          />
+          <ng-container
+            [ngTemplateOutlet]="blocsSection"
+            [ngTemplateOutletContext]="{ $implicit: section }"
+          />
+        </div>
+
+        <ul class="cartes list-unstyled">
+          @for (carte of section.cartes; track carte.titre) {
+            <li class="carte">
+              @if (carte.pictogramme) {
+                <!-- Le pictogramme est dans un cartouche, pas pose nu sur le
+                     fond : c'est ce qui lui donne du poids dans la carte. Le
+                     cartouche porte la taille du dessin, parce que les
+                     variables CSS traversent l'encapsulation du composant,
+                     contrairement aux selecteurs. -->
+                <span class="carte__cartouche">
+                  <app-motif [nom]="carte.pictogramme" />
+                </span>
+              }
+              <h3 class="carte__titre">{{ carte.titre }}</h3>
+              <p class="carte__texte">{{ carte.texte }}</p>
+            </li>
+          }
+        </ul>
+      } @else {
+        <!-- TITRE EN REGARD : le titre a gauche, colle sous l'en-tete pendant
+             qu'on lit la section, et le texte a droite. -->
+        <div class="row">
+          <div class="col-12 col-lg-4 bande__regard">
+            <ng-container
+              [ngTemplateOutlet]="titreSection"
+              [ngTemplateOutletContext]="{ $implicit: section }"
+            />
+          </div>
+
+          <div class="col-12 col-lg-7 offset-lg-1">
+            <ng-container
+              [ngTemplateOutlet]="blocsSection"
+              [ngTemplateOutletContext]="{ $implicit: section }"
+            />
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+}

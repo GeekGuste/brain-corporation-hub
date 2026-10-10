@@ -1,7 +1,7 @@
 {
   "$commentaire": [
-    "Libelles de l'ossature du site : navigation, pied de page, liens d'aide.",
-    "Ils sont ici et non dans les composants, pour permettre une version",
+    "Libelles de l'ossature du site : navigation, pied de page, emplacement du",
+    "logo. Ils sont ici et non dans les composants, pour permettre une version",
     "anglaise plus tard sans refactorisation (CLAUDE.md §13). L'i18n n'est PAS",
     "implementee en V1.",
     "La cle de chaque lien renvoie a seo/routes.config.json : le chemin d'URL",
@@ -9,15 +9,37 @@
   ],
   "lienEvitement": "Aller au contenu principal",
   "marque": "Brain Corporation Hub",
+
   "logo": {
-    "source": null,
+    "$commentaire": [
+      "Emplacement reserve. Tant que « fichier » vaut null, la marque s'affiche",
+      "en texte et l'espace reste occupe : la mise en page ne bougera pas quand",
+      "le logo arrivera.",
+      "",
+      "Pour l'activer : deposer le fichier dans frontend/public/logo/, renseigner",
+      "« fichier », « largeur », « hauteur » et « texteAlternatif ». Rien d'autre",
+      "a modifier dans le code.",
+      "",
+      "« largeur » et « hauteur » sont les dimensions INTRINSEQUES du fichier, en",
+      "pixels. Elles sont posees en attributs sur la balise image pour reserver",
+      "la place avant le chargement et eviter que la page ne sursaute.",
+      "",
+      "La hauteur D'AFFICHAGE dans l'en-tete n'est pas ici : c'est une decision",
+      "visuelle, elle vit dans styles/_theme.scss avec le reste du theme",
+      "(CLAUDE.md §14). La largeur s'ajuste, le rapport est preserve."
+    ],
+    "fichier": null,
+    "largeur": null,
+    "hauteur": null,
     "texteAlternatif": "[À FOURNIR PAR LE CLIENT]"
   },
+
   "liens": [
     { "cle": "accueil", "libelle": "Accueil" },
     { "cle": "brain-corporation-hub", "libelle": "Brain Corporation Hub" },
     { "cle": "lignes-rouges", "libelle": "Lignes Rouges" }
   ],
+
   "piedDePage": {
     "mention": "Brain Corporation Hub",
     "liens": []

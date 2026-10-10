@@ -1,0 +1,45 @@
+# =============================================================================
+# Fins de ligne
+# -----------------------------------------------------------------------------
+# Le poste de developpement est sous Windows avec core.autocrlf = true, le
+# serveur est sous Linux. Sans ces regles, Git convertirait les scripts en CRLF
+# au checkout, et un script en CRLF copie sur le serveur echoue avec
+# « bad interpreter: /usr/bin/env bash^M ».
+#
+# Ces fichiers doivent rester en LF quelle que soit la machine.
+# =============================================================================
+
+# Normalisation par defaut : Git decide pour le texte, laisse le binaire tel quel.
+* text=auto
+
+# Executes par Linux : LF imperatif.
+*.sh              text eol=lf
+Dockerfile        text eol=lf
+*.Dockerfile      text eol=lf
+.dockerignore     text eol=lf
+
+# Lus par Docker, Compose et les conteneurs : LF imperatif.
+# Un fichier .env en CRLF produit des valeurs avec un retour chariot invisible
+# a la fin, ce qui casse une chaine de connexion ou un nom d'hote sans erreur
+# explicite.
+*.env             text eol=lf
+.env.example      text eol=lf
+*.yml             text eol=lf
+*.yaml            text eol=lf
+
+# Configuration Apache posee sur le serveur.
+*.conf            text eol=lf
+
+# Contenus et configuration lus par l'application.
+*.json            text eol=lf
+
+# Binaires : aucune conversion.
+*.png             binary
+*.jpg             binary
+*.jpeg            binary
+*.webp            binary
+*.ico             binary
+*.pdf             binary
+*.woff            binary
+*.woff2           binary
+*.docx            binary

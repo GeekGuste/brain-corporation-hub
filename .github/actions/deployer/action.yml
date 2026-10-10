@@ -1,0 +1,97 @@
+# =============================================================================
+# Action composite : deposer les fichiers puis lancer le deploiement en SSH
+# -----------------------------------------------------------------------------
+# Mutualisee entre la preprod et la production, pour que les deux
+# environnements suivent exactement la meme procedure. Une divergence entre les
+# deux serait le meilleur moyen de decouvrir un probleme en production
+# seulement.
+#
+# Aucune action tierce : uniquement le client OpenSSH du runner. Une action
+# tierce compromise aurait acces a la cle du serveur.
+# =============================================================================
+
+name: Deployer sur le VPS
+description: Copie le compose et le script, puis execute le deploiement.
+
+inputs:
+  environnement:
+    description: preprod ou prod
+    required: true
+  tag:
+    description: SHA du commit, qui est aussi le tag de l'image
+    required: true
+  hote:
+    description: adresse du serveur
+    required: true
+  utilisateur:
+    description: utilisateur de deploiement
+    required: true
+  cle-ssh:
+    description: cle privee
+    required: true
+  port-ssh:
+    description: port SSH
+    required: false
+    default: '22'
+
+runs:
+  using: composite
+  steps:
+    - name: Preparer la cle SSH
+      shell: bash
+      env:
+        CLE: ${{ inputs.cle-ssh }}
+        HOTE: ${{ inputs.hote }}
+        PORT: ${{ inputs.port-ssh }}
+      run: |
+        set -euo pipefail
+        mkdir -p ~/.ssh
+        chmod 700 ~/.ssh
+        printf '%s\n' "$CLE" > ~/.ssh/id_deploiement
+        chmod 600 ~/.ssh/id_deploiement
+        # On enregistre l'empreinte du serveur plutot que de desactiver la
+        # verification : sans cela, une usurpation du serveur passerait
+        # inapercue.
+        ssh-keyscan -p "${PORT:-22}" -H "$HOTE" >> ~/.ssh/known_hosts 2>/dev/null
+
+    - name: Copier le compose et le script
+      shell: bash
+      env:
+        HOTE: ${{ inputs.hote }}
+        UTILISATEUR: ${{ inputs.utilisateur }}
+        PORT: ${{ inputs.port-ssh }}
+        ENVIRONNEMENT: ${{ inputs.environnement }}
+      run: |
+        set -euo pipefail
+        # Le compose et le script viennent du depot a chaque deploiement : ce
+        # qui tourne sur le serveur est toujours la version versionnee, jamais
+        # une copie modifiee a la main.
+        scp -i ~/.ssh/id_deploiement -P "${PORT:-22}" \
+          "deploy/docker-compose.${ENVIRONNEMENT}.yml" \
+          "deploy/deploy.sh" \
+          "${UTILISATEUR}@${HOTE}:/opt/brainhub/${ENVIRONNEMENT}/"
+        ssh -i ~/.ssh/id_deploiement -p "${PORT:-22}" \
+          "${UTILISATEUR}@${HOTE}" \
+          "chmod +x /opt/brainhub/${ENVIRONNEMENT}/deploy.sh"
+
+    - name: Deployer
+      shell: bash
+      env:
+        HOTE: ${{ inputs.hote }}
+        UTILISATEUR: ${{ inputs.utilisateur }}
+        PORT: ${{ inputs.port-ssh }}
+        ENVIRONNEMENT: ${{ inputs.environnement }}
+        TAG: ${{ inputs.tag }}
+      run: |
+        set -euo pipefail
+        # Le script tourne sur le serveur : c'est lui qui parle a PostgreSQL,
+        # applique les migrations et controle la sante. La CI n'a jamais la
+        # chaine de connexion (CLAUDE.md §11).
+        ssh -i ~/.ssh/id_deploiement -p "${PORT:-22}" \
+          "${UTILISATEUR}@${HOTE}" \
+          "/opt/brainhub/${ENVIRONNEMENT}/deploy.sh '${ENVIRONNEMENT}' '${TAG}'"
+
+    - name: Effacer la cle
+      if: always()
+      shell: bash
+      run: rm -f ~/.ssh/id_deploiement
