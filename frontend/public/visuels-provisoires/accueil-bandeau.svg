@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
-  <rect width="1200" height="675" fill="#112232"/>
+  <rect width="1200" height="675" fill="#0b6380"/>
   <g opacity="0.14">
-    <circle cx="1010" cy="150" r="230" fill="#1b3a5c"/>
-    <circle cx="150" cy="600" r="180" fill="#2c5f7c"/>
+    <circle cx="1010" cy="150" r="230" fill="#0b8e6d"/>
+    <circle cx="150" cy="600" r="180" fill="#5ba4db"/>
   </g>
   <g stroke="#ffffff" stroke-width="1" opacity="0.07">
     <line x1="0" y1="135" x2="1200" y2="135"/>
@@ -14,8 +14,8 @@
   <path d="M330 400 C560 400 760 290 1140 110 L1140 620 C760 540 560 410 330 400 Z" fill="#ffffff" opacity="0.08"/>
   <path d="M330 400 C560 412 760 540 1140 620" stroke="#ffffff" stroke-opacity="0.32" stroke-width="5" stroke-dasharray="14 16" fill="none"/>
   <path d="M40 400 H330 C560 400 760 290 1140 110" stroke="#ffffff" stroke-width="7" fill="none" stroke-linecap="round"/>
-  <line x1="330" y1="230" x2="330" y2="570" stroke="#d9533b" stroke-width="5"/>
-  <circle cx="330" cy="400" r="24" fill="#d9533b"/>
-  <circle cx="330" cy="400" r="40" fill="none" stroke="#d9533b" stroke-width="3" opacity="0.5"/>
+  <line x1="330" y1="230" x2="330" y2="570" stroke="#0b8e6d" stroke-width="5"/>
+  <circle cx="330" cy="400" r="24" fill="#0b8e6d"/>
+  <circle cx="330" cy="400" r="40" fill="none" stroke="#0b8e6d" stroke-width="3" opacity="0.5"/>
   <circle cx="1140" cy="110" r="16" fill="#ffffff"/>
 </svg>

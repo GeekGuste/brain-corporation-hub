@@ -22,6 +22,172 @@ namespace BrainHub.Infrastructure.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("BrainHub.Domain.Inscriptions.Cohorte", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("BarreauRequis")
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<string>("CategorieCode")
+                        .HasMaxLength(3)
+                        .HasColumnType("character varying(3)");
+
+                    b.Property<Guid?>("CreneauId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("DateCreation")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreneauId");
+
+                    b.ToTable("cohorte", (string)null);
+                });
+
+            modelBuilder.Entity("BrainHub.Domain.Inscriptions.Creneau", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Capacite")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTimeOffset>("Debut")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTimeOffset>("Fin")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("creneau", (string)null);
+                });
+
+            modelBuilder.Entity("BrainHub.Domain.Inscriptions.Inscription", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("BarreauRequis")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<string>("CategorieCode")
+                        .IsRequired()
+                        .HasMaxLength(3)
+                        .HasColumnType("character varying(3)");
+
+                    b.Property<Guid?>("CohorteId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CommuneOuCodePostalProjete")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<DateOnly?>("DateArriveePrevisionnelle")
+                        .HasColumnType("date");
+
+                    b.Property<DateTimeOffset>("DateSoumission")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTimeOffset?>("DateValidation")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("DepartementPrefecture")
+                        .IsRequired()
+                        .HasMaxLength(3)
+                        .HasColumnType("character varying(3)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(254)
+                        .HasColumnType("character varying(254)");
+
+                    b.Property<bool?>("FormationSuivie")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("IdentifiantPaymentIntent")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("PaysResidenceActuelle")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("PrecisionAutreSituation")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<string>("PrefectureLibelle")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Prenom")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<int?>("SousCategorieId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Statut")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
+
+                    b.Property<string>("StatutResidence")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
+
+                    b.Property<string>("Telephone")
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
+
+                    b.Property<string>("TribunalJudiciaireReference")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BarreauRequis");
+
+                    b.HasIndex("CategorieCode");
+
+                    b.HasIndex("CohorteId");
+
+                    b.HasIndex("DateValidation");
+
+                    b.HasIndex("DepartementPrefecture");
+
+                    b.HasIndex("Email");
+
+                    b.HasIndex("IdentifiantPaymentIntent")
+                        .IsUnique()
+                        .HasFilter("\"IdentifiantPaymentIntent\" IS NOT NULL");
+
+                    b.HasIndex("SousCategorieId");
+
+                    b.HasIndex("Statut", "DateSoumission");
+
+                    b.ToTable("inscription", (string)null);
+                });
+
             modelBuilder.Entity("BrainHub.Domain.Referentiels.CategorieTitreSejour", b =>
                 {
                     b.Property<string>("Code")
@@ -126,6 +292,49 @@ namespace BrainHub.Infrastructure.Persistence.Migrations
                     b.ToTable("sous_categorie_titre_sejour", (string)null);
                 });
 
+            modelBuilder.Entity("BrainHub.Domain.Inscriptions.Cohorte", b =>
+                {
+                    b.HasOne("BrainHub.Domain.Inscriptions.Creneau", "Creneau")
+                        .WithMany("Cohortes")
+                        .HasForeignKey("CreneauId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Creneau");
+                });
+
+            modelBuilder.Entity("BrainHub.Domain.Inscriptions.Inscription", b =>
+                {
+                    b.HasOne("BrainHub.Domain.Referentiels.CategorieTitreSejour", "Categorie")
+                        .WithMany()
+                        .HasForeignKey("CategorieCode")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("BrainHub.Domain.Inscriptions.Cohorte", "Cohorte")
+                        .WithMany("Inscriptions")
+                        .HasForeignKey("CohorteId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("BrainHub.Domain.Referentiels.LigneReferentielTerritorial", "LignePrefecture")
+                        .WithMany()
+                        .HasForeignKey("DepartementPrefecture")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("BrainHub.Domain.Referentiels.SousCategorieTitreSejour", "SousCategorie")
+                        .WithMany()
+                        .HasForeignKey("SousCategorieId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Categorie");
+
+                    b.Navigation("Cohorte");
+
+                    b.Navigation("LignePrefecture");
+
+                    b.Navigation("SousCategorie");
+                });
+
             modelBuilder.Entity("BrainHub.Domain.Referentiels.SousCategorieTitreSejour", b =>
                 {
                     b.HasOne("BrainHub.Domain.Referentiels.CategorieTitreSejour", "Categorie")
@@ -135,6 +344,16 @@ namespace BrainHub.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Categorie");
+                });
+
+            modelBuilder.Entity("BrainHub.Domain.Inscriptions.Cohorte", b =>
+                {
+                    b.Navigation("Inscriptions");
+                });
+
+            modelBuilder.Entity("BrainHub.Domain.Inscriptions.Creneau", b =>
+                {
+                    b.Navigation("Cohortes");
                 });
 
             modelBuilder.Entity("BrainHub.Domain.Referentiels.CategorieTitreSejour", b =>

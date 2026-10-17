@@ -79,11 +79,31 @@ main li a {
 // =============================================================================
 // Boutons
 // -----------------------------------------------------------------------------
-// Montserrat en 600 sur un bouton demande un peu d'air entre les lettres,
+// Open Sans en 600 sur un bouton demande un peu d'air entre les lettres,
 // sinon les capitales se collent.
 // =============================================================================
 .btn {
   letter-spacing: 0.01em;
+}
+
+// Bouton d'appel a l'action du bandeau de tete.
+//
+// Le vert clair de la charte est le seul aplat vif de la palette, et il ne vit
+// que sur la surface profonde : trop clair pour porter du texte sur blanc, il
+// porte en revanche le bleu-vert profond a 5,77:1, donc au-dessus du seuil AA.
+// Les deux valeurs viennent du fichier de theme, aucune couleur n'est ecrite
+// ici (CLAUDE.md §14).
+.btn-vif {
+  --bs-btn-bg: var(--bch-vif);
+  --bs-btn-border-color: var(--bch-vif);
+  --bs-btn-color: var(--bch-sur-vif);
+  --bs-btn-hover-bg: var(--bch-sur-encre);
+  --bs-btn-hover-border-color: var(--bch-sur-encre);
+  --bs-btn-hover-color: var(--bch-sur-vif);
+  --bs-btn-active-bg: var(--bch-sur-encre);
+  --bs-btn-active-border-color: var(--bch-sur-encre);
+  --bs-btn-active-color: var(--bch-sur-vif);
+  font-weight: 600;
 }
 
 // =============================================================================

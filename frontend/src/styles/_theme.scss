@@ -5,103 +5,136 @@
 // nulle part ailleurs (CLAUDE.md §14). Aucune couleur ne doit etre ecrite en
 // dur dans un composant, un template ou une feuille de style de composant.
 //
-// La charte graphique du client n'est pas encore fournie. Les valeurs
-// ci-dessous sont une palette PROVISOIRE. Le remplacement de la charte consiste
-// a modifier ce seul fichier.
+// SOURCE : « Identite Visuelle LIGNES ROUGES », livree par le graphiste le
+// 12 octobre 2026 (docs/). La palette provisoire a ete remplacee par celle de
+// la charte, et ce fichier est le seul qui ait change pour cela.
 //
-// Partis pris, pour qu'un repreneur comprenne les choix :
+// -----------------------------------------------------------------------------
+// LA PALETTE DE LA CHARTE, ET CE QUE CHAQUE COULEUR PEUT PORTER
+// -----------------------------------------------------------------------------
+// La charte donne cinq couleurs. Elle ne dit pas lesquelles peuvent porter du
+// texte : c'est une question de contraste, pas de gout, et le §13 impose des
+// contrastes accessibles. Rapports mesures sur fond blanc :
 //
-//   Registre institutionnel, proche d'un cabinet (CLAUDE.md §14). Donc des
-//   filets d'un pixel et des aplats de papier, PAS d'ombres portees, pas de
-//   degrades, pas d'animation. Un rayon de bordure faible : l'arrondi genereux
-//   appartient au registre des applications grand public, pas a celui d'un
-//   organisme de formation.
+//   #0B6380  bleu-vert profond   6,84:1   OK pour du texte de toute taille
+//   #0B8E6D  vert                4,18:1   SOUS le seuil AA de 4,5 pour du
+//                                         texte courant. Reserve aux filets,
+//                                         aux bordures et aux grands aplats.
+//   #5BA4DB  bleu clair          2,74:1   decoratif uniquement
+//   #BCFF80  vert clair          tres clair : ne vit que sur fond profond
+//   #FFFFFF  blanc
 //
-//   UNE seule famille de caracteres, Montserrat, en fonte variable : un seul
-//   fichier de 38 Ko couvre toutes les graisses de 100 a 900. Le §12 demande de
-//   limiter les polices et le public est parfois en connexion lente
-//   (CLAUDE.md §13) : une famille, un fichier, pas d'italique.
+// D'ou la repartition : le bleu-vert profond porte les liens, les boutons et la
+// surface sombre ; le vert porte le filet de marque ; le vert clair est le seul
+// aplat vif, pose sur le bleu-vert profond (5,77:1 avec du texte profond).
 //
-//   Elle est HEBERGEE PAR NOUS, pas chargee depuis le CDN de Google. Passer par
-//   Google transmettrait l'adresse IP de chaque visiteur a un tiers, ce qui
-//   n'est pas defendable sur un site qui traite des situations administratives
-//   d'etrangers (CLAUDE.md §15). Le fichier est fourni par le paquet
-//   @fontsource-variable/montserrat, declare dans angular.json.
+// -----------------------------------------------------------------------------
+// CE QUE LA CHARTE NE DONNE PAS, ET QU'IL FAUT POURTANT
+// -----------------------------------------------------------------------------
+// Une charte de marque ne couvre pas les etats fonctionnels d'un formulaire.
+// Trois neutres et une couleur d'erreur sont donc derives ici, signales comme
+// tels, et a confronter au graphiste :
 //
-//   Montserrat est large : les titres demandent un interlettrage negatif et une
-//   mesure courte, sinon ils s'etalent. C'est fait plus bas.
+//   le noir de lecture, repris du noir du logo ;
+//   un gris d'appui pour les textes secondaires ;
+//   un gris de filet pour les bordures ;
+//   un rouge d'erreur de formulaire, car la charte n'a aucun rouge et un champ
+//   en faute doit se distinguer d'un champ valide (CLAUDE.md §13). La couleur
+//   n'est jamais le seul signal : un message en toutes lettres l'accompagne.
 //
-//   Le rouge n'est jamais un aplat. Il ne sert qu'aux filets de seuil, qui
-//   portent le nom de la marque. Une page qui parle de perte de droit au sejour
-//   ne doit pas crier.
+// -----------------------------------------------------------------------------
+// TYPOGRAPHIE
+// -----------------------------------------------------------------------------
+// La charte prescrit Open Sauce en police principale « pour les en-tetes », et
+// Cooper Hewitt et Open Sans en polices secondaires « pour les sous-titres et
+// les paragraphes ».
 //
-//   Le bandeau de tete est sur fond encre profonde, texte blanc. C'est le seul
-//   contraste fort du site : il situe la marque et donne du relief sans ajouter
-//   ni degrade ni ombre.
+// On charge DEUX familles et non trois : Open Sauce pour les titres, Open Sans
+// pour tout le reste. Cooper Hewitt occupe le meme role qu'Open Sans dans la
+// charte ; ajouter une troisieme famille couterait des octets sans rien
+// apporter, alors que le §12 demande de limiter les polices et que le public
+// est parfois en connexion lente (§13).
 //
-//   Le corps de page est decoupe en BANDES pleine largeur qui alternent entre le
-//   blanc et le papier froid. C'est ce qui donne le rythme vertical, a la place
-//   d'une colonne de texte unique qui laissait un tiers de l'ecran vide a droite
-//   sur grand ecran. Deux valeurs suffisent : pas de troisieme fond, pas de
-//   degrade d'une bande a l'autre.
+// Les deux sont HEBERGEES PAR NOUS, pas chargees depuis le CDN de Google.
+// Passer par Google transmettrait l'adresse IP de chaque visiteur a un tiers,
+// ce qui n'est pas defendable sur un site qui traite des situations
+// administratives d'etrangers (CLAUDE.md §15). Les fichiers viennent des
+// paquets @fontsource, declares dans angular.json.
+//
+// -----------------------------------------------------------------------------
+// AUTRES PARTIS PRIS
+// -----------------------------------------------------------------------------
+// Registre institutionnel, proche d'un cabinet (CLAUDE.md §14) : des filets
+// d'un pixel et des aplats, PAS d'ombres portees, pas de degrades, pas
+// d'animation, un rayon de bordure faible.
+//
+// Le bandeau de tete et le pied de page sont sur le bleu-vert profond de la
+// charte. C'est le seul contraste fort du site.
 // =============================================================================
 
 @use 'bootstrap/scss/bootstrap' with (
   // ---------------------------------------------------------------------------
-  // Couleurs de marque (provisoires)
+  // Couleurs de la charte
   // ---------------------------------------------------------------------------
-  // Bleu encre : registre institutionnel.
-  $primary: #1b3a5c,
-  // Ardoise : elements secondaires, texte d'appui.
-  $secondary: #566573,
-  // Vert sobre : confirmation de paiement, etat valide.
-  $success: #2e6b4f,
-  // Rouge brique : erreurs de formulaire et filets de seuil. Assez fonce pour
-  // rester lisible sur fond clair, sans virer au rouge d'alerte agressif.
-  $danger: #a5352b,
-  // Ocre : avertissements et mentions de vigilance.
+  // Bleu-vert profond : la seule couleur de marque qui porte du texte sur fond
+  // blanc. Liens, boutons, surface sombre.
+  $primary: #0b6380,
+  // Vert de la charte. Filets, bordures, grands aplats. Egalement l'etat
+  // « valide », ou il sert d'aplat avec du texte clair.
+  $success: #0b8e6d,
+  // Bleu clair de la charte : encarts d'information, jamais du texte.
+  $info: #5ba4db,
+  // Gris d'appui, derive. Textes secondaires.
+  $secondary: #5a6b72,
+  // DERIVES, hors charte : etats de formulaire. Voir l'entete du fichier.
+  $danger: #a3281f,
   $warning: #8a6d3b,
-  // Bleu clair : encarts d'information neutre.
-  $info: #2c5f7c,
   // Fonds neutres.
-  $light: #f4f6f8,
-  $dark: #14202f,
+  $light: #f1f6f8,
+  $dark: #07323f,
 
   // ---------------------------------------------------------------------------
   // Corps de page
   // ---------------------------------------------------------------------------
   $body-bg: #ffffff,
-  $body-color: #1c2430,
-  $body-secondary-color: #566573,
-  // Papier froid : fond des bandeaux de tete et des encarts. Bleute plutot que
-  // gris, pour rester dans la famille de l'encre.
-  $body-tertiary-bg: #eef2f6,
-  $border-color: #d6dae0,
-  $link-color: #1b3a5c,
-  $link-hover-color: #14202f,
+  // Noir de lecture, repris du noir du logo, legerement adouci : un noir pur en
+  // long paragraphe fatigue l'oeil.
+  $body-color: #15191c,
+  $body-secondary-color: #5a6b72,
+  // Papier : fond des bandes alternees et des encarts. Teinte du bleu-vert de
+  // la charte, pas un gris neutre, pour rester dans sa famille.
+  $body-tertiary-bg: #eef4f6,
+  $border-color: #d2dde1,
+  $link-color: #0b6380,
+  $link-hover-color: #07323f,
 
   // ---------------------------------------------------------------------------
   // Typographie
   // ---------------------------------------------------------------------------
-  // Montserrat, fonte variable, hebergee par nous. Le repli systeme couvre le
-  // temps de chargement et le cas ou la police echoue.
+  // Open Sans en fonte variable : un seul fichier couvre toutes les graisses.
   $font-family-sans-serif: (
-    'Montserrat Variable',
-    'Montserrat',
+    'Open Sans Variable',
+    'Open Sans',
     system-ui,
     -apple-system,
     'Segoe UI',
     Roboto,
     sans-serif
   ),
+  // Open Sauce pour les en-tetes, comme la charte le prescrit.
+  $headings-font-family: (
+    'Open Sauce Sans',
+    'Open Sans Variable',
+    system-ui,
+    sans-serif
+  ),
   $font-size-base: 1.125rem,
   // Interligne genereux : textes longs, lus par un public souvent non
-  // francophone de naissance (CLAUDE.md §13). Montserrat a une grande hauteur
-  // d'x, elle en demande encore un peu plus que la moyenne.
+  // francophone de naissance (CLAUDE.md §13).
   $line-height-base: 1.75,
   $headings-font-weight: 700,
   $headings-line-height: 1.15,
-  $headings-color: #112232,
+  $headings-color: #0d2a33,
   // Les tailles reelles sont posees plus bas, en variables CSS, parce qu'elles
   // varient selon la largeur de l'ecran. Ces valeurs servent de repli.
   $h1-font-size: 2.5rem,
@@ -113,7 +146,6 @@
   // ---------------------------------------------------------------------------
   // Rayons
   // ---------------------------------------------------------------------------
-  // Volontairement faibles. Voir les partis pris en tete de fichier.
   $border-radius: 0.1875rem,
   $border-radius-sm: 0.125rem,
   $border-radius-lg: 0.25rem,
@@ -140,74 +172,62 @@
 
 // =============================================================================
 // Variables CSS propres au projet
-// -----------------------------------------------------------------------------
-// Pour les valeurs qui n'ont pas d'equivalent Bootstrap, et pour tout ce qui
-// varie selon la largeur de l'ecran. Elles restent dans ce fichier pour que la
-// regle « une seule source » tienne.
 // =============================================================================
 :root {
   // --- Polices -------------------------------------------------------------
-  // Exposee en variable pour que rien, ailleurs dans le projet, n'ait a
-  // recopier l'empilement. Si la charte impose une autre police de marque, elle
-  // se declare dans le bloc Bootstrap ci-dessus et ici.
   --bch-police: var(--bs-font-sans-serif);
+  --bch-police-titres: 'Open Sauce Sans', var(--bs-font-sans-serif);
 
   // --- Couleurs ------------------------------------------------------------
-  // Anneau de focus clavier, utilise sur les elements non Bootstrap.
   --bch-focus-ring: var(--bs-primary);
-  // Papier froid : fond des encarts et des cartes.
-  --bch-papier: #f1f4f7;
-  // Encre profonde : surface du bandeau de tete et du pied de page. Le seul
-  // contraste fort du site.
-  --bch-encre: #112232;
-  // Texte sur encre profonde. Blanc franc pour les titres, voile pour le texte
-  // courant : un blanc pur sur fond sombre en long paragraphe fatigue l'oeil.
+  // Papier : fond des bandes alternees, des encarts et des cartes.
+  --bch-papier: #eef4f6;
+  // Surface profonde : bandeau de tete et pied de page. C'est le bleu-vert de
+  // la charte, le seul contraste fort du site.
+  --bch-encre: #0b6380;
+  // Texte sur surface profonde. Blanc franc pour les titres, voile pour le
+  // texte courant : un blanc pur sur fond sombre en long paragraphe fatigue.
   --bch-sur-encre: #ffffff;
-  --bch-sur-encre-voile: #c3cfdb;
-  // Aplats et filets poses SUR l'encre profonde. Du blanc tres dilue plutot
-  // qu'une teinte fixe : ils restent justes si l'encre change de valeur.
-  --bch-aplat-sur-encre: rgb(255 255 255 / 4%);
-  --bch-filet-sur-encre: rgb(255 255 255 / 16%);
-  // Filet de seuil. DECORATIF UNIQUEMENT : jamais utilise pour du texte, donc
-  // non soumis a un rapport de contraste. Plus clair que le rouge des erreurs
-  // de formulaire, pour rester visible sur l'encre profonde comme sur le blanc.
-  --bch-seuil: #d9533b;
+  --bch-sur-encre-voile: #c5dde6;
+  // Aplats et filets poses SUR la surface profonde. Du blanc tres dilue plutot
+  // qu'une teinte fixe : ils restent justes si la surface change de valeur.
+  --bch-aplat-sur-encre: rgb(255 255 255 / 6%);
+  --bch-filet-sur-encre: rgb(255 255 255 / 20%);
+  // Filet de marque. Le vert de la charte. DECORATIF UNIQUEMENT : il ne porte
+  // jamais de texte, il n'est donc pas soumis a un rapport de contraste. C'est
+  // lui qui decline le motif du seuil sur tout le site.
+  --bch-seuil: #0b8e6d;
+  // Vert clair de la charte. Le seul aplat vif, reserve a la surface profonde,
+  // ou il porte du texte en bleu-vert profond (5,77:1).
+  --bch-vif: #bcff80;
+  --bch-sur-vif: #0b6380;
 
   // --- Mesures de lecture --------------------------------------------------
-  // Moins de 80 caracteres par ligne. Le titre est plus etroit que le texte :
-  // Montserrat est large, un titre non bride s'etale sur toute la page.
   --bch-mesure: 58ch;
   --bch-mesure-titre: 20ch;
 
   // --- Echelle typographique ----------------------------------------------
-  // Relevee d'un cran par rapport a la version precedente : le public lit
-  // souvent sur petit ecran et n'est pas toujours francophone de naissance
-  // (CLAUDE.md §13). Un corps genereux coute moins qu'un texte survole.
   --bch-corps: 1.125rem;
   --bch-chapo: 1.3125rem;
   --bch-h1: 2.5rem;
   --bch-h2: 1.75rem;
   --bch-h3: 1.25rem;
   --bch-exergue: 1.5rem;
-  // Interlettrage des titres. Montserrat est geometrique et large : sans
-  // resserrage, un grand titre se delite.
-  --bch-serrage-titre: -0.02em;
+  // Open Sauce et Open Sans sont moins larges que Montserrat : le resserrage
+  // des titres est plus leger qu'avant.
+  --bch-serrage-titre: -0.015em;
 
   // --- Rythme vertical ----------------------------------------------------
-  // Un seul reglage commande la respiration : c'est l'espace interieur d'une
-  // bande du corps de page. Les bandes se succedent sans marge, elles ne
-  // portent que leur propre espace, donc deux reglages ne peuvent plus
-  // s'additionner ni se neutraliser.
   --bch-espace-section: 3.25rem;
   --bch-espace-bandeau: 3rem;
 
   // --- Divers -------------------------------------------------------------
   --bch-cible-tactile-min: 44px;
+  // Hauteur d'affichage du logo. Le fichier livre est recadre sur son contenu,
+  // la « zone de travail » de la charte est donc donnee par la CSS, autour.
   --bch-hauteur-logo: 32px;
-  // Hauteur de l'en-tete fixe. Elle sert a deux choses : decaler les ancres
-  // pour qu'un titre vise ne se retrouve pas sous la barre, et poser le titre
-  // collant des sections de texte. Deux lignes sur telephone (la marque, puis
-  // la navigation), une seule a partir de la tablette.
+  // Hauteur de l'en-tete fixe : deux lignes sur telephone, une a partir de la
+  // tablette. Sert a decaler les ancres et a poser les titres collants.
   --bch-hauteur-entete: 92px;
 }
 
@@ -226,6 +246,13 @@
     --bch-hauteur-logo: 40px;
     --bch-hauteur-entete: 68px;
   }
+}
+
+// Les titres prennent la police d'en-tete de la charte. Bootstrap pose deja
+// $headings-font-family sur h1 a h6 ; cette regle couvre les elements qui
+// jouent un role de titre sans en etre un.
+.titre-charte {
+  font-family: var(--bch-police-titres);
 }
 
 // Focus clavier toujours visible, partout (CLAUDE.md §13).
