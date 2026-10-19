@@ -1,7 +1,11 @@
+using System.Threading.RateLimiting;
+using BrainHub.Api.Inscriptions;
+using BrainHub.Api.Paiement;
 using BrainHub.Infrastructure;
 using BrainHub.Infrastructure.Persistence;
 using BrainHub.Infrastructure.Persistence.Seed;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +19,62 @@ var builder = WebApplication.CreateBuilder(args);
 // (CLAUDE.md §11 et §15).
 
 builder.Services.AjouterPersistance(builder.Configuration);
+
+// -----------------------------------------------------------------------------
+// Inscription et paiement
+// -----------------------------------------------------------------------------
+// TimeProvider plutot que DateTimeOffset.UtcNow : les horodatages de soumission
+// et de validation sont des donnees metier (ils determinent l'ordre d'arrivee,
+// CLAUDE.md §6), ils doivent donc etre testables sans attendre le calendrier.
+builder.Services.AddSingleton(TimeProvider.System);
+
+// ValidateOnStart : l'application REFUSE de demarrer si une cle Stripe ou le
+// montant manquent. Un conteneur qui ne demarre pas est rattrape par le
+// controle de sante du script de deploiement, qui revient au tag precedent
+// (CLAUDE.md §11). Decouvrir une cle absente au premier paiement reel coute
+// infiniment plus cher qu'une indisponibilite visible.
+builder.Services
+    .AddOptions<OptionsPaiement>()
+    .Bind(builder.Configuration.GetSection(OptionsPaiement.Section))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+
+builder.Services
+    .AddOptions<OptionsFormation>()
+    .Bind(builder.Configuration.GetSection(OptionsFormation.Section))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+
+builder.Services.AddScoped<ServicePaiement>();
+builder.Services.AddScoped<ServiceInscription>();
+
+// -----------------------------------------------------------------------------
+// Limitation de debit
+// -----------------------------------------------------------------------------
+// Pour le seul controle de doublon d'email. Il ne renvoie qu'un booleen, mais
+// sans limite il permettrait d'enumerer des adresses pour savoir qui est inscrit
+// a une formation sur le droit au sejour (CLAUDE.md §15).
+//
+// Le partitionnement se fait sur l'adresse du client, lue APRES le middleware de
+// forwarded headers : derriere Apache, sans cela, tout le trafic partagerait la
+// seule adresse du proxy et la limite tomberait sur tout le monde a la fois.
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
+    options.AddPolicy(EndpointsInscription.LimiteVerificationEmail, contexte =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: contexte.Connection.RemoteIpAddress?.ToString() ?? "inconnu",
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+                // Dix essais par minute : largement au-dessus d'une saisie
+                // humaine, qui corrige une adresse deux ou trois fois, et bien
+                // en dessous de ce qu'exige un balayage de liste.
+                PermitLimit = 10,
+                Window = TimeSpan.FromMinutes(1),
+                QueueLimit = 0,
+            }));
+});
 
 // -----------------------------------------------------------------------------
 // Derriere le proxy
@@ -124,6 +184,20 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors(PolitiqueCors);
+
+// Apres UseForwardedHeaders, pour que la limite porte sur l'adresse du visiteur
+// et non sur celle du proxy.
+app.UseRateLimiter();
+
+// -----------------------------------------------------------------------------
+// Endpoints
+// -----------------------------------------------------------------------------
+// A la RACINE, sans prefixe /api : c'est Apache qui retire ce prefixe en
+// preprod et en production (ProxyPass /api/ vers la racine du conteneur), et le
+// proxy de ng serve fait de meme en local. Le navigateur, lui, appelle toujours
+// /api/... (CLAUDE.md §11).
+app.MapperReferentiels();
+app.MapperInscriptions();
 
 app.MapHealthChecks("/sante/vivant", new()
 {

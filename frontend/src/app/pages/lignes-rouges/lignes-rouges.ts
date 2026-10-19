@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import contenu from '../../../content/fr/lignes-rouges.json';
 import type { ContenuDePage } from '../../core/content/modele-contenu';
 import { Seo } from '../../core/seo/seo';
+import { FormulaireInscription } from '../../shared/formulaire-inscription/formulaire-inscription';
 import { PageContenu } from '../../shared/page-contenu/page-contenu';
 
 /** Bloc d'inscription. Produit d'apres CLAUDE.md §4, pas fourni par le client. */
@@ -10,12 +11,11 @@ interface BlocInscription {
   readonly titre: string;
   readonly recapitulatif: string;
   readonly mentionTva: string;
-  readonly attente: string;
 }
 
 @Component({
   selector: 'app-lignes-rouges',
-  imports: [PageContenu],
+  imports: [PageContenu, FormulaireInscription],
   templateUrl: './lignes-rouges.html',
   styleUrl: './lignes-rouges.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

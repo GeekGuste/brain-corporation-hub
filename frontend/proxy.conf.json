@@ -11,7 +11,16 @@
   "/api": {
     "target": "http://localhost:5080",
     "secure": false,
-    "changeOrigin": false
+    "changeOrigin": false,
+    "$commentaire-pathRewrite": [
+      "Le prefixe /api est RETIRE avant transmission, exactement comme le fait",
+      "Apache en preprod et en production :",
+      "  ProxyPass /api/ http://127.0.0.1:8080/",
+      "L'API expose donc ses routes a la racine (/referentiels, /inscriptions),",
+      "et le navigateur appelle toujours /api/... Sans cette reecriture, le code",
+      "marcherait en local et echouerait en ligne."
+    ],
+    "pathRewrite": { "^/api": "" }
   },
   "/sante": {
     "target": "http://localhost:5080",

@@ -1,0 +1,162 @@
+{
+  "$commentaire": [
+    "Libelles du formulaire d'inscription.",
+    "",
+    "Ces textes ne viennent PAS du document du client : ce sont des libelles",
+    "d'interface, produits d'apres CLAUDE.md §6 et §13. Ils sont ici et non dans",
+    "les composants pour permettre une version anglaise plus tard sans",
+    "refactorisation, et pour que le client puisse les reformuler lui-meme.",
+    "",
+    "Regles d'ecriture appliquees (CLAUDE.md §13) : francais simple, phrases",
+    "courtes, pas de jargon non explique, et des messages d'erreur qui disent",
+    "quoi corriger. Le public est souvent non francophone de naissance.",
+    "",
+    "Aucune date de session n'est annoncee (CLAUDE.md §16).",
+    "Pas de tiret cadratin (CLAUDE.md §3)."
+  ],
+  "titre": "S’inscrire à la formation",
+  "chapo": "Le formulaire demande quelques informations sur votre situation administrative. Elles servent à rattacher votre session au bon avocat formateur.",
+  "sections": {
+    "identite": {
+      "titre": "Vos coordonnées",
+      "aide": "Nous vous écrirons à cette adresse pour confirmer votre inscription."
+    },
+    "residence": {
+      "titre": "Où résidez-vous aujourd’hui ?"
+    },
+    "titreSejour": {
+      "titre": "Votre titre de séjour",
+      "aide": "Choisissez la catégorie qui correspond le mieux. Si vous hésitez, choisissez la plus proche."
+    },
+    "titreSejourEnvisage": {
+      "titre": "Le titre de séjour envisagé après l’arrivée en France",
+      "aide": "Choisissez la catégorie que vous pensez demander. Si vous hésitez, choisissez la plus proche."
+    },
+    "prefecture": {
+      "titre": "Votre préfecture"
+    }
+  },
+  "champs": {
+    "prenom": {
+      "libelle": "Prénom"
+    },
+    "nom": {
+      "libelle": "Nom"
+    },
+    "email": {
+      "libelle": "Adresse email",
+      "aide": "Exemple : nom@exemple.com"
+    },
+    "telephone": {
+      "libelle": "Téléphone",
+      "facultatif": "facultatif",
+      "aide": "Utile seulement si nous n’arrivons pas à vous joindre par email."
+    },
+    "statutResidence": {
+      "libelle": "Votre situation",
+      "options": {
+        "ResidentEnFrance": "Je réside en France",
+        "ResidentALEtranger": "Je réside à l’étranger"
+      }
+    },
+    "categorie": {
+      "libelle": "Catégorie de titre de séjour",
+      "invite": "Choisissez une catégorie"
+    },
+    "sousCategorie": {
+      "libelle": "Précision",
+      "facultatif": "facultatif",
+      "invite": "Choisissez une précision",
+      "aide": "Vous pouvez laisser ce champ vide."
+    },
+    "precisionAutre": {
+      "libelle": "Précisez votre situation",
+      "aide": "Décrivez votre situation en quelques mots."
+    },
+    "prefectureFrance": {
+      "libelle": "Préfecture de votre département de résidence",
+      "invite": "Choisissez une préfecture"
+    },
+    "prefectureProjetee": {
+      "libelle": "Préfecture du département où vous prévoyez de résider",
+      "invite": "Choisissez une préfecture",
+      "aide": "Ce n’est pas votre adresse actuelle, mais le département où vous pensez vous installer."
+    },
+    "paysResidence": {
+      "libelle": "Pays de résidence actuelle"
+    },
+    "dateArrivee": {
+      "libelle": "Date d’arrivée prévue en France",
+      "facultatif": "si vous la connaissez"
+    },
+    "communeProjetee": {
+      "libelle": "Commune ou code postal envisagé",
+      "facultatif": "si vous le connaissez"
+    }
+  },
+  "rattachement": {
+    "titre": "Votre rattachement",
+    "aide": "Il est calculé à partir de votre préfecture. Chaque avocat formateur n’intervient que pour les préfectures de son ressort.",
+    "prefecture": "Préfecture",
+    "tribunal": "Tribunal judiciaire de référence",
+    "barreau": "Barreau requis"
+  },
+  "doublon": {
+    "titre": "Cette adresse email est déjà inscrite",
+    "texte": "Une inscription existe déjà avec cette adresse. Si vous inscrivez une autre personne, continuez. Si c’est une erreur, modifiez l’adresse email.",
+    "confirmer": "Oui, créer une inscription supplémentaire",
+    "annuler": "Non, je corrige l’adresse"
+  },
+  "actions": {
+    "envoyer": "Continuer vers le paiement",
+    "envoiEnCours": "Enregistrement en cours"
+  },
+  "erreurs": {
+    "titre": "Votre inscription n’a pas pu être enregistrée",
+    "introduction": "Corrigez les points suivants, puis réessayez :",
+    "requis": "Ce champ est obligatoire.",
+    "emailInvalide": "Cette adresse email ne semble pas valide. Vérifiez qu’elle contient un arobase et un point.",
+    "reseau": "Nous n’avons pas pu joindre le serveur. Vérifiez votre connexion, puis réessayez.",
+    "serveur": "Une erreur est survenue de notre côté. Réessayez dans un instant.",
+    "referentielsIndisponibles": "Les listes de choix n’ont pas pu être chargées. Rechargez la page."
+  },
+  "paiement": {
+    "$commentaire": [
+      "Libelles du paiement. Produits d apres CLAUDE.md §4 et §9, pas fournis par",
+      "le client. AUCUNE date de session n est annoncee (CLAUDE.md §16), et rien",
+      "n est promis que le webhook n ait confirme."
+    ],
+    "titre": "Paiement",
+    "recapitulatif": "Formation Lignes Rouges, 1 h 30 à distance.",
+    "mentionTva": "TVA non applicable, article 293 B du CGI.",
+    "retractation": "Vous disposez d’un délai de rétractation de quatorze jours. La formation ne se déroule jamais avant l’expiration de ce délai.",
+    "payer": "Payer",
+    "paiementEnCours": "Paiement en cours",
+    "chargement": "Chargement du paiement sécurisé",
+    "securite": "Les informations de votre carte sont transmises directement à notre prestataire de paiement. Elles ne passent pas par nos serveurs et ne sont jamais enregistrées.",
+    "erreurs": {
+      "refuse": "Le paiement n’a pas abouti. Vérifiez vos informations, puis réessayez.",
+      "indisponible": "Le service de paiement est momentanément indisponible. Votre inscription est enregistrée : réessayez dans un instant.",
+      "chargement": "Le module de paiement n’a pas pu se charger. Vérifiez votre connexion, puis rechargez la page."
+    }
+  },
+  "confirmation": {
+    "$commentaire": [
+      "Affiche une fois le paiement confirme par le WEBHOOK, jamais sur la foi",
+      "d un evenement du navigateur (CLAUDE.md §9).",
+      "",
+      "Le texte sur le delai avant la session est EN ATTENTE DE REPONSE DU CLIENT",
+      "(CLAUDE.md §17) : la cohorte se constitue a dix stagiaires et nous ne",
+      "savons pas encore quoi annoncer. D ou un texte prudent qui ne promet aucun",
+      "delai."
+    ],
+    "titre": "Votre inscription est confirmée",
+    "texte": "Nous avons bien reçu votre paiement. Un reçu vous a été envoyé par email.",
+    "suite": "[À FOURNIR PAR LE CLIENT] Ce qui est annoncé ici sur le délai avant la session.",
+    "reference": "Référence de votre inscription :",
+    "attente": {
+      "titre": "Paiement reçu",
+      "texte": "Votre confirmation arrive par email dans quelques instants. Vous pouvez fermer cette page."
+    }
+  }
+}

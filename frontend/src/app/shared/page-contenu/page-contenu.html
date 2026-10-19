@@ -89,25 +89,32 @@
           }
         </div>
 
-        @if (contenu().faitsCles?.length) {
-          <!-- Faits pratiques. Un tableau de definitions, pas des cartes : ce
-               sont des couples libelle-valeur, la structure le dit. -->
-          <dl class="faits">
-            @for (fait of contenu().faitsCles; track fait.libelle) {
-              <div class="faits__item">
-                <dt>{{ fait.libelle }}</dt>
-                <dd>{{ fait.valeur }}</dd>
-              </div>
+        @if (contenu().faitsCles?.length || contenu().appelAction) {
+          <!-- Faits pratiques et appel a l'action sur une meme rangee a partir
+               du grand ecran, empiles sur telephone. Les empiler partout
+               ajoutait une centaine de pixels a un bandeau deja haut. -->
+          <div class="bandeau__pied">
+            @if (contenu().faitsCles?.length) {
+              <!-- Un tableau de definitions, pas des cartes : ce sont des
+                   couples libelle-valeur, la structure le dit. -->
+              <dl class="faits">
+                @for (fait of contenu().faitsCles; track fait.libelle) {
+                  <div class="faits__item">
+                    <dt>{{ fait.libelle }}</dt>
+                    <dd>{{ fait.valeur }}</dd>
+                  </div>
+                }
+              </dl>
             }
-          </dl>
-        }
 
-        @if (contenu().appelAction) {
-          <p class="bandeau__action">
-            <a class="btn btn-light btn-lg" [href]="contenu().appelAction!.ancre">
-              {{ contenu().appelAction!.libelle }}
-            </a>
-          </p>
+            @if (contenu().appelAction) {
+              <p class="bandeau__action">
+                <a class="btn btn-vif btn-lg" [href]="contenu().appelAction!.ancre">
+                  {{ contenu().appelAction!.libelle }}
+                </a>
+              </p>
+            }
+          </div>
         }
       </div>
 

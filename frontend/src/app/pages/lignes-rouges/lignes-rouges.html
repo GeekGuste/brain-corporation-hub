@@ -1,4 +1,8 @@
-<app-page-contenu [contenu]="contenu" />
+<!-- Bandeau resserre, comme les deux autres pages. A hauteur pleine, il
+     occupait plus d'un ecran avant que le premier paragraphe du corps
+     n'apparaisse : trois lignes de titre, deux paragraphes de chapo en grand
+     corps, puis les faits et le bouton empiles. -->
+<app-page-contenu [contenu]="contenu" [bandeauCompact]="true" />
 
 <!-- =========================================================================
      INSCRIPTION
@@ -28,10 +32,10 @@
           <p class="inscription__recapitulatif">{{ inscription.recapitulatif }}</p>
           <p class="inscription__mention">{{ inscription.mentionTva }}</p>
 
-          <!-- Le formulaire arrive a l'etape 4, le paiement Stripe integre a
-               l'etape 5. L'ancre est posee des maintenant pour que les liens
-               vers l'inscription n'aient pas a changer ensuite. -->
-          <p class="inscription__attente mb-0">{{ inscription.attente }}</p>
+          <!-- Formulaire d'inscription qualifie (etape 4). Le paiement Stripe
+               s'integrera dans ce meme panneau a l'etape 5 : l'ancre
+               #inscription ne changera pas. -->
+          <app-formulaire-inscription />
         </div>
       </div>
     </div>

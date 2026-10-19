@@ -307,7 +307,6 @@
   "inscription": {
     "titre": "S’inscrire",
     "recapitulatif": "1 h 30, à distance. 100 € TTC par stagiaire.",
-    "mentionTva": "TVA non applicable, article 293 B du CGI.",
-    "attente": "Le formulaire d’inscription et le paiement seront intégrés ici."
+    "mentionTva": "TVA non applicable, article 293 B du CGI."
   }
 }

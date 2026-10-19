@@ -14,11 +14,30 @@
   color: var(--bch-sur-encre-voile);
   padding-block: var(--bch-espace-bandeau);
 
-  // Version resserree, utilisee par l'accueil. Le visuel passe en meme temps
-  // au format large, cote gabarit : c'est lui qui commande la hauteur de la
-  // bande, la reduire sans le reduire ne servirait a rien.
+  // Version resserree, utilisee par les trois pages.
+  //
+  // Elle joue sur quatre leviers, parce qu'aucun ne suffit seul : le visuel
+  // passe au format large (cote gabarit), le rembourrage se reduit, le titre
+  // descend d'un cran et respire sur une mesure plus large, et le chapo revient
+  // au corps du texte courant.
+  //
+  // Le titre est le levier qui compte le plus : a 3,5 rem sur une mesure de
+  // 20 caracteres, un titre un peu long passe a trois lignes, soit pres de
+  // deux cents pixels. Elargir la mesure le ramene a deux.
+  // Mobile d'abord : les valeurs du petit ecran sont ici, celles du grand dans
+  // la requete de media. C'est sur telephone que le bandeau est le plus a
+  // l'etroit, et c'est donc la que le resserrage doit etre le plus franc.
   &--compact {
-    padding-block: calc(var(--bch-espace-bandeau) * 0.625);
+    padding-block: 1.5rem;
+    --bch-h1: 2rem;
+    --bch-chapo: 1.0625rem;
+
+    @media (min-width: 768px) {
+      padding-block: calc(var(--bch-espace-bandeau) * 0.625);
+      --bch-h1: 3rem;
+      --bch-mesure-titre: 26ch;
+      --bch-chapo: 1.3125rem;
+    }
   }
 
   &__titre {
@@ -29,13 +48,32 @@
   &__chapo {
     max-width: var(--bch-mesure);
 
+    p {
+      margin-block-end: 0.875rem;
+    }
+
     p:last-child {
       margin-block-end: 0;
     }
   }
 
+  // Faits pratiques et appel a l'action : cote a cote des que la place le
+  // permet, empiles sur telephone.
+  &__pied {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    margin-block-start: 1.25rem;
+
+    @media (min-width: 768px) {
+      gap: 1.5rem 2.5rem;
+      margin-block-start: 1.75rem;
+    }
+  }
+
   &__action {
-    margin-block: 2rem 0;
+    margin: 0;
   }
 }
 
@@ -48,7 +86,11 @@
   line-height: 1.5;
   color: var(--bch-sur-encre-voile);
   max-width: 44ch;
-  margin-block-end: 1.5rem;
+  margin-block-end: 1rem;
+
+  @media (min-width: 768px) {
+    margin-block-end: 1.5rem;
+  }
   // Un filet court plutot qu'une pastille : c'est le motif du site.
   padding-inline-start: 0.875rem;
   border-inline-start: 3px solid var(--bch-seuil);
@@ -63,12 +105,25 @@
 .faits {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem 2rem;
-  margin-block: 2rem 0;
+  // Serre sur telephone, pour que les trois faits tiennent sur UNE ligne. A
+  // 1,75 rem avec deux rem de separation, ils passaient a deux lignes et
+  // ajoutaient une soixantaine de pixels au bandeau.
+  gap: 0.75rem 1rem;
+  // L'espacement exterieur est porte par .bandeau__pied, qui tient aussi le
+  // bouton.
+  margin: 0;
+
+  @media (min-width: 768px) {
+    gap: 1rem 2rem;
+  }
 
   &__item {
-    padding-inline-end: 2rem;
+    padding-inline-end: 1rem;
     border-inline-end: 1px solid var(--bch-filet-sur-encre);
+
+    @media (min-width: 768px) {
+      padding-inline-end: 2rem;
+    }
 
     &:last-child {
       padding-inline-end: 0;
@@ -77,18 +132,28 @@
   }
 
   dt {
-    font-size: 0.9375rem;
+    font-size: 0.8125rem;
     font-weight: 400;
     color: var(--bch-sur-encre-voile);
     margin-block-end: 0.125rem;
+
+    @media (min-width: 768px) {
+      font-size: 0.9375rem;
+    }
   }
 
   dd {
     margin-block-end: 0;
-    font-size: 1.75rem;
+    font-size: 1.1875rem;
     font-weight: 700;
     letter-spacing: var(--bch-serrage-titre);
+    line-height: 1.2;
     color: var(--bch-sur-encre);
+    white-space: nowrap;
+
+    @media (min-width: 768px) {
+      font-size: 1.75rem;
+    }
   }
 }
 

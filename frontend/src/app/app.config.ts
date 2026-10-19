@@ -4,6 +4,7 @@ import {
   provideBrowserGlobalErrorListeners,
   TransferState,
 } from '@angular/core';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 
@@ -23,6 +24,10 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' }),
     ),
     provideClientHydration(withEventReplay()),
+    // withFetch : requis pour que les appels passent aussi cote serveur sous
+    // SSR. Le formulaire n'appelle l'API que dans le navigateur, mais la
+    // configuration doit etre juste des maintenant pour ne pas pieger l'etape 5.
+    provideHttpClient(withFetch()),
     {
       // Cote navigateur, la configuration est relue dans l'etat transfere par
       // le serveur. Aucune requete supplementaire, aucune valeur figee au build.

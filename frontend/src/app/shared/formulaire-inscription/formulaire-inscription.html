@@ -1,0 +1,455 @@
+<!-- Formulaire d'inscription qualifie (CLAUDE.md §6).
+     Aucun libelle ecrit ici : tout vient de content/fr/inscription.json.
+     Aucune couleur : classes Bootstrap et variables du fichier de theme. -->
+
+@switch (etape()) {
+  <!-- ======================================================================
+       CONFIRMEE
+       ----------------------------------------------------------------------
+       Affiche UNIQUEMENT quand le serveur a vu l'inscription passer a
+       « Confirmee », donc quand le WEBHOOK l'a confirmee. Jamais sur la foi du
+       retour de Stripe au navigateur (CLAUDE.md §9).
+       ====================================================================== -->
+  @case ('confirmee') {
+    <div class="confirmation" role="status">
+      <h3 class="confirmation__titre">{{ t.confirmation.titre }}</h3>
+      <p>{{ t.confirmation.texte }}</p>
+      <p>{{ t.confirmation.suite }}</p>
+      @if (inscription(); as creee) {
+        <p class="confirmation__reference mb-0">
+          {{ t.confirmation.reference }} <code>{{ creee.id }}</code>
+        </p>
+      }
+    </div>
+  }
+
+  <!-- ======================================================================
+       PAIEMENT RECU, WEBHOOK EN RETARD
+       ----------------------------------------------------------------------
+       Stripe a accepte le paiement mais notre serveur ne l'a pas encore vu.
+       On n'invente pas une confirmation : on dit ce qui est vrai, et ce qui
+       reste vrai si le visiteur ferme son onglet (CLAUDE.md §9).
+       ====================================================================== -->
+  @case ('attenteWebhook') {
+    <div class="confirmation" role="status">
+      <h3 class="confirmation__titre">{{ t.confirmation.attente.titre }}</h3>
+      <p class="mb-0">{{ t.confirmation.attente.texte }}</p>
+    </div>
+  }
+
+  <!-- ======================================================================
+       PAIEMENT
+       ----------------------------------------------------------------------
+       Le Payment Element de Stripe est un cadre isole : les numeros de carte
+       y sont saisis et transmis directement a Stripe. Ils ne passent jamais
+       par notre serveur et ne sont jamais enregistres (CLAUDE.md §6 et §15).
+       ====================================================================== -->
+  @case ('paiement') {
+    <section class="paiement" aria-labelledby="titre-paiement">
+      <h3 class="paiement__titre" id="titre-paiement">{{ t.paiement.titre }}</h3>
+
+      <dl class="paiement__recapitulatif">
+        <dt>{{ t.paiement.recapitulatif }}</dt>
+        <dd>{{ montantAffiche() }}</dd>
+      </dl>
+      <p class="paiement__mention">{{ t.paiement.mentionTva }}</p>
+
+      @if (erreurPaiement(); as message) {
+        <p class="alert alert-danger" role="alert">{{ message }}</p>
+      }
+
+      <!-- Cadre de Stripe. Son contenu n'est pas le notre. -->
+      <div class="paiement__cadre" #conteneurPaiement></div>
+
+      @if (!paiementPret() && !erreurPaiement()) {
+        <p class="paiement__chargement" role="status">{{ t.paiement.chargement }}</p>
+      }
+
+      @if (paiementPret()) {
+        <p class="paiement__securite">{{ t.paiement.securite }}</p>
+
+        <!-- Delai de retractation de quatorze jours. Aucune case de
+             renonciation : la formation ne se deroule jamais avant son
+             expiration (CLAUDE.md §4). -->
+        <p class="paiement__retractation">{{ t.paiement.retractation }}</p>
+
+        <div class="formulaire__action">
+          <button
+            class="btn btn-primary btn-lg"
+            type="button"
+            [disabled]="paiementEnCours()"
+            (click)="payer()"
+          >
+            @if (paiementEnCours()) {
+              {{ t.paiement.paiementEnCours }}
+            } @else {
+              {{ t.paiement.payer }} {{ montantAffiche() }}
+            }
+          </button>
+        </div>
+      }
+    </section>
+  }
+
+  <!-- ======================================================================
+       FORMULAIRE
+       ====================================================================== -->
+  @default {
+  @if (referentielsEnEchec()) {
+    <p class="alert alert-warning" role="alert">{{ t.erreurs.referentielsIndisponibles }}</p>
+  }
+
+  <p class="formulaire__chapo">{{ t.chapo }}</p>
+
+  @if (erreurGlobale(); as message) {
+    <div class="alert alert-danger" role="alert">
+      <strong>{{ t.erreurs.titre }}</strong>
+      <p class="mb-0">{{ message }}</p>
+    </div>
+  }
+
+  <form class="formulaire" [formGroup]="formulaire" (ngSubmit)="envoyer()" novalidate>
+    <!-- ====================================================================
+         VOS COORDONNEES
+         ==================================================================== -->
+    <fieldset class="bloc">
+      <legend class="bloc__titre">{{ t.sections.identite.titre }}</legend>
+      <p class="bloc__aide">{{ t.sections.identite.aide }}</p>
+
+      <div class="row g-3">
+        <div class="col-12 col-sm-6">
+          <label class="form-label" for="prenom">{{ t.champs.prenom.libelle }}</label>
+          <input
+            id="prenom"
+            class="form-control"
+            type="text"
+            autocomplete="given-name"
+            formControlName="prenom"
+            [class.is-invalid]="enErreur('prenom')"
+            [attr.aria-describedby]="enErreur('prenom') ? 'erreur-prenom' : null"
+          />
+          @if (messageErreur('prenom'); as message) {
+            <p class="invalid-feedback d-block" id="erreur-prenom">{{ message }}</p>
+          }
+        </div>
+
+        <div class="col-12 col-sm-6">
+          <label class="form-label" for="nom">{{ t.champs.nom.libelle }}</label>
+          <input
+            id="nom"
+            class="form-control"
+            type="text"
+            autocomplete="family-name"
+            formControlName="nom"
+            [class.is-invalid]="enErreur('nom')"
+            [attr.aria-describedby]="enErreur('nom') ? 'erreur-nom' : null"
+          />
+          @if (messageErreur('nom'); as message) {
+            <p class="invalid-feedback d-block" id="erreur-nom">{{ message }}</p>
+          }
+        </div>
+
+        <div class="col-12">
+          <label class="form-label" for="email">{{ t.champs.email.libelle }}</label>
+          <input
+            id="email"
+            class="form-control"
+            type="email"
+            inputmode="email"
+            autocomplete="email"
+            formControlName="email"
+            [class.is-invalid]="enErreur('email')"
+            aria-describedby="aide-email"
+          />
+          <p class="form-text" id="aide-email">{{ t.champs.email.aide }}</p>
+          @if (messageErreur('email'); as message) {
+            <p class="invalid-feedback d-block">{{ message }}</p>
+          }
+        </div>
+
+        <div class="col-12">
+          <label class="form-label" for="telephone">
+            {{ t.champs.telephone.libelle }}
+            <span class="facultatif">{{ t.champs.telephone.facultatif }}</span>
+          </label>
+          <input
+            id="telephone"
+            class="form-control"
+            type="tel"
+            inputmode="tel"
+            autocomplete="tel"
+            formControlName="telephone"
+            aria-describedby="aide-telephone"
+          />
+          <p class="form-text" id="aide-telephone">{{ t.champs.telephone.aide }}</p>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- ====================================================================
+         OU RESIDEZ-VOUS
+         --------------------------------------------------------------------
+         Cette reponse commande tout le reste du formulaire : elle vient donc
+         avant, et elle est posee en boutons radio plutot qu'en liste
+         deroulante, pour que les deux cas soient visibles d'un coup d'oeil.
+         ==================================================================== -->
+    <fieldset class="bloc">
+      <legend class="bloc__titre">{{ t.sections.residence.titre }}</legend>
+
+      <div class="choix">
+        @for (option of [
+          { valeur: 'ResidentEnFrance', libelle: t.champs.statutResidence.options.ResidentEnFrance },
+          { valeur: 'ResidentALEtranger', libelle: t.champs.statutResidence.options.ResidentALEtranger }
+        ]; track option.valeur) {
+          <label class="choix__option">
+            <input
+              class="form-check-input"
+              type="radio"
+              [value]="option.valeur"
+              formControlName="statutResidence"
+              (change)="surChangementResidence()"
+            />
+            <span>{{ option.libelle }}</span>
+          </label>
+        }
+      </div>
+      @if (messageErreur('statutResidence'); as message) {
+        <p class="invalid-feedback d-block">{{ message }}</p>
+      }
+    </fieldset>
+
+    <!-- Le reste n'apparait qu'une fois la residence choisie : les libelles en
+         dependent, et demander avant serait demander dans le vide. -->
+    @if (residenceRenseignee()) {
+      <!-- ==================================================================
+           TITRE DE SEJOUR
+           ================================================================== -->
+      <fieldset class="bloc">
+        <legend class="bloc__titre">
+          @if (resideALEtranger()) {
+            {{ t.sections.titreSejourEnvisage.titre }}
+          } @else {
+            {{ t.sections.titreSejour.titre }}
+          }
+        </legend>
+        <p class="bloc__aide">
+          @if (resideALEtranger()) {
+            {{ t.sections.titreSejourEnvisage.aide }}
+          } @else {
+            {{ t.sections.titreSejour.aide }}
+          }
+        </p>
+
+        <div class="row g-3">
+          <div class="col-12">
+            <label class="form-label" for="categorie">{{ t.champs.categorie.libelle }}</label>
+            <select
+              id="categorie"
+              class="form-select"
+              formControlName="categorieCode"
+              (change)="surChangementCategorie()"
+              [class.is-invalid]="enErreur('categorieCode')"
+            >
+              <option value="">{{ t.champs.categorie.invite }}</option>
+              @for (categorie of categories(); track categorie.code) {
+                <option [value]="categorie.code">{{ categorie.famille }}</option>
+              }
+            </select>
+            @if (messageErreur('categorieCode'); as message) {
+              <p class="invalid-feedback d-block">{{ message }}</p>
+            }
+          </div>
+
+          <!-- Sous-categorie : affichee APRES le choix de la famille, et
+               facultative, elle ne bloque pas la validation (CLAUDE.md §6). -->
+          @if (sousCategories().length) {
+            <div class="col-12">
+              <label class="form-label" for="sousCategorie">
+                {{ t.champs.sousCategorie.libelle }}
+                <span class="facultatif">{{ t.champs.sousCategorie.facultatif }}</span>
+              </label>
+              <select
+                id="sousCategorie"
+                class="form-select"
+                formControlName="sousCategorieId"
+                aria-describedby="aide-sous-categorie"
+              >
+                <option value="">{{ t.champs.sousCategorie.invite }}</option>
+                @for (sousCategorie of sousCategories(); track sousCategorie.id) {
+                  <option [value]="sousCategorie.id">{{ sousCategorie.libelle }}</option>
+                }
+              </select>
+              <p class="form-text" id="aide-sous-categorie">{{ t.champs.sousCategorie.aide }}</p>
+            </div>
+          }
+
+          <!-- Famille AUT seulement : precision en texte libre obligatoire. -->
+          @if (precisionLibreRequise()) {
+            <div class="col-12">
+              <label class="form-label" for="precisionAutre">
+                {{ t.champs.precisionAutre.libelle }}
+              </label>
+              <textarea
+                id="precisionAutre"
+                class="form-control"
+                rows="3"
+                formControlName="precisionAutreSituation"
+                [class.is-invalid]="enErreur('precisionAutreSituation')"
+                aria-describedby="aide-precision"
+              ></textarea>
+              <p class="form-text" id="aide-precision">{{ t.champs.precisionAutre.aide }}</p>
+              @if (messageErreur('precisionAutreSituation'); as message) {
+                <p class="invalid-feedback d-block">{{ message }}</p>
+              }
+            </div>
+          }
+        </div>
+      </fieldset>
+
+      <!-- ==================================================================
+           PREFECTURE
+           ------------------------------------------------------------------
+           Le libelle change selon la residence : actuelle, ou PROJETEE pour un
+           resident a l'etranger (CLAUDE.md §6).
+           ================================================================== -->
+      <fieldset class="bloc">
+        <legend class="bloc__titre">{{ t.sections.prefecture.titre }}</legend>
+
+        <div class="row g-3">
+          @if (resideALEtranger()) {
+            <div class="col-12">
+              <label class="form-label" for="pays">{{ t.champs.paysResidence.libelle }}</label>
+              <input
+                id="pays"
+                class="form-control"
+                type="text"
+                autocomplete="country-name"
+                formControlName="paysResidenceActuelle"
+                [class.is-invalid]="enErreur('paysResidenceActuelle')"
+              />
+              @if (messageErreur('paysResidenceActuelle'); as message) {
+                <p class="invalid-feedback d-block">{{ message }}</p>
+              }
+            </div>
+          }
+
+          <div class="col-12">
+            <label class="form-label" for="prefecture">
+              @if (resideALEtranger()) {
+                {{ t.champs.prefectureProjetee.libelle }}
+              } @else {
+                {{ t.champs.prefectureFrance.libelle }}
+              }
+            </label>
+            <select
+              id="prefecture"
+              class="form-select"
+              formControlName="departementPrefecture"
+              (change)="surChangementPrefecture()"
+              [class.is-invalid]="enErreur('departementPrefecture')"
+              [attr.aria-describedby]="resideALEtranger() ? 'aide-prefecture' : null"
+            >
+              <option value="">{{ t.champs.prefectureFrance.invite }}</option>
+              @for (prefecture of prefectures(); track prefecture.departement) {
+                <option [value]="prefecture.departement">
+                  {{ prefecture.departement }} {{ prefecture.nomDepartement }} :
+                  {{ prefecture.prefecture }}
+                </option>
+              }
+            </select>
+            @if (resideALEtranger()) {
+              <p class="form-text" id="aide-prefecture">{{ t.champs.prefectureProjetee.aide }}</p>
+            }
+            @if (messageErreur('departementPrefecture'); as message) {
+              <p class="invalid-feedback d-block">{{ message }}</p>
+            }
+          </div>
+
+          @if (resideALEtranger()) {
+            <div class="col-12 col-sm-6">
+              <label class="form-label" for="dateArrivee">
+                {{ t.champs.dateArrivee.libelle }}
+                <span class="facultatif">{{ t.champs.dateArrivee.facultatif }}</span>
+              </label>
+              <input
+                id="dateArrivee"
+                class="form-control"
+                type="date"
+                formControlName="dateArriveePrevisionnelle"
+                [class.is-invalid]="enErreur('dateArriveePrevisionnelle')"
+              />
+              @if (messageErreur('dateArriveePrevisionnelle'); as message) {
+                <p class="invalid-feedback d-block">{{ message }}</p>
+              }
+            </div>
+
+            <div class="col-12 col-sm-6">
+              <label class="form-label" for="communeProjetee">
+                {{ t.champs.communeProjetee.libelle }}
+                <span class="facultatif">{{ t.champs.communeProjetee.facultatif }}</span>
+              </label>
+              <input
+                id="communeProjetee"
+                class="form-control"
+                type="text"
+                formControlName="communeOuCodePostalProjete"
+              />
+            </div>
+          }
+        </div>
+
+        <!-- Rattachement derive de la prefecture.
+             Il affiche prefecture, tribunal judiciaire et barreau REQUIS, et
+             rien d'autre. Il ne nomme JAMAIS un avocat : ce choix est humain et
+             manuel (CLAUDE.md §6). -->
+        @if (prefectureCourante(); as rattachement) {
+          <div class="rattachement">
+            <h4 class="rattachement__titre">{{ t.rattachement.titre }}</h4>
+            <dl class="rattachement__liste">
+              <dt>{{ t.rattachement.prefecture }}</dt>
+              <dd>{{ rattachement.prefecture }}</dd>
+              <dt>{{ t.rattachement.tribunal }}</dt>
+              <dd>{{ rattachement.tribunalJudiciaire }}</dd>
+              <dt>{{ t.rattachement.barreau }}</dt>
+              <dd>{{ rattachement.barreauRequis }}</dd>
+            </dl>
+            <p class="rattachement__aide mb-0">{{ t.rattachement.aide }}</p>
+          </div>
+        }
+      </fieldset>
+    }
+
+    <!-- ====================================================================
+         DOUBLON D'EMAIL
+         --------------------------------------------------------------------
+         Une question, pas une erreur : plusieurs inscriptions peuvent partager
+         un email, une personne pouvant inscrire un proche. Mais la deuxieme et
+         les suivantes exigent une confirmation EXPLICITE (CLAUDE.md §6).
+         ==================================================================== -->
+    @if (doublonAConfirmer()) {
+      <div class="doublon" role="alert">
+        <h4 class="doublon__titre">{{ t.doublon.titre }}</h4>
+        <p>{{ t.doublon.texte }}</p>
+        <div class="doublon__actions">
+          <button class="btn btn-primary" type="button" (click)="envoyer(true)">
+            {{ t.doublon.confirmer }}
+          </button>
+          <button class="btn btn-outline-secondary" type="button" (click)="annulerDoublon()">
+            {{ t.doublon.annuler }}
+          </button>
+        </div>
+      </div>
+    }
+
+    <div class="formulaire__action">
+      <button class="btn btn-primary btn-lg" type="submit" [disabled]="envoiEnCours()">
+        @if (envoiEnCours()) {
+          {{ t.actions.envoiEnCours }}
+        } @else {
+          {{ t.actions.envoyer }}
+        }
+      </button>
+    </div>
+  </form>
+  }
+}
