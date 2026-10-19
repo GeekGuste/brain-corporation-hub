@@ -1,5 +1,6 @@
 using System.Threading.RateLimiting;
 using BrainHub.Api.Inscriptions;
+using BrainHub.Api.Paiement;
 using BrainHub.Infrastructure;
 using BrainHub.Infrastructure.Persistence;
 using BrainHub.Infrastructure.Persistence.Seed;
@@ -20,12 +21,31 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AjouterPersistance(builder.Configuration);
 
 // -----------------------------------------------------------------------------
-// Inscription
+// Inscription et paiement
 // -----------------------------------------------------------------------------
 // TimeProvider plutot que DateTimeOffset.UtcNow : les horodatages de soumission
 // et de validation sont des donnees metier (ils determinent l'ordre d'arrivee,
 // CLAUDE.md §6), ils doivent donc etre testables sans attendre le calendrier.
 builder.Services.AddSingleton(TimeProvider.System);
+
+// ValidateOnStart : l'application REFUSE de demarrer si une cle Stripe ou le
+// montant manquent. Un conteneur qui ne demarre pas est rattrape par le
+// controle de sante du script de deploiement, qui revient au tag precedent
+// (CLAUDE.md §11). Decouvrir une cle absente au premier paiement reel coute
+// infiniment plus cher qu'une indisponibilite visible.
+builder.Services
+    .AddOptions<OptionsPaiement>()
+    .Bind(builder.Configuration.GetSection(OptionsPaiement.Section))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+
+builder.Services
+    .AddOptions<OptionsFormation>()
+    .Bind(builder.Configuration.GetSection(OptionsFormation.Section))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+
+builder.Services.AddScoped<ServicePaiement>();
 builder.Services.AddScoped<ServiceInscription>();
 
 // -----------------------------------------------------------------------------

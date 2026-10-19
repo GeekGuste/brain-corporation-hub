@@ -62,6 +62,14 @@ export interface ReponseInscription {
   readonly barreauRequis: string;
   readonly montantCentimes: number;
   readonly devise: string;
+  /** Permet au navigateur de parler directement a Stripe. */
+  readonly clientSecret: string;
+  /**
+   * Cle publiable du compte. Elle vient de l'API et n'est pas figee dans le
+   * paquet : la preprod tourne en cles de test et la production en cles live,
+   * avec la meme image (CLAUDE.md §11 et §16).
+   */
+  readonly clePubliable: string;
 }
 
 /**
@@ -74,4 +82,10 @@ export type ResultatEnvoi =
   | { readonly type: 'creee'; readonly inscription: ReponseInscription }
   | { readonly type: 'doublon' }
   | { readonly type: 'invalide'; readonly erreurs: Record<string, readonly string[]> }
-  | { readonly type: 'echec'; readonly cle: 'reseau' | 'serveur' };
+  | { readonly type: 'echec'; readonly cle: 'reseau' | 'serveur' | 'paiementIndisponible' };
+
+/**
+ * Etats d'une inscription renvoyes par l'API. Ils refletent l'enumeration
+ * StatutInscription du domaine.
+ */
+export type StatutInscription = 'EnAttenteDePaiement' | 'Confirmee' | 'PaiementEchoue';

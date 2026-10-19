@@ -1,7 +1,10 @@
 using System.Globalization;
+using BrainHub.Api.Paiement;
 using BrainHub.Domain.Inscriptions;
 using BrainHub.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Stripe;
 
 namespace BrainHub.Api.Inscriptions;
 
@@ -18,6 +21,13 @@ public abstract record ResultatInscription
     /// confirme vouloir en creer une autre (CLAUDE.md §6).
     /// </summary>
     public sealed record DoublonAConfirmer : ResultatInscription;
+
+    /// <summary>
+    /// L'inscription est enregistree mais Stripe n'a pas pu ouvrir le paiement.
+    /// La ligne reste « en attente de paiement » et sera purgee : on ne laisse
+    /// pas le visiteur devant un formulaire muet.
+    /// </summary>
+    public sealed record PaiementIndisponible : ResultatInscription;
 }
 
 /// <summary>
@@ -30,7 +40,8 @@ public abstract record ResultatInscription
 /// </summary>
 public sealed class ServiceInscription(
     BrainHubDbContext contexte,
-    IConfiguration configuration,
+    IOptions<OptionsFormation> formation,
+    ServicePaiement paiement,
     TimeProvider horloge,
     ILogger<ServiceInscription> journal)
 {
@@ -285,14 +296,67 @@ public sealed class ServiceInscription(
             inscription.Id,
             inscription.BarreauRequis);
 
+        // --- Ouverture du paiement --------------------------------------------
+        //
+        // APRES l'enregistrement, jamais avant : le PaymentIntent porte
+        // l'identifiant de l'inscription dans ses metadonnees, il faut donc que
+        // la ligne existe (CLAUDE.md §9.3).
+        IntentionDePaiement intention;
+        try
+        {
+            intention = await paiement.CreerAsync(inscription, annulation);
+        }
+        catch (StripeException exception)
+        {
+            // L'inscription reste « en attente de paiement » et sera purgee.
+            // On ne journalise que le message de Stripe, qui ne contient aucune
+            // donnee de carte.
+            journal.LogError(
+                exception,
+                "Stripe a refuse d'ouvrir le paiement pour l'inscription {Id}",
+                inscription.Id);
+            return new ResultatInscription.PaiementIndisponible();
+        }
+
+        inscription.IdentifiantPaymentIntent = ExtraireIdentifiantIntent(intention.ClientSecret);
+        await contexte.SaveChangesAsync(annulation);
+
         return new ResultatInscription.Creee(new ReponseInscription(
             inscription.Id,
             inscription.Statut.ToString(),
             inscription.PrefectureLibelle,
             inscription.TribunalJudiciaireReference,
             inscription.BarreauRequis,
-            configuration.GetValue<int?>("Formation:MontantCentimes") ?? 10_000,
-            configuration.GetValue<string>("Formation:Devise") ?? "eur"));
+            formation.Value.MontantCentimes,
+            formation.Value.Devise,
+            intention.ClientSecret,
+            intention.ClePubliable));
+    }
+
+    /// <summary>
+    /// Etat d'une inscription, pour l'interrogation qui suit le retour de
+    /// Stripe (CLAUDE.md §9.6). Renvoie null si l'identifiant est inconnu.
+    /// </summary>
+    public async Task<string?> StatutAsync(Guid id, CancellationToken annulation)
+    {
+        var statut = await contexte.Inscriptions
+            .AsNoTracking()
+            .Where(inscription => inscription.Id == id)
+            .Select(inscription => (StatutInscription?)inscription.Statut)
+            .FirstOrDefaultAsync(annulation);
+
+        return statut?.ToString();
+    }
+
+    /// <summary>
+    /// Le « client_secret » a la forme « pi_XXX_secret_YYY ». On n'en conserve
+    /// que la partie identifiante, « pi_XXX » : c'est elle que le webhook
+    /// reverra, et la seconde moitie est un secret qui n'a rien a faire en base.
+    /// </summary>
+    private static string ExtraireIdentifiantIntent(string clientSecret)
+    {
+        var separateur = clientSecret.IndexOf("_secret_", StringComparison.Ordinal);
+        return separateur > 0 ? clientSecret[..separateur] : clientSecret;
     }
 
     // -------------------------------------------------------------------------

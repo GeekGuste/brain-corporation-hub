@@ -78,11 +78,34 @@ export class ServiceInscription {
             return of({ type: 'invalide', erreurs: erreur.error.errors });
           }
 
+          // 503 : l'inscription est enregistree, c'est Stripe qui n'a pas
+          // repondu. Le visiteur doit pouvoir reessayer sans resaisir.
+          if (erreur.status === 503) {
+            return of({ type: 'echec', cle: 'paiementIndisponible' });
+          }
+
           // 0 : requete jamais partie, donc connexion absente ou coupee. Le
           // public est parfois en connexion lente (CLAUDE.md §13), ce cas
           // merite son propre message.
           return of({ type: 'echec', cle: erreur.status === 0 ? 'reseau' : 'serveur' });
         }),
+      );
+  }
+
+  /**
+   * Etat d'une inscription.
+   *
+   * Interroge pendant quelques secondes apres le retour de Stripe, le temps que
+   * le webhook fasse foi (CLAUDE.md §9.6). Une erreur reseau renvoie null
+   * plutot que de propager : l'attente doit continuer, pas s'interrompre sur un
+   * paquet perdu.
+   */
+  statut(id: string): Observable<string | null> {
+    return this.http
+      .get<{ statut: string }>(`${ServiceInscription.BASE}/inscriptions/${id}/statut`)
+      .pipe(
+        map((reponse) => reponse.statut),
+        catchError(() => of(null)),
       );
   }
 }

@@ -124,9 +124,37 @@ public static class EndpointsInscription
                 ResultatInscription.DoublonAConfirmer =>
                     Results.Conflict(new { code = "doublon-email" }),
 
+                // 503 : l'inscription est enregistree, c'est Stripe qui n'a pas
+                // repondu. Le visiteur doit pouvoir reessayer, pas recommencer
+                // sa saisie.
+                ResultatInscription.PaiementIndisponible =>
+                    Results.Json(
+                        new { code = "paiement-indisponible" },
+                        statusCode: StatusCodes.Status503ServiceUnavailable),
+
                 _ => Results.Problem("Resultat inattendu."),
             };
         })
-        .WithSummary("Cree une inscription en attente de paiement et derive le barreau requis");
+        .WithSummary("Cree une inscription, derive le barreau requis et ouvre le paiement");
+
+        // ---------------------------------------------------------------------
+        // Etat d'une inscription
+        // ---------------------------------------------------------------------
+        // Interroge par la page pendant quelques secondes apres le retour de
+        // Stripe, le temps que le webhook fasse foi (CLAUDE.md §9.6).
+        //
+        // Renvoie UNIQUEMENT le statut. L'identifiant est un GUID non devinable,
+        // mais ce n'est pas une raison d'y exposer un nom ou un email.
+        groupe.MapGet("/{id:guid}/statut", async (
+            Guid id,
+            ServiceInscription service,
+            CancellationToken annulation) =>
+        {
+            var statut = await service.StatutAsync(id, annulation);
+            return statut is null
+                ? Results.NotFound()
+                : Results.Ok(new ReponseStatutInscription(statut));
+        })
+        .WithSummary("Etat d'une inscription, pour l'attente de confirmation du webhook");
     }
 }

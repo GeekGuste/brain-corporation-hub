@@ -58,8 +58,13 @@ public sealed record DemandeInscription
 /// Ce que l'API renvoie apres creation. L'inscription est au statut
 /// « en attente de paiement » : rien n'est confirme, aucun email n'est parti.
 ///
-/// L'etape 5 ajoutera le « client_secret » du PaymentIntent a cette reponse
-/// (CLAUDE.md §9.3).
+/// Le « client_secret » permet au navigateur d'afficher le Payment Element et
+/// de parler DIRECTEMENT a Stripe. Les numeros de carte ne touchent jamais
+/// notre serveur (CLAUDE.md §6 et §15).
+///
+/// La cle publiable accompagne la reponse plutot que d'etre figee dans le
+/// paquet du front : la preprod tourne en cles de test et la production en cles
+/// live, et c'est la meme image qui sert les deux (CLAUDE.md §11 et §16).
 /// </summary>
 public sealed record ReponseInscription(
     Guid Id,
@@ -68,7 +73,19 @@ public sealed record ReponseInscription(
     string TribunalJudiciaireReference,
     string BarreauRequis,
     int MontantCentimes,
-    string Devise);
+    string Devise,
+    string ClientSecret,
+    string ClePubliable);
+
+/// <summary>
+/// Etat d'une inscription, interroge par la page apres le retour de Stripe
+/// (CLAUDE.md §9.6).
+///
+/// Ne renvoie QUE le statut : ni nom, ni email, ni categorie. L'identifiant est
+/// un GUID non devinable, mais cela ne justifie pas d'y exposer des donnees
+/// personnelles.
+/// </summary>
+public sealed record ReponseStatutInscription(string Statut);
 
 /// <summary>
 /// Reponse du controle de doublon.

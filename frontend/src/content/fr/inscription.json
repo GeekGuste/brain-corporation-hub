@@ -14,10 +14,8 @@
     "Aucune date de session n'est annoncee (CLAUDE.md §16).",
     "Pas de tiret cadratin (CLAUDE.md §3)."
   ],
-
   "titre": "S’inscrire à la formation",
   "chapo": "Le formulaire demande quelques informations sur votre situation administrative. Elles servent à rattacher votre session au bon avocat formateur.",
-
   "sections": {
     "identite": {
       "titre": "Vos coordonnées",
@@ -38,10 +36,13 @@
       "titre": "Votre préfecture"
     }
   },
-
   "champs": {
-    "prenom": { "libelle": "Prénom" },
-    "nom": { "libelle": "Nom" },
+    "prenom": {
+      "libelle": "Prénom"
+    },
+    "nom": {
+      "libelle": "Nom"
+    },
     "email": {
       "libelle": "Adresse email",
       "aide": "Exemple : nom@exemple.com"
@@ -93,7 +94,6 @@
       "facultatif": "si vous le connaissez"
     }
   },
-
   "rattachement": {
     "titre": "Votre rattachement",
     "aide": "Il est calculé à partir de votre préfecture. Chaque avocat formateur n’intervient que pour les préfectures de son ressort.",
@@ -101,19 +101,16 @@
     "tribunal": "Tribunal judiciaire de référence",
     "barreau": "Barreau requis"
   },
-
   "doublon": {
     "titre": "Cette adresse email est déjà inscrite",
     "texte": "Une inscription existe déjà avec cette adresse. Si vous inscrivez une autre personne, continuez. Si c’est une erreur, modifiez l’adresse email.",
     "confirmer": "Oui, créer une inscription supplémentaire",
     "annuler": "Non, je corrige l’adresse"
   },
-
   "actions": {
     "envoyer": "Continuer vers le paiement",
     "envoiEnCours": "Enregistrement en cours"
   },
-
   "erreurs": {
     "titre": "Votre inscription n’a pas pu être enregistrée",
     "introduction": "Corrigez les points suivants, puis réessayez :",
@@ -123,15 +120,43 @@
     "serveur": "Une erreur est survenue de notre côté. Réessayez dans un instant.",
     "referentielsIndisponibles": "Les listes de choix n’ont pas pu être chargées. Rechargez la page."
   },
-
-  "apresEnvoi": {
+  "paiement": {
     "$commentaire": [
-      "Message affiche apres creation de l'inscription, en attendant l'etape 5.",
-      "Le paiement Stripe integre a la page remplacera ce bloc.",
-      "Aucune promesse de date de session (CLAUDE.md §16)."
+      "Libelles du paiement. Produits d apres CLAUDE.md §4 et §9, pas fournis par",
+      "le client. AUCUNE date de session n est annoncee (CLAUDE.md §16), et rien",
+      "n est promis que le webhook n ait confirme."
     ],
-    "titre": "Inscription enregistrée",
-    "texte": "Votre inscription est enregistrée et attend le paiement. Le paiement par carte sera intégré à cette page.",
-    "rappelReference": "Référence de votre inscription :"
+    "titre": "Paiement",
+    "recapitulatif": "Formation Lignes Rouges, 1 h 30 à distance.",
+    "mentionTva": "TVA non applicable, article 293 B du CGI.",
+    "retractation": "Vous disposez d’un délai de rétractation de quatorze jours. La formation ne se déroule jamais avant l’expiration de ce délai.",
+    "payer": "Payer",
+    "paiementEnCours": "Paiement en cours",
+    "chargement": "Chargement du paiement sécurisé",
+    "securite": "Les informations de votre carte sont transmises directement à notre prestataire de paiement. Elles ne passent pas par nos serveurs et ne sont jamais enregistrées.",
+    "erreurs": {
+      "refuse": "Le paiement n’a pas abouti. Vérifiez vos informations, puis réessayez.",
+      "indisponible": "Le service de paiement est momentanément indisponible. Votre inscription est enregistrée : réessayez dans un instant.",
+      "chargement": "Le module de paiement n’a pas pu se charger. Vérifiez votre connexion, puis rechargez la page."
+    }
+  },
+  "confirmation": {
+    "$commentaire": [
+      "Affiche une fois le paiement confirme par le WEBHOOK, jamais sur la foi",
+      "d un evenement du navigateur (CLAUDE.md §9).",
+      "",
+      "Le texte sur le delai avant la session est EN ATTENTE DE REPONSE DU CLIENT",
+      "(CLAUDE.md §17) : la cohorte se constitue a dix stagiaires et nous ne",
+      "savons pas encore quoi annoncer. D ou un texte prudent qui ne promet aucun",
+      "delai."
+    ],
+    "titre": "Votre inscription est confirmée",
+    "texte": "Nous avons bien reçu votre paiement. Un reçu vous a été envoyé par email.",
+    "suite": "[À FOURNIR PAR LE CLIENT] Ce qui est annoncé ici sur le délai avant la session.",
+    "reference": "Référence de votre inscription :",
+    "attente": {
+      "titre": "Paiement reçu",
+      "texte": "Votre confirmation arrive par email dans quelques instants. Vous pouvez fermer cette page."
+    }
   }
 }

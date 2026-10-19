@@ -2,22 +2,99 @@
      Aucun libelle ecrit ici : tout vient de content/fr/inscription.json.
      Aucune couleur : classes Bootstrap et variables du fichier de theme. -->
 
-@if (inscriptionCreee(); as inscription) {
+@switch (etape()) {
   <!-- ======================================================================
-       APRES CREATION
+       CONFIRMEE
        ----------------------------------------------------------------------
-       L'inscription est en attente de paiement. Rien n'est confirme, aucun
-       email n'est parti : la confirmation viendra du webhook (CLAUDE.md §9).
-       Le Payment Element de Stripe prendra la place de ce bloc a l'etape 5.
+       Affiche UNIQUEMENT quand le serveur a vu l'inscription passer a
+       « Confirmee », donc quand le WEBHOOK l'a confirmee. Jamais sur la foi du
+       retour de Stripe au navigateur (CLAUDE.md §9).
        ====================================================================== -->
-  <div class="confirmation" role="status">
-    <h3 class="confirmation__titre">{{ t.apresEnvoi.titre }}</h3>
-    <p>{{ t.apresEnvoi.texte }}</p>
-    <p class="confirmation__reference mb-0">
-      {{ t.apresEnvoi.rappelReference }} <code>{{ inscription.id }}</code>
-    </p>
-  </div>
-} @else {
+  @case ('confirmee') {
+    <div class="confirmation" role="status">
+      <h3 class="confirmation__titre">{{ t.confirmation.titre }}</h3>
+      <p>{{ t.confirmation.texte }}</p>
+      <p>{{ t.confirmation.suite }}</p>
+      @if (inscription(); as creee) {
+        <p class="confirmation__reference mb-0">
+          {{ t.confirmation.reference }} <code>{{ creee.id }}</code>
+        </p>
+      }
+    </div>
+  }
+
+  <!-- ======================================================================
+       PAIEMENT RECU, WEBHOOK EN RETARD
+       ----------------------------------------------------------------------
+       Stripe a accepte le paiement mais notre serveur ne l'a pas encore vu.
+       On n'invente pas une confirmation : on dit ce qui est vrai, et ce qui
+       reste vrai si le visiteur ferme son onglet (CLAUDE.md §9).
+       ====================================================================== -->
+  @case ('attenteWebhook') {
+    <div class="confirmation" role="status">
+      <h3 class="confirmation__titre">{{ t.confirmation.attente.titre }}</h3>
+      <p class="mb-0">{{ t.confirmation.attente.texte }}</p>
+    </div>
+  }
+
+  <!-- ======================================================================
+       PAIEMENT
+       ----------------------------------------------------------------------
+       Le Payment Element de Stripe est un cadre isole : les numeros de carte
+       y sont saisis et transmis directement a Stripe. Ils ne passent jamais
+       par notre serveur et ne sont jamais enregistres (CLAUDE.md §6 et §15).
+       ====================================================================== -->
+  @case ('paiement') {
+    <section class="paiement" aria-labelledby="titre-paiement">
+      <h3 class="paiement__titre" id="titre-paiement">{{ t.paiement.titre }}</h3>
+
+      <dl class="paiement__recapitulatif">
+        <dt>{{ t.paiement.recapitulatif }}</dt>
+        <dd>{{ montantAffiche() }}</dd>
+      </dl>
+      <p class="paiement__mention">{{ t.paiement.mentionTva }}</p>
+
+      @if (erreurPaiement(); as message) {
+        <p class="alert alert-danger" role="alert">{{ message }}</p>
+      }
+
+      <!-- Cadre de Stripe. Son contenu n'est pas le notre. -->
+      <div class="paiement__cadre" #conteneurPaiement></div>
+
+      @if (!paiementPret() && !erreurPaiement()) {
+        <p class="paiement__chargement" role="status">{{ t.paiement.chargement }}</p>
+      }
+
+      @if (paiementPret()) {
+        <p class="paiement__securite">{{ t.paiement.securite }}</p>
+
+        <!-- Delai de retractation de quatorze jours. Aucune case de
+             renonciation : la formation ne se deroule jamais avant son
+             expiration (CLAUDE.md §4). -->
+        <p class="paiement__retractation">{{ t.paiement.retractation }}</p>
+
+        <div class="formulaire__action">
+          <button
+            class="btn btn-primary btn-lg"
+            type="button"
+            [disabled]="paiementEnCours()"
+            (click)="payer()"
+          >
+            @if (paiementEnCours()) {
+              {{ t.paiement.paiementEnCours }}
+            } @else {
+              {{ t.paiement.payer }} {{ montantAffiche() }}
+            }
+          </button>
+        </div>
+      }
+    </section>
+  }
+
+  <!-- ======================================================================
+       FORMULAIRE
+       ====================================================================== -->
+  @default {
   @if (referentielsEnEchec()) {
     <p class="alert alert-warning" role="alert">{{ t.erreurs.referentielsIndisponibles }}</p>
   }
@@ -374,4 +451,5 @@
       </button>
     </div>
   </form>
+  }
 }
