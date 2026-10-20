@@ -1,0 +1,188 @@
+<!--
+  MODELE MAILJET : confirmation d'inscription
+  ===========================================================================
+  A coller dans Mailjet : Campagnes > Modeles > Creer un modele > Coder le
+  vôtre, puis coller ce HTML.
+
+  Variables attendues, envoyees par l'API (voir ServiceEmail.cs) :
+    prenom     prenom du stagiaire
+    nom        nom du stagiaire
+    reference  identifiant de l'inscription
+    montant    montant paye, par exemple 100.00
+    devise     EUR
+
+  Syntaxe Mailjet : {{var:nom_de_variable:"valeur par defaut"}}
+  La valeur par defaut evite qu'un email parte avec un trou si une variable
+  manque.
+
+  CE QU'IL RESTE A COMPLETER, marque [A FOURNIR PAR LE CLIENT] :
+    - ce qui est annonce sur le delai avant la session (question §17 du
+      cahier des charges, sans reponse a ce jour) ;
+    - l'adresse de contact ;
+    - le lien vers la politique de confidentialite (page de l'etape 9).
+
+  Contraintes respectees : tableaux et styles en ligne, car les clients de
+  messagerie ne gerent ni flexbox ni grille. Largeur 600 px. Aucune date de
+  session n'est annoncee (CLAUDE.md §16).
+-->
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Votre inscription est confirmée</title>
+  </head>
+  <body style="margin:0; padding:0; background-color:#eef4f6; font-family:'Open Sans',Arial,Helvetica,sans-serif; color:#15191c;">
+    <!-- Texte d'apercu, visible dans la liste des messages avant ouverture. -->
+    <div style="display:none; max-height:0; overflow:hidden; opacity:0;">
+      Votre inscription à la formation Lignes Rouges est enregistrée.
+    </div>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#eef4f6;">
+      <tr>
+        <td align="center" style="padding:24px 12px;">
+
+          <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:100%; background-color:#ffffff; border-radius:4px;">
+
+            <!-- ============================================ EN-TETE -->
+            <tr>
+              <td align="left" style="padding:28px 32px 20px 32px; border-bottom:1px solid #d2dde1;">
+                <!-- Remplacer l'adresse par celle du logo en ligne. Voir le
+                     LISEZ-MOI : tant que le domaine est protege par mot de
+                     passe, l'image ne s'affichera pas. -->
+                <img
+                  src="https://braincorporationhub.com/visuels/logo-lignes-rouges.png"
+                  alt="Lignes Rouges"
+                  width="150"
+                  style="display:block; width:150px; height:auto; border:0;"
+                />
+              </td>
+            </tr>
+
+            <!-- ============================================ CORPS -->
+            <tr>
+              <td style="padding:32px;">
+
+                <h1 style="margin:0 0 20px 0; font-size:26px; line-height:1.25; font-weight:700; color:#0d2a33;">
+                  Votre inscription est confirmée
+                </h1>
+
+                <p style="margin:0 0 16px 0; font-size:16px; line-height:1.65;">
+                  Bonjour {{var:prenom:""}},
+                </p>
+
+                <p style="margin:0 0 16px 0; font-size:16px; line-height:1.65;">
+                  Nous avons bien reçu votre paiement. Votre inscription à la
+                  formation Lignes Rouges est enregistrée.
+                </p>
+
+                <!-- ---------------------------------- RECAPITULATIF -->
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:24px 0; background-color:#eef4f6; border-left:3px solid #0b8e6d;">
+                  <tr>
+                    <td style="padding:20px 24px;">
+                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                          <td style="padding:0 0 10px 0; font-size:14px; color:#5a6b72;">Formation</td>
+                          <td align="right" style="padding:0 0 10px 0; font-size:16px; font-weight:700; color:#0d2a33;">Lignes Rouges</td>
+                        </tr>
+                        <tr>
+                          <td style="padding:0 0 10px 0; font-size:14px; color:#5a6b72;">Durée</td>
+                          <td align="right" style="padding:0 0 10px 0; font-size:16px; font-weight:700; color:#0d2a33;">1 h 30</td>
+                        </tr>
+                        <tr>
+                          <td style="padding:0 0 10px 0; font-size:14px; color:#5a6b72;">Format</td>
+                          <td align="right" style="padding:0 0 10px 0; font-size:16px; font-weight:700; color:#0d2a33;">À distance</td>
+                        </tr>
+                        <tr>
+                          <td style="padding:0 0 10px 0; font-size:14px; color:#5a6b72;">Montant payé</td>
+                          <td align="right" style="padding:0 0 10px 0; font-size:16px; font-weight:700; color:#0d2a33;">{{var:montant:""}} {{var:devise:"EUR"}}</td>
+                        </tr>
+                        <tr>
+                          <td style="padding:0; font-size:14px; color:#5a6b72;">Référence</td>
+                          <td align="right" style="padding:0; font-size:13px; font-family:Consolas,Menlo,monospace; color:#0d2a33; word-break:break-all;">{{var:reference:""}}</td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <p style="margin:0 0 24px 0; font-size:13px; line-height:1.6; color:#5a6b72;">
+                  TVA non applicable, article 293 B du CGI.
+                </p>
+
+                <!-- ---------------------------------- LA SUITE -->
+                <h2 style="margin:0 0 12px 0; font-size:19px; line-height:1.3; font-weight:700; color:#0d2a33;">
+                  Ce qui se passe ensuite
+                </h2>
+
+                <p style="margin:0 0 16px 0; font-size:16px; line-height:1.65; background-color:#fff6f5; border-left:3px solid #a3281f; padding:12px 16px;">
+                  [À FOURNIR PAR LE CLIENT] Ce qui est annoncé ici sur le délai
+                  avant la session, et sur la manière dont le stagiaire sera
+                  prévenu. Remplacez ce paragraphe, et retirez son encadré.
+                </p>
+
+                <!-- ---------------------------------- RETRACTATION -->
+                <h2 style="margin:28px 0 12px 0; font-size:19px; line-height:1.3; font-weight:700; color:#0d2a33;">
+                  Votre droit de rétractation
+                </h2>
+
+                <p style="margin:0 0 16px 0; font-size:16px; line-height:1.65;">
+                  Vous disposez d’un délai de quatorze jours pour vous
+                  rétracter. La formation ne se déroule jamais avant
+                  l’expiration de ce délai.
+                </p>
+
+                <!-- ---------------------------------- RECU -->
+                <h2 style="margin:28px 0 12px 0; font-size:19px; line-height:1.3; font-weight:700; color:#0d2a33;">
+                  Votre justificatif de paiement
+                </h2>
+
+                <p style="margin:0 0 16px 0; font-size:16px; line-height:1.65;">
+                  Un reçu vous est envoyé séparément par notre prestataire de
+                  paiement. Conservez-le, il vous servira de justificatif.
+                </p>
+
+                <!-- ---------------------------------- CADRE -->
+                <p style="margin:28px 0 0 0; font-size:15px; line-height:1.65; color:#5a6b72;">
+                  La formation aide à repérer plus tôt les situations sensibles.
+                  Elle ne prédit pas les décisions administratives et ne
+                  remplace pas l’intervention d’un avocat.
+                </p>
+
+              </td>
+            </tr>
+
+            <!-- ============================================ CONTACT -->
+            <tr>
+              <td style="padding:0 32px 32px 32px;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid #d2dde1;">
+                  <tr>
+                    <td style="padding:20px 0 0 0; font-size:15px; line-height:1.65;">
+                      Une question ? Écrivez-nous à
+                      <a href="mailto:[A FOURNIR PAR LE CLIENT]" style="color:#0b6380;">[À FOURNIR PAR LE CLIENT] adresse de contact</a>,
+                      en indiquant votre référence.
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+          </table>
+
+          <!-- ============================================ PIED -->
+          <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:100%;">
+            <tr>
+              <td align="center" style="padding:20px 32px; font-size:13px; line-height:1.6; color:#5a6b72;">
+                Brain Corporation Hub<br />
+                Ce message vous est envoyé parce que vous vous êtes inscrit à la
+                formation Lignes Rouges.<br />
+                <a href="[A FOURNIR PAR LE CLIENT]" style="color:#0b6380;">Politique de confidentialité</a>
+              </td>
+            </tr>
+          </table>
+
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
