@@ -12,8 +12,14 @@ import { cheminDePage, pageParCle } from '../config/site-routes';
 interface MetadonneesDePage {
   readonly titre: string;
   readonly description: string;
-  readonly ogTitre: string;
-  readonly ogDescription: string;
+  /**
+   * Open Graph et Twitter Card. FACULTATIFS : ils decrivent une page partagee
+   * sur un reseau social, ce qui n a pas de sens pour une page de gestion en
+   * noindex. A defaut, le titre et la description de la page sont repris, ce
+   * qui evite de les recopier dans le fichier de configuration.
+   */
+  readonly ogTitre?: string;
+  readonly ogDescription?: string;
 }
 
 /**
@@ -53,14 +59,14 @@ export class Seo {
     this.meta.updateTag({ property: 'og:type', content: 'website' });
     this.meta.updateTag({ property: 'og:site_name', content: commun.nomDuSite });
     this.meta.updateTag({ property: 'og:locale', content: commun.locale });
-    this.meta.updateTag({ property: 'og:title', content: metadonnees.ogTitre });
-    this.meta.updateTag({ property: 'og:description', content: metadonnees.ogDescription });
+    this.meta.updateTag({ property: 'og:title', content: metadonnees.ogTitre ?? metadonnees.titre });
+    this.meta.updateTag({ property: 'og:description', content: metadonnees.ogDescription ?? metadonnees.description });
     this.meta.updateTag({ property: 'og:url', content: urlCanonique });
 
     // Le trafic viendra beaucoup des reseaux sociaux (CLAUDE.md §12).
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
-    this.meta.updateTag({ name: 'twitter:title', content: metadonnees.ogTitre });
-    this.meta.updateTag({ name: 'twitter:description', content: metadonnees.ogDescription });
+    this.meta.updateTag({ name: 'twitter:title', content: metadonnees.ogTitre ?? metadonnees.titre });
+    this.meta.updateTag({ name: 'twitter:description', content: metadonnees.ogDescription ?? metadonnees.description });
 
     // L'image de partage n'est pas encore fournie par le client : tant qu'elle
     // manque, aucune balise d'image n'est emise plutot qu'une URL inventee.
