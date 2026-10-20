@@ -25,6 +25,18 @@
     },
     {
       "$commentaire": [
+        "Page publique du referentiel territorial (CLAUDE.md §5.8).",
+        "Consultation UNIQUEMENT : aucun ajout, retrait ni modification. L interface",
+        "d administration du referentiel est hors perimetre V1 (§8).",
+        "Indexable : c est du contenu public utile, et il repond a une question que",
+        "les visiteurs se posent."
+      ],
+      "cle": "referentiel-territorial",
+      "chemin": "referentiel-territorial",
+      "indexable": true
+    },
+    {
+      "$commentaire": [
         "Page de suivi des inscriptions (CLAUDE.md §5.7).",
         "indexable a FAUX : elle ne doit jamais entrer dans un moteur de recherche",
         "ni dans le sitemap (CLAUDE.md §12). Elle n apparait pas non plus dans la",

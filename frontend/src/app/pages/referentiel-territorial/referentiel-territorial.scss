@@ -1,0 +1,172 @@
+// Page publique du referentiel territorial.
+//
+// Aucune couleur et aucune taille de caractere ecrites ici : tout vient des
+// variables du fichier de theme unique et des classes Bootstrap
+// (CLAUDE.md §14).
+
+// =============================================================================
+// Bandeau de tete
+// -----------------------------------------------------------------------------
+// Version reduite de celui de page-contenu, redeclaree ici parce que les
+// styles de composant sont encapsules : cette page n'utilise pas le gabarit
+// editorial, elle affiche un tableau. Seule la mise en page est reprise, et
+// toutes les valeurs viennent du theme : rien n'est fige en double.
+// =============================================================================
+.bandeau {
+  background-color: var(--bch-encre);
+  color: var(--bch-sur-encre-voile);
+  padding-block: 1.5rem;
+
+  @media (min-width: 768px) {
+    padding-block: calc(var(--bch-espace-bandeau) * 0.625);
+    --bch-h1: 3rem;
+    --bch-mesure-titre: 26ch;
+    --bch-chapo: 1.3125rem;
+  }
+
+  &__titre {
+    color: var(--bch-sur-encre);
+    margin-block-end: 1.25rem;
+  }
+
+  &__chapo {
+    max-width: var(--bch-mesure);
+
+    p:last-child {
+      margin-block-end: 0;
+    }
+  }
+}
+
+.surtitre {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--bch-sur-encre-voile);
+  max-width: 44ch;
+  margin-block-end: 1rem;
+  padding-inline-start: 0.875rem;
+  border-inline-start: 3px solid var(--bch-seuil);
+
+  @media (min-width: 768px) {
+    margin-block-end: 1.5rem;
+  }
+}
+
+// =============================================================================
+// Corps
+// =============================================================================
+.referentiel {
+  padding-block: 2.5rem 4rem;
+
+  // Ce que la grille n'est pas. Place avant le tableau : la precision doit
+  // etre lue avant qu'on en tire une conclusion.
+  &__avertissement,
+  &__verification-note {
+    max-width: var(--bch-mesure);
+    padding: 1.25rem 1.5rem;
+    background-color: var(--bch-papier);
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    border-inline-start: 3px solid var(--bch-seuil);
+    margin-block-end: 2rem;
+  }
+
+  &__verification-note {
+    margin-block: 2rem 0;
+  }
+
+  &__avertissement-titre {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    margin-block-end: 0.5rem;
+  }
+
+  // --- Recherche -----------------------------------------------------------
+  &__recherche {
+    max-width: var(--bch-mesure);
+    margin-block-end: 1.5rem;
+  }
+
+  &__champ {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__compte {
+    margin-block: 0.5rem 0;
+    font-size: 0.9375rem;
+    color: var(--bs-secondary-color);
+  }
+
+  &__vide {
+    padding: 2rem;
+    text-align: center;
+    color: var(--bs-secondary-color);
+    background-color: var(--bch-papier);
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+  }
+
+  // --- Tableau --------------------------------------------------------------
+  // Quatre-vingt-seize lignes : il defile horizontalement sur petit ecran
+  // plutot que d'ecraser ses colonnes (CLAUDE.md §13, public majoritairement
+  // sur mobile).
+  &__cadre {
+    overflow-x: auto;
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+  }
+
+  &__table {
+    margin: 0;
+    font-size: 0.9375rem;
+
+    th[scope='col'] {
+      white-space: nowrap;
+      background-color: var(--bch-papier);
+      // L'en-tete reste visible pendant le defilement d'une longue grille.
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 1;
+    }
+
+    td,
+    th {
+      vertical-align: top;
+    }
+  }
+
+  &__departement {
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  // Le numero de departement, qui sert de reperage visuel au balayage.
+  &__numero {
+    display: inline-block;
+    min-inline-size: 2.25rem;
+    font-weight: 700;
+    color: var(--bs-heading-color);
+  }
+
+  &__verification {
+    white-space: nowrap;
+    color: var(--bs-secondary-color);
+  }
+
+  // L'absence de verification doit SE VOIR : la validation juridique de la
+  // grille appartient au client (CLAUDE.md §7).
+  &__non-verifiee {
+    font-size: 0.875rem;
+    font-style: italic;
+  }
+
+  // Precision du client sur une correspondance qui pourrait surprendre.
+  &__ligne-note td {
+    padding-block-start: 0;
+    font-size: 0.875rem;
+    color: var(--bs-secondary-color);
+    border-block-start: 0;
+  }
+}

@@ -29,6 +29,15 @@ export const routes: Routes = [
       import('./pages/lignes-rouges/lignes-rouges').then((m) => m.LignesRouges),
   },
   {
+    // Consultation seule : aucun ajout, retrait ni modification. L'interface
+    // d'administration du referentiel est hors perimetre V1 (CLAUDE.md §8).
+    path: pageParCle('referentiel-territorial').chemin,
+    loadComponent: () =>
+      import('./pages/referentiel-territorial/referentiel-territorial').then(
+        (m) => m.ReferentielTerritorial,
+      ),
+  },
+  {
     // Page de gestion, en noindex et absente de la navigation : on y accede
     // par son URL, et elle est protegee par mot de passe (CLAUDE.md §5.7).
     path: pageParCle('suivi').chemin,

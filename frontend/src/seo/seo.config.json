@@ -35,6 +35,10 @@
     "suivi": {
       "titre": "Suivi des inscriptions",
       "description": "Page de gestion réservée. Accès protégé."
+    },
+    "referentiel-territorial": {
+      "titre": "Référentiel territorial : préfecture, tribunal judiciaire et barreau",
+      "description": "La grille qui relie chaque préfecture à son tribunal judiciaire de référence et au barreau requis pour la formation Lignes Rouges."
     }
   }
 }

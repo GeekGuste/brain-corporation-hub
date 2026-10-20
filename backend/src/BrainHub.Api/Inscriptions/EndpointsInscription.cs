@@ -63,7 +63,9 @@ public static class EndpointsInscription
                     ligne.NomDepartement,
                     ligne.Prefecture,
                     ligne.TribunalJudiciaire,
-                    ligne.BarreauRequis))
+                    ligne.BarreauRequis,
+                    ligne.Note,
+                    ligne.DateDerniereVerification))
                 .ToListAsync(annulation);
 
             return Results.Ok(prefectures);

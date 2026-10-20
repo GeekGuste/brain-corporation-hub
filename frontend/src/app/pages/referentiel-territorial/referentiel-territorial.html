@@ -1,0 +1,112 @@
+<!-- Page publique du referentiel territorial (CLAUDE.md §5.8).
+     LECTURE SEULE : aucun formulaire d'edition, et c'est voulu.
+     Aucun libelle ici : tout vient de content/fr/referentiel-territorial.json. -->
+
+<header class="bandeau bandeau--compact">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-8">
+        <p class="surtitre">{{ t.surtitre }}</p>
+        <h1 class="bandeau__titre">{{ t.titre }}</h1>
+        <div class="bandeau__chapo">
+          @for (paragraphe of t.introduction; track $index) {
+            <p class="chapo">{{ paragraphe }}</p>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container referentiel">
+  <!-- Ce que la grille n'est pas. Pose avant le tableau, pas apres : la
+       precision doit etre lue avant qu'on en tire une conclusion
+       (CLAUDE.md §6). -->
+  <div class="referentiel__avertissement">
+    <h2 class="referentiel__avertissement-titre">{{ t.avertissement.titre }}</h2>
+    <p class="mb-0">{{ t.avertissement.texte }}</p>
+  </div>
+
+  @if (enEchec()) {
+    <p class="alert alert-warning" role="alert">{{ t.erreur }}</p>
+  } @else {
+    <div class="referentiel__recherche">
+      <label class="form-label" for="recherche">{{ t.recherche.libelle }}</label>
+      <div class="referentiel__champ">
+        <input
+          id="recherche"
+          class="form-control"
+          type="search"
+          autocomplete="off"
+          [placeholder]="t.recherche.invite"
+          [value]="recherche()"
+          (input)="surRecherche($event)"
+        />
+        @if (recherche()) {
+          <button class="btn btn-outline-secondary" type="button" (click)="effacer()">
+            {{ t.recherche.effacer }}
+          </button>
+        }
+      </div>
+
+      @if (recherche()) {
+        <p class="referentiel__compte" role="status">
+          {{ resultats().length }} {{ t.recherche.resultats }} {{ total() }}
+        </p>
+      }
+    </div>
+
+    @if (resultats().length === 0 && total() > 0) {
+      <p class="referentiel__vide">{{ t.recherche.aucun }}</p>
+    } @else {
+      <div class="referentiel__cadre">
+        <table class="table referentiel__table">
+          <caption class="visually-hidden">{{ t.titre }}</caption>
+          <thead>
+            <tr>
+              <th scope="col">{{ t.colonnes.departement }}</th>
+              <th scope="col">{{ t.colonnes.prefecture }}</th>
+              <th scope="col">{{ t.colonnes.tribunal }}</th>
+              <th scope="col">{{ t.colonnes.barreau }}</th>
+              <th scope="col">{{ t.colonnes.verification }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (ligne of resultats(); track ligne.departement) {
+              <tr>
+                <th scope="row" class="referentiel__departement">
+                  <span class="referentiel__numero">{{ ligne.departement }}</span>
+                  {{ ligne.nomDepartement }}
+                </th>
+                <td>{{ ligne.prefecture }}</td>
+                <td>{{ ligne.tribunalJudiciaire }}</td>
+                <td><strong>{{ ligne.barreauRequis }}</strong></td>
+                <td class="referentiel__verification">
+                  @if (ligne.dateDerniereVerification) {
+                    {{ verification(ligne.dateDerniereVerification) }}
+                  } @else {
+                    <span class="referentiel__non-verifiee">{{ t.verification.jamais }}</span>
+                  }
+                </td>
+              </tr>
+
+              <!-- Precision du client sur une correspondance qui pourrait
+                   surprendre, par exemple une prefecture dont le tribunal
+                   judiciaire siege ailleurs. Affichee telle quelle. -->
+              @if (ligne.note) {
+                <tr class="referentiel__ligne-note">
+                  <td colspan="5">{{ ligne.note }}</td>
+                </tr>
+              }
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    <div class="referentiel__verification-note">
+      <h2 class="referentiel__avertissement-titre">{{ t.verification.titre }}</h2>
+      <p class="mb-0">{{ t.verification.texte }}</p>
+    </div>
+  }
+</div>

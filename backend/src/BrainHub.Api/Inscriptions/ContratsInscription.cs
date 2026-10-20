@@ -126,4 +126,14 @@ public sealed record PrefectureExposee(
     string NomDepartement,
     string Prefecture,
     string TribunalJudiciaire,
-    string BarreauRequis);
+    string BarreauRequis,
+    string? Note,
+    DateOnly? DateDerniereVerification);
+
+// Note et DateDerniereVerification servent a la PAGE PUBLIQUE du referentiel
+// (etape 8, CLAUDE.md §5.8). Le formulaire les ignore.
+//
+// La date est nulle tant que le client n a pas confronte la ligne aux
+// annuaires officiels : la validation juridique de cette grille lui appartient,
+// nous l integrons sans la certifier (CLAUDE.md §7). Une date inventee
+// donnerait une fausse assurance, l absence de date doit donc se voir.
