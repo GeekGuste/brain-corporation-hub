@@ -22,6 +22,18 @@
       "cle": "lignes-rouges",
       "chemin": "lignes-rouges",
       "indexable": true
+    },
+    {
+      "$commentaire": [
+        "Page de suivi des inscriptions (CLAUDE.md §5.7).",
+        "indexable a FAUX : elle ne doit jamais entrer dans un moteur de recherche",
+        "ni dans le sitemap (CLAUDE.md §12). Elle n apparait pas non plus dans la",
+        "navigation du site : on y accede par son URL, et elle est protegee par mot",
+        "de passe."
+      ],
+      "cle": "suivi",
+      "chemin": "suivi",
+      "indexable": false
     }
   ]
 }

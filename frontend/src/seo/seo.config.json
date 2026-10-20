@@ -31,6 +31,10 @@
       "description": "Programme de formation consacré à la prévention des situations susceptibles de fragiliser le droit au séjour des personnes étrangères en France. 1 h 30, à distance, 100 € TTC.",
       "ogTitre": "Lignes Rouges",
       "ogDescription": "Prévenir les risques liés au droit au séjour."
+    },
+    "suivi": {
+      "titre": "Suivi des inscriptions",
+      "description": "Page de gestion réservée. Accès protégé."
     }
   }
 }

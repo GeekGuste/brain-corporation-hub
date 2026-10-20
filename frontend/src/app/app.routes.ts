@@ -28,4 +28,10 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/lignes-rouges/lignes-rouges').then((m) => m.LignesRouges),
   },
+  {
+    // Page de gestion, en noindex et absente de la navigation : on y accede
+    // par son URL, et elle est protegee par mot de passe (CLAUDE.md §5.7).
+    path: pageParCle('suivi').chemin,
+    loadComponent: () => import('./pages/suivi/suivi').then((m) => m.Suivi),
+  },
 ];
