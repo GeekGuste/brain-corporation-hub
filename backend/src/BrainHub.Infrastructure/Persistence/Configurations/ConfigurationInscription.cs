@@ -133,3 +133,26 @@ public sealed class ConfigurationCreneau : IEntityTypeConfiguration<Creneau>
         builder.HasKey(creneau => creneau.Id);
     }
 }
+
+/// <summary>
+/// Trace des evenements Stripe deja traites, qui porte l'idempotence du
+/// webhook (CLAUDE.md §9).
+/// </summary>
+public sealed class ConfigurationEvenementStripeTraite
+    : IEntityTypeConfiguration<EvenementStripeTraite>
+{
+    public void Configure(EntityTypeBuilder<EvenementStripeTraite> builder)
+    {
+        builder.ToTable("evenement_stripe_traite");
+
+        // L'identifiant Stripe EST la cle primaire : c'est la base qui refuse
+        // le doublon, pas un test prealable qui laisserait une fenetre entre
+        // la lecture et l'ecriture.
+        builder.HasKey(evenement => evenement.Id);
+        builder.Property(evenement => evenement.Id).HasMaxLength(255);
+        builder.Property(evenement => evenement.Type).HasMaxLength(100);
+
+        // La purge des traces anciennes balaye sur la date.
+        builder.HasIndex(evenement => evenement.DateTraitement);
+    }
+}

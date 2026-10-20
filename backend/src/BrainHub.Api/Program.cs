@@ -1,4 +1,5 @@
 using System.Threading.RateLimiting;
+using BrainHub.Api.Emails;
 using BrainHub.Api.Inscriptions;
 using BrainHub.Api.Paiement;
 using BrainHub.Infrastructure;
@@ -45,8 +46,25 @@ builder.Services
     .ValidateDataAnnotations()
     .ValidateOnStart();
 
+// Les modeles d'email vivent dans Mailjet, ou le client les personnalise. Le
+// back appelle un modele par son identifiant et lui passe des variables : aucun
+// texte d'email n'est ecrit dans le code (CLAUDE.md §16).
+builder.Services
+    .AddOptions<OptionsEmail>()
+    .Bind(builder.Configuration.GetSection(OptionsEmail.Section))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+
 builder.Services.AddScoped<ServicePaiement>();
 builder.Services.AddScoped<ServiceInscription>();
+
+// Delai court : le webhook doit repondre vite a Stripe, et un envoi d'email qui
+// traine ne doit pas faire expirer la livraison de l'evenement.
+builder.Services
+    .AddHttpClient<ServiceEmail>(client => client.Timeout = TimeSpan.FromSeconds(10));
+
+// Purge des inscriptions restees en attente de paiement (CLAUDE.md §9).
+builder.Services.AddHostedService<ServicePurge>();
 
 // -----------------------------------------------------------------------------
 // Limitation de debit
@@ -196,6 +214,7 @@ app.UseRateLimiter();
 // preprod et en production (ProxyPass /api/ vers la racine du conteneur), et le
 // proxy de ng serve fait de meme en local. Le navigateur, lui, appelle toujours
 // /api/... (CLAUDE.md §11).
+app.MapperWebhookStripe();
 app.MapperReferentiels();
 app.MapperInscriptions();
 

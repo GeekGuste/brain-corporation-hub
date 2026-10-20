@@ -69,6 +69,27 @@ namespace BrainHub.Infrastructure.Persistence.Migrations
                     b.ToTable("creneau", (string)null);
                 });
 
+            modelBuilder.Entity("BrainHub.Domain.Inscriptions.EvenementStripeTraite", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<DateTimeOffset>("DateTraitement")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DateTraitement");
+
+                    b.ToTable("evenement_stripe_traite", (string)null);
+                });
+
             modelBuilder.Entity("BrainHub.Domain.Inscriptions.Inscription", b =>
                 {
                     b.Property<Guid>("Id")

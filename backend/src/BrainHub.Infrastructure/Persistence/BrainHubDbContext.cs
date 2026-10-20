@@ -29,6 +29,9 @@ public sealed class BrainHubDbContext(DbContextOptions<BrainHubDbContext> option
 
     public DbSet<Creneau> Creneaux => Set<Creneau>();
 
+    /// <summary>Idempotence du webhook Stripe (CLAUDE.md §9).</summary>
+    public DbSet<EvenementStripeTraite> EvenementsStripeTraites => Set<EvenementStripeTraite>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
