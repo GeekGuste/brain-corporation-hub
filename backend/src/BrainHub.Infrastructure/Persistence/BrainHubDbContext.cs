@@ -29,6 +29,9 @@ public sealed class BrainHubDbContext(DbContextOptions<BrainHubDbContext> option
 
     public DbSet<Creneau> Creneaux => Set<Creneau>();
 
+    /// <summary>Adresses internes prevenues d un paiement confirme.</summary>
+    public DbSet<DestinataireNotification> DestinatairesNotification => Set<DestinataireNotification>();
+
     /// <summary>Idempotence du webhook Stripe (CLAUDE.md §9).</summary>
     public DbSet<EvenementStripeTraite> EvenementsStripeTraites => Set<EvenementStripeTraite>();
 

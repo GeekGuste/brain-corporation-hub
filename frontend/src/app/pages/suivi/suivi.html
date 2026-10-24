@@ -52,6 +52,9 @@
          [routerLinkActiveOptions]="{ exact: true }">
         {{ t.menu.inscriptions }}
       </a>
+      <a [routerLink]="[base, 'notifications']" routerLinkActive="est-actif">
+        {{ t.menu.notifications }}
+      </a>
       <a [routerLink]="[base, 'referentiel']" routerLinkActive="est-actif">
         {{ t.menu.referentiel }}
       </a>

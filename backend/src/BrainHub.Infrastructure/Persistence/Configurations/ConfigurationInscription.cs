@@ -156,3 +156,23 @@ public sealed class ConfigurationEvenementStripeTraite
         builder.HasIndex(evenement => evenement.DateTraitement);
     }
 }
+
+/// <summary>
+/// Adresses internes a prevenir d'un paiement confirme.
+/// </summary>
+public sealed class ConfigurationDestinataireNotification
+    : IEntityTypeConfiguration<DestinataireNotification>
+{
+    public void Configure(EntityTypeBuilder<DestinataireNotification> builder)
+    {
+        builder.ToTable("destinataire_notification");
+
+        builder.HasKey(destinataire => destinataire.Id);
+        builder.Property(destinataire => destinataire.Email).HasMaxLength(254);
+        builder.Property(destinataire => destinataire.Libelle).HasMaxLength(100);
+
+        // Unicite portee par la base : un doublon ajoute par inadvertance
+        // enverrait deux fois le meme message, et ne se verrait pas.
+        builder.HasIndex(destinataire => destinataire.Email).IsUnique();
+    }
+}

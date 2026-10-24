@@ -68,9 +68,46 @@
   },
   "menu": {
     "inscriptions": "Inscriptions",
-    "referentiel": "Référentiel territorial"
+    "referentiel": "Référentiel territorial",
+    "notifications": "Notifications"
   },
   "referentiel": {
     "aide": "Grille de référence, en lecture seule. Elle se modifie dans le fichier versionné du projet, pas depuis cet écran."
+  },
+  "notifications": {
+    "$commentaire": [
+      "Ecran de gestion des adresses prevenues d un paiement confirme.",
+      "Ajout hors contrat initial, demande explicitement et accepte en V1."
+    ],
+    "aide": "Ces adresses reçoivent un message à chaque paiement confirmé. Ce sont des adresses internes, pas celles des stagiaires.",
+    "vide": "Aucune adresse enregistrée. Personne ne sera prévenu des nouveaux paiements.",
+    "colonnes": {
+      "email": "Adresse",
+      "libelle": "Qui",
+      "ajout": "Ajoutée le",
+      "actions": ""
+    },
+    "ajout": {
+      "titre": "Ajouter une adresse",
+      "email": "Adresse email",
+      "libelle": "Qui est-ce ?",
+      "libelleFacultatif": "facultatif",
+      "libelleAide": "Par exemple : Marie, commerciale. Utile quand la liste s’allonge.",
+      "valider": "Ajouter",
+      "enCours": "Ajout en cours"
+    },
+    "retirer": "Retirer",
+    "confirmation": {
+      "titre": "Retirer cette adresse ?",
+      "texte": "Elle ne recevra plus de notification. Vous pourrez la rajouter à tout moment.",
+      "confirmer": "Oui, retirer",
+      "annuler": "Annuler"
+    },
+    "erreurs": {
+      "invalide": "Cette adresse email ne semble pas valide.",
+      "dejaPresent": "Cette adresse est déjà dans la liste.",
+      "action": "L’action n’a pas abouti. Réessayez.",
+      "modeleManquant": "Aucun modèle d’email de notification n’est configuré : les messages ne partiront pas tant que ce n’est pas fait."
+    }
   }
 }

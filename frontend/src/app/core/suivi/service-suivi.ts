@@ -25,6 +25,15 @@ export interface InscriptionSuivie {
   readonly formationSuivie: boolean | null;
 }
 
+
+/** Une adresse prevenue d un paiement confirme. */
+export interface DestinataireNotification {
+  readonly id: string;
+  readonly email: string;
+  readonly libelle: string | null;
+  readonly dateAjout: string;
+}
+
 /**
  * Appels de la page de suivi (CLAUDE.md §5.7).
  *
@@ -132,5 +141,50 @@ export class ServiceSuivi {
         responseType: 'blob',
       })
       .pipe(catchError(() => of(null)));
+  }
+
+  // ---------------------------------------------------------------------------
+  // Adresses de notification
+  // ---------------------------------------------------------------------------
+
+  destinataires(): Observable<readonly DestinataireNotification[] | null> {
+    return this.http
+      .get<DestinataireNotification[]>(
+        `${ServiceSuivi.BASE}/notifications`,
+        ServiceSuivi.AVEC_SESSION,
+      )
+      .pipe(catchError(() => of(null)));
+  }
+
+  ajouteDestinataire(
+    email: string,
+    libelle: string | null,
+  ): Observable<DestinataireNotification | 'invalide' | 'deja-present' | 'echec'> {
+    return this.http
+      .post<DestinataireNotification>(
+        `${ServiceSuivi.BASE}/notifications`,
+        { email, libelle },
+        ServiceSuivi.AVEC_SESSION,
+      )
+      .pipe(
+        catchError((erreur: unknown) => {
+          if (erreur instanceof HttpErrorResponse && erreur.status === 400) {
+            return of('invalide' as const);
+          }
+          if (erreur instanceof HttpErrorResponse && erreur.status === 409) {
+            return of('deja-present' as const);
+          }
+          return of('echec' as const);
+        }),
+      );
+  }
+
+  retireDestinataire(id: string): Observable<boolean> {
+    return this.http
+      .delete(`${ServiceSuivi.BASE}/notifications/${id}`, ServiceSuivi.AVEC_SESSION)
+      .pipe(
+        map(() => true),
+        catchError(() => of(false)),
+      );
   }
 }

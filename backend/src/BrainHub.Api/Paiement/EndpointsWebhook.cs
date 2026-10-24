@@ -218,6 +218,18 @@ public static class EndpointsWebhook
                     optionsFormation.Value.MontantCentimes,
                     optionsFormation.Value.Devise,
                     annulation);
+
+                // Puis les gestionnaires et commerciaux, prevenus du paiement.
+                // Meme principe : un echec ici ne remet rien en cause.
+                var destinataires = await contexte.DestinatairesNotification
+                    .AsNoTracking()
+                    .Select(destinataire => destinataire.Email)
+                    .ToListAsync(annulation);
+
+                await emails.EnvoyerNotificationInterneAsync(
+                    inscription,
+                    destinataires,
+                    annulation);
             }
 
             return Results.Ok();

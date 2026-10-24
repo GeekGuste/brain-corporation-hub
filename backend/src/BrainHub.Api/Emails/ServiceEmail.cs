@@ -138,4 +138,87 @@ public sealed class ServiceEmail(
             return false;
         }
     }
+
+    /// <summary>
+    /// Previent les adresses internes qu un paiement vient d etre confirme.
+    ///
+    /// Les destinataires sont les gestionnaires et les commerciaux, saisis
+    /// depuis le back-office. UN MESSAGE PAR DESTINATAIRE, et non un seul
+    /// message a plusieurs adresses : personne n a besoin de voir la liste de
+    /// diffusion, et Mailjet rend alors compte de chaque envoi separement.
+    ///
+    /// Le contenu se limite a ce qui permet d agir : qui, quel barreau, quelle
+    /// reference. Ni categorie de titre, ni prefecture, ni coordonnees : le
+    /// detail est dans le back-office, derriere mot de passe, et n a pas a
+    /// circuler par email (CLAUDE.md §15).
+    ///
+    /// Un echec n annule JAMAIS la confirmation du paiement : l argent est
+    /// encaisse et l inscription est valide, qu une notification interne soit
+    /// partie ou non.
+    /// </summary>
+    public async Task EnvoyerNotificationInterneAsync(
+        Inscription inscription,
+        IReadOnlyCollection<string> destinataires,
+        CancellationToken annulation)
+    {
+        if (_options.ModeleNotification <= 0 || destinataires.Count == 0)
+        {
+            return;
+        }
+
+        var messages = destinataires.Select(adresse => new
+        {
+            From = new { Email = _options.ExpediteurEmail, Name = _options.ExpediteurNom },
+            To = new[] { new { Email = adresse } },
+            TemplateID = _options.ModeleNotification,
+            TemplateLanguage = true,
+            Variables = new Dictionary<string, object>
+            {
+                ["prenom"] = inscription.Prenom,
+                ["nom"] = inscription.Nom,
+                ["barreau"] = inscription.BarreauRequis,
+                ["reference"] = inscription.Id.ToString(),
+            },
+        }).ToArray();
+
+        var corps = new { Messages = messages, SandboxMode = _options.BacASable };
+
+        using var requete = new HttpRequestMessage(HttpMethod.Post, "https://api.mailjet.com/v3.1/send")
+        {
+            Content = new StringContent(
+                JsonSerializer.Serialize(corps),
+                Encoding.UTF8,
+                "application/json"),
+        };
+
+        var identifiants = Convert.ToBase64String(
+            Encoding.UTF8.GetBytes($"{_options.CleApi}:{_options.CleSecrete}"));
+        requete.Headers.Authorization = new AuthenticationHeaderValue("Basic", identifiants);
+
+        try
+        {
+            using var reponse = await client.SendAsync(requete, annulation);
+
+            if (reponse.IsSuccessStatusCode)
+            {
+                journal.LogInformation(
+                    "Notification interne envoyee a {Nombre} destinataire(s) pour {Id}",
+                    destinataires.Count,
+                    inscription.Id);
+            }
+            else
+            {
+                var detail = await reponse.Content.ReadAsStringAsync(annulation);
+                journal.LogError(
+                    "Mailjet a refuse la notification interne pour {Id} : {Code} {Detail}",
+                    inscription.Id,
+                    (int)reponse.StatusCode,
+                    detail);
+            }
+        }
+        catch (Exception exception) when (exception is HttpRequestException or TaskCanceledException)
+        {
+            journal.LogError(exception, "Echec de la notification interne pour {Id}", inscription.Id);
+        }
+    }
 }

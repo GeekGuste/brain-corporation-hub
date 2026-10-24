@@ -109,7 +109,14 @@
 
             @if (contenu().appelAction) {
               <p class="bandeau__action">
-                <a class="btn btn-vif btn-lg" [href]="contenu().appelAction!.ancre">
+                <!-- routerLink avec un tableau vide, et non href="#ancre".
+                     La page declare <base href="/"> : une URL reduite a un
+                     fragment se resout contre l'URL DE BASE et non contre la
+                     page courante, donc « #inscription » menait a l'accueil.
+                     Ici, le routeur reste sur la route courante et se contente
+                     de poser le fragment, puis defile jusqu'a lui grace a
+                     anchorScrolling. -->
+                <a class="btn btn-vif btn-lg" [routerLink]="[]" [fragment]="ancre()">
                   {{ contenu().appelAction!.libelle }}
                 </a>
               </p>

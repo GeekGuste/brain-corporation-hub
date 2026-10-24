@@ -52,6 +52,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'notifications',
+        loadComponent: () =>
+          import('./pages/suivi/notifications/suivi-notifications').then(
+            (m) => m.SuiviNotifications,
+          ),
+      },
+      {
         path: 'referentiel',
         loadComponent: () =>
           import('./pages/suivi/referentiel/suivi-referentiel').then((m) => m.SuiviReferentiel),

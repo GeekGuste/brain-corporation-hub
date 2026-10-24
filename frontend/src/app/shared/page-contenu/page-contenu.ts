@@ -1,5 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import type { ContenuDePage } from '../../core/content/modele-contenu';
 import { Motif } from '../motif/motif';
@@ -15,7 +16,7 @@ import { Visuel } from '../visuel/visuel';
  */
 @Component({
   selector: 'app-page-contenu',
-  imports: [Motif, Visuel, NgTemplateOutlet],
+  imports: [Motif, Visuel, NgTemplateOutlet, RouterLink],
   templateUrl: './page-contenu.html',
   styleUrl: './page-contenu.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,4 +33,17 @@ export class PageContenu {
    * l'appel a l'action sont annonces.
    */
   readonly bandeauCompact = input<boolean>(false);
+
+  /**
+   * Le fragment de l'appel a l'action, sans son diese.
+   *
+   * Le fichier de contenu ecrit « #inscription », parce que c'est la forme
+   * qu'on reconnait. Le routeur, lui, veut « inscription » : il ajoute le
+   * diese lui-meme. On ne peut pas utiliser href="#inscription" : la page
+   * declare <base href="/">, et une URL reduite a un fragment se resout contre
+   * l'URL DE BASE, ce qui menait a l'accueil.
+   */
+  protected readonly ancre = computed(() =>
+    this.contenu().appelAction?.ancre.replace(/^#/, '') ?? '',
+  );
 }

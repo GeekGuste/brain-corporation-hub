@@ -302,6 +302,7 @@ app.UseAuthorization();
 // /api/... (CLAUDE.md §11).
 app.MapperWebhookStripe();
 app.MapperSuivi();
+app.MapperNotifications();
 app.MapperReferentiels();
 app.MapperInscriptions();
 

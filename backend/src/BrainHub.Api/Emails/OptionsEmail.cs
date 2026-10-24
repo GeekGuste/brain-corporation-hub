@@ -43,6 +43,17 @@ public sealed class OptionsEmail
     public long ModeleConfirmation { get; init; }
 
     /// <summary>
+    /// Identifiant du modele Mailjet de NOTIFICATION INTERNE, envoye aux
+    /// gestionnaires et commerciaux a chaque paiement confirme.
+    ///
+    /// C est un modele DIFFERENT de celui du stagiaire : il ne s adresse pas
+    /// aux memes personnes et ne dit pas la meme chose. Zero signifie « pas
+    /// encore cree » : l envoi est alors ignore avec une trace, et la
+    /// confirmation du paiement aboutit quand meme.
+    /// </summary>
+    public long ModeleNotification { get; init; }
+
+    /// <summary>
     /// Mode bac a sable de Mailjet : la requete est validee de bout en bout
     /// mais aucun email ne part. Utile en preprod et en developpement, pour ne
     /// pas ecrire a de vraies adresses pendant les essais.
