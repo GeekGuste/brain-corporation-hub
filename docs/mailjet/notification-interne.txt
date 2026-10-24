@@ -1,0 +1,17 @@
+PAIEMENT CONFIRMÉ, NOUVELLE INSCRIPTION
+
+Stagiaire      : {{var:prenom:""}} {{var:nom:""}}
+Barreau requis : {{var:barreau:""}}
+Référence      : {{var:reference:""}}
+
+Ouvrir le suivi des inscriptions :
+https://braincorporationhub.com/suivi
+
+Le barreau est calculé à partir de la préfecture déclarée par le
+stagiaire. Il indique le ressort, il ne désigne pas d'avocat : le choix
+de l'intervenant reste manuel.
+
+--
+Message automatique de Brain Corporation Hub.
+Vous le recevez parce que votre adresse figure dans la liste des
+notifications du back-office.
