@@ -65,5 +65,12 @@
   },
   "barreau": {
     "aide": "Le barreau est calculé à partir de la préfecture. Le choix de l’avocat reste manuel : le site ne propose et ne désigne jamais personne."
+  },
+  "menu": {
+    "inscriptions": "Inscriptions",
+    "referentiel": "Référentiel territorial"
+  },
+  "referentiel": {
+    "aide": "Grille de référence, en lecture seule. Elle se modifie dans le fichier versionné du projet, pas depuis cet écran."
   }
 }

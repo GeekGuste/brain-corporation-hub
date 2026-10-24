@@ -7,7 +7,17 @@ import {
 import express from 'express';
 import { join } from 'node:path';
 
+import configurationRoutes from './seo/routes.config.json' with { type: 'json' };
+
 const browserDistFolder = join(import.meta.dirname, '../browser');
+
+const cheminsDeclares = configurationRoutes.pages.map((page) => ({
+  chemin: page.chemin ? `/${page.chemin}` : '/',
+  // Vrai pour les pages a ecrans enfants, comme le back-office. Sans cette
+  // distinction, /lignes-rouges/n-importe-quoi passerait pour une page valide
+  // et repondrait 200.
+  enfants: 'enfants' in page && page.enfants === true,
+}));
 
 const app = express();
 
@@ -79,16 +89,43 @@ app.use(
 );
 
 /**
- * Toute autre requete est rendue par Angular. Si aucune route ne correspond,
- * angularApp.handle rend une reponse vide et on passe la main : Express repond
- * alors un vrai 404, pas une redirection vers l'accueil.
+ * Un chemin correspond-il a une page declaree ?
+ *
+ * La liste vient de seo/routes.config.json, la meme source que les routes
+ * Angular : ajouter une page ne demande donc rien ici (CLAUDE.md §12).
+ *
+ * Les sous-chemins ne sont acceptes que pour les pages qui ont reellement des
+ * ecrans enfants, et qui le declarent. Les accepter partout ferait repondre
+ * 200 a /lignes-rouges/n-importe-quoi.
  */
+function cheminConnu(chemin: string): boolean {
+  const normalise = chemin.replace(/\/+$/, '') || '/';
+  return cheminsDeclares.some(
+    (connu) =>
+      normalise === connu.chemin ||
+      (connu.enfants && normalise.startsWith(`${connu.chemin}/`)),
+  );
+}
+
 app.use((req, res, next) => {
   angularApp
     .handle(req)
-    .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
-    )
+    .then((response) => {
+      if (!response) {
+        return next();
+      }
+
+      // Angular rend toujours en 200, y compris la page « non trouvee » de la
+      // route generique. On remet le vrai code ici : une page d'erreur servie
+      // en 200 ferait entrer des URL fantomes dans l'index des moteurs, et un
+      // lien casse ne se verrait jamais dans les outils de mesure
+      // (CLAUDE.md §12).
+      const finale = cheminConnu(req.path)
+        ? response
+        : new Response(response.body, { status: 404, headers: response.headers });
+
+      return writeResponseToNodeResponse(finale, res);
+    })
     .catch(next);
 });
 

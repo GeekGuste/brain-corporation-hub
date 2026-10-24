@@ -1,0 +1,19 @@
+<!-- Aucun libelle ici : tout vient de content/fr/non-trouvee.json. -->
+
+<div class="container non-trouvee">
+  <div class="row">
+    <div class="col-12 col-lg-8">
+      <h1 class="non-trouvee__titre">{{ t.titre }}</h1>
+      <p class="non-trouvee__texte">{{ t.texte }}</p>
+
+      <div class="non-trouvee__actions">
+        <a class="btn btn-primary btn-lg" [routerLink]="versFormation">
+          {{ t.versFormation }}
+        </a>
+        <a class="btn btn-outline-secondary btn-lg" [routerLink]="versAccueil">
+          {{ t.versAccueil }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,176 @@
+// Page de suivi des inscriptions.
+//
+// Aucune couleur et aucune taille de caractere ecrites ici : tout vient des
+// variables du fichier de theme unique et des classes Bootstrap
+// (CLAUDE.md §14).
+
+.suivi {
+  padding-block: 2.5rem 4rem;
+
+  &__tete {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    margin-block-end: 1.5rem;
+  }
+
+  &__titre {
+    font-size: var(--bch-h2);
+    margin-block-end: 0.25rem;
+  }
+
+  &__total {
+    margin: 0;
+    color: var(--bs-secondary-color);
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  // Rappel de ce que la colonne du barreau ne veut pas dire.
+  &__note {
+    max-width: var(--bch-mesure);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--bs-secondary-color);
+    padding-inline-start: 1rem;
+    border-inline-start: 3px solid var(--bch-seuil);
+    margin-block-end: 1.5rem;
+  }
+
+  &__attente {
+    padding: 2rem;
+    text-align: center;
+    color: var(--bs-secondary-color);
+    background-color: var(--bch-papier);
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+  }
+
+  // Le tableau est large : il defile horizontalement plutot que d'ecraser ses
+  // colonnes. Le gestionnaire travaille sur un ecran d'ordinateur, mais la
+  // page doit rester utilisable sur une tablette.
+  &__cadre {
+    overflow-x: auto;
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+  }
+
+  &__table {
+    margin: 0;
+    font-size: 0.9375rem;
+    vertical-align: top;
+
+    th {
+      white-space: nowrap;
+      background-color: var(--bch-papier);
+    }
+
+    td {
+      line-height: 1.5;
+    }
+  }
+
+  &__date,
+  &__contact {
+    white-space: nowrap;
+  }
+
+  // Les precisions secondaires : sous-categorie, tribunal, pays.
+  &__appoint {
+    font-size: 0.875rem;
+    color: var(--bs-secondary-color);
+  }
+
+  &__choix {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin-block-start: 0.375rem;
+  }
+
+  &__lien {
+    display: block;
+    padding: 0;
+    font-size: 0.8125rem;
+  }
+}
+
+// =============================================================================
+// Connexion
+// =============================================================================
+.connexion {
+  margin-block-start: 3rem;
+  padding: 2rem;
+  background-color: var(--bch-papier);
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  border-block-start: 3px solid var(--bch-seuil);
+
+  &__titre {
+    font-size: var(--bch-h3);
+    margin-block-end: 0.5rem;
+  }
+
+  &__aide {
+    font-size: 0.9375rem;
+    color: var(--bs-secondary-color);
+    margin-block-end: 1.5rem;
+  }
+}
+
+// =============================================================================
+// Marque de presence
+// =============================================================================
+.marque {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--bs-border-radius-sm);
+
+  &--oui {
+    color: var(--bs-success-text-emphasis);
+    background-color: var(--bs-success-bg-subtle);
+  }
+
+  &--non {
+    color: var(--bs-secondary-color);
+    background-color: var(--bch-papier);
+    border: 1px solid var(--bs-border-color);
+  }
+}
+
+// =============================================================================
+// Confirmation de suppression
+// =============================================================================
+.confirmation-suppression {
+  max-width: var(--bch-mesure);
+  margin-block-start: 1.5rem;
+  padding: 1.5rem;
+  background-color: var(--bs-body-bg);
+  border: 1px solid var(--bs-danger-border-subtle);
+  border-radius: var(--bs-border-radius);
+  border-inline-start: 3px solid var(--bs-danger);
+
+  &__titre {
+    font-size: var(--bch-h3);
+    margin-block-end: 0.75rem;
+  }
+
+  &__cible {
+    margin-block-end: 0.75rem;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-block-start: 1.25rem;
+  }
+}

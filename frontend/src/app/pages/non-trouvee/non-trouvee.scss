@@ -1,0 +1,24 @@
+// Aucune couleur ni taille de caractere ici : tout vient du fichier de theme
+// unique (CLAUDE.md §14).
+
+.non-trouvee {
+  padding-block: 4rem 5rem;
+
+  &__titre {
+    font-size: var(--bch-h2);
+    margin-block-end: 1rem;
+  }
+
+  &__texte {
+    max-width: var(--bch-mesure);
+    font-size: var(--bch-chapo);
+    line-height: 1.55;
+    margin-block-end: 2rem;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+}

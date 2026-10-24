@@ -39,6 +39,10 @@
     "referentiel-territorial": {
       "titre": "Référentiel territorial : préfecture, tribunal judiciaire et barreau",
       "description": "La grille qui relie chaque préfecture à son tribunal judiciaire de référence et au barreau requis pour la formation Lignes Rouges."
+    },
+    "non-trouvee": {
+      "titre": "Page introuvable",
+      "description": "Cette adresse ne correspond à aucune page du site."
     }
   }
 }

@@ -1,0 +1,16 @@
+{
+  "$commentaire": [
+    "Page affichee quand une URL ne correspond a aucune page du site.",
+    "",
+    "Elle repond un VRAI 404, et ne redirige pas : une redirection donnerait un",
+    "200 sur une page qui n existe pas, ce qui trompe les moteurs de recherche",
+    "et fait entrer des URL fantomes dans l index (CLAUDE.md §12).",
+    "",
+    "Le visiteur, lui, n est pas laisse sans issue : la page propose la formation",
+    "et l accueil."
+  ],
+  "titre": "Cette page n’existe pas",
+  "texte": "L’adresse que vous avez suivie ne correspond à aucune page du site. Elle a peut être changé, ou comporte une erreur.",
+  "versFormation": "Découvrir la formation Lignes Rouges",
+  "versAccueil": "Revenir à l’accueil"
+}

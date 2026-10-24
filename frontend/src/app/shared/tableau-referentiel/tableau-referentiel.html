@@ -1,0 +1,82 @@
+<!-- La grille territoriale, en lecture seule. Partagee par la page publique
+     et par l ecran d administration : c est la meme grille (CLAUDE.md §5.8).
+     Aucune action d ecriture, l administration du referentiel est hors
+     perimetre V1 (§8). -->
+
+@if (enEchec()) {
+  <p class="alert alert-warning" role="alert">{{ t.erreur }}</p>
+} @else {
+  <div class="referentiel__recherche">
+    <label class="form-label" for="recherche">{{ t.recherche.libelle }}</label>
+    <div class="referentiel__champ">
+      <input
+        id="recherche"
+        class="form-control"
+        type="search"
+        autocomplete="off"
+        [placeholder]="t.recherche.invite"
+        [value]="recherche()"
+        (input)="surRecherche($event)"
+      />
+      @if (recherche()) {
+        <button class="btn btn-outline-secondary" type="button" (click)="effacer()">
+          {{ t.recherche.effacer }}
+        </button>
+      }
+    </div>
+
+    @if (recherche()) {
+      <p class="referentiel__compte" role="status">
+        {{ resultats().length }} {{ t.recherche.resultats }} {{ total() }}
+      </p>
+    }
+  </div>
+
+  @if (resultats().length === 0 && total() > 0) {
+    <p class="referentiel__vide">{{ t.recherche.aucun }}</p>
+  } @else {
+    <div class="referentiel__cadre">
+      <table class="table referentiel__table">
+        <caption class="visually-hidden">{{ t.titre }}</caption>
+        <thead>
+          <tr>
+            <th scope="col">{{ t.colonnes.departement }}</th>
+            <th scope="col">{{ t.colonnes.prefecture }}</th>
+            <th scope="col">{{ t.colonnes.tribunal }}</th>
+            <th scope="col">{{ t.colonnes.barreau }}</th>
+            <th scope="col">{{ t.colonnes.verification }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (ligne of resultats(); track ligne.departement) {
+            <tr>
+              <th scope="row" class="referentiel__departement">
+                <span class="referentiel__numero">{{ ligne.departement }}</span>
+                {{ ligne.nomDepartement }}
+              </th>
+              <td>{{ ligne.prefecture }}</td>
+              <td>{{ ligne.tribunalJudiciaire }}</td>
+              <td><strong>{{ ligne.barreauRequis }}</strong></td>
+              <td class="referentiel__verification">
+                @if (ligne.dateDerniereVerification) {
+                  {{ verification(ligne.dateDerniereVerification) }}
+                } @else {
+                  <span class="referentiel__non-verifiee">{{ t.verification.jamais }}</span>
+                }
+              </td>
+            </tr>
+
+            <!-- Precision du client sur une correspondance qui pourrait
+                 surprendre, par exemple une prefecture dont le tribunal
+                 judiciaire siege ailleurs. Affichee telle quelle. -->
+            @if (ligne.note) {
+              <tr class="referentiel__ligne-note">
+                <td colspan="5">{{ ligne.note }}</td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+}

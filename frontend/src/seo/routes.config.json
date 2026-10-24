@@ -41,11 +41,16 @@
         "indexable a FAUX : elle ne doit jamais entrer dans un moteur de recherche",
         "ni dans le sitemap (CLAUDE.md §12). Elle n apparait pas non plus dans la",
         "navigation du site : on y accede par son URL, et elle est protegee par mot",
-        "de passe."
+        "de passe.",
+        "",
+        "enfants : cette page a des ecrans enfants (/suivi/referentiel). Le",
+        "serveur accepte donc ses sous-chemins. Sans ce drapeau, toute URL sous",
+        "une page declaree passerait pour valide et repondrait 200."
       ],
       "cle": "suivi",
       "chemin": "suivi",
-      "indexable": false
+      "indexable": false,
+      "enfants": true
     }
   ]
 }

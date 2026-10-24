@@ -36,6 +36,24 @@ export class Seo {
   private readonly document = inject(DOCUMENT);
   private readonly config: ConfigurationExecution = inject(CONFIGURATION_EXECUTION);
 
+  /**
+   * Metadonnees de la page « non trouvee ».
+   *
+   * Elle n'a pas de route a elle, donc pas d'URL canonique : poser une
+   * canonique sur une adresse qui n'existe pas dirait au moteur de recherche
+   * que cette page est la version de reference de quelque chose. Elle est en
+   * revanche toujours en noindex, quel que soit l'environnement : une page
+   * d'erreur n'a rien a faire dans un index (CLAUDE.md §12).
+   */
+  appliquerNonTrouvee(): void {
+    const metadonnees = this.metadonneesDe('non-trouvee');
+    const commun = seoConfig.commun;
+
+    this.title.setTitle(`${metadonnees.titre}${commun.separateurDeTitre}${commun.nomDuSite}`);
+    this.meta.updateTag({ name: 'description', content: metadonnees.description });
+    this.meta.updateTag({ name: 'robots', content: 'noindex, nofollow' });
+  }
+
   appliquer(clePage: string): void {
     const page = pageParCle(clePage);
     const metadonnees = this.metadonneesDe(clePage);
