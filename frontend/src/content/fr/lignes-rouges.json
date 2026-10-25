@@ -315,5 +315,55 @@
     "titre": "S’inscrire",
     "recapitulatif": "1 h 30, à distance. 100 € TTC par stagiaire.",
     "mentionTva": "TVA non applicable, article 293 B du CGI."
+  },
+  "faq": {
+    "$commentaire": [
+      "FOIRE AUX QUESTIONS.",
+      "",
+      "CE BLOC NE VIENT PAS TEL QUEL DU DOCUMENT DU CLIENT. Il est redige a",
+      "partir de deux sources qui sont de lui : le document « Contenus editoriaux",
+      "du site web » et le script « PROJET DE PRODUCTION DE CONTENUS VIDEOS ».",
+      "La source de chaque reponse est notee dans le champ « source ».",
+      "",
+      "A FAIRE RELIRE PAR LE CLIENT AVANT MISE EN LIGNE : c est de la parole de",
+      "juriste, transposee d un dialogue televise vers un format de site.",
+      "",
+      "Aucune promesse de resultat, aucun chiffre invente, aucune date de",
+      "session (CLAUDE.md §3 et §16). La taille des cohortes n y figure pas :",
+      "le client ne s est pas prononce sur ce qui peut en etre dit."
+    ],
+    "titre": "Questions fréquentes",
+    "questions": [
+      {
+        "source": "Document de contenus, « Une formation structurée » ; émission 2, séquence 1.",
+        "question": "Pourquoi payer, alors que beaucoup d’informations sont gratuites ?",
+        "reponse": "Les informations sur le droit des étrangers sont nombreuses : sites institutionnels, associations spécialisées, contenus d’avocats, réseaux sociaux, forums. Elles peuvent être utiles, mais elles sont dispersées, de qualité variable et difficiles à relier à une démarche durable de prévention. Vous ne payez pas l’accès à une information brute. Vous payez un travail de sélection, de vérification, d’actualisation et de mise en ordre, qui transforme cette information en repères utilisables."
+      },
+      {
+        "source": "Émission 1, séquence 3.",
+        "question": "Je n’ai aucun problème aujourd’hui. Pourquoi dépenser 100 € ?",
+        "reponse": "La comparaison n’est pas entre 100 € et rien. Elle est entre le coût d’une démarche préventive et le coût possible de son absence : des mois de démarches, des frais de contentieux, une perte de revenus, des études interrompues, un projet entrepreneurial compromis, et parfois plusieurs années d’incertitude. La prévention n’offre aucune garantie qu’aucune difficulté ne surviendra. Elle vous permet d’identifier plus tôt les situations à risque et de consulter avant que vos possibilités d’action ne se réduisent."
+      },
+      {
+        "source": "Émissions 1 et 2, formulation reprise à plusieurs endroits.",
+        "question": "Est-ce que cette formation remplace un avocat ?",
+        "reponse": "Non, et ce n’est pas son objet. Elle ne se substitue pas à la consultation juridique individualisée. Elle vous aide à reconnaître le moment où cette consultation devient nécessaire, pendant qu’il reste des possibilités d’action."
+      },
+      {
+        "source": "Émission 2, séquence 1 ; émission 1, séquence 5.",
+        "question": "Quelles décisions peuvent fragiliser mon droit au séjour ?",
+        "reponse": "Des décisions ordinaires, prises de bonne foi : changer d’emploi, interrompre ou réorienter vos études, créer une activité, modifier votre situation familiale, partir longtemps à l’étranger, voir vos ressources évoluer, changer de domicile. Leur conséquence administrative éventuelle n’est pas toujours visible au moment où vous les prenez. C’est précisément ce que la formation apprend à repérer."
+      },
+      {
+        "source": "Document de contenus, « Les formateurs lignes rouges ».",
+        "question": "Qui anime la formation ?",
+        "reponse": "Des avocats, sélectionnés notamment pour leur expertise en droit des étrangers, leur expérience et leurs qualités pédagogiques. Chacun intervient auprès des stagiaires dont la préfecture relève du ressort de la cour d’appel de son barreau d’inscription, afin de tenir compte des pratiques administratives observées localement."
+      },
+      {
+        "source": "Deduite du positionnement preventif du client, emissions 1 et 2. C est la reponse la plus delicate : elle peut inviter quelqu un a NE PAS s inscrire. A faire valider en priorite.",
+        "question": "Je suis déjà en difficulté. Cette formation est-elle pour moi ?",
+        "reponse": "Elle est conçue pour anticiper, pas pour traiter une difficulté déjà installée. Si vous avez reçu un refus de titre ou une obligation de quitter le territoire, consultez un avocat sans attendre : c’est l’urgence qui prime. La formation ne remplace pas cette démarche."
+      }
+    ]
   }
 }

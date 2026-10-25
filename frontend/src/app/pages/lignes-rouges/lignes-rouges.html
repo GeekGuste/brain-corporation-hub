@@ -4,6 +4,36 @@
      corps, puis les faits et le bouton empiles. -->
 <app-page-contenu [contenu]="contenu" [bandeauCompact]="true" />
 
+
+<!-- =========================================================================
+     QUESTIONS FREQUENTES
+     -------------------------------------------------------------------------
+     Placees AVANT le formulaire : elles traitent les objections qui empechent
+     de s inscrire, elles doivent donc se lire avant le moment de decider.
+
+     En <details> natif : l accordeon fonctionne SANS JavaScript, il est
+     navigable au clavier, et son contenu reste dans le HTML pour les moteurs
+     de recherche. Le public est parfois en connexion lente (CLAUDE.md §13).
+     ========================================================================= -->
+<section class="faq" aria-labelledby="titre-faq">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10 col-xl-8">
+        <h2 class="faq__titre" id="titre-faq">{{ faq.titre }}</h2>
+
+        @for (item of faq.questions; track item.question) {
+          <details class="faq__item">
+            <summary class="faq__question">
+              <h3 class="faq__intitule">{{ item.question }}</h3>
+            </summary>
+            <p class="faq__reponse">{{ item.reponse }}</p>
+          </details>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- =========================================================================
      INSCRIPTION
      -------------------------------------------------------------------------

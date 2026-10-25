@@ -40,3 +40,82 @@
     border-block-end: 1px solid var(--bs-border-color);
   }
 }
+
+// =============================================================================
+// Questions frequentes
+// -----------------------------------------------------------------------------
+// Accordeon en <details> natif : aucun script, navigable au clavier, et le
+// contenu reste dans le HTML pour les moteurs de recherche.
+// =============================================================================
+.faq {
+  background-color: var(--bch-papier);
+  padding-block: var(--bch-espace-section);
+
+  &__titre {
+    margin-block-end: 1.5rem;
+  }
+
+  &__item {
+    background-color: var(--bs-body-bg);
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    margin-block-end: 0.75rem;
+
+    // La question ouverte est marquee par le filet de marque : le motif du
+    // site, decline une fois de plus.
+    &[open] {
+      border-inline-start: 3px solid var(--bch-seuil);
+    }
+  }
+
+  &__question {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    // Cible tactile genereuse (CLAUDE.md §13).
+    min-height: var(--bch-cible-tactile-min);
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    list-style: none;
+
+    // Le marqueur par defaut differe d'un navigateur a l'autre : on le
+    // remplace par un chevron dessine, identique partout.
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::before {
+      content: '';
+      flex: none;
+      inline-size: 0.5rem;
+      block-size: 0.5rem;
+      border-inline-end: 2px solid var(--bch-seuil);
+      border-block-end: 2px solid var(--bch-seuil);
+      transform: rotate(-45deg);
+      transition: transform 0.15s ease;
+    }
+  }
+
+  &__item[open] &__question::before {
+    transform: rotate(45deg);
+  }
+
+  &__intitule {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0;
+    max-width: none;
+
+    @media (min-width: 768px) {
+      font-size: 1.125rem;
+    }
+  }
+
+  &__reponse {
+    margin: 0;
+    padding: 0 1.25rem 1.25rem 2.5rem;
+    line-height: 1.7;
+    color: var(--bs-body-color);
+  }
+}
