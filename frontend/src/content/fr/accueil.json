@@ -14,7 +14,7 @@
   "surtitre": "BRAIN CORPORATION HUB",
   "titre": "Mieux comprendre les risques pour décider plus tôt",
   "introduction": [
-    "Brain Corporation Hub conçoit des formations et des accompagnements qui font de la connaissance un outil d’anticipation. Notre objectif est d’aider chacun à reconnaître les situations sensibles, à mesurer les conséquences possibles de ses choix et à agir avant qu’une difficulté ne devienne une crise."
+    "Brain Corporation Hub conçoit des formations qui font de la connaissance un outil d’anticipation. Notre objectif est de vous aider à reconnaître les situations sensibles, à mesurer les conséquences possibles de vos choix et à agir avant qu’une difficulté ne devienne une crise."
   ],
   "sections": [
     {
@@ -23,7 +23,7 @@
       "blocs": [
         {
           "type": "paragraphe",
-          "texte": "Dans la vie personnelle comme dans la vie professionnelle, certaines difficultés peuvent être évitées ou mieux maîtrisées lorsque les risques sont identifiés suffisamment tôt. La formation ne sert donc pas seulement à acquérir des compétences : elle permet aussi de comprendre une situation, d’adopter des réflexes de vigilance et de prendre des décisions plus éclairées."
+          "texte": "Dans la vie personnelle comme dans la vie professionnelle, certaines difficultés peuvent être évitées ou mieux maîtrisées lorsque les risques sont identifiés suffisamment tôt. La formation ne sert donc pas seulement à acquérir des compétences : elle vous permet aussi de comprendre une situation, d’adopter des réflexes de vigilance et de prendre des décisions plus éclairées."
         }
       ],
       "visuel": {
@@ -53,17 +53,17 @@
       "cartes": [
         {
           "titre": "Prévention des risques",
-          "texte": "Nous transformons des informations complexes en repères concrets afin d’aider les participants à détecter les situations qui exigent une vigilance particulière.",
+          "texte": "Vous repérez les situations qui exigent une vigilance particulière, à partir de repères concrets tirés d’informations complexes que nous avons débroussaillées pour vous.",
           "pictogramme": "picto-vigilance"
         },
         {
           "titre": "Excellence des intervenants",
-          "texte": "Nous sélectionnons des professionnels pour leur expertise, leur expérience, leurs qualités pédagogiques et leur capacité à apporter une réelle valeur ajoutée.",
+          "texte": "Vous êtes formé par des professionnels choisis pour leur expertise, leur expérience et leurs qualités pédagogiques, pas par un contenu enregistré une fois pour toutes.",
           "pictogramme": "picto-intervenants"
         },
         {
           "titre": "Exigence pédagogique",
-          "texte": "Nos formations sont conçues, actualisées et améliorées pour répondre aux besoins réels des publics et rendre les connaissances directement utilisables.",
+          "texte": "Vous repartez avec des connaissances directement utilisables, parce que nos formations sont conçues, actualisées et améliorées à partir des besoins réels des publics.",
           "pictogramme": "picto-pedagogie"
         }
       ]
@@ -87,5 +87,18 @@
     "hauteur": 675,
     "texteAlternatif": "Deux trajectoires qui se separent a partir d’un meme point : celle d’une decision prise tot s’eleve, celle d’une difficulte subie decline.",
     "motif": "anticipation"
+  },
+  "appelFinal": {
+    "$commentaire": [
+      "Appel a l action vers Lignes Rouges, produit phare.",
+      "NE VIENT PAS du document du client : produit d apres le brief de",
+      "copywriting, et a faire valider comme les blocs « faitsCles » et",
+      "« inscription » de la page de vente.",
+      "Aucune promesse de resultat, aucune urgence fabriquee (CLAUDE.md §3)."
+    ],
+    "surtitre": "NOTRE FORMATION",
+    "titre": "Lignes Rouges",
+    "texte": "Comprendre les risques liés à votre droit au séjour, et savoir quand consulter. 1 h 30, à distance, 100 € TTC.",
+    "libelle": "Découvrir la formation"
   }
 }

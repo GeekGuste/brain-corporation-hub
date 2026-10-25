@@ -24,8 +24,7 @@
   "surtitre": "PRÉVENIR LES RISQUES LIÉS AU DROIT AU SÉJOUR",
   "titre": "Détecter le risque avant qu’il ne devienne une crise",
   "introduction": [
-    "Lignes Rouges est un programme de formation consacré à la prévention des situations susceptibles de fragiliser le droit au séjour des personnes étrangères en France.",
-    "En 1 h 30, la formation aide le participant à mieux comprendre ses principales obligations, à reconnaître les décisions de vie qui appellent une vigilance particulière et à savoir quand solliciter un accompagnement professionnel adapté."
+    "En 1 h 30, vous apprenez à reconnaître les décisions qui peuvent fragiliser votre droit au séjour, et à savoir quand consulter un avocat."
   ],
   "sections": [
     {
@@ -71,6 +70,14 @@
       "blocs": [
         {
           "type": "paragraphe",
+          "texte": "En 1 h 30, la formation aide le participant à mieux comprendre ses principales obligations, à reconnaître les décisions de vie qui appellent une vigilance particulière et à savoir quand solliciter un accompagnement professionnel adapté."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Lignes Rouges est un programme de formation consacré à la prévention des situations susceptibles de fragiliser le droit au séjour des personnes étrangères en France."
+        },
+        {
+          "type": "paragraphe",
           "texte": "La formation donne au participant une méthode de vigilance. Elle ne consiste pas à prédire toutes les décisions administratives, mais à repérer plus tôt les situations sensibles et à préserver, lorsque cela est possible, davantage de possibilités d’action."
         }
       ]
@@ -81,16 +88,16 @@
       "blocs": [
         {
           "type": "paragraphe",
-          "texte": "À l’issue de la session, le participant doit être mieux en mesure de :"
+          "texte": "À l’issue de la session, vous serez mieux en mesure de :"
         },
         {
           "type": "liste",
           "elements": [
-            "comprendre les principales obligations associées à sa situation de séjour ;",
-            "identifier les changements personnels ou professionnels susceptibles d’avoir une incidence sur son dossier ;",
+            "comprendre les principales obligations associées à votre situation de séjour ;",
+            "identifier les changements personnels ou professionnels susceptibles d’avoir une incidence sur votre dossier ;",
             "repérer des signaux de vigilance avant une demande, un renouvellement ou un changement de statut ;",
             "éviter certains comportements ou retards pouvant accroître le risque ;",
-            "conserver et organiser les informations utiles à son suivi ;",
+            "conserver et organiser les informations utiles à votre suivi ;",
             "savoir quand une situation nécessite l’intervention rapide d’un avocat ou d’un autre professionnel compétent."
           ]
         }
@@ -106,7 +113,7 @@
         },
         {
           "type": "paragraphe",
-          "texte": "Ce tableau de bord a vocation à aider le participant à suivre sa situation dans le temps : échéances, changements de circonstances, documents à conserver, démarches à anticiper et événements justifiant une consultation professionnelle."
+          "texte": "Ce tableau de bord a vocation à vous aider à suivre votre situation dans le temps : échéances, changements de circonstances, documents à conserver, démarches à anticiper et événements justifiant une consultation professionnelle."
         }
       ],
       "visuel": {

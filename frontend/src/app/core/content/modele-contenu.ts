@@ -60,6 +60,23 @@ export interface FaitCle {
   readonly valeur: string;
 }
 
+/**
+ * Bande de cloture menant a Lignes Rouges.
+ *
+ * Chaque page doit avoir UN objectif. L accueil et la page Brain Corporation
+ * Hub n en avaient aucun : on les lisait, puis rien. Cette bande leur en donne
+ * un, vers le produit phare.
+ *
+ * Absente de la page Lignes Rouges elle-meme, qui a deja le sien : le
+ * formulaire d inscription.
+ */
+export interface AppelFinal {
+  readonly surtitre: string;
+  readonly titre: string;
+  readonly texte: string;
+  readonly libelle: string;
+}
+
 export interface ContenuDePage {
   /** Accroche au-dessus du titre principal. Reprise du document du client. */
   readonly surtitre: string;
@@ -73,6 +90,8 @@ export interface ContenuDePage {
   readonly faitsCles?: readonly FaitCle[];
   /** Bouton d'appel a l'action du bandeau de tete. */
   readonly appelAction?: { readonly libelle: string; readonly ancre: string };
+  /** Bande de cloture vers Lignes Rouges. Absente de la page Lignes Rouges. */
+  readonly appelFinal?: AppelFinal;
 }
 
 /**

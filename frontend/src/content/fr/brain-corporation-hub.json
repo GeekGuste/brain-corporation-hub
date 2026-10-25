@@ -18,7 +18,7 @@
       "blocs": [
         {
           "type": "paragraphe",
-          "texte": "Nous ne réduisons pas la formation à la transmission d’un contenu ou à l’acquisition d’une compétence technique. Nous la concevons également comme un outil de compréhension, d’anticipation et de gestion des risques. Cette approche peut s’appliquer chaque fois qu’une décision personnelle ou professionnelle produit des conséquences juridiques, économiques, matérielles, familiales ou psychologiques importantes."
+          "texte": "Nous ne réduisons pas la formation à la transmission d’un contenu ou à l’acquisition d’une compétence technique. Nous la concevons également comme un outil de compréhension, d’anticipation et de gestion des risques. Cette approche vaut chaque fois qu’une de vos décisions, personnelle ou professionnelle, produit des conséquences juridiques, économiques, matérielles, familiales ou psychologiques importantes."
         }
       ]
     },
@@ -143,5 +143,16 @@
     "hauteur": 900,
     "texteAlternatif": "Une facade institutionnelle a colonnes, dont le fronton est souligne d’une ligne rouge.",
     "motif": "exigence"
+  },
+  "appelFinal": {
+    "$commentaire": [
+      "Appel a l action vers Lignes Rouges, produit phare.",
+      "NE VIENT PAS du document du client : produit d apres le brief de",
+      "copywriting, a faire valider."
+    ],
+    "surtitre": "NOTRE PREMIER PROGRAMME",
+    "titre": "Lignes Rouges",
+    "texte": "La prévention des risques liés au droit au séjour, appliquée. 1 h 30, à distance, animée par des avocats.",
+    "libelle": "Découvrir la formation"
   }
 }

@@ -2,6 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { cheminDePage } from '../../core/config/site-routes';
 import type { ContenuDePage } from '../../core/content/modele-contenu';
 import { Motif } from '../motif/motif';
 import { Visuel } from '../visuel/visuel';
@@ -43,6 +44,9 @@ export class PageContenu {
    * declare <base href="/">, et une URL reduite a un fragment se resout contre
    * l'URL DE BASE, ce qui menait a l'accueil.
    */
+  /** Chemin vers le produit phare, jamais ecrit en dur (CLAUDE.md §12). */
+  protected readonly versLignesRouges = cheminDePage('lignes-rouges');
+
   protected readonly ancre = computed(() =>
     this.contenu().appelAction?.ancre.replace(/^#/, '') ?? '',
   );

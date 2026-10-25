@@ -235,3 +235,29 @@
     </div>
   </section>
 }
+
+<!-- =========================================================================
+     APPEL A L'ACTION DE CLOTURE
+     -------------------------------------------------------------------------
+     Chaque page doit avoir UN objectif. L'accueil et la page Brain Corporation
+     Hub n'en avaient aucun : on les lisait, puis rien. Cette bande leur en
+     donne un, vers le produit phare.
+
+     Absente de la page Lignes Rouges, qui a deja le sien : son formulaire.
+     ========================================================================= -->
+@if (contenu().appelFinal; as appel) {
+  <aside class="cloture">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-8 text-center">
+          <p class="cloture__surtitre">{{ appel.surtitre }}</p>
+          <h2 class="cloture__titre">{{ appel.titre }}</h2>
+          <p class="cloture__texte">{{ appel.texte }}</p>
+          <a class="btn btn-vif btn-lg" [routerLink]="versLignesRouges">
+            {{ appel.libelle }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </aside>
+}
