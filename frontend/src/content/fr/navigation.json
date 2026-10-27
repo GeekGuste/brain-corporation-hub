@@ -11,22 +11,28 @@
   "marque": "Brain Corporation Hub",
   "logo": {
     "$commentaire": [
-      "Logo livre par le graphiste le 12 octobre 2026 (charte « Identite Visuelle",
-      "LIGNES ROUGES », docs/).",
+      "Logo de BRAIN CORPORATION HUB, la plateforme, livre le 27 octobre 2026.",
       "",
-      "Le fichier d origine, Logo_Principal.png, est un carre de 1024 dont le",
-      "dessin n occupe que 709 x 412 au centre : affiche a 40 px de haut, il n en",
-      "serait reste que 16. Celui-ci est recadre sur son contenu, et la zone de",
-      "respiration est donnee par la CSS autour (variable --bch-hauteur-logo du",
-      "fichier de theme). Les originaux sont conserves a cote.",
+      "C est bien celui-ci qui va dans l en-tete, et non celui de Lignes Rouges :",
+      "la plateforme porte le domaine et la page d accueil, le programme est une",
+      "de ses offres (CLAUDE.md §2). Le logo Lignes Rouges s affiche sur la page",
+      "du programme.",
       "",
-      "largeur et hauteur sont les dimensions INTRINSEQUES du fichier, posees en",
-      "attributs pour reserver la place avant chargement."
+      "Le fichier d origine, brain-corporation-hub-logo.jpeg, est un carre de",
+      "1254 px pesant 123 Ko, avec une large marge blanche : le dessin n en occupe",
+      "que 1060 x 845. Celui-ci est recadre sur son contenu et reduit a la",
+      "resolution utile pour un en-tete, soit 16 Ko. L original est conserve a cote.",
+      "",
+      "Le nom de la marque est ecrit A COTE du logo, en vraies lettres : le dessin",
+      "contient des mots qui deviennent illisibles a 40 px de haut.",
+      "",
+      "A DEMANDER AU GRAPHISTE : un SVG, net a toute taille et quelques kilo-octets,",
+      "et une version sur fond colore pour le pied de page."
     ],
-    "fichier": "/visuels/logo-lignes-rouges.png",
-    "largeur": 709,
-    "hauteur": 412,
-    "texteAlternatif": "Lignes Rouges"
+    "fichier": "/visuels/logo-brain-corporation-hub.png",
+    "largeur": 151,
+    "hauteur": 120,
+    "texteAlternatif": ""
   },
   "liens": [
     {

@@ -38,15 +38,32 @@
   &__marque {
     display: flex;
     align-items: center;
+    gap: 0.625rem;
     color: var(--bs-heading-color);
     text-decoration: none;
   }
 
+  // Le nom en vraies lettres, a cote du dessin. Le logo livre est carre : a la
+  // hauteur d un en-tete, les mots qu il contient sont illisibles. Ecrit ici,
+  // le nom reste lisible a toute taille et ne coute pas un octet.
+  //
+  // Masque sur les tres petits ecrans, ou la place manque : le dessin suffit
+  // alors a identifier le site, et le lien conserve son nom accessible.
   &__marque-texte {
-    font-size: 1.0625rem;
+    display: none;
+    font-size: 1rem;
     font-weight: 700;
     letter-spacing: var(--bch-serrage-titre);
+    line-height: 1.2;
     white-space: nowrap;
+
+    @media (min-width: 420px) {
+      display: block;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 1.0625rem;
+    }
   }
 
   // Sur telephone, la navigation occupe sa propre ligne sous la marque : les

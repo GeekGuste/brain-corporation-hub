@@ -23,7 +23,11 @@
         <!-- Les attributs width et height portent les dimensions INTRINSEQUES
              du fichier. Ils reservent la place avant le chargement de l'image.
              En « attr. » plutot qu'en propriete, pour qu'ils disparaissent
-             simplement s'ils ne sont pas renseignes. -->
+             simplement s'ils ne sont pas renseignes.
+
+             Le texte alternatif est VIDE a dessein : le nom de la marque est
+             juste a cote, en vraies lettres. Le repeter ferait entendre deux
+             fois la meme chose a un lecteur d'ecran. -->
         <img
           class="emplacement-logo"
           [src]="logo.fichier"
@@ -31,11 +35,13 @@
           [attr.width]="logo.largeur"
           [attr.height]="logo.hauteur"
         />
-      } @else {
-        <span class="emplacement-logo entete__marque-texte">
-          {{ navigation.marque }}
-        </span>
       }
+
+      <!-- Le nom en vraies lettres, toujours. Le logo livre est carre : a la
+           hauteur d'un en-tete, les mots qu'il contient sont illisibles. Ecrit
+           a cote, le nom reste lisible a toute taille, il est lu par les
+           lecteurs d'ecran, et il ne coute pas un octet de plus. -->
+      <span class="entete__marque-texte">{{ navigation.marque }}</span>
     </a>
 
     <nav class="entete__navigation" aria-label="Navigation principale">
