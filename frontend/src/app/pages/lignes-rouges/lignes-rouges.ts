@@ -4,6 +4,7 @@ import contenu from '../../../content/fr/lignes-rouges.json';
 import type { ContenuDePage } from '../../core/content/modele-contenu';
 import { Seo } from '../../core/seo/seo';
 import { FormulaireInscription } from '../../shared/formulaire-inscription/formulaire-inscription';
+import { LogoLignesRouges } from '../../shared/logo-lignes-rouges/logo-lignes-rouges';
 import { PageContenu } from '../../shared/page-contenu/page-contenu';
 
 /** Une question de la foire aux questions. */
@@ -34,7 +35,7 @@ interface BlocInscription {
 
 @Component({
   selector: 'app-lignes-rouges',
-  imports: [PageContenu, FormulaireInscription],
+  imports: [PageContenu, FormulaireInscription, LogoLignesRouges],
   templateUrl: './lignes-rouges.html',
   styleUrl: './lignes-rouges.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

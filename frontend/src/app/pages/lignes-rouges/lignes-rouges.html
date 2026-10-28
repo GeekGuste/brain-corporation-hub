@@ -2,7 +2,13 @@
      occupait plus d'un ecran avant que le premier paragraphe du corps
      n'apparaisse : trois lignes de titre, deux paragraphes de chapo en grand
      corps, puis les faits et le bouton empiles. -->
-<app-page-contenu [contenu]="contenu" [bandeauCompact]="true" />
+<app-page-contenu [contenu]="contenu" [bandeauCompact]="true">
+  <!-- Le logo du programme, dans le bandeau de sa propre page. L en-tete du
+       site porte celui de la plateforme : le visiteur voit les deux marques
+       d un coup d oeil, et leur rapport se lit sans etre explique
+       (CLAUDE.md §2). -->
+  <app-logo-lignes-rouges logo-programme class="logo-programme" />
+</app-page-contenu>
 
 
 <!-- =========================================================================

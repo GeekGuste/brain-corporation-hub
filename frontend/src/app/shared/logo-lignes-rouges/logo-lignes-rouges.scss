@@ -1,0 +1,11 @@
+// Taille du logo, pilotable par le parent.
+//
+// Aucune couleur ecrite ici : les rubans portent celles de la charte dans le
+// dessin lui-meme, et le texte suit la couleur du contexte (CLAUDE.md §14).
+
+.logo {
+  display: block;
+  // La hauteur est imposee par le parent, la largeur suit le rapport du dessin.
+  block-size: var(--bch-hauteur-logo-programme, 4.5rem);
+  inline-size: auto;
+}

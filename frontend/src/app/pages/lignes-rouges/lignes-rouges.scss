@@ -119,3 +119,14 @@
     color: var(--bs-body-color);
   }
 }
+
+// Le logo du programme, dans le bandeau. Sur l'encre profonde : son texte
+// passe au blanc tout seul, les deux rubans gardent leurs couleurs.
+.logo-programme {
+  --bch-hauteur-logo-programme: 3.5rem;
+  margin-block-end: 1.25rem;
+
+  @media (min-width: 768px) {
+    --bch-hauteur-logo-programme: 4.5rem;
+  }
+}

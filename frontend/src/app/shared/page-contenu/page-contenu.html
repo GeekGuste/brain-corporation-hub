@@ -79,6 +79,12 @@
              capitales dans le document du client, on ne le transforme pas, et
              on ne l'espace pas davantage : des capitales pistonnees sont
              penibles a lire pour un lecteur non francophone de naissance. -->
+        <!-- Emplacement du logo du programme, projete par la page. La page
+             de vente y place celui de Lignes Rouges ; les autres n en ont pas.
+             Par projection plutot qu en dur : ce gabarit sert les trois pages
+             et ne doit connaitre aucune marque en particulier. -->
+        <ng-content select="[logo-programme]" />
+
         <p class="surtitre">{{ contenu().surtitre }}</p>
 
         <h1 class="bandeau__titre">{{ contenu().titre }}</h1>
