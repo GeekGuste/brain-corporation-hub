@@ -32,6 +32,18 @@
       "ogTitre": "Lignes Rouges",
       "ogDescription": "Prévenir les risques liés au droit au séjour."
     },
+    "mentions-legales": {
+      "titre": "Mentions légales",
+      "description": "Éditeur, responsable de la publication et hébergeur du site Brain Corporation Hub."
+    },
+    "politique-confidentialite": {
+      "titre": "Politique de confidentialité",
+      "description": "Comment Brain Corporation Hub utilise les données personnelles recueillies lors des demandes de renseignements, des inscriptions et du suivi des formations."
+    },
+    "conditions-generales-de-vente": {
+      "titre": "Conditions générales de vente",
+      "description": "Prix, paiement et droit de rétractation applicables à la formation Lignes Rouges."
+    },
     "suivi": {
       "titre": "Suivi des inscriptions",
       "description": "Page de gestion réservée. Accès protégé."

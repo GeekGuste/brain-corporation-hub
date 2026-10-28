@@ -1,0 +1,79 @@
+<!-- Gabarit generique des pages legales.
+     Aucun texte ici : tout vient du fichier de contenu passe en entree.
+     Aucune couleur non plus : classes Bootstrap et variables du fichier de
+     theme unique (CLAUDE.md §14). -->
+
+<article class="legale">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-9 col-xl-8">
+        <header class="legale__entete">
+          <h1 class="legale__titre">{{ contenu().titre }}</h1>
+
+          @if (contenu().dateMiseAJour; as date) {
+            <p class="legale__date">
+              {{ date.libelle }} : <span>{{ date.valeur }}</span>
+            </p>
+          }
+        </header>
+
+        <!-- Sommaire. Dix sections de texte juridique font une page tres
+             longue au pouce : le visiteur doit pouvoir aller directement a
+             celle qui le concerne, les durees de conservation ou ses droits.
+
+             En routerLink avec un tableau vide, et non href="#ancre" : la page
+             declare <base href="/">, et une URL reduite a un fragment se
+             resout contre l'URL DE BASE, ce qui menerait a l'accueil. -->
+        @if (sections().length > 2) {
+          <nav class="legale__sommaire" aria-labelledby="titre-sommaire">
+            <h2 class="legale__sommaire-titre" id="titre-sommaire">{{ t.sommaire }}</h2>
+            <ol class="legale__sommaire-liste">
+              @for (section of sections(); track section.ancre) {
+                <li>
+                  <a [routerLink]="[]" [fragment]="section.ancre">{{ section.titre }}</a>
+                </li>
+              }
+            </ol>
+          </nav>
+        }
+
+        @for (section of sections(); track section.ancre) {
+          <section class="legale__section">
+            <!-- L'ancre est posee sur le titre lui-meme : l'en-tete du site
+                 est collant, et un titre vise par un fragment se retrouverait
+                 cache derriere lui sans la marge de defilement posee en CSS. -->
+            <h2 class="legale__section-titre" [id]="section.ancre">{{ section.titre }}</h2>
+
+            @for (bloc of section.blocs; track $index) {
+              @switch (bloc.type) {
+                @case ('paragraphe') {
+                  <!-- Le texte reste du texte dans le fichier de contenu : les
+                       adresses de courriel, les adresses web et le renvoi a la
+                       politique de confidentialite sont reconnus au rendu. -->
+                  <p>
+                    <app-texte-avec-liens
+                      [texte]="bloc.texte"
+                      [lienInterne]="lienPolitique"
+                    />
+                  </p>
+                }
+                @case ('liste') {
+                  <ul class="legale__liste">
+                    @for (element of bloc.elements; track $index) {
+                      <li>
+                        <app-texte-avec-liens
+                          [texte]="element"
+                          [lienInterne]="lienPolitique"
+                        />
+                      </li>
+                    }
+                  </ul>
+                }
+              }
+            }
+          </section>
+        }
+      </div>
+    </div>
+  </div>
+</article>

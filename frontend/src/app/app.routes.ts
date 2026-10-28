@@ -34,6 +34,28 @@ export const routes: Routes = [
       ),
   },
   {
+    // Pages legales (CLAUDE.md §16). Les trois partagent le meme gabarit : la
+    // page ne fait que passer son fichier de contenu, les textes appartiennent
+    // au client.
+    path: pageParCle('mentions-legales').chemin,
+    loadComponent: () =>
+      import('./pages/mentions-legales/mentions-legales').then((m) => m.MentionsLegales),
+  },
+  {
+    path: pageParCle('politique-confidentialite').chemin,
+    loadComponent: () =>
+      import('./pages/politique-confidentialite/politique-confidentialite').then(
+        (m) => m.PolitiqueConfidentialite,
+      ),
+  },
+  {
+    path: pageParCle('conditions-generales-de-vente').chemin,
+    loadComponent: () =>
+      import('./pages/conditions-generales-de-vente/conditions-generales-de-vente').then(
+        (m) => m.ConditionsGeneralesDeVente,
+      ),
+  },
+  {
     // Back-office. La coque porte la connexion et le menu, ses ecrans sont des
     // routes filles. En noindex et absent de la navigation : on y accede par
     // son URL, derriere mot de passe (CLAUDE.md §5.7).

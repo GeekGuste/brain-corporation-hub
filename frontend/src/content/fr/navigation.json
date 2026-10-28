@@ -49,7 +49,45 @@
     }
   ],
   "piedDePage": {
+    "$commentaire": [
+      "Liens du pied de page. Les pages legales sont ici, et non dans la",
+      "navigation de tete : elles doivent etre atteignables depuis toutes les",
+      "pages, mais elles ne sont pas un chemin de lecture.",
+      "",
+      "Le referentiel territorial y figure aussi. C est une page publique et",
+      "indexable (CLAUDE.md §5.8) : sans un lien depuis le site, elle n etait",
+      "atteignable que par son URL, ce qui la rendait introuvable pour un",
+      "visiteur comme pour un moteur de recherche.",
+      "",
+      "La cle renvoie a seo/routes.config.json : le chemin d URL n est jamais",
+      "recopie ici."
+    ],
     "mention": "Brain Corporation Hub",
-    "liens": []
+    "liens": [
+      {
+        "cle": "mentions-legales",
+        "libelle": "Mentions légales"
+      },
+      {
+        "cle": "politique-confidentialite",
+        "libelle": "Politique de confidentialité"
+      },
+      {
+        "cle": "conditions-generales-de-vente",
+        "libelle": "Conditions générales de vente"
+      },
+      {
+        "cle": "referentiel-territorial",
+        "libelle": "Référentiel territorial"
+      }
+    ]
+  },
+  "pagesLegales": {
+    "$commentaire": [
+      "Libelles du gabarit des pages legales. Ici et non dans les fichiers de",
+      "contenu : ils appartiennent a l interface, pas aux textes du client, et",
+      "ils seraient recopies trois fois."
+    ],
+    "sommaire": "Sommaire"
   }
 }

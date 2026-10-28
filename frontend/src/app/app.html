@@ -75,8 +75,21 @@
 
 <footer class="pied">
   <div class="container pied__contenu">
+    <!-- Pages legales et referentiel territorial. Dans le pied et non dans la
+         navigation de tete : ils doivent etre atteignables depuis toutes les
+         pages, mais ils ne sont pas un chemin de lecture (CLAUDE.md §16).
+         Les libelles viennent de navigation.json, les chemins de
+         seo/routes.config.json. -->
+    <nav class="pied__navigation" aria-label="Informations légales">
+      <ul class="pied__liens">
+        @for (lien of liensDuPied; track lien.cle) {
+          <li>
+            <a [routerLink]="lien.chemin">{{ lien.libelle }}</a>
+          </li>
+        }
+      </ul>
+    </nav>
+
     <p class="pied__mention">&copy; {{ anneeCourante }} {{ navigation.piedDePage.mention }}</p>
-    <!-- Les liens vers les pages legales sont ajoutes a l'etape 9, depuis
-         navigation.json. -->
   </div>
 </footer>

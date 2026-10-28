@@ -1,0 +1,24 @@
+<!-- Chaque morceau est dans un element, et SANS espace autour de
+     l'interpolation : Angular remplace une suite d'espaces par un espace
+     simple dans un noeud de texte, ce qui ajouterait une espace parasite
+     avant chaque point et apres chaque lien. Les espaces entre les balises,
+     eux, forment des noeuds entierement blancs et sont supprimes.
+
+     L'adresse web s'ouvre dans un nouvel onglet : le visiteur est en train de
+     lire un texte legal, il ne doit pas le perdre pour aller voir la CNIL. -->
+@for (morceau of morceaux(); track $index) {
+  @switch (morceau.type) {
+    @case ('courriel') {
+      <a [href]="morceau.href">{{ morceau.valeur }}</a>
+    }
+    @case ('web') {
+      <a [href]="morceau.href" target="_blank" rel="noopener">{{ morceau.valeur }}</a>
+    }
+    @case ('interne') {
+      <a [routerLink]="morceau.chemin">{{ morceau.valeur }}</a>
+    }
+    @default {
+      <span>{{ morceau.valeur }}</span>
+    }
+  }
+}

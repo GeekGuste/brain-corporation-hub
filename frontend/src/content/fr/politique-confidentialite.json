@@ -1,0 +1,166 @@
+{
+  "$commentaire": [
+    "Politique de confidentialite, FOURNIE PAR LE CLIENT",
+    "(docs/Politique_confidentialite_Brain_Corporation_Hub.pdf, recue le",
+    "28 octobre 2026).",
+    "",
+    "Texte integre TEL QUEL (CLAUDE.md §3) : aucune phrase reecrite, aucune",
+    "phrase ajoutee, aucune phrase retiree. Seules deux choses ont change, et",
+    "elles ne touchent pas aux mots :",
+    "  - les apostrophes droites sont passees en apostrophes typographiques,",
+    "    comme dans tous les autres fichiers de contenu du site ;",
+    "  - les retours a la ligne du PDF sont supprimes, les paragraphes sont",
+    "    reconstitues.",
+    "",
+    "Les numeros de section sont ceux du document du client. Ils sont dans le",
+    "titre, parce qu ils en font partie : la politique y renvoie.",
+    "",
+    "L adresse de courriel et l adresse de la CNIL sont transformees en liens",
+    "au rendu, par detection dans le texte. Elles ne sont donc pas balisees",
+    "ici : le texte reste du texte."
+  ],
+  "titre": "Politique de confidentialité",
+  "$aDemanderAuClient": [
+    "La section 10 du document impose de publier « la version en vigueur et sa",
+    "date de mise a jour ». Cette date appartient au client : elle n est pas",
+    "dans le PDF et nous ne l inventons pas (CLAUDE.md §3). Tant qu elle n est",
+    "pas fournie, la ligne de date affiche le texte de remplacement.",
+    "",
+    "A noter aussi : la politique parle de prospection commerciale et de",
+    "cookies soumis a consentement. Le site n envoie aucune prospection en V1",
+    "et ne pose que des cookies necessaires. Le texte reste tel quel, c est au",
+    "client d en decider, mais il faut qu il le sache."
+  ],
+  "dateMiseAJour": {
+    "libelle": "Dernière mise à jour",
+    "valeur": "[À FOURNIR PAR LE CLIENT]"
+  },
+  "sections": [
+    {
+      "titre": "1. Objet de cette politique",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "La présente politique explique comment Brain Corporation Hub utilise les données personnelles recueillies sur son site, lors des demandes de renseignements, des inscriptions et du suivi des formations. Nous attachons une importance particulière à la confidentialité des échanges et à la protection des informations relatives aux situations administratives."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Elle s’applique aux visiteurs du site, aux personnes qui prennent contact avec nous et aux participants aux formations. Les traitements propres à une consultation individuelle menée par un avocat partenaire font l’objet d’une information distincte de la part du professionnel concerné."
+        }
+      ]
+    },
+    {
+      "titre": "2. Responsable du traitement",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Le responsable du traitement des données personnelles collectées dans le cadre des services présentés sur ce site est Brain Corporation Hub."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Pour toute question relative à la protection des données personnelles ou pour exercer vos droits, vous pouvez nous écrire à : contact@braincorporationhub.com."
+        }
+      ]
+    },
+    {
+      "titre": "3. Données que nous recueillons",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Selon vos démarches, nous pouvons recueillir vos nom et prénom, vos coordonnées, les informations nécessaires à votre demande, à votre inscription et à votre facturation, ainsi que les éléments utiles à l’organisation et au suivi pédagogique de votre formation. Ces renseignements ne doivent être demandés que lorsqu’ils sont effectivement utiles et ne sont pas exigés au stade d’une simple prise de contact."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Nous vous invitons à ne pas communiquer spontanément de récits détaillés de votre situation dans les champs libres du site. Si une pièce est indispensable à une prestation particulière, les modalités de transmission sécurisée et sa durée de conservation vous seront indiquées séparément."
+        }
+      ]
+    },
+    {
+      "titre": "4. Pourquoi nous utilisons vos données et sur quelle base",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Nous utilisons vos données pour répondre à vos demandes de renseignements et préparer une éventuelle inscription (mesures précontractuelles à votre demande) ; gérer votre inscription, votre participation et le suivi de la formation (exécution du contrat) ; établir les justificatifs comptables et respecter nos obligations légales (obligation légale) ; assurer la sécurité du site, prévenir les usages abusifs et gérer les éventuels litiges (intérêt légitime, dans les limites applicables)."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Nous ne vous adressons des communications commerciales par courrier électronique que dans les conditions prévues par la réglementation, notamment sur la base de votre consentement lorsqu’il est requis. Vous pouvez vous désinscrire à tout moment."
+        }
+      ]
+    },
+    {
+      "titre": "5. Qui peut accéder à vos données ?",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Les informations sont accessibles uniquement aux personnes habilitées au sein de Brain Corporation Hub et, dans la limite de leurs missions, aux prestataires intervenant dans l’hébergement, la maintenance, l’inscription, le paiement ou la gestion de la formation. Lorsque ces prestataires agissent pour notre compte, leurs interventions sont encadrées par des engagements contractuels adaptés."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Nous ne vendons pas vos données personnelles."
+        }
+      ]
+    },
+    {
+      "titre": "6. Durées de conservation",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Nous conservons les données pendant une durée proportionnée à leur utilisation : les demandes de renseignements non suivies d’une inscription sont conservées au maximum trois ans après le dernier contact émanant de votre part ; les données nécessaires à la gestion de la formation sont conservées pendant la relation contractuelle puis archivées, si nécessaire, pour la durée applicable à la preuve et aux éventuels litiges ; les documents comptables sont conservés pendant la durée légale correspondante, généralement dix ans."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Les renseignements administratifs facultatifs liés au suivi préventif sont supprimés ou anonymisés lorsqu’ils ne sont plus nécessaires à ce suivi, et au plus tard dans un délai maximal de douze mois après la fin du suivi préventif, sauf obligation légale particulière justifiant une conservation distincte. Les préférences de prospection sont conservées jusqu’au retrait du consentement, sous réserve des éléments nécessaires à la preuve de ce retrait."
+        }
+      ]
+    },
+    {
+      "titre": "7. Sécurité et confidentialité",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Nous mettons en œuvre des mesures techniques et organisationnelles adaptées aux risques : contrôle des accès, authentification des utilisateurs habilités, communications sécurisées, sauvegardes, mises à jour et limitation des données collectées. Aucune transmission sur Internet ne pouvant offrir une sécurité absolue, nous veillons à adapter régulièrement ces mesures."
+        }
+      ]
+    },
+    {
+      "titre": "8. Hébergement, transferts et cookies",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Les données sont hébergées et traitées par les prestataires techniques intervenant pour le fonctionnement de notre site et de nos services, dans le respect des exigences applicables en matière de protection des données. Lorsque des données sont transférées hors de l’Espace économique européen, ces transferts sont encadrés par les garanties prévues par le RGPD."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Le site utilise des cookies nécessaires à son fonctionnement. Lorsque des cookies ou autres traceurs soumis à consentement sont utilisés, votre accord est recueilli avant leur dépôt et vous pouvez modifier vos choix."
+        }
+      ]
+    },
+    {
+      "titre": "9. Vos droits",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Dans les conditions prévues par la réglementation, vous pouvez demander l’accès à vos données, leur rectification, leur effacement, la limitation de leur utilisation ou leur portabilité. Vous pouvez également vous opposer à certains traitements et retirer à tout moment un consentement donné, sans remettre en cause les traitements antérieurs licites."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Pour exercer vos droits, écrivez à contact@braincorporationhub.com. Nous pouvons demander des éléments permettant de vérifier votre identité lorsque cela est nécessaire. Nous répondons en principe dans un délai d’un mois, susceptible d’être prolongé dans les cas prévus par le RGPD."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Si vous estimez que vos droits ne sont pas respectés, vous pouvez introduire une réclamation auprès de la Commission nationale de l’informatique et des libertés (CNIL), sur www.cnil.fr."
+        }
+      ]
+    },
+    {
+      "titre": "10. Modifications",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Cette politique peut être actualisée pour tenir compte de l’évolution des services de Brain Corporation Hub, de ses prestataires ou de la réglementation. La version en vigueur et sa date de mise à jour sont publiées sur le site. En cas de modification substantielle, une information adaptée sera fournie aux personnes concernées."
+        }
+      ]
+    }
+  ]
+}

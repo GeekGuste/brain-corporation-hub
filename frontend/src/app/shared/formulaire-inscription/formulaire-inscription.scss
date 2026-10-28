@@ -247,6 +247,20 @@
     padding-inline-start: 1rem;
     border-inline-start: 3px solid var(--bch-seuil);
   }
+
+  // Le lien vers les conditions de vente. Discret, mais souligne : c'est un
+  // lien, et il doit se voir comme tel.
+  &__cgv {
+    font-size: 0.9375rem;
+    margin-block-end: 1.5rem;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--bch-cible-tactile-min);
+      color: var(--bs-body-color);
+    }
+  }
 }
 
 // =============================================================================
@@ -267,5 +281,45 @@
   &__reference code {
     font-size: 0.9375rem;
     word-break: break-all;
+  }
+
+  // Mention de TVA, obligatoire en auto-entreprise (CLAUDE.md §4).
+  &__mention {
+    font-size: 0.875rem;
+    color: var(--bs-secondary-color);
+  }
+}
+
+// =============================================================================
+// Protection des donnees personnelles
+// -----------------------------------------------------------------------------
+// Mention du client, posee juste avant le bouton d'envoi. En petit corps et sur
+// le fond de page : c'est une information obligatoire, pas un argument de
+// vente. Un filet a gauche la detache du formulaire sans l'encadrer.
+//
+// Aucune couleur ni taille de caractere ecrite ici : tout vient du fichier de
+// theme unique (CLAUDE.md §14).
+// =============================================================================
+.rgpd {
+  margin-block: 2rem 0;
+  padding-inline-start: 1rem;
+  border-inline-start: 3px solid var(--bs-border-color);
+
+  &__titre {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-block-end: 0.5rem;
+  }
+
+  &__texte {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--bs-secondary-color);
+    max-width: var(--bch-mesure);
+    margin-block-end: 0.75rem;
+
+    &--dernier {
+      margin-block-end: 0;
+    }
   }
 }

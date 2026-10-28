@@ -16,10 +16,16 @@
       <p>{{ t.confirmation.texte }}</p>
       <p>{{ t.confirmation.suite }}</p>
       @if (inscription(); as creee) {
-        <p class="confirmation__reference mb-0">
+        <p class="confirmation__reference">
           {{ t.confirmation.reference }} <code>{{ creee.id }}</code>
         </p>
       }
+
+      <!-- Mention de TVA, obligatoire en auto-entreprise. Elle doit figurer
+           sur le justificatif de paiement, dans les conditions de vente ET sur
+           la page de confirmation (CLAUDE.md §4). Elle est lue dans le bloc du
+           paiement, pour que la phrase n'existe qu'une fois. -->
+      <p class="confirmation__mention mb-0">{{ t.paiement.mentionTva }}</p>
     </div>
   }
 
@@ -72,6 +78,15 @@
              renonciation : la formation ne se deroule jamais avant son
              expiration (CLAUDE.md §4). -->
         <p class="paiement__retractation">{{ t.paiement.retractation }}</p>
+
+        <!-- Lien vers les conditions de vente, atteignable a l'endroit ou l'on
+             paie. Un LIEN, et rien d'autre : aucune phrase du type « en
+             payant, vous acceptez les conditions ». Ces conditions ne sont pas
+             encore fournies, et la facon de recueillir cette acceptation est
+             une decision du client, qui est juriste (CLAUDE.md §3). -->
+        <p class="paiement__cgv">
+          <a [routerLink]="lienCgv">{{ t.paiement.lienCgv }}</a>
+        </p>
 
         <div class="formulaire__action">
           <button
@@ -440,6 +455,28 @@
         </div>
       </div>
     }
+
+    <!-- ====================================================================
+         PROTECTION DES DONNEES PERSONNELLES
+         --------------------------------------------------------------------
+         Mention FOURNIE PAR LE CLIENT, integree telle quelle (CLAUDE.md §3).
+
+         Posee juste avant le bouton d'envoi, et affichee en clair plutot que
+         repliee : l'information doit etre donnee AU MOMENT de la collecte,
+         pas derriere un clic. Le formulaire collecte des donnees sensibles
+         par nature, la situation administrative d'une personne etrangere
+         (CLAUDE.md §15).
+
+         Le texte reste du texte dans le fichier de contenu : l'adresse de
+         courriel et le renvoi a la politique de confidentialite deviennent
+         des liens au rendu. -->
+    <section class="rgpd" aria-labelledby="titre-rgpd">
+      <h3 class="rgpd__titre" id="titre-rgpd">{{ t.rgpd.titre }}</h3>
+      <p class="rgpd__texte">
+        <app-texte-avec-liens [texte]="t.rgpd.mention" [lienInterne]="lienPolitique" />
+      </p>
+      <p class="rgpd__texte rgpd__texte--dernier">{{ t.rgpd.champsObligatoires }}</p>
+    </section>
 
     <div class="formulaire__action">
       <button class="btn btn-primary btn-lg" type="submit" [disabled]="envoiEnCours()">

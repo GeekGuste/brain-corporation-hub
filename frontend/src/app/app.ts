@@ -31,5 +31,17 @@ export class App {
     chemin: cheminDePage(lien.cle),
   }));
 
+  /**
+   * Liens du pied de page : pages legales et referentiel territorial.
+   *
+   * Dans le pied et non dans la navigation de tete : ils doivent etre
+   * atteignables depuis toutes les pages, mais ils ne sont pas un chemin de
+   * lecture (CLAUDE.md §16).
+   */
+  protected readonly liensDuPied = navigation.piedDePage.liens.map((lien) => ({
+    ...lien,
+    chemin: cheminDePage(lien.cle),
+  }));
+
   protected readonly anneeCourante = new Date().getFullYear();
 }

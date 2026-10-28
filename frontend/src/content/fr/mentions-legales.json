@@ -1,0 +1,73 @@
+{
+  "$commentaire": [
+    "Mentions legales. LE CLIENT NE LES A PAS ENCORE FOURNIES.",
+    "",
+    "La page existe des maintenant dans l arborescence, avec des contenus",
+    "marques « [A FOURNIR PAR LE CLIENT] » (CLAUDE.md §16). Rien n est invente :",
+    "ni numero SIREN, ni adresse, ni nom d hebergeur (CLAUDE.md §3).",
+    "",
+    "Les intitules de section sont ceux qu impose la loi pour un editeur de",
+    "site professionnel : ils indiquent au client QUOI fournir. Les valeurs,",
+    "elles, sont vides."
+  ],
+  "titre": "Mentions légales",
+  "$aDemanderAuClient": [
+    "Elements a fournir, un par section :",
+    "  - editeur : denomination, forme juridique, numero SIREN ou SIRET,",
+    "    adresse du siege, courriel, telephone, nom du responsable de la",
+    "    publication ;",
+    "  - hebergeur : nom, adresse et telephone (IONOS, a confirmer avec les",
+    "    coordonnees exactes de l entite contractante) ;",
+    "  - activite de formation : numero de declaration d activite si le client",
+    "    en detient un, et l organisme aupres duquel il est enregistre ;",
+    "  - mediateur de la consommation : nom et adresse. C est une obligation",
+    "    pour une vente a des particuliers, et nous ne pouvons pas la deviner."
+  ],
+  "sections": [
+    {
+      "titre": "Éditeur du site",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "[À FOURNIR PAR LE CLIENT]"
+        }
+      ]
+    },
+    {
+      "titre": "Responsable de la publication",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "[À FOURNIR PAR LE CLIENT]"
+        }
+      ]
+    },
+    {
+      "titre": "Hébergeur",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "[À FOURNIR PAR LE CLIENT]"
+        }
+      ]
+    },
+    {
+      "titre": "Activité de formation",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "[À FOURNIR PAR LE CLIENT]"
+        }
+      ]
+    },
+    {
+      "titre": "Nous contacter",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Pour toute question relative au site, vous pouvez écrire à contact@braincorporationhub.com."
+        }
+      ]
+    }
+  ]
+}

@@ -25,6 +25,26 @@
     },
     {
       "$commentaire": [
+        "Pages legales (CLAUDE.md §16). Indexables : une page legale doit etre",
+        "trouvable, c est ce qui prouve qu elle est publiee. Elles sont liees",
+        "depuis le pied de page, donc depuis toutes les pages du site."
+      ],
+      "cle": "mentions-legales",
+      "chemin": "mentions-legales",
+      "indexable": true
+    },
+    {
+      "cle": "politique-confidentialite",
+      "chemin": "politique-confidentialite",
+      "indexable": true
+    },
+    {
+      "cle": "conditions-generales-de-vente",
+      "chemin": "conditions-generales-de-vente",
+      "indexable": true
+    },
+    {
+      "$commentaire": [
         "Page publique du referentiel territorial (CLAUDE.md §5.8).",
         "Consultation UNIQUEMENT : aucun ajout, retrait ni modification. L interface",
         "d administration du referentiel est hors perimetre V1 (§8).",
