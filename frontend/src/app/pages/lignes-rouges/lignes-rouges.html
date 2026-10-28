@@ -61,6 +61,19 @@
            le formulaire et le paiement (etapes 4 et 5). -->
       <div class="col-12 col-lg-10 col-xl-8">
         <div id="inscription" class="inscription__panneau">
+          <!-- Le logo du programme, une seconde fois, au moment de payer.
+               Ce panneau est long : au bas d une page de lecture, puis
+               derriere le formulaire et le cadre de Stripe, le bandeau de
+               tete est hors de l ecran depuis longtemps. Le visiteur voit
+               donc POUR QUOI il paie a l instant ou il paie, ce qui compte
+               d autant plus que le libelle qui apparaitra sur son releve
+               bancaire porte le nom de la formation.
+
+               Plus petit que dans le bandeau : il situe, il n annonce pas.
+               Decoratif, comme dans le bandeau : le titre juste en dessous
+               porte deja le nom. -->
+          <app-logo-lignes-rouges class="inscription__logo" />
+
           <h2 id="titre-inscription" class="inscription__titre">
             {{ inscription.titre }}
           </h2>
