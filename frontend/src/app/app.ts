@@ -4,10 +4,11 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import navigation from '../content/fr/navigation.json';
 import { cheminDePage } from './core/config/site-routes';
 import type { EmplacementLogo } from './core/content/modele-contenu';
+import { MentionCookies } from './shared/mention-cookies/mention-cookies';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, MentionCookies],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

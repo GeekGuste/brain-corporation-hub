@@ -1,0 +1,57 @@
+// Mention d'information sur les cookies. Aucune couleur ni taille de caractere
+// ecrite ici : tout vient du fichier de theme unique (CLAUDE.md §14).
+//
+// Collee en bas de la fenetre, sur l'encre profonde, comme le pied de page :
+// elle en est le prolongement et ne ressemble pas a une alerte. Pas de voile
+// sombre sur la page, pas de fenetre modale, pas d'animation : elle n'attend
+// aucune reponse (CLAUDE.md §14, ni compteur ni popup).
+
+.cookies {
+  position: fixed;
+  inset-inline: 0;
+  inset-block-end: 0;
+  // Au-dessus du contenu et de l'en-tete collant, sous le lien d'evitement.
+  z-index: 1040;
+  background-color: var(--bch-encre);
+  border-block-start: 3px solid var(--bch-seuil);
+  // Au-dela de l'encoche des telephones recents.
+  padding-block-end: env(safe-area-inset-bottom);
+
+  &__contenu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding-block: 1.125rem;
+
+    // Le texte et le bouton cote a cote des que la place existe. Empiles sur
+    // telephone : trois lignes de texte plus un bouton a cote donneraient une
+    // colonne de texte de six mots de large.
+    @media (min-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+  }
+
+  &__texte {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--bch-sur-encre-voile);
+    max-width: var(--bch-mesure);
+    margin: 0;
+
+    a {
+      color: var(--bch-sur-encre);
+    }
+  }
+
+  // Le bouton ne se comprime pas et ne passe pas a la ligne : c'est la seule
+  // action de la bande.
+  &__bouton {
+    flex: none;
+    min-height: var(--bch-cible-tactile-min);
+    white-space: nowrap;
+  }
+}
