@@ -80,7 +80,16 @@
       "blocs": [
         {
           "type": "paragraphe",
-          "texte": "Nous utilisons vos données pour répondre à vos demandes de renseignements et préparer une éventuelle inscription (mesures précontractuelles à votre demande) ; gérer votre inscription, votre participation et le suivi de la formation (exécution du contrat) ; établir les justificatifs comptables et respecter nos obligations légales (obligation légale) ; assurer la sécurité du site, prévenir les usages abusifs et gérer les éventuels litiges (intérêt légitime, dans les limites applicables)."
+          "texte": "Nous utilisons vos données pour :"
+        },
+        {
+          "type": "liste",
+          "elements": [
+            "répondre à vos demandes de renseignements et préparer une éventuelle inscription (mesures précontractuelles à votre demande)",
+            "gérer votre inscription, votre participation et le suivi de la formation (exécution du contrat)",
+            "établir les justificatifs comptables et respecter nos obligations légales (obligation légale)",
+            "assurer la sécurité du site, prévenir les usages abusifs et gérer les éventuels litiges (intérêt légitime, dans les limites applicables)"
+          ]
         },
         {
           "type": "paragraphe",
@@ -162,5 +171,22 @@
         }
       ]
     }
+  ],
+  "$miseEnFormeSignalee": [
+    "L article 4 est rendu en LISTE A PUCES, alors que le document du client en",
+    "fait un seul paragraphe.",
+    "",
+    "Les mots sont rigoureusement les memes. Ce qui change : « pour repondre »",
+    "devient « pour : » puis « repondre », et les trois points-virgules qui",
+    "separaient les quatre finalites deviennent quatre elements de liste. Le",
+    "point final disparait avec le dernier point-virgule.",
+    "",
+    "Pourquoi : quatre finalites et quatre bases legales dans une seule phrase",
+    "de soixante mots sont illisibles pour un public dont le francais n est pas",
+    "la langue maternelle (CLAUDE.md §13). La liste dit exactement la meme",
+    "chose, en se laissant lire.",
+    "",
+    "Demande et validee par le client le 28 octobre 2026. L article 6, qui a la",
+    "meme structure, reste en paragraphe : il n a pas ete valide."
   ]
 }

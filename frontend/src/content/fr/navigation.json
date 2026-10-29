@@ -8,6 +8,16 @@
     "n'est jamais recopie ici."
   ],
   "lienEvitement": "Aller au contenu principal",
+  "indications": {
+    "$commentaire": [
+      "Indications lues par les lecteurs d ecran, invisibles a l ecran.",
+      "Un lien EXTERNE ouvre un onglet neuf et doit le dire : sinon la personne",
+      "ne comprend pas pourquoi le bouton « page precedente » ne la ramene plus",
+      "(CLAUDE.md §13). Les liens internes au site, eux, restent dans l onglet",
+      "courant et n ont donc rien a annoncer."
+    ],
+    "nouvelleFenetre": "nouvelle fenêtre"
+  },
   "marque": "Brain Corporation Hub",
   "logo": {
     "$commentaire": [
@@ -46,6 +56,10 @@
     {
       "cle": "lignes-rouges",
       "libelle": "Lignes Rouges"
+    },
+    {
+      "cle": "contact",
+      "libelle": "Contact"
     }
   ],
   "piedDePage": {
@@ -89,5 +103,28 @@
       "ils seraient recopies trois fois."
     ],
     "sommaire": "Sommaire"
+  },
+  "mentionCookies": {
+    "$commentaire": [
+      "Mention d INFORMATION sur les cookies, et non bandeau de consentement.",
+      "",
+      "Le site ne depose que des cookies strictement necessaires : aucun cookie",
+      "de mesure d audience, aucun cookie publicitaire, aucun suivi d un site a",
+      "l autre. Les seuls poses sont celui de la session de la page de suivi et",
+      "ceux de notre prestataire de paiement, qui servent a detecter la fraude",
+      "et se chargent uniquement quand le cadre de paiement s affiche.",
+      "",
+      "Ces cookies-la sont dispenses de consentement. Demander un accord dont on",
+      "n a pas besoin serait trompeur, et un bouton « Refuser » qui ne refuse",
+      "rien l est encore plus. La mention informe, elle ne demande rien : il n y",
+      "a donc qu un bouton, et il ne fait que ranger la mention.",
+      "",
+      "Le texte est volontairement explicite sur ce que le site NE fait pas :",
+      "c est un signal de confiance avant un paiement, pour un public qui confie",
+      "des informations sur sa situation administrative (CLAUDE.md §15)."
+    ],
+    "texte": "Ce site ne dépose que les cookies nécessaires à son fonctionnement et au paiement sécurisé. Il ne mesure pas votre audience, ne vous montre aucune publicité et ne vous suit pas d’un site à l’autre. Pour en savoir plus, consultez notre Politique de confidentialité.",
+    "fermer": "J’ai compris",
+    "etiquette": "Information sur les cookies"
   }
 }

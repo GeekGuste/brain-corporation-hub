@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import navigation from '../../../content/fr/navigation.json';
 import { decouperLiens, type LienInterne } from './decoupe-liens';
 
 /**
@@ -19,6 +20,9 @@ import { decouperLiens, type LienInterne } from './decoupe-liens';
 })
 export class TexteAvecLiens {
   readonly texte = input.required<string>();
+
+  /** Indications pour lecteurs d'ecran, lues dans navigation.json. */
+  protected readonly t = navigation.indications;
 
   /**
    * Phrase a transformer en lien vers une page du site, par exemple

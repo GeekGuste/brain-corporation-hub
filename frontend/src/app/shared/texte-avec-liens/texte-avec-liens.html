@@ -4,15 +4,21 @@
      avant chaque point et apres chaque lien. Les espaces entre les balises,
      eux, forment des noeuds entierement blancs et sont supprimes.
 
-     L'adresse web s'ouvre dans un nouvel onglet : le visiteur est en train de
-     lire un texte legal, il ne doit pas le perdre pour aller voir la CNIL. -->
+     Seuls les liens EXTERNES ouvrent un onglet neuf : le site de la CNIL
+     quitte notre domaine, et on ne doit pas perdre le texte legal qu'on etait
+     en train de lire. Les liens internes, eux, restent dans l'onglet courant,
+     comme tous les autres liens du site.
+
+     L'indication « nouvelle fenetre » est lue par les lecteurs d'ecran et
+     invisible a l'ecran : sans elle, la personne ne comprend pas pourquoi le
+     bouton « page precedente » ne la ramene plus (CLAUDE.md §13). -->
 @for (morceau of morceaux(); track $index) {
   @switch (morceau.type) {
     @case ('courriel') {
       <a [href]="morceau.href">{{ morceau.valeur }}</a>
     }
     @case ('web') {
-      <a [href]="morceau.href" target="_blank" rel="noopener">{{ morceau.valeur }}</a>
+      <a [href]="morceau.href" target="_blank" rel="noopener">{{ morceau.valeur }}<span class="visually-hidden">({{ t.nouvelleFenetre }})</span></a>
     }
     @case ('interne') {
       <a [routerLink]="morceau.chemin">{{ morceau.valeur }}</a>
