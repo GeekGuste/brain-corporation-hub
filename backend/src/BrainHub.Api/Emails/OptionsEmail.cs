@@ -54,6 +54,28 @@ public sealed class OptionsEmail
     public long ModeleNotification { get; init; }
 
     /// <summary>
+    /// Identifiant du modele Mailjet du MESSAGE DE CONTACT, envoye aux adresses
+    /// internes quand un visiteur remplit le formulaire de contact.
+    ///
+    /// Contrairement aux deux precedents, zero ne s'ignore PAS en silence :
+    /// l'endpoint repond une erreur et le visiteur est invite a ecrire
+    /// directement. Un formulaire qui affiche « message envoye » sans rien
+    /// envoyer serait pire qu'un formulaire en panne, puisque le visiteur
+    /// attendrait une reponse qui ne viendra jamais.
+    /// </summary>
+    public long ModeleContact { get; init; }
+
+    /// <summary>
+    /// Adresse qui recoit les messages de contact lorsque la liste des
+    /// destinataires de la page de suivi est vide.
+    ///
+    /// Sans ce filet, un deploiement neuf aurait un formulaire de contact qui
+    /// repond « envoye » a personne. Ce n'est pas un secret : c'est l'adresse
+    /// publiee par le client dans ses propres documents.
+    /// </summary>
+    public string ContactDestinataireDeSecours { get; init; } = string.Empty;
+
+    /// <summary>
     /// Mode bac a sable de Mailjet : la requete est validee de bout en bout
     /// mais aucun email ne part. Utile en preprod et en developpement, pour ne
     /// pas ecrire a de vraies adresses pendant les essais.

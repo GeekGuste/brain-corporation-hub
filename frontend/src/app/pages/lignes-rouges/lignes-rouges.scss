@@ -143,3 +143,15 @@
     --bch-hauteur-logo-programme: 4.5rem;
   }
 }
+
+// Renvoi vers la page de contact, apres l'accordeon. Discret : il s'adresse a
+// la minorite qui n'a pas trouve sa reponse, le reste doit aller au formulaire.
+.faq__relance {
+  font-size: 1rem;
+  color: var(--bs-secondary-color);
+  margin-block: 1.5rem 0;
+
+  a {
+    color: var(--bs-body-color);
+  }
+}

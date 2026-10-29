@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import contenu from '../../../content/fr/lignes-rouges.json';
+import { cheminDePage } from '../../core/config/site-routes';
 import type { ContenuDePage } from '../../core/content/modele-contenu';
 import { Seo } from '../../core/seo/seo';
 import { FormulaireInscription } from '../../shared/formulaire-inscription/formulaire-inscription';
@@ -24,6 +26,8 @@ interface QuestionFaq {
 interface BlocFaq {
   readonly titre: string;
   readonly questions: readonly QuestionFaq[];
+  /** Renvoi vers la page de contact, pour la question qui n y est pas. */
+  readonly relance: { readonly texte: string; readonly libelle: string };
 }
 
 /** Bloc d'inscription. Produit d'apres CLAUDE.md §4, pas fourni par le client. */
@@ -35,7 +39,7 @@ interface BlocInscription {
 
 @Component({
   selector: 'app-lignes-rouges',
-  imports: [PageContenu, FormulaireInscription, LogoLignesRouges],
+  imports: [PageContenu, FormulaireInscription, LogoLignesRouges, RouterLink],
   templateUrl: './lignes-rouges.html',
   styleUrl: './lignes-rouges.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -59,6 +63,9 @@ export class LignesRouges {
    * moment de decider.
    */
   protected readonly faq = contenu.faq as unknown as BlocFaq;
+
+  /** Chemin de la page de contact, jamais ecrit en dur (CLAUDE.md §12). */
+  protected readonly versContact = cheminDePage('contact');
 
   constructor() {
     inject(Seo).appliquer('lignes-rouges');

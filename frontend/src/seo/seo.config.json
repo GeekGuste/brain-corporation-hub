@@ -32,6 +32,12 @@
       "ogTitre": "Lignes Rouges",
       "ogDescription": "Prévenir les risques liés au droit au séjour."
     },
+    "contact": {
+      "titre": "Nous écrire",
+      "description": "Une question sur la formation Lignes Rouges avant de vous inscrire ? Écrivez-nous, nous vous répondons par email.",
+      "ogTitre": "Nous écrire",
+      "ogDescription": "Une question avant de vous inscrire ?"
+    },
     "mentions-legales": {
       "titre": "Mentions légales",
       "description": "Éditeur, responsable de la publication et hébergeur du site Brain Corporation Hub."

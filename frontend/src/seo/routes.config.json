@@ -25,6 +25,16 @@
     },
     {
       "$commentaire": [
+        "Page de contact. HORS DU PERIMETRE du §5, demandee explicitement et",
+        "acceptee en V1. Indexable : « contacter Brain Corporation Hub » est une",
+        "recherche legitime, et la page porte l adresse de la marque."
+      ],
+      "cle": "contact",
+      "chemin": "contact",
+      "indexable": true
+    },
+    {
+      "$commentaire": [
         "Pages legales (CLAUDE.md §16). Indexables : une page legale doit etre",
         "trouvable, c est ce qui prouve qu elle est publiee. Elles sont liees",
         "depuis le pied de page, donc depuis toutes les pages du site."

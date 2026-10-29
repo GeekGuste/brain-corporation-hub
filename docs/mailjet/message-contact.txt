@@ -1,0 +1,20 @@
+QUESTION REÇUE PAR LE FORMULAIRE DE CONTACT
+
+{{var:message:""}}
+
+--
+
+Nom      : {{var:prenom:""}} {{var:nom:""}}
+Email    : {{var:email:""}}
+{% if var:telephone != "" %}Téléphone : {{var:telephone:""}}
+{% endif %}
+Répondez directement à ce message : l'adresse du visiteur est en
+Reply-To.
+
+Ce message n'est enregistré nulle part ailleurs : cet email est
+l'original. Ne le supprimez pas avant d'avoir répondu.
+
+--
+Message automatique de Brain Corporation Hub.
+Vous le recevez parce que votre adresse figure dans la liste des
+notifications du back-office.

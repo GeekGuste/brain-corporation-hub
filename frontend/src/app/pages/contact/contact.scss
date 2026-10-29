@@ -1,0 +1,166 @@
+// Page de contact. Aucune couleur ni taille de caractere ecrite ici : tout
+// vient du fichier de theme unique (CLAUDE.md §14).
+
+// =============================================================================
+// Bandeau de tete
+// -----------------------------------------------------------------------------
+// Version reduite de celui de page-contenu, redeclaree ici parce que les styles
+// de composant sont encapsules : cette page n'utilise pas le gabarit editorial.
+// Seule la mise en page est reprise, toutes les valeurs viennent du theme.
+// =============================================================================
+.bandeau {
+  background-color: var(--bch-encre);
+  color: var(--bch-sur-encre-voile);
+  padding-block: 1.5rem;
+
+  @media (min-width: 768px) {
+    padding-block: calc(var(--bch-espace-bandeau) * 0.625);
+    --bch-h1: 3rem;
+    --bch-mesure-titre: 26ch;
+    --bch-chapo: 1.3125rem;
+  }
+
+  &__titre {
+    color: var(--bch-sur-encre);
+    margin-block-end: 1.25rem;
+  }
+
+  &__chapo {
+    max-width: var(--bch-mesure);
+
+    p:last-child {
+      margin-block-end: 0;
+    }
+  }
+}
+
+.surtitre {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--bch-sur-encre-voile);
+  max-width: 44ch;
+  margin-block-end: 1rem;
+  padding-inline-start: 0.875rem;
+  border-inline-start: 3px solid var(--bch-seuil);
+
+  @media (min-width: 768px) {
+    margin-block-end: 1.5rem;
+  }
+}
+
+// =============================================================================
+// Le formulaire
+// -----------------------------------------------------------------------------
+// Dans un panneau, comme celui de l'inscription : c'est le meme geste, et le
+// visiteur reconnait l'endroit ou l'on agit.
+// =============================================================================
+.contact {
+  padding-block: var(--bch-espace-section);
+
+  &__panneau {
+    background-color: var(--bch-papier);
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    // Le filet de seuil en tete du panneau : le motif du site.
+    border-block-start: 3px solid var(--bch-seuil);
+    padding: 1.5rem;
+
+    @media (min-width: 768px) {
+      padding: 2rem;
+    }
+  }
+
+  &__titre {
+    font-size: var(--bch-h3);
+    margin-block-end: 1.5rem;
+  }
+
+  // Le champ de message ne se redimensionne qu'en hauteur : une poignee libre
+  // casse la mise en page sur petit ecran.
+  &__message {
+    resize: vertical;
+    min-height: 9rem;
+  }
+
+  &__compteur {
+    font-size: 0.875rem;
+    color: var(--bs-secondary-color);
+    margin-block: 0.25rem 0;
+  }
+}
+
+// Titre d'une alerte. Au corps du texte : une alerte n'est pas une section, et
+// un gros titre rouge sur un formulaire fait peur sans rien apprendre.
+.alert-titre {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-block-end: 0.375rem;
+}
+
+// =============================================================================
+// Accuse de reception
+// =============================================================================
+.confirmation {
+  &__titre {
+    font-size: var(--bch-h3);
+    margin-block-end: 0.75rem;
+  }
+}
+
+// =============================================================================
+// Protection des donnees personnelles
+// -----------------------------------------------------------------------------
+// Mention du client, posee juste avant le bouton d'envoi. En petit corps : une
+// information obligatoire, pas un argument. Un filet a gauche la detache du
+// formulaire sans l'encadrer.
+// =============================================================================
+.rgpd {
+  padding-inline-start: 1rem;
+  border-inline-start: 3px solid var(--bs-border-color);
+
+  &__titre {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-block-end: 0.5rem;
+  }
+
+  &__texte {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--bs-secondary-color);
+    max-width: var(--bch-mesure);
+    margin-block-end: 0.75rem;
+
+    &--dernier {
+      margin-block-end: 0;
+    }
+  }
+}
+
+// =============================================================================
+// Appel a l'action de cloture
+// -----------------------------------------------------------------------------
+// Sur l'encre profonde, comme le bandeau de tete : la page est tenue par ses
+// deux extremites. Redeclare ici pour la meme raison que le bandeau.
+// =============================================================================
+.cloture {
+  background-color: var(--bch-encre);
+  color: var(--bch-sur-encre-voile);
+  padding-block: var(--bch-espace-section);
+  text-align: center;
+
+  &__titre {
+    color: var(--bch-sur-encre);
+    max-width: none;
+    margin-block-end: 1rem;
+  }
+
+  &__texte {
+    max-width: 52ch;
+    margin-inline: auto;
+    margin-block-end: 2rem;
+    font-size: var(--bch-chapo);
+    line-height: 1.55;
+  }
+}

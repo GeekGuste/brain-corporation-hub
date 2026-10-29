@@ -221,4 +221,121 @@ public sealed class ServiceEmail(
             journal.LogError(exception, "Echec de la notification interne pour {Id}", inscription.Id);
         }
     }
+
+    /// <summary>
+    /// Transmet un message du formulaire de contact aux adresses internes.
+    ///
+    /// Renvoie vrai si le message est parti. Ici, contrairement aux deux envois
+    /// precedents, l'echec COMPTE : rien n'est enregistre en base, donc un
+    /// message qui ne part pas n'existe plus. L'endpoint le dit au visiteur au
+    /// lieu d'afficher une confirmation mensongere.
+    ///
+    /// UN MESSAGE PAR DESTINATAIRE, comme pour les notifications de paiement :
+    /// personne n'a besoin de voir la liste de diffusion interne.
+    ///
+    /// L'adresse du visiteur est posee en « ReplyTo » : repondre depuis sa
+    /// messagerie suffit, sans recopier l'adresse a la main et sans risque de
+    /// faute de frappe.
+    /// </summary>
+    public async Task<bool> EnvoyerMessageContactAsync(
+        string prenom,
+        string nom,
+        string email,
+        string telephone,
+        string message,
+        IReadOnlyCollection<string> destinataires,
+        CancellationToken annulation)
+    {
+        if (_options.ModeleContact <= 0)
+        {
+            journal.LogError(
+                "Aucun modele Mailjet de contact configure : un message de visiteur est "
+                + "PERDU. Renseignez Mailjet:ModeleContact.");
+            return false;
+        }
+
+        // A defaut d'adresses saisies dans la page de suivi, le filet de
+        // configuration. Sans lui, le formulaire repondrait « envoye » a
+        // personne.
+        var adresses = destinataires.Count > 0
+            ? destinataires
+            : string.IsNullOrWhiteSpace(_options.ContactDestinataireDeSecours)
+                ? []
+                : (IReadOnlyCollection<string>)[_options.ContactDestinataireDeSecours];
+
+        if (adresses.Count == 0)
+        {
+            journal.LogError(
+                "Aucun destinataire pour les messages de contact : un message de visiteur "
+                + "est PERDU. Ajoutez une adresse dans la page de suivi, ou renseignez "
+                + "Mailjet:ContactDestinataireDeSecours.");
+            return false;
+        }
+
+        var messages = adresses.Select(adresse => new
+        {
+            From = new { Email = _options.ExpediteurEmail, Name = _options.ExpediteurNom },
+            To = new[] { new { Email = adresse } },
+
+            // Repondre au visiteur sans recopier son adresse.
+            ReplyTo = new { Email = email, Name = $"{prenom} {nom}" },
+            TemplateID = _options.ModeleContact,
+            TemplateLanguage = true,
+            Variables = new Dictionary<string, object>
+            {
+                ["prenom"] = prenom,
+                ["nom"] = nom,
+                ["email"] = email,
+
+                // Chaine vide et non absente quand le visiteur n'a pas donne
+                // son numero : le modele Mailjet teste une valeur vide, il ne
+                // sait pas tester une variable manquante.
+                ["telephone"] = telephone,
+                ["message"] = message,
+            },
+        }).ToArray();
+
+        var corps = new { Messages = messages, SandboxMode = _options.BacASable };
+
+        using var requete = new HttpRequestMessage(HttpMethod.Post, "https://api.mailjet.com/v3.1/send")
+        {
+            Content = new StringContent(
+                JsonSerializer.Serialize(corps),
+                Encoding.UTF8,
+                "application/json"),
+        };
+
+        var identifiants = Convert.ToBase64String(
+            Encoding.UTF8.GetBytes($"{_options.CleApi}:{_options.CleSecrete}"));
+        requete.Headers.Authorization = new AuthenticationHeaderValue("Basic", identifiants);
+
+        try
+        {
+            using var reponse = await client.SendAsync(requete, annulation);
+
+            if (!reponse.IsSuccessStatusCode)
+            {
+                // Le corps de reponse de Mailjet decrit l'erreur. Le message du
+                // visiteur, lui, n'est PAS journalise : il peut contenir le
+                // recit d'une situation administrative (CLAUDE.md §15).
+                var detail = await reponse.Content.ReadAsStringAsync(annulation);
+                journal.LogError(
+                    "Mailjet a refuse un message de contact : {Code} {Detail}",
+                    (int)reponse.StatusCode,
+                    detail);
+                return false;
+            }
+
+            journal.LogInformation(
+                "Message de contact transmis a {Nombre} destinataire(s){BacASable}",
+                adresses.Count,
+                _options.BacASable ? " (bac a sable, rien n'est parti)" : string.Empty);
+            return true;
+        }
+        catch (Exception exception) when (exception is HttpRequestException or TaskCanceledException)
+        {
+            journal.LogError(exception, "Echec de l'appel a Mailjet pour un message de contact");
+            return false;
+        }
+    }
 }

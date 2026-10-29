@@ -34,6 +34,13 @@ export const routes: Routes = [
       ),
   },
   {
+    // Page de contact. HORS DU PERIMETRE du §5 de CLAUDE.md, demandee
+    // explicitement et acceptee en V1 : les visiteurs ont des questions avant
+    // de s'inscrire, et la foire aux questions n'y repond pas toujours.
+    path: pageParCle('contact').chemin,
+    loadComponent: () => import('./pages/contact/contact').then((m) => m.Contact),
+  },
+  {
     // Pages legales (CLAUDE.md §16). Les trois partagent le meme gabarit : la
     // page ne fait que passer son fichier de contenu, les textes appartiennent
     // au client.

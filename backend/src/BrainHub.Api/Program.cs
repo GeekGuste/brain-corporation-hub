@@ -1,4 +1,5 @@
 using System.Threading.RateLimiting;
+using BrainHub.Api.Contact;
 using BrainHub.Api.Emails;
 using BrainHub.Api.Inscriptions;
 using BrainHub.Api.Paiement;
@@ -173,6 +174,24 @@ builder.Services.AddRateLimiter(options =>
                 Window = TimeSpan.FromMinutes(1),
                 QueueLimit = 0,
             }));
+
+    // Formulaire de contact : huit envois par dix minutes et par adresse.
+    //
+    // Le compte inclut les envois REFUSES, parce que le limiteur s execute
+    // avant la validation : une personne qui corrige son adresse email deux
+    // fois a deja consomme trois jetons. Huit laisse donc la place aux
+    // corrections, et laisse aussi passer deux adresses derriere un meme
+    // routeur, sans pour autant permettre d inonder les boites internes. Le
+    // champ piege arrete de son cote la plupart des robots.
+    options.AddPolicy(EndpointsContact.LimiteEnvoi, contexte =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: contexte.Connection.RemoteIpAddress?.ToString() ?? "inconnu",
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 8,
+                Window = TimeSpan.FromMinutes(10),
+                QueueLimit = 0,
+            }));
 });
 
 // -----------------------------------------------------------------------------
@@ -305,6 +324,7 @@ app.MapperSuivi();
 app.MapperNotifications();
 app.MapperReferentiels();
 app.MapperInscriptions();
+app.MapperContact();
 
 app.MapHealthChecks("/sante/vivant", new()
 {

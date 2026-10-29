@@ -364,6 +364,15 @@
         "question": "Je suis déjà en difficulté. Cette formation est-elle pour moi ?",
         "reponse": "Elle est conçue pour anticiper, pas pour traiter une difficulté déjà installée. Si vous avez reçu un refus de titre ou une obligation de quitter le territoire, consultez un avocat sans attendre : c’est l’urgence qui prime. La formation ne remplace pas cette démarche."
       }
-    ]
+    ],
+    "relance": {
+      "$commentaire": [
+        "Posee APRES l accordeon et AVANT le formulaire : une question sans reponse",
+        "est la derniere chose qui empeche de s inscrire. Le lien mene a la page de",
+        "contact, qui est hors du perimetre du §5 et a ete demandee explicitement."
+      ],
+      "texte": "Votre question n’est pas dans cette liste ?",
+      "libelle": "Posez-la nous"
+    }
   }
 }

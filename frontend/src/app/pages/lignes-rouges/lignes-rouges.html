@@ -35,6 +35,14 @@
             <p class="faq__reponse">{{ item.reponse }}</p>
           </details>
         }
+
+        <!-- Une question sans reponse est la derniere chose qui empeche de
+             s inscrire : le renvoi vers le contact est donc ici, entre
+             l accordeon et le formulaire, et pas ailleurs. -->
+        <p class="faq__relance">
+          {{ faq.relance.texte }}
+          <a [routerLink]="versContact">{{ faq.relance.libelle }}</a>
+        </p>
       </div>
     </div>
   </div>
