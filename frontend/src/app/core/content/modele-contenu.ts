@@ -52,6 +52,15 @@ export interface VisuelDePage {
   readonly hauteur: number | null;
   /** Illustration de repli, et identite visuelle de la page. */
   readonly motif: NomDeMotif;
+  /**
+   * Legende affichee sur l image, facultative.
+   *
+   * Sert a dire « photographie d illustration » la ou la photo pourrait
+   * etre prise pour un portrait reel : la section des formateurs montre un
+   * avocat, et les formateurs de la methode sont des avocats. Sans cette
+   * mention, le visiteur croirait voir celui qui l animera (CLAUDE.md §3).
+   */
+  readonly legende?: string;
 }
 
 /** Un chiffre cle affiche en tete de la page de vente. */

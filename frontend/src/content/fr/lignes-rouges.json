@@ -244,22 +244,17 @@
       ],
       "visuel": {
         "$commentaire": [
-          "IMAGE PROVISOIRE, a remplacer par celle du client.",
-          "Le fichier se trouve dans frontend/public/visuels-provisoires/.",
-          "",
-          "Pour poser l’image definitive : deposer le fichier dans frontend/public/,",
-          "puis remplacer ici « fichier », « largeur », « hauteur » et",
-          "« texteAlternatif ». Rien a modifier dans le code (CLAUDE.md §14).",
-          "Garder le meme rapport largeur/hauteur, sinon l’image sera recadree.",
-          "",
-          "« motif » reste renseigne : c’est le dessin de repli, affiche si",
-          "« fichier » repasse a null."
+          "La legende n est pas decorative. Les formateurs de la methode SONT des",
+          "avocats : sans elle, le visiteur croirait voir celui qui l animera. Le §3",
+          "interdit d inventer un nom d avocat, et un visage reviendrait au meme.",
+          "Pour la retirer, supprimer la ligne « legende »."
         ],
-        "fichier": "/visuels-provisoires/lr-formateurs.svg",
-        "largeur": 1200,
-        "hauteur": 900,
-        "texteAlternatif": "Une grille de territoires dont un groupe contigu est entoure en rouge, avec un point marquant la ville-prefecture.",
-        "motif": "territoire"
+        "fichier": "/visuels/pages/lr-formateurs.jpg",
+        "largeur": 1400,
+        "hauteur": 1050,
+        "texteAlternatif": "Un avocat à son bureau, devant un ouvrage de droit ouvert et une statuette de la Justice.",
+        "motif": "territoire",
+        "legende": "Photographie d’illustration."
       }
     }
   ],

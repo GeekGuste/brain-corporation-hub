@@ -138,6 +138,7 @@
           [largeur]="contenu().visuel.largeur"
           [hauteur]="contenu().visuel.hauteur"
           [motif]="contenu().visuel.motif"
+          [legende]="contenu().visuel.legende ?? ''"
           [rapport]="bandeauCompact() ? '16 / 9' : '4 / 3'"
           [premierEcran]="true"
           fond="encre"
@@ -179,6 +180,7 @@
               [largeur]="section.visuel!.largeur"
               [hauteur]="section.visuel!.hauteur"
               [motif]="section.visuel!.motif"
+              [legende]="section.visuel!.legende ?? ''"
               rapport="4 / 3"
               [fond]="indice % 2 === 1 ? 'blanc' : 'papier'"
             />

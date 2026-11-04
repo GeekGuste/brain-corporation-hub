@@ -53,6 +53,15 @@ export class Visuel {
   readonly largeur = input<number | null>(null);
   readonly hauteur = input<number | null>(null);
 
+  /**
+   * Legende posee sur l image, facultative.
+   *
+   * Elle existe pour un seul cas : dire « photographie d illustration » la
+   * ou la photo pourrait passer pour un portrait reel. Ce n est pas une
+   * credit photo ni un commentaire editorial.
+   */
+  readonly legende = input<string>('');
+
   /** Vrai pour le visuel de tete : il se charge immediatement, pas en differe. */
   readonly premierEcran = input<boolean>(false);
 
