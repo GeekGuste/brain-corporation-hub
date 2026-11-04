@@ -51,7 +51,7 @@
         "fichier": "/visuels/pages/bch-intervenants.jpg",
         "largeur": 1400,
         "hauteur": 1050,
-        "texteAlternatif": "Une intervenante présente un graphique au tableau devant un auditoire assis.",
+        "texteAlternatif": "Cinq personnes en tenue professionnelle, debout dans une salle de formation.",
         "motif": "creuset"
       }
     },
@@ -141,7 +141,7 @@
     "fichier": "/visuels/pages/bch-bandeau.jpg",
     "largeur": 1400,
     "hauteur": 1050,
-    "texteAlternatif": "L’Arc de Triomphe à Paris, sous un ciel dégagé.",
+    "texteAlternatif": "Une intervenante présente un graphique au tableau devant un auditoire assis.",
     "motif": "exigence"
   },
   "appelFinal": {

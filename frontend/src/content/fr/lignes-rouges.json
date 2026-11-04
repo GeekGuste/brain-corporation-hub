@@ -60,7 +60,7 @@
         "fichier": "/visuels/pages/lr-pourquoi.jpg",
         "largeur": 1400,
         "hauteur": 1050,
-        "texteAlternatif": "Un homme assis dans un bus regarde par la fenêtre.",
+        "texteAlternatif": "La façade d’une préfecture française, drapeau tricolore au-dessus du portail.",
         "motif": "echeances"
       }
     },
@@ -130,9 +130,9 @@
           "« fichier » repasse a null."
         ],
         "fichier": "/visuels/pages/lr-tableau-de-bord.jpg",
-        "largeur": 1400,
-        "hauteur": 1050,
-        "texteAlternatif": "Une formatrice écrit au paperboard devant trois personnes assises autour d’une table.",
+        "largeur": 1120,
+        "hauteur": 840,
+        "texteAlternatif": "Trois personnes penchées sur un ordinateur portable, l’une commente un document affiché à l’écran.",
         "motif": "suivi"
       }
     },
@@ -166,10 +166,10 @@
           "« motif » reste renseigne : c’est le dessin de repli, affiche si",
           "« fichier » repasse a null."
         ],
-        "fichier": "/visuels-provisoires/lr-methode.svg",
-        "largeur": 1200,
-        "hauteur": 900,
-        "texteAlternatif": "Des feuilles dispersees passant par des filtres resserres pour ressortir en trois documents nets.",
+        "fichier": "/visuels/pages/lr-methode.jpg",
+        "largeur": 1400,
+        "hauteur": 1050,
+        "texteAlternatif": "Une formatrice écrit au paperboard devant trois personnes assises autour d’une table.",
         "motif": "methode"
       }
     },
@@ -277,9 +277,9 @@
       "« fichier » repasse a null."
     ],
     "fichier": "/visuels/pages/lr-bandeau.jpg",
-    "largeur": 1120,
-    "hauteur": 840,
-    "texteAlternatif": "Trois personnes penchées sur un ordinateur portable, l’une commente un document affiché à l’écran.",
+    "largeur": 1400,
+    "hauteur": 1050,
+    "texteAlternatif": "Deux personnes assises à une table passent en revue des documents, l’une annote une page.",
     "motif": "seuil"
   },
   "faitsCles": [

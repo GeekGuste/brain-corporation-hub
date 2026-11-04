@@ -40,9 +40,9 @@
           "« fichier » repasse a null."
         ],
         "fichier": "/visuels/pages/accueil-prevenir.jpg",
-        "largeur": 1148,
-        "hauteur": 861,
-        "texteAlternatif": "Une femme sereine, souriante, la main posée contre un mur.",
+        "largeur": 1400,
+        "hauteur": 1050,
+        "texteAlternatif": "Une main annote au stylo un document posé sur une table, en pleine lumière.",
         "motif": "seuil"
       }
     },
@@ -85,7 +85,7 @@
     "fichier": "/visuels/pages/accueil-bandeau.jpg",
     "largeur": 1600,
     "hauteur": 900,
-    "texteAlternatif": "Un formateur écrit au paperboard devant un petit groupe installé autour d’une table de travail.",
+    "texteAlternatif": "Quatre personnes souriantes, en tenue professionnelle, à l’issue d’une session.",
     "motif": "anticipation"
   },
   "appelFinal": {
