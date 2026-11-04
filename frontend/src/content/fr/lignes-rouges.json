@@ -130,9 +130,9 @@
           "« fichier » repasse a null."
         ],
         "fichier": "/visuels/pages/lr-tableau-de-bord.jpg",
-        "largeur": 1120,
-        "hauteur": 840,
-        "texteAlternatif": "Trois personnes penchées sur un ordinateur portable, l’une commente un document affiché à l’écran.",
+        "largeur": 1400,
+        "hauteur": 1050,
+        "texteAlternatif": "Une formatrice écrit au paperboard devant trois personnes assises autour d’une table.",
         "motif": "suivi"
       }
     },
@@ -277,9 +277,9 @@
       "« fichier » repasse a null."
     ],
     "fichier": "/visuels/pages/lr-bandeau.jpg",
-    "largeur": 1400,
-    "hauteur": 1050,
-    "texteAlternatif": "Une formatrice écrit au paperboard devant trois personnes assises autour d’une table.",
+    "largeur": 1120,
+    "hauteur": 840,
+    "texteAlternatif": "Trois personnes penchées sur un ordinateur portable, l’une commente un document affiché à l’écran.",
     "motif": "seuil"
   },
   "faitsCles": [
