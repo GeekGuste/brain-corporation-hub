@@ -60,7 +60,7 @@
         "fichier": "/visuels/pages/lr-pourquoi.jpg",
         "largeur": 1400,
         "hauteur": 1050,
-        "texteAlternatif": "La façade d’une préfecture française, drapeau tricolore au-dessus du portail.",
+        "texteAlternatif": "Deux personnes assises à une table passent en revue des documents, l’une annote une page.",
         "motif": "echeances"
       }
     },
@@ -279,7 +279,7 @@
     "fichier": "/visuels/pages/lr-bandeau.jpg",
     "largeur": 1400,
     "hauteur": 1050,
-    "texteAlternatif": "Deux personnes assises à une table passent en revue des documents, l’une annote une page.",
+    "texteAlternatif": "La façade d’une préfecture française, drapeau tricolore au-dessus du portail.",
     "motif": "seuil"
   },
   "faitsCles": [
