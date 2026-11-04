@@ -86,8 +86,41 @@ export class Seo {
     this.meta.updateTag({ name: 'twitter:title', content: metadonnees.ogTitre ?? metadonnees.titre });
     this.meta.updateTag({ name: 'twitter:description', content: metadonnees.ogDescription ?? metadonnees.description });
 
-    // L'image de partage n'est pas encore fournie par le client : tant qu'elle
-    // manque, aucune balise d'image n'est emise plutot qu'une URL inventee.
+    this.poserImageDePartage();
+  }
+
+  /**
+   * Image affichee quand un lien du site est colle sur un reseau social ou
+   * dans une messagerie. Le trafic viendra beaucoup de la (CLAUDE.md §12).
+   *
+   * L'URL est rendue ABSOLUE et pointe toujours sur le domaine de production,
+   * comme la canonique : un reseau social ne resout pas une URL relative, et
+   * il met l'image en cache, donc une image servie depuis la preprod y
+   * resterait.
+   *
+   * Tant que le fichier n'est pas renseigne, aucune balise n'est emise :
+   * mieux vaut pas d'image qu'une URL inventee, qui afficherait un cadre vide
+   * sur chaque partage.
+   */
+  private poserImageDePartage(): void {
+    const commun = seoConfig.commun;
+    const chemin = commun.imagePartageParDefaut;
+
+    // Un texte de remplacement « [A FOURNIR PAR LE CLIENT] » ne commence ni
+    // par une barre oblique ni par un protocole : c'est ce qui le distingue
+    // d'un vrai chemin, sans avoir a reconnaitre sa formulation.
+    if (!chemin.startsWith('/') && !chemin.startsWith('http')) {
+      return;
+    }
+
+    const base = this.config.urlCanoniqueDeBase.replace(/\/$/, '');
+    const url = chemin.startsWith('http') ? chemin : `${base}${chemin}`;
+
+    this.meta.updateTag({ property: 'og:image', content: url });
+    this.meta.updateTag({ property: 'og:image:alt', content: commun.imagePartageTexteAlternatif });
+    this.meta.updateTag({ property: 'og:image:width', content: String(commun.imagePartageLargeur) });
+    this.meta.updateTag({ property: 'og:image:height', content: String(commun.imagePartageHauteur) });
+    this.meta.updateTag({ name: 'twitter:image', content: url });
   }
 
   /**

@@ -203,10 +203,10 @@
           "« motif » reste renseigne : c’est le dessin de repli, affiche si",
           "« fichier » repasse a null."
         ],
-        "fichier": "/visuels-provisoires/lr-cout.svg",
-        "largeur": 1200,
-        "hauteur": 900,
-        "texteAlternatif": "Deux empilements de blocs de hauteurs tres differentes, sans aucun chiffre ni aucune legende.",
+        "fichier": "/visuels/pages/lr-prevention.jpg",
+        "largeur": 1024,
+        "hauteur": 768,
+        "texteAlternatif": "Une table de réunion rangée près d’une fenêtre : un carnet ouvert, un stylo, des dossiers empilés.",
         "motif": "cout"
       }
     },

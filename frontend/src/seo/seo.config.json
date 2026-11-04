@@ -10,8 +10,23 @@
     "nomDuSite": "Brain Corporation Hub",
     "separateurDeTitre": " | ",
     "locale": "fr_FR",
-    "imagePartageParDefaut": "[À FOURNIR PAR LE CLIENT]",
-    "imagePartageTexteAlternatif": "[À FOURNIR PAR LE CLIENT]"
+    "imagePartageParDefaut": "/visuels/pages/partage-defaut.jpg",
+    "imagePartageTexteAlternatif": "Une salle de réunion claire, table en bois et grandes fenêtres.",
+    "$commentaire": [
+      "Valeurs communes a toutes les pages.",
+      "",
+      "imagePartage : l image qui s affiche quand un lien du site est colle sur",
+      "un reseau social ou dans une messagerie. 1200 x 630 est la taille attendue",
+      "partout. Le chemin est relatif ; le service SEO le rend absolu, sur le",
+      "domaine de production, parce qu un reseau social ne resout pas une URL",
+      "relative et met l image en cache.",
+      "",
+      "PROVISOIRE : c est une photographie seule. Une vraie image de partage",
+      "porte le logo et une phrase courte, et se compose. A reprendre avec la",
+      "graphiste, en remplacant ce seul fichier."
+    ],
+    "imagePartageLargeur": 1200,
+    "imagePartageHauteur": 630
   },
   "pages": {
     "accueil": {
