@@ -57,10 +57,10 @@
           "« motif » reste renseigne : c’est le dessin de repli, affiche si",
           "« fichier » repasse a null."
         ],
-        "fichier": "/visuels-provisoires/lr-echeances.svg",
-        "largeur": 1200,
-        "hauteur": 900,
-        "texteAlternatif": "Un calendrier dont une case est marquee en rouge, suivie d’une longue periode hachuree.",
+        "fichier": "/visuels/pages/lr-pourquoi.jpg",
+        "largeur": 1400,
+        "hauteur": 1050,
+        "texteAlternatif": "Un homme assis dans un bus regarde par la fenêtre.",
         "motif": "echeances"
       }
     },
@@ -129,10 +129,10 @@
           "« motif » reste renseigne : c’est le dessin de repli, affiche si",
           "« fichier » repasse a null."
         ],
-        "fichier": "/visuels-provisoires/lr-tableau-de-bord.svg",
-        "largeur": 1200,
-        "hauteur": 900,
-        "texteAlternatif": "Une feuille de suivi : des points de vigilance alignes dans le temps, et un repere rouge marquant le moment d’une consultation.",
+        "fichier": "/visuels/pages/lr-tableau-de-bord.jpg",
+        "largeur": 1120,
+        "hauteur": 840,
+        "texteAlternatif": "Trois personnes penchées sur un ordinateur portable, l’une commente un document affiché à l’écran.",
         "motif": "suivi"
       }
     },
@@ -276,10 +276,10 @@
       "« motif » reste renseigne : c’est le dessin de repli, affiche si",
       "« fichier » repasse a null."
     ],
-    "fichier": "/visuels-provisoires/lr-bandeau.svg",
-    "largeur": 1200,
-    "hauteur": 900,
-    "texteAlternatif": "Un dossier dont les feuillets sont larges au-dessus d’une ligne rouge, et de plus en plus etroits en dessous.",
+    "fichier": "/visuels/pages/lr-bandeau.jpg",
+    "largeur": 1400,
+    "hauteur": 1050,
+    "texteAlternatif": "Une formatrice écrit au paperboard devant trois personnes assises autour d’une table.",
     "motif": "seuil"
   },
   "faitsCles": [

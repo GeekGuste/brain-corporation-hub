@@ -48,10 +48,10 @@
           "« motif » reste renseigne : c’est le dessin de repli, affiche si",
           "« fichier » repasse a null."
         ],
-        "fichier": "/visuels-provisoires/bch-creuset.svg",
-        "largeur": 1200,
-        "hauteur": 900,
-        "texteAlternatif": "Six candidatures de hauteurs inegales : seules celles qui depassent la ligne rouge du niveau exige sont retenues.",
+        "fichier": "/visuels/pages/bch-intervenants.jpg",
+        "largeur": 1400,
+        "hauteur": 1050,
+        "texteAlternatif": "Une intervenante présente un graphique au tableau devant un auditoire assis.",
         "motif": "creuset"
       }
     },
@@ -88,10 +88,10 @@
           "« motif » reste renseigne : c’est le dessin de repli, affiche si",
           "« fichier » repasse a null."
         ],
-        "fichier": "/visuels-provisoires/bch-cycle.svg",
-        "largeur": 1200,
-        "hauteur": 900,
-        "texteAlternatif": "Une boucle de quatre etapes autour d’un document, dont l’etape rouge referme le cycle.",
+        "fichier": "/visuels/pages/bch-exigence.jpg",
+        "largeur": 1400,
+        "hauteur": 1050,
+        "texteAlternatif": "Un intervenant écrit au paperboard dans une salle de réunion, deux personnes l’écoutent.",
         "motif": "cycle"
       }
     },
@@ -117,10 +117,10 @@
           "« motif » reste renseigne : c’est le dessin de repli, affiche si",
           "« fichier » repasse a null."
         ],
-        "fichier": "/visuels-provisoires/bch-ambition.svg",
-        "largeur": 1200,
-        "hauteur": 900,
-        "texteAlternatif": "Trois niveaux construits, surmontes de deux niveaux en pointilles restant a construire.",
+        "fichier": "/visuels/pages/bch-ambition.jpg",
+        "largeur": 1400,
+        "hauteur": 1050,
+        "texteAlternatif": "La tour Eiffel et la Seine au crépuscule.",
         "motif": "ambition"
       }
     }
@@ -138,10 +138,10 @@
       "« motif » reste renseigne : c’est le dessin de repli, affiche si",
       "« fichier » repasse a null."
     ],
-    "fichier": "/visuels-provisoires/bch-bandeau.svg",
-    "largeur": 1200,
-    "hauteur": 900,
-    "texteAlternatif": "Une facade institutionnelle a colonnes, dont le fronton est souligne d’une ligne rouge.",
+    "fichier": "/visuels/pages/bch-bandeau.jpg",
+    "largeur": 1400,
+    "hauteur": 1050,
+    "texteAlternatif": "L’Arc de Triomphe à Paris, sous un ciel dégagé.",
     "motif": "exigence"
   },
   "appelFinal": {

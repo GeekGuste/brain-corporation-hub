@@ -18,9 +18,16 @@ import { Motif, type NomDeMotif } from '../motif/motif';
  * dans le fichier de contenu de la page. L'etiquette disparait d'elle-meme.
  * Rien a modifier dans le code (CLAUDE.md §14).
  *
- * Ces illustrations sont dessinees pour le projet. Aucune photographie de
- * personne n'est fabriquee : sur un sujet comme le droit au sejour, un visage
- * presente comme un formateur ou un stagiaire serait un faux.
+ * LES PHOTOGRAPHIES ILLUSTRENT, ELLES NE TEMOIGNENT PAS. Ce sont des images de
+ * banque, choisies par le client. Aucune n'est presentee comme un formateur de
+ * la methode, un stagiaire, ni le temoignage de qui que ce soit : sur un sujet
+ * comme le droit au sejour, ce serait un faux, et la personne photographiee
+ * n'a consenti a rien de tel. Les textes alternatifs decrivent donc une scene,
+ * jamais une identite ni une situation administrative.
+ *
+ * Les illustrations vectorielles restent la ou elles expliquent un mecanisme
+ * qu'aucune photographie ne montre : le filtrage des sources, l'ecart entre
+ * deux couts, la carte des ressorts de cour d'appel.
  */
 @Component({
   selector: 'app-visuel',

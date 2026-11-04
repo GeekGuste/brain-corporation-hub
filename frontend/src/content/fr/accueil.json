@@ -39,10 +39,10 @@
           "« motif » reste renseigne : c’est le dessin de repli, affiche si",
           "« fichier » repasse a null."
         ],
-        "fichier": "/visuels-provisoires/accueil-prevenir.svg",
-        "largeur": 1200,
-        "hauteur": 900,
-        "texteAlternatif": "Un dossier ouvert sur deux feuillets, dont celui du dessus porte une ligne rouge marquant un point de vigilance.",
+        "fichier": "/visuels/pages/accueil-prevenir.jpg",
+        "largeur": 1148,
+        "hauteur": 861,
+        "texteAlternatif": "Une femme sereine, souriante, la main posée contre un mur.",
         "motif": "seuil"
       }
     },
@@ -82,10 +82,10 @@
       "« motif » reste renseigne : c’est le dessin de repli, affiche si",
       "« fichier » repasse a null."
     ],
-    "fichier": "/visuels-provisoires/accueil-bandeau.svg",
-    "largeur": 1200,
-    "hauteur": 675,
-    "texteAlternatif": "Deux trajectoires qui se separent a partir d’un meme point : celle d’une decision prise tot s’eleve, celle d’une difficulte subie decline.",
+    "fichier": "/visuels/pages/accueil-bandeau.jpg",
+    "largeur": 1600,
+    "hauteur": 900,
+    "texteAlternatif": "Un formateur écrit au paperboard devant un petit groupe installé autour d’une table de travail.",
     "motif": "anticipation"
   },
   "appelFinal": {
