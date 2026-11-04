@@ -184,3 +184,102 @@ ensuite ; l'inverse n'est pas possible.
 - **Aucune personne générée ne doit être présentée comme un formateur, un
   stagiaire ou un témoin.** Les textes alternatifs décrivent une scène, jamais
   une identité. C'est la règle qui vaut déjà pour les photos de banque.
+
+---
+
+# Version prête à coller dans ChatGPT
+
+DALL·E, le générateur de ChatGPT, impose deux choses que les prompts ci-dessus
+ne prennent pas en compte.
+
+**Il ne sait pas faire du 4/3.** Trois formats seulement : carré 1024 × 1024,
+paysage 1792 × 1024, portrait 1024 × 1792. Demandez le **paysage** pour les
+trois images, en composant le sujet au centre. Je recadre ensuite en 4/3, ce
+qui retire environ un quart de la largeur : un sujet centré survit, un sujet
+posé sur un bord sera coupé.
+
+**Il n'a pas de champ d'interdits**, et une consigne négative a tendance à
+faire apparaître la chose. « No people » produit parfois quelqu'un. Les prompts
+ci-dessous sont donc formulés en positif : « the room is empty and still »
+plutôt que « no people ».
+
+Demandez-lui quatre variantes de chaque et choisissez. C'est plus rapide
+qu'affiner un prompt, et le résultat est meilleur.
+
+## 1. « Pourquoi investir dans la prévention »
+
+```
+Génère une image en format paysage.
+
+An editorial documentary photograph of a tidy wooden desk beside a window in
+soft morning light, inside a quiet contemporary European office. On the desk, a
+neat stack of plain paper folders, an open notebook with a pen resting on it. A
+wall calendar hangs further back, strongly blurred. The room is empty and
+still. Cool neutral palette of grey-blue and soft teal, muted desaturated
+colours, shallow depth of field, 50mm lens, generous empty space in the frame.
+Calm and institutional mood. Photographic realism. Keep the desk centred in the
+frame.
+```
+
+## 2. « Les formateurs Lignes Rouges »
+
+Variante la plus sûre : elle ne montre personne, donc elle ne prétend pas
+montrer les avocats de la méthode.
+
+```
+Génère une image en format paysage.
+
+An editorial documentary photograph of a quiet meeting room prepared before a
+small session, in a contemporary European building. A long wooden table with
+six empty chairs, a closed notebook and a glass of water at each place, a clean
+blank flipchart at the far end, tall windows letting in soft daylight. The room
+is deserted and still. Cool neutral palette of grey-blue and soft teal, muted
+desaturated colours, shallow depth of field, generous empty space. Calm and
+institutional mood. Photographic realism. Keep the table centred in the frame.
+```
+
+Variante cabinet, si vous préférez évoquer l'avocat :
+
+```
+Génère une image en format paysage.
+
+An editorial documentary photograph of a lawyer's office in late afternoon
+light, empty of people. A plain wooden desk in the foreground with a reading
+lamp and a closed notebook. Far behind, a wall of bound legal volumes rendered
+in strong bokeh, so the shelves read as soft blocks of colour. Cool neutral
+palette of grey-blue and soft teal, muted desaturated colours, shallow depth of
+field. Calm and institutional mood. Photographic realism. Keep the desk centred
+in the frame.
+```
+
+Le flou prononcé sur les rayonnages n'est pas décoratif : c'est ce qui empêche
+les fausses lettres d'apparaître sur les tranches des livres.
+
+## 3. Le fond de l'image de partage
+
+Le format paysage de DALL·E, 1792 × 1024, est proche du 1200 × 630 voulu. Je
+recadre et je pose le logo ensuite.
+
+```
+Génère une image en format paysage.
+
+A wide editorial photograph of a calm, empty modern meeting room with tall
+windows and soft daylight. Cool grey-blue and teal tones, muted and
+desaturated. The right half of the frame holds the room; the left half is a
+plain, uncluttered wall surface with nothing on it. Photographic realism.
+```
+
+La moitié gauche vide n'est pas un détail : c'est là que viendront le logo et
+le titre, et sans elle ils tomberont sur un élément chargé.
+
+## À vérifier sur chaque image rendue
+
+- **Les tranches des livres et les dos de dossiers.** Du faux texte y apparaît
+  presque toujours. Si c'est lisible, regénérez.
+- **Les mains**, s'il y en a. C'est là que les générateurs échouent.
+- **Les chaises et les pieds de table**, sur la salle de réunion : les
+  générateurs en fabriquent volontiers un de travers.
+
+Les conditions d'utilisation d'OpenAI vous attribuent les droits sur les images
+produites, usage commercial compris. C'est le cas aussi d'Adobe Firefly. Gardez
+une trace de l'outil utilisé pour chaque fichier.
