@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import contenu from '../../../content/fr/lignes-rouges.json';
 import { cheminDePage } from '../../core/config/site-routes';
 import type { ContenuDePage } from '../../core/content/modele-contenu';
+import { formation, questionsFrequentes } from '../../core/seo/donnees-structurees';
 import { Seo } from '../../core/seo/seo';
 import { FormulaireInscription } from '../../shared/formulaire-inscription/formulaire-inscription';
 import { LogoLignesRouges } from '../../shared/logo-lignes-rouges/logo-lignes-rouges';
@@ -68,6 +69,16 @@ export class LignesRouges {
   protected readonly versContact = cheminDePage('contact');
 
   constructor() {
-    inject(Seo).appliquer('lignes-rouges');
+    const seo = inject(Seo);
+
+    // La formation et la foire aux questions, decrites aux moteurs de
+    // recherche. Les questions sont celles REELLEMENT AFFICHEES juste en
+    // dessous : une question structuree absente de la page est une
+    // infraction, et elle fait perdre l affichage enrichi pour la page
+    // entiere.
+    seo.appliquer('lignes-rouges', [
+      formation(seo.urlDeBase(), seo.urlCanonique('lignes-rouges')),
+      questionsFrequentes(this.faq.questions),
+    ]);
   }
 }

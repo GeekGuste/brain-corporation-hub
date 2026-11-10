@@ -8,6 +8,7 @@ import {
   type ConfigurationExecution,
 } from '../config/runtime-config';
 import { cheminDePage, pageParCle } from '../config/site-routes';
+import { organisation, type DonneeStructuree } from './donnees-structurees';
 
 interface MetadonneesDePage {
   readonly titre: string;
@@ -54,7 +55,12 @@ export class Seo {
     this.meta.updateTag({ name: 'robots', content: 'noindex, nofollow' });
   }
 
-  appliquer(clePage: string): void {
+  /**
+   * @param donneesEnPlus donnees structurees propres a la page, par exemple
+   * la formation et la foire aux questions sur la page de vente. L'editeur du
+   * site, lui, est pose sur toutes les pages sans qu'on le demande.
+   */
+  appliquer(clePage: string, donneesEnPlus: readonly DonneeStructuree[] = []): void {
     const page = pageParCle(clePage);
     const metadonnees = this.metadonneesDe(clePage);
     const commun = seoConfig.commun;
@@ -87,6 +93,65 @@ export class Seo {
     this.meta.updateTag({ name: 'twitter:description', content: metadonnees.ogDescription ?? metadonnees.description });
 
     this.poserImageDePartage();
+
+    // Les donnees structurees ne sont posees que sur une page indexable. Les
+    // emettre sur la preprod ou sur la page de suivi n'aurait aucun effet
+    // utile, et decrirait un contenu qu'on demande par ailleurs d'ignorer.
+    if (indexable) {
+      this.poserDonneesStructurees([organisation(this.urlDeBase()), ...donneesEnPlus]);
+    } else {
+      this.retirerDonneesStructurees();
+    }
+  }
+
+  /**
+   * Domaine des URL absolues, sans barre oblique finale.
+   *
+   * Public : les fabriques de donnees structurees en ont besoin pour batir
+   * leurs URL, et c'est la seule facon de garantir qu'elles emploient le meme
+   * domaine que les canoniques.
+   */
+  urlDeBase(): string {
+    return this.config.urlCanoniqueDeBase.replace(/\/$/, '');
+  }
+
+  /**
+   * Ecrit le bloc JSON-LD dans l'en-tete du document.
+   *
+   * UN SEUL bloc, remplace a chaque navigation : plusieurs scripts cumules
+   * decriraient la page precedente en meme temps que la courante.
+   *
+   * Les chevrons sont echappes avant ecriture. Le contenu vient de nos
+   * fichiers, mais un « </script> » glisse un jour dans un texte fermerait la
+   * balise et casserait la page : l'echappement coute un appel et supprime la
+   * question.
+   */
+  private poserDonneesStructurees(elements: readonly DonneeStructuree[]): void {
+    const graphe = { '@context': 'https://schema.org', '@graph': elements };
+    const script = this.scriptDonneesStructurees(true);
+    script!.textContent = JSON.stringify(graphe).replace(/</g, '\\u003c');
+  }
+
+  private retirerDonneesStructurees(): void {
+    this.scriptDonneesStructurees(false)?.remove();
+  }
+
+  /**
+   * Retrouve le bloc JSON-LD, et le cree s'il manque quand on le demande.
+   * Designe par un identifiant stable, pour qu'il n'en existe jamais deux.
+   */
+  private scriptDonneesStructurees(creerSiAbsent: boolean): HTMLScriptElement | null {
+    const existant = this.document.head.querySelector<HTMLScriptElement>(
+      'script[type="application/ld+json"]',
+    );
+    if (existant || !creerSiAbsent) {
+      return existant;
+    }
+
+    const script = this.document.createElement('script');
+    script.setAttribute('type', 'application/ld+json');
+    this.document.head.appendChild(script);
+    return script;
   }
 
   /**
@@ -113,7 +178,7 @@ export class Seo {
       return;
     }
 
-    const base = this.config.urlCanoniqueDeBase.replace(/\/$/, '');
+    const base = this.urlDeBase();
     const url = chemin.startsWith('http') ? chemin : `${base}${chemin}`;
 
     this.meta.updateTag({ property: 'og:image', content: url });
@@ -128,7 +193,7 @@ export class Seo {
    * depuis la preprod (CLAUDE.md §12.3).
    */
   urlCanonique(clePage: string): string {
-    const base = this.config.urlCanoniqueDeBase.replace(/\/$/, '');
+    const base = this.urlDeBase();
     const chemin = cheminDePage(clePage);
     // L'accueil garde sa barre oblique finale : c'est la forme attendue d'une
     // canonique de racine, et cela evite deux URL pour la meme page.

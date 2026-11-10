@@ -1,0 +1,48 @@
+{
+  "$commentaire": [
+    "Donnees structurees JSON-LD (CLAUDE.md §12).",
+    "",
+    "Elles decrivent aux moteurs de recherche QUI publie le site et CE QUI y",
+    "est vendu. Externalisees ici comme les titres et les descriptions : le",
+    "referenceur pourra les ajuster sans toucher au code.",
+    "",
+    "RIEN N EST INVENTE ICI, et plusieurs champs sont volontairement absents :",
+    "",
+    "  - pas d adresse postale ni de telephone : ils ne sont pas fournis, et",
+    "    ils arriveront avec les mentions legales ;",
+    "  - pas de « sameAs » : nous ne connaissons aucun compte officiel de la",
+    "    marque sur les reseaux sociaux, et en deviner un dirigerait les",
+    "    moteurs vers un compte qui n est pas le sien ;",
+    "  - AUCUNE DATE DE SESSION, nulle part. La regle de constitution des",
+    "    cohortes n est pas tranchee (CLAUDE.md §16), donc la formation est",
+    "    decrite par sa duree et sa modalite, jamais par un calendrier.",
+    "",
+    "La description de la formation n est pas recopiee ici : elle est lue dans",
+    "seo.config.json, a l entree « lignes-rouges ». Une seule source, donc",
+    "aucun risque de voir la description du moteur de recherche diverger de",
+    "celle des donnees structurees."
+  ],
+  "organisation": {
+    "nom": "Brain Corporation Hub",
+    "cheminLogo": "/visuels/logo-brain-corporation-hub.png",
+    "email": "contact@braincorporationhub.com",
+    "zoneDesservie": "FR",
+    "langue": "fr"
+  },
+  "formation": {
+    "$commentaire": [
+      "ATTENTION : « prix » doit correspondre a « Formation:MontantCentimes »",
+      "dans la configuration de l API, qui est la seule valeur qui encaisse.",
+      "Un prix annonce aux moteurs de recherche qui differe de celui debite",
+      "est une publicite trompeuse. 10000 centimes = 100.00 euros.",
+      "",
+      "« duree » est au format ISO 8601 : PT1H30M vaut une heure trente."
+    ],
+    "cle": "lignes-rouges",
+    "nom": "Lignes Rouges",
+    "modalite": "Online",
+    "duree": "PT1H30M",
+    "prix": "100.00",
+    "devise": "EUR"
+  }
+}
