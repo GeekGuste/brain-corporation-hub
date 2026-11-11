@@ -23,7 +23,11 @@
         <!-- Les attributs width et height portent les dimensions INTRINSEQUES
              du fichier. Ils reservent la place avant le chargement de l'image.
              En « attr. » plutot qu'en propriete, pour qu'ils disparaissent
-             simplement s'ils ne sont pas renseignes. -->
+             simplement s'ils ne sont pas renseignes.
+
+             Le texte alternatif est VIDE a dessein : le nom de la marque est
+             juste a cote, en vraies lettres. Le repeter ferait entendre deux
+             fois la meme chose a un lecteur d'ecran. -->
         <img
           class="emplacement-logo"
           [src]="logo.fichier"
@@ -31,11 +35,13 @@
           [attr.width]="logo.largeur"
           [attr.height]="logo.hauteur"
         />
-      } @else {
-        <span class="emplacement-logo entete__marque-texte">
-          {{ navigation.marque }}
-        </span>
       }
+
+      <!-- Le nom en vraies lettres, toujours. Le logo livre est carre : a la
+           hauteur d'un en-tete, les mots qu'il contient sont illisibles. Ecrit
+           a cote, le nom reste lisible a toute taille, il est lu par les
+           lecteurs d'ecran, et il ne coute pas un octet de plus. -->
+      <span class="entete__marque-texte">{{ navigation.marque }}</span>
     </a>
 
     <nav class="entete__navigation" aria-label="Navigation principale">
@@ -69,8 +75,27 @@
 
 <footer class="pied">
   <div class="container pied__contenu">
+    <!-- Pages legales et referentiel territorial. Dans le pied et non dans la
+         navigation de tete : ils doivent etre atteignables depuis toutes les
+         pages, mais ils ne sont pas un chemin de lecture (CLAUDE.md §16).
+         Les libelles viennent de navigation.json, les chemins de
+         seo/routes.config.json. -->
+    <nav class="pied__navigation" aria-label="Informations légales">
+      <ul class="pied__liens">
+        @for (lien of liensDuPied; track lien.cle) {
+          <li>
+            <a [routerLink]="lien.chemin">{{ lien.libelle }}</a>
+          </li>
+        }
+      </ul>
+    </nav>
+
     <p class="pied__mention">&copy; {{ anneeCourante }} {{ navigation.piedDePage.mention }}</p>
-    <!-- Les liens vers les pages legales sont ajoutes a l'etape 9, depuis
-         navigation.json. -->
   </div>
 </footer>
+
+<!-- Mention d information sur les cookies. Apres le pied de page dans le
+     document, collee en bas de la fenetre a l affichage : elle est le
+     prolongement du pied, pas une alerte. Elle ne s affiche que dans le
+     navigateur, voir le composant. -->
+<app-mention-cookies />

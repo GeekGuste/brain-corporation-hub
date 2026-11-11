@@ -1,10 +1,35 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import contenu from '../../../content/fr/lignes-rouges.json';
+import { cheminDePage } from '../../core/config/site-routes';
 import type { ContenuDePage } from '../../core/content/modele-contenu';
+import { formation, questionsFrequentes } from '../../core/seo/donnees-structurees';
 import { Seo } from '../../core/seo/seo';
 import { FormulaireInscription } from '../../shared/formulaire-inscription/formulaire-inscription';
+import { LogoLignesRouges } from '../../shared/logo-lignes-rouges/logo-lignes-rouges';
 import { PageContenu } from '../../shared/page-contenu/page-contenu';
+
+/** Une question de la foire aux questions. */
+interface QuestionFaq {
+  readonly question: string;
+  readonly reponse: string;
+}
+
+/**
+ * Foire aux questions.
+ *
+ * Redigee a partir de deux documents du client, le document de contenus et le
+ * script des emissions video. A FAIRE RELIRE PAR LUI avant mise en ligne :
+ * c est de la parole de juriste, transposee d un dialogue televise vers un
+ * format de site.
+ */
+interface BlocFaq {
+  readonly titre: string;
+  readonly questions: readonly QuestionFaq[];
+  /** Renvoi vers la page de contact, pour la question qui n y est pas. */
+  readonly relance: { readonly texte: string; readonly libelle: string };
+}
 
 /** Bloc d'inscription. Produit d'apres CLAUDE.md §4, pas fourni par le client. */
 interface BlocInscription {
@@ -15,7 +40,7 @@ interface BlocInscription {
 
 @Component({
   selector: 'app-lignes-rouges',
-  imports: [PageContenu, FormulaireInscription],
+  imports: [PageContenu, FormulaireInscription, LogoLignesRouges, RouterLink],
   templateUrl: './lignes-rouges.html',
   styleUrl: './lignes-rouges.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,7 +58,27 @@ export class LignesRouges {
    */
   protected readonly inscription = contenu.inscription as unknown as BlocInscription;
 
+  /**
+   * Foire aux questions, placee AVANT le formulaire : elle traite les
+   * objections qui empechent de s inscrire, elle doit donc se lire avant le
+   * moment de decider.
+   */
+  protected readonly faq = contenu.faq as unknown as BlocFaq;
+
+  /** Chemin de la page de contact, jamais ecrit en dur (CLAUDE.md §12). */
+  protected readonly versContact = cheminDePage('contact');
+
   constructor() {
-    inject(Seo).appliquer('lignes-rouges');
+    const seo = inject(Seo);
+
+    // La formation et la foire aux questions, decrites aux moteurs de
+    // recherche. Les questions sont celles REELLEMENT AFFICHEES juste en
+    // dessous : une question structuree absente de la page est une
+    // infraction, et elle fait perdre l affichage enrichi pour la page
+    // entiere.
+    seo.appliquer('lignes-rouges', [
+      formation(seo.urlDeBase(), seo.urlCanonique('lignes-rouges')),
+      questionsFrequentes(this.faq.questions),
+    ]);
   }
 }

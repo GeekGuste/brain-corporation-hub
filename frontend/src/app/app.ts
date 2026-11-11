@@ -4,10 +4,11 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import navigation from '../content/fr/navigation.json';
 import { cheminDePage } from './core/config/site-routes';
 import type { EmplacementLogo } from './core/content/modele-contenu';
+import { MentionCookies } from './shared/mention-cookies/mention-cookies';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, MentionCookies],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
@@ -27,6 +28,18 @@ export class App {
 
   /** Chemins resolus depuis seo/routes.config.json, jamais ecrits en dur. */
   protected readonly liens = navigation.liens.map((lien) => ({
+    ...lien,
+    chemin: cheminDePage(lien.cle),
+  }));
+
+  /**
+   * Liens du pied de page : pages legales et referentiel territorial.
+   *
+   * Dans le pied et non dans la navigation de tete : ils doivent etre
+   * atteignables depuis toutes les pages, mais ils ne sont pas un chemin de
+   * lecture (CLAUDE.md §16).
+   */
+  protected readonly liensDuPied = navigation.piedDePage.liens.map((lien) => ({
     ...lien,
     chemin: cheminDePage(lien.cle),
   }));

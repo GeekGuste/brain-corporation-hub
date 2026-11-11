@@ -124,7 +124,13 @@
     "$commentaire": [
       "Libelles du paiement. Produits d apres CLAUDE.md §4 et §9, pas fournis par",
       "le client. AUCUNE date de session n est annoncee (CLAUDE.md §16), et rien",
-      "n est promis que le webhook n ait confirme."
+      "n est promis que le webhook n ait confirme.",
+      "",
+      "lienCgv : un lien vers les conditions de vente, atteignable au point de",
+      "paiement. Un LIEN, et rien d autre : aucune phrase du type « en payant,",
+      "vous acceptez les conditions », parce que ces conditions ne sont pas",
+      "encore fournies et que la facon de recueillir cette acceptation est une",
+      "decision du client, qui est juriste (CLAUDE.md §3 et §17)."
     ],
     "titre": "Paiement",
     "recapitulatif": "Formation Lignes Rouges, 1 h 30 à distance.",
@@ -138,7 +144,8 @@
       "refuse": "Le paiement n’a pas abouti. Vérifiez vos informations, puis réessayez.",
       "indisponible": "Le service de paiement est momentanément indisponible. Votre inscription est enregistrée : réessayez dans un instant.",
       "chargement": "Le module de paiement n’a pas pu se charger. Vérifiez votre connexion, puis rechargez la page."
-    }
+    },
+    "lienCgv": "Conditions générales de vente"
   },
   "confirmation": {
     "$commentaire": [
@@ -158,5 +165,28 @@
       "titre": "Paiement reçu",
       "texte": "Votre confirmation arrive par email dans quelques instants. Vous pouvez fermer cette page."
     }
+  },
+  "rgpd": {
+    "$commentaire": [
+      "Mentions de protection des donnees personnelles, FOURNIES PAR LE CLIENT",
+      "(docs/Mentions_RGPD_formulaires_Brain_Corporation_Hub.pdf, recu le",
+      "28 octobre 2026), section 2 « Formulaire d inscription a une formation ».",
+      "",
+      "Texte integre TEL QUEL (CLAUDE.md §3). Seules les apostrophes droites",
+      "sont passees en apostrophes typographiques, comme partout ailleurs.",
+      "",
+      "Affiche en clair avant le bouton d envoi, et non replie : l information",
+      "doit etre donnee AU MOMENT de la collecte, pas derriere un clic.",
+      "",
+      "L adresse de courriel devient un lien, et la phrase « Politique de",
+      "confidentialite » un lien vers la page. Le texte reste du texte dans ce",
+      "fichier : les liens sont reconnus au rendu.",
+      "",
+      "La section 1 du document, le formulaire de contact, n est pas integree :",
+      "le site n a pas de formulaire de contact en V1."
+    ],
+    "titre": "Vos données personnelles",
+    "mention": "Brain Corporation Hub traite les informations communiquées pour gérer votre inscription, organiser la formation, assurer son suivi et établir les documents de facturation. Les données nécessaires à l’inscription sont traitées dans le cadre de l’exécution du contrat ou des mesures précontractuelles ; les données comptables sont conservées conformément aux obligations légales applicables. Les informations sont accessibles aux personnes habilitées et aux prestataires intervenant dans la gestion de la formation. Vous disposez des droits prévus par la réglementation, que vous pouvez exercer à contact@braincorporationhub.com. Pour plus de précisions, consultez notre Politique de confidentialité.",
+    "champsObligatoires": "Les champs obligatoires sont signalés dans le formulaire. Leur absence peut empêcher le traitement de l’inscription."
   }
 }

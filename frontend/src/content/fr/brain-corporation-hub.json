@@ -18,7 +18,7 @@
       "blocs": [
         {
           "type": "paragraphe",
-          "texte": "Nous ne réduisons pas la formation à la transmission d’un contenu ou à l’acquisition d’une compétence technique. Nous la concevons également comme un outil de compréhension, d’anticipation et de gestion des risques. Cette approche peut s’appliquer chaque fois qu’une décision personnelle ou professionnelle produit des conséquences juridiques, économiques, matérielles, familiales ou psychologiques importantes."
+          "texte": "Nous ne réduisons pas la formation à la transmission d’un contenu ou à l’acquisition d’une compétence technique. Nous la concevons également comme un outil de compréhension, d’anticipation et de gestion des risques. Cette approche vaut chaque fois qu’une de vos décisions, personnelle ou professionnelle, produit des conséquences juridiques, économiques, matérielles, familiales ou psychologiques importantes."
         }
       ]
     },
@@ -37,21 +37,21 @@
       ],
       "visuel": {
         "$commentaire": [
-          "IMAGE PROVISOIRE, a remplacer par celle du client.",
-          "Le fichier se trouve dans frontend/public/visuels-provisoires/.",
+          "Photographie en place. Pour la remplacer : deposer le fichier dans",
+          "frontend/public/visuels/pages/, puis mettre a jour ici « fichier »,",
+          "« largeur », « hauteur » et « texteAlternatif ». Rien a modifier dans le",
+          "code (CLAUDE.md §14).",
           "",
-          "Pour poser l’image definitive : deposer le fichier dans frontend/public/,",
-          "puis remplacer ici « fichier », « largeur », « hauteur » et",
-          "« texteAlternatif ». Rien a modifier dans le code (CLAUDE.md §14).",
-          "Garder le meme rapport largeur/hauteur, sinon l’image sera recadree.",
+          "Garder le meme rapport largeur/hauteur, sinon l image sera recadree au",
+          "centre par le navigateur, ce qui coupe parfois le sujet.",
           "",
-          "« motif » reste renseigne : c’est le dessin de repli, affiche si",
+          "« motif » reste renseigne : c est le dessin de repli, affiche si",
           "« fichier » repasse a null."
         ],
-        "fichier": "/visuels-provisoires/bch-creuset.svg",
-        "largeur": 1200,
-        "hauteur": 900,
-        "texteAlternatif": "Six candidatures de hauteurs inegales : seules celles qui depassent la ligne rouge du niveau exige sont retenues.",
+        "fichier": "/visuels/pages/bch-intervenants.jpg",
+        "largeur": 1400,
+        "hauteur": 1050,
+        "texteAlternatif": "Cinq personnes en tenue professionnelle, debout dans une salle de formation.",
         "motif": "creuset"
       }
     },
@@ -77,21 +77,21 @@
       ],
       "visuel": {
         "$commentaire": [
-          "IMAGE PROVISOIRE, a remplacer par celle du client.",
-          "Le fichier se trouve dans frontend/public/visuels-provisoires/.",
+          "Photographie en place. Pour la remplacer : deposer le fichier dans",
+          "frontend/public/visuels/pages/, puis mettre a jour ici « fichier »,",
+          "« largeur », « hauteur » et « texteAlternatif ». Rien a modifier dans le",
+          "code (CLAUDE.md §14).",
           "",
-          "Pour poser l’image definitive : deposer le fichier dans frontend/public/,",
-          "puis remplacer ici « fichier », « largeur », « hauteur » et",
-          "« texteAlternatif ». Rien a modifier dans le code (CLAUDE.md §14).",
-          "Garder le meme rapport largeur/hauteur, sinon l’image sera recadree.",
+          "Garder le meme rapport largeur/hauteur, sinon l image sera recadree au",
+          "centre par le navigateur, ce qui coupe parfois le sujet.",
           "",
-          "« motif » reste renseigne : c’est le dessin de repli, affiche si",
+          "« motif » reste renseigne : c est le dessin de repli, affiche si",
           "« fichier » repasse a null."
         ],
-        "fichier": "/visuels-provisoires/bch-cycle.svg",
-        "largeur": 1200,
-        "hauteur": 900,
-        "texteAlternatif": "Une boucle de quatre etapes autour d’un document, dont l’etape rouge referme le cycle.",
+        "fichier": "/visuels/pages/bch-exigence.jpg",
+        "largeur": 1400,
+        "hauteur": 1050,
+        "texteAlternatif": "Un intervenant écrit au paperboard dans une salle de réunion, deux personnes l’écoutent.",
         "motif": "cycle"
       }
     },
@@ -106,42 +106,53 @@
       ],
       "visuel": {
         "$commentaire": [
-          "IMAGE PROVISOIRE, a remplacer par celle du client.",
-          "Le fichier se trouve dans frontend/public/visuels-provisoires/.",
+          "Photographie en place. Pour la remplacer : deposer le fichier dans",
+          "frontend/public/visuels/pages/, puis mettre a jour ici « fichier »,",
+          "« largeur », « hauteur » et « texteAlternatif ». Rien a modifier dans le",
+          "code (CLAUDE.md §14).",
           "",
-          "Pour poser l’image definitive : deposer le fichier dans frontend/public/,",
-          "puis remplacer ici « fichier », « largeur », « hauteur » et",
-          "« texteAlternatif ». Rien a modifier dans le code (CLAUDE.md §14).",
-          "Garder le meme rapport largeur/hauteur, sinon l’image sera recadree.",
+          "Garder le meme rapport largeur/hauteur, sinon l image sera recadree au",
+          "centre par le navigateur, ce qui coupe parfois le sujet.",
           "",
-          "« motif » reste renseigne : c’est le dessin de repli, affiche si",
+          "« motif » reste renseigne : c est le dessin de repli, affiche si",
           "« fichier » repasse a null."
         ],
-        "fichier": "/visuels-provisoires/bch-ambition.svg",
-        "largeur": 1200,
-        "hauteur": 900,
-        "texteAlternatif": "Trois niveaux construits, surmontes de deux niveaux en pointilles restant a construire.",
+        "fichier": "/visuels/pages/bch-ambition.jpg",
+        "largeur": 1400,
+        "hauteur": 1050,
+        "texteAlternatif": "La tour Eiffel et la Seine au crépuscule.",
         "motif": "ambition"
       }
     }
   ],
   "visuel": {
     "$commentaire": [
-      "IMAGE PROVISOIRE, a remplacer par celle du client.",
-      "Le fichier se trouve dans frontend/public/visuels-provisoires/.",
+      "Photographie en place. Pour la remplacer : deposer le fichier dans",
+      "frontend/public/visuels/pages/, puis mettre a jour ici « fichier »,",
+      "« largeur », « hauteur » et « texteAlternatif ». Rien a modifier dans le",
+      "code (CLAUDE.md §14).",
       "",
-      "Pour poser l’image definitive : deposer le fichier dans frontend/public/,",
-      "puis remplacer ici « fichier », « largeur », « hauteur » et",
-      "« texteAlternatif ». Rien a modifier dans le code (CLAUDE.md §14).",
-      "Garder le meme rapport largeur/hauteur, sinon l’image sera recadree.",
+      "Garder le meme rapport largeur/hauteur, sinon l image sera recadree au",
+      "centre par le navigateur, ce qui coupe parfois le sujet.",
       "",
-      "« motif » reste renseigne : c’est le dessin de repli, affiche si",
+      "« motif » reste renseigne : c est le dessin de repli, affiche si",
       "« fichier » repasse a null."
     ],
-    "fichier": "/visuels-provisoires/bch-bandeau.svg",
-    "largeur": 1200,
-    "hauteur": 900,
-    "texteAlternatif": "Une facade institutionnelle a colonnes, dont le fronton est souligne d’une ligne rouge.",
+    "fichier": "/visuels/pages/bch-bandeau.jpg",
+    "largeur": 1400,
+    "hauteur": 1050,
+    "texteAlternatif": "Une intervenante présente un graphique au tableau devant un auditoire assis.",
     "motif": "exigence"
+  },
+  "appelFinal": {
+    "$commentaire": [
+      "Appel a l action vers Lignes Rouges, produit phare.",
+      "NE VIENT PAS du document du client : produit d apres le brief de",
+      "copywriting, a faire valider."
+    ],
+    "surtitre": "NOTRE PREMIER PROGRAMME",
+    "titre": "Lignes Rouges",
+    "texte": "La prévention des risques liés au droit au séjour, appliquée. 1 h 30, à distance, animée par des avocats.",
+    "libelle": "Découvrir la formation"
   }
 }

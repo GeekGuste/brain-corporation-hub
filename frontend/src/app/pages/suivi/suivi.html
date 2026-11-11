@@ -1,0 +1,65 @@
+<!-- Coque du back-office. Aucun libelle ici : tout vient de
+     content/fr/suivi.json. -->
+
+<div class="container admin">
+  @if (!etat.verifiee()) {
+    <p class="admin__attente" role="status">{{ t.table.chargement }}</p>
+  } @else if (!etat.connecte()) {
+    <!-- Porte unique. Un seul message d'erreur pour les deux causes
+         possibles : dire « cet identifiant n'existe pas » revelerait lequel
+         est le bon. -->
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 col-md-7 col-lg-5">
+        <div class="connexion">
+          <h1 class="connexion__titre">{{ t.connexion.titre }}</h1>
+          <p class="connexion__aide">{{ t.connexion.aide }}</p>
+
+          @if (connexionEchouee()) {
+            <p class="alert alert-danger" role="alert">{{ t.connexion.echec }}</p>
+          }
+
+          <form [formGroup]="formulaire" (ngSubmit)="seConnecter()" novalidate>
+            <div class="mb-3">
+              <label class="form-label" for="identifiant">{{ t.connexion.identifiant }}</label>
+              <input id="identifiant" class="form-control" type="text"
+                     autocomplete="username" formControlName="identifiant" />
+            </div>
+            <div class="mb-4">
+              <label class="form-label" for="motDePasse">{{ t.connexion.motDePasse }}</label>
+              <input id="motDePasse" class="form-control" type="password"
+                     autocomplete="current-password" formControlName="motDePasse" />
+            </div>
+            <button class="btn btn-primary w-100" type="submit" [disabled]="connexionEnCours()">
+              @if (connexionEnCours()) { {{ t.connexion.enCours }} }
+              @else { {{ t.connexion.valider }} }
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <header class="admin__tete">
+      <h1 class="admin__titre">{{ t.titre }}</h1>
+      <button class="btn btn-outline-secondary btn-sm" type="button" (click)="seDeconnecter()">
+        {{ t.actions.deconnexion }}
+      </button>
+    </header>
+
+    <!-- Menu du back-office. Les chemins viennent de la configuration des
+         routes, jamais ecrits en dur (CLAUDE.md §12). -->
+    <nav class="admin__menu" aria-label="Navigation du back-office">
+      <a [routerLink]="base" routerLinkActive="est-actif"
+         [routerLinkActiveOptions]="{ exact: true }">
+        {{ t.menu.inscriptions }}
+      </a>
+      <a [routerLink]="[base, 'notifications']" routerLinkActive="est-actif">
+        {{ t.menu.notifications }}
+      </a>
+      <a [routerLink]="[base, 'referentiel']" routerLinkActive="est-actif">
+        {{ t.menu.referentiel }}
+      </a>
+    </nav>
+
+    <router-outlet />
+  }
+</div>

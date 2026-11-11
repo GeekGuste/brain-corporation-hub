@@ -79,6 +79,12 @@
              capitales dans le document du client, on ne le transforme pas, et
              on ne l'espace pas davantage : des capitales pistonnees sont
              penibles a lire pour un lecteur non francophone de naissance. -->
+        <!-- Emplacement du logo du programme, projete par la page. La page
+             de vente y place celui de Lignes Rouges ; les autres n en ont pas.
+             Par projection plutot qu en dur : ce gabarit sert les trois pages
+             et ne doit connaitre aucune marque en particulier. -->
+        <ng-content select="[logo-programme]" />
+
         <p class="surtitre">{{ contenu().surtitre }}</p>
 
         <h1 class="bandeau__titre">{{ contenu().titre }}</h1>
@@ -109,7 +115,14 @@
 
             @if (contenu().appelAction) {
               <p class="bandeau__action">
-                <a class="btn btn-vif btn-lg" [href]="contenu().appelAction!.ancre">
+                <!-- routerLink avec un tableau vide, et non href="#ancre".
+                     La page declare <base href="/"> : une URL reduite a un
+                     fragment se resout contre l'URL DE BASE et non contre la
+                     page courante, donc « #inscription » menait a l'accueil.
+                     Ici, le routeur reste sur la route courante et se contente
+                     de poser le fragment, puis defile jusqu'a lui grace a
+                     anchorScrolling. -->
+                <a class="btn btn-vif btn-lg" [routerLink]="[]" [fragment]="ancre()">
                   {{ contenu().appelAction!.libelle }}
                 </a>
               </p>
@@ -125,6 +138,7 @@
           [largeur]="contenu().visuel.largeur"
           [hauteur]="contenu().visuel.hauteur"
           [motif]="contenu().visuel.motif"
+          [legende]="contenu().visuel.legende ?? ''"
           [rapport]="bandeauCompact() ? '16 / 9' : '4 / 3'"
           [premierEcran]="true"
           fond="encre"
@@ -166,6 +180,7 @@
               [largeur]="section.visuel!.largeur"
               [hauteur]="section.visuel!.hauteur"
               [motif]="section.visuel!.motif"
+              [legende]="section.visuel!.legende ?? ''"
               rapport="4 / 3"
               [fond]="indice % 2 === 1 ? 'blanc' : 'papier'"
             />
@@ -227,4 +242,30 @@
       }
     </div>
   </section>
+}
+
+<!-- =========================================================================
+     APPEL A L'ACTION DE CLOTURE
+     -------------------------------------------------------------------------
+     Chaque page doit avoir UN objectif. L'accueil et la page Brain Corporation
+     Hub n'en avaient aucun : on les lisait, puis rien. Cette bande leur en
+     donne un, vers le produit phare.
+
+     Absente de la page Lignes Rouges, qui a deja le sien : son formulaire.
+     ========================================================================= -->
+@if (contenu().appelFinal; as appel) {
+  <aside class="cloture">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-8 text-center">
+          <p class="cloture__surtitre">{{ appel.surtitre }}</p>
+          <h2 class="cloture__titre">{{ appel.titre }}</h2>
+          <p class="cloture__texte">{{ appel.texte }}</p>
+          <a class="btn btn-vif btn-lg" [routerLink]="versLignesRouges">
+            {{ appel.libelle }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </aside>
 }

@@ -10,8 +10,23 @@
     "nomDuSite": "Brain Corporation Hub",
     "separateurDeTitre": " | ",
     "locale": "fr_FR",
-    "imagePartageParDefaut": "[À FOURNIR PAR LE CLIENT]",
-    "imagePartageTexteAlternatif": "[À FOURNIR PAR LE CLIENT]"
+    "imagePartageParDefaut": "/visuels/pages/partage-defaut.jpg",
+    "imagePartageTexteAlternatif": "Une salle de réunion claire, table en bois et grandes fenêtres.",
+    "$commentaire": [
+      "Valeurs communes a toutes les pages.",
+      "",
+      "imagePartage : l image qui s affiche quand un lien du site est colle sur",
+      "un reseau social ou dans une messagerie. 1200 x 630 est la taille attendue",
+      "partout. Le chemin est relatif ; le service SEO le rend absolu, sur le",
+      "domaine de production, parce qu un reseau social ne resout pas une URL",
+      "relative et met l image en cache.",
+      "",
+      "PROVISOIRE : c est une photographie seule. Une vraie image de partage",
+      "porte le logo et une phrase courte, et se compose. A reprendre avec la",
+      "graphiste, en remplacant ce seul fichier."
+    ],
+    "imagePartageLargeur": 1200,
+    "imagePartageHauteur": 630
   },
   "pages": {
     "accueil": {
@@ -31,6 +46,36 @@
       "description": "Programme de formation consacré à la prévention des situations susceptibles de fragiliser le droit au séjour des personnes étrangères en France. 1 h 30, à distance, 100 € TTC.",
       "ogTitre": "Lignes Rouges",
       "ogDescription": "Prévenir les risques liés au droit au séjour."
+    },
+    "contact": {
+      "titre": "Nous écrire",
+      "description": "Une question sur la formation Lignes Rouges avant de vous inscrire ? Écrivez-nous, nous vous répondons par email.",
+      "ogTitre": "Nous écrire",
+      "ogDescription": "Une question avant de vous inscrire ?"
+    },
+    "mentions-legales": {
+      "titre": "Mentions légales",
+      "description": "Éditeur, responsable de la publication et hébergeur du site Brain Corporation Hub."
+    },
+    "politique-confidentialite": {
+      "titre": "Politique de confidentialité",
+      "description": "Comment Brain Corporation Hub utilise les données personnelles recueillies lors des demandes de renseignements, des inscriptions et du suivi des formations."
+    },
+    "conditions-generales-de-vente": {
+      "titre": "Conditions générales de vente",
+      "description": "Prix, paiement et droit de rétractation applicables à la formation Lignes Rouges."
+    },
+    "suivi": {
+      "titre": "Suivi des inscriptions",
+      "description": "Page de gestion réservée. Accès protégé."
+    },
+    "referentiel-territorial": {
+      "titre": "Référentiel territorial : préfecture, tribunal judiciaire et barreau",
+      "description": "La grille qui relie chaque préfecture à son tribunal judiciaire de référence et au barreau requis pour la formation Lignes Rouges."
+    },
+    "non-trouvee": {
+      "titre": "Page introuvable",
+      "description": "Cette adresse ne correspond à aucune page du site."
     }
   }
 }

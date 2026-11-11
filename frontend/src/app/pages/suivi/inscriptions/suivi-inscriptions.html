@@ -1,0 +1,187 @@
+<!-- Suivi des inscriptions (CLAUDE.md §5.7).
+     La connexion et le menu sont dans la coque du back-office.
+     Aucun libelle ici : tout vient de content/fr/suivi.json. -->
+
+<div class="suivi__tete">
+  <p class="suivi__total">{{ total() }} {{ t.table.total }}</p>
+
+  <div class="suivi__actions">
+    <button class="btn btn-outline-secondary" type="button" (click)="charger()">
+      {{ t.actions.rafraichir }}
+    </button>
+    <button
+      class="btn btn-primary"
+      type="button"
+      [disabled]="exportEnCours() || total() === 0"
+      (click)="exporter()"
+    >
+      @if (exportEnCours()) {
+        {{ t.actions.exportEnCours }}
+      } @else {
+        {{ t.actions.exporter }}
+      }
+    </button>
+  </div>
+</div>
+
+@if (message(); as texte) {
+  <p class="alert alert-warning" role="alert">{{ texte }}</p>
+}
+
+<!-- Rappel de ce que la colonne « barreau requis » veut dire, et surtout
+     de ce qu'elle ne veut pas dire (CLAUDE.md §6). -->
+<p class="suivi__note">{{ t.barreau.aide }}</p>
+
+@if (chargement()) {
+  <p class="suivi__attente" role="status">{{ t.table.chargement }}</p>
+} @else if (total() === 0) {
+  <p class="suivi__attente">{{ t.table.vide }}</p>
+} @else {
+  <div class="suivi__cadre">
+    <table class="table suivi__table">
+      <thead>
+        <tr>
+          <th scope="col">{{ t.table.colonnes.validation }}</th>
+          <th scope="col">{{ t.table.colonnes.stagiaire }}</th>
+          <th scope="col">{{ t.table.colonnes.contact }}</th>
+          <th scope="col">{{ t.table.colonnes.residence }}</th>
+          <th scope="col">{{ t.table.colonnes.titre }}</th>
+          <th scope="col">{{ t.table.colonnes.prefecture }}</th>
+          <th scope="col">{{ t.table.colonnes.barreau }}</th>
+          <th scope="col">{{ t.table.colonnes.presence }}</th>
+          <th scope="col">{{ t.table.colonnes.actions }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (inscription of inscriptions(); track inscription.id) {
+          <tr>
+            <td class="suivi__date">{{ dateCourte(inscription.dateValidation) }}</td>
+
+            <td>
+              <strong>{{ inscription.prenom }} {{ inscription.nom }}</strong>
+            </td>
+
+            <td class="suivi__contact">
+              {{ inscription.email }}
+              @if (inscription.telephone) {
+                <br />{{ inscription.telephone }}
+              }
+            </td>
+
+            <td>
+              {{ residence(inscription.statutResidence) }}
+              @if (inscription.paysResidenceActuelle) {
+                <br /><span class="suivi__appoint">{{ inscription.paysResidenceActuelle }}</span>
+              }
+            </td>
+
+            <td>
+              {{ inscription.categorieFamille }}
+              @if (inscription.sousCategorie) {
+                <br /><span class="suivi__appoint">{{ inscription.sousCategorie }}</span>
+              }
+              @if (inscription.precisionAutreSituation) {
+                <br /><span class="suivi__appoint">{{ inscription.precisionAutreSituation }}</span>
+              }
+            </td>
+
+            <td>
+              {{ inscription.departement }} {{ inscription.prefecture }}
+              <br /><span class="suivi__appoint">{{ inscription.tribunalJudiciaire }}</span>
+            </td>
+
+            <td>
+              <strong>{{ inscription.barreauRequis }}</strong>
+            </td>
+
+            <!-- PREMIERE action d'ecriture -->
+            <td>
+              @switch (inscription.formationSuivie) {
+                @case (true) {
+                  <span class="marque marque--oui">{{ t.presence.oui }}</span>
+                  <button
+                    class="btn btn-sm btn-link suivi__lien"
+                    type="button"
+                    (click)="marquerPresence(inscription, null)"
+                  >
+                    {{ t.presence.reinitialiser }}
+                  </button>
+                }
+                @case (false) {
+                  <span class="marque marque--non">{{ t.presence.non }}</span>
+                  <button
+                    class="btn btn-sm btn-link suivi__lien"
+                    type="button"
+                    (click)="marquerPresence(inscription, true)"
+                  >
+                    {{ t.presence.marquerOui }}
+                  </button>
+                }
+                @default {
+                  <span class="suivi__appoint">{{ t.presence.nonRenseignee }}</span>
+                  <div class="suivi__choix">
+                    <button
+                      class="btn btn-sm btn-outline-success"
+                      type="button"
+                      (click)="marquerPresence(inscription, true)"
+                    >
+                      {{ t.presence.marquerOui }}
+                    </button>
+                    <button
+                      class="btn btn-sm btn-outline-secondary"
+                      type="button"
+                      (click)="marquerPresence(inscription, false)"
+                    >
+                      {{ t.presence.marquerNon }}
+                    </button>
+                  </div>
+                }
+              }
+            </td>
+
+            <!-- SECONDE action d'ecriture.
+                 Le bouton n'apparait qu'une fois la formation marquee comme
+                 suivie (CLAUDE.md §5.7). Le serveur tient la meme regle :
+                 cacher le bouton ne suffirait pas. -->
+            <td>
+              @if (inscription.formationSuivie === true) {
+                <button
+                  class="btn btn-sm btn-outline-danger"
+                  type="button"
+                  (click)="demanderSuppression(inscription)"
+                >
+                  {{ t.actions.supprimer }}
+                </button>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}
+
+<!-- ====================================================================
+     CONFIRMATION DE SUPPRESSION
+     --------------------------------------------------------------------
+     La suppression est definitive : elle ne se fait pas d'un seul clic.
+     ==================================================================== -->
+@if (suppressionAConfirmer(); as cible) {
+  <div class="confirmation-suppression" role="alertdialog" aria-labelledby="titre-suppression">
+    <h2 class="confirmation-suppression__titre" id="titre-suppression">
+      {{ t.suppression.titre }}
+    </h2>
+    <p class="confirmation-suppression__cible">
+      <strong>{{ cible.prenom }} {{ cible.nom }}</strong>, {{ cible.email }}
+    </p>
+    <p>{{ t.suppression.texte }}</p>
+    <div class="confirmation-suppression__actions">
+      <button class="btn btn-danger" type="button" (click)="confirmerSuppression()">
+        {{ t.suppression.confirmer }}
+      </button>
+      <button class="btn btn-outline-secondary" type="button" (click)="annulerSuppression()">
+        {{ t.suppression.annuler }}
+      </button>
+    </div>
+  </div>
+}

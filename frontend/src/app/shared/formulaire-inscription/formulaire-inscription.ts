@@ -11,9 +11,11 @@ import {
   viewChild,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import type { Stripe, StripeElements } from '@stripe/stripe-js';
 
 import libelles from '../../../content/fr/inscription.json';
+import { cheminDePage } from '../../core/config/site-routes';
 import type {
   CategorieTitre,
   DemandeInscription,
@@ -22,6 +24,7 @@ import type {
   StatutResidence,
 } from '../../core/inscription/modele-inscription';
 import { ServiceInscription } from '../../core/inscription/service-inscription';
+import { TexteAvecLiens } from '../texte-avec-liens/texte-avec-liens';
 
 /** Les quatre ecrans successifs du parcours. */
 type Etape = 'formulaire' | 'paiement' | 'confirmee' | 'attenteWebhook';
@@ -53,7 +56,7 @@ type Etape = 'formulaire' | 'paiement' | 'confirmee' | 'attenteWebhook';
  */
 @Component({
   selector: 'app-formulaire-inscription',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink, TexteAvecLiens],
   templateUrl: './formulaire-inscription.html',
   styleUrl: './formulaire-inscription.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -65,6 +68,19 @@ export class FormulaireInscription {
 
   /** Libelles, lus dans content/fr/inscription.json (CLAUDE.md §13). */
   protected readonly t = libelles;
+
+  /**
+   * La phrase « Politique de confidentialite » devient un lien vers la page
+   * correspondante dans la mention RGPD du client. Le chemin vient de la
+   * configuration des routes, jamais ecrit en dur (CLAUDE.md §12).
+   */
+  protected readonly lienPolitique = {
+    phrase: 'Politique de confidentialité',
+    chemin: cheminDePage('politique-confidentialite'),
+  };
+
+  /** Conditions de vente, atteignables au point de paiement. */
+  protected readonly lienCgv = cheminDePage('conditions-generales-de-vente');
 
   protected readonly categories = signal<readonly CategorieTitre[]>([]);
   protected readonly prefectures = signal<readonly Prefecture[]>([]);

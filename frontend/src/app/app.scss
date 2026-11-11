@@ -38,15 +38,32 @@
   &__marque {
     display: flex;
     align-items: center;
+    gap: 0.625rem;
     color: var(--bs-heading-color);
     text-decoration: none;
   }
 
+  // Le nom en vraies lettres, a cote du dessin. Le logo livre est carre : a la
+  // hauteur d un en-tete, les mots qu il contient sont illisibles. Ecrit ici,
+  // le nom reste lisible a toute taille et ne coute pas un octet.
+  //
+  // Masque sur les tres petits ecrans, ou la place manque : le dessin suffit
+  // alors a identifier le site, et le lien conserve son nom accessible.
   &__marque-texte {
-    font-size: 1.0625rem;
+    display: none;
+    font-size: 1rem;
     font-weight: 700;
     letter-spacing: var(--bch-serrage-titre);
+    line-height: 1.2;
     white-space: nowrap;
+
+    @media (min-width: 420px) {
+      display: block;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 1.0625rem;
+    }
   }
 
   // Sur telephone, la navigation occupe sa propre ligne sous la marque : les
@@ -155,6 +172,40 @@
 
   &__contenu {
     padding-block: 2.5rem;
+  }
+
+  // Liens legaux. Empiles sur telephone, en ligne a partir de la tablette :
+  // quatre libelles dont « Conditions generales de vente » ne tiennent pas
+  // cote a cote sur un petit ecran, et des liens empiles offrent des cibles
+  // tactiles plus franches (CLAUDE.md §13).
+  &__liens {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0 0 1.25rem;
+    padding: 0;
+
+    @media (min-width: 576px) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      column-gap: 1.75rem;
+    }
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--bch-cible-tactile-min);
+      font-size: 0.9375rem;
+      color: var(--bch-sur-encre);
+      text-decoration: none;
+      border-block-end: 1px solid var(--bch-filet-sur-encre);
+
+      &:hover,
+      &:focus-visible {
+        color: var(--bch-sur-encre);
+        border-block-end-color: var(--bch-sur-encre);
+      }
+    }
   }
 
   &__mention {

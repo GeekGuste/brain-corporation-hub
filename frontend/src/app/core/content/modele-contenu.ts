@@ -52,12 +52,38 @@ export interface VisuelDePage {
   readonly hauteur: number | null;
   /** Illustration de repli, et identite visuelle de la page. */
   readonly motif: NomDeMotif;
+  /**
+   * Legende affichee sur l image, facultative.
+   *
+   * Sert a dire « photographie d illustration » la ou la photo pourrait
+   * etre prise pour un portrait reel : la section des formateurs montre un
+   * avocat, et les formateurs de la methode sont des avocats. Sans cette
+   * mention, le visiteur croirait voir celui qui l animera (CLAUDE.md §3).
+   */
+  readonly legende?: string;
 }
 
 /** Un chiffre cle affiche en tete de la page de vente. */
 export interface FaitCle {
   readonly libelle: string;
   readonly valeur: string;
+}
+
+/**
+ * Bande de cloture menant a Lignes Rouges.
+ *
+ * Chaque page doit avoir UN objectif. L accueil et la page Brain Corporation
+ * Hub n en avaient aucun : on les lisait, puis rien. Cette bande leur en donne
+ * un, vers le produit phare.
+ *
+ * Absente de la page Lignes Rouges elle-meme, qui a deja le sien : le
+ * formulaire d inscription.
+ */
+export interface AppelFinal {
+  readonly surtitre: string;
+  readonly titre: string;
+  readonly texte: string;
+  readonly libelle: string;
 }
 
 export interface ContenuDePage {
@@ -73,6 +99,8 @@ export interface ContenuDePage {
   readonly faitsCles?: readonly FaitCle[];
   /** Bouton d'appel a l'action du bandeau de tete. */
   readonly appelAction?: { readonly libelle: string; readonly ancre: string };
+  /** Bande de cloture vers Lignes Rouges. Absente de la page Lignes Rouges. */
+  readonly appelFinal?: AppelFinal;
 }
 
 /**
@@ -98,4 +126,35 @@ export interface ModalitesFormation {
   readonly titre: string;
   readonly elements: readonly { readonly libelle: string; readonly valeur: string }[];
   readonly mentionTva: string;
+}
+
+/**
+ * Forme d'une page legale : politique de confidentialite, mentions legales,
+ * conditions generales de vente.
+ *
+ * Volontairement plus pauvre que ContenuDePage : pas de bandeau sur l'encre
+ * profonde, pas de visuel, pas d'appel a l'action. Une page legale se lit, elle
+ * ne vend rien. Les numeros de section, quand le document du client en porte,
+ * font partie du titre : c'est son texte, et la page y renvoie.
+ */
+export interface ContenuPageLegale {
+  /** Le h1 unique de la page. */
+  readonly titre: string;
+  /**
+   * Date de derniere mise a jour, telle que le client la fournit.
+   *
+   * Facultative dans le type, obligatoire dans les faits pour la politique de
+   * confidentialite : son article 10 impose de publier « la version en vigueur
+   * et sa date de mise a jour ». Tant que le client ne l'a pas donnee, la
+   * valeur est un texte de remplacement : on n'invente pas une date
+   * (CLAUDE.md §3).
+   */
+  readonly dateMiseAJour?: {
+    readonly libelle: string;
+    readonly valeur: string;
+  };
+  readonly sections: readonly {
+    readonly titre: string;
+    readonly blocs: readonly BlocContenu[];
+  }[];
 }

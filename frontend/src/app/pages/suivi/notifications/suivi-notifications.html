@@ -1,0 +1,129 @@
+<!-- Adresses prevenues d'un paiement confirme.
+     Aucun libelle ici : tout vient de content/fr/suivi.json. -->
+
+<p class="text-body-secondary notifications__aide">{{ t.notifications.aide }}</p>
+
+@if (message(); as texte) {
+  <p class="alert alert-warning" role="alert">{{ texte }}</p>
+}
+
+<!-- ========================================================================
+     AJOUT
+     ======================================================================== -->
+<div class="notifications__ajout">
+  <h2 class="notifications__titre">{{ t.notifications.ajout.titre }}</h2>
+
+  <form [formGroup]="formulaire" (ngSubmit)="ajouter()" novalidate>
+    <div class="row g-3 align-items-end">
+      <div class="col-12 col-md-5">
+        <label class="form-label" for="email">{{ t.notifications.ajout.email }}</label>
+        <input
+          id="email"
+          class="form-control"
+          type="email"
+          inputmode="email"
+          autocomplete="off"
+          formControlName="email"
+        />
+      </div>
+
+      <div class="col-12 col-md-5">
+        <label class="form-label" for="libelle">
+          {{ t.notifications.ajout.libelle }}
+          <span class="notifications__facultatif">
+            {{ t.notifications.ajout.libelleFacultatif }}
+          </span>
+        </label>
+        <input
+          id="libelle"
+          class="form-control"
+          type="text"
+          autocomplete="off"
+          formControlName="libelle"
+          aria-describedby="aide-libelle"
+        />
+      </div>
+
+      <div class="col-12 col-md-2">
+        <button class="btn btn-primary w-100" type="submit" [disabled]="ajoutEnCours()">
+          @if (ajoutEnCours()) {
+            {{ t.notifications.ajout.enCours }}
+          } @else {
+            {{ t.notifications.ajout.valider }}
+          }
+        </button>
+      </div>
+    </div>
+
+    <p class="form-text" id="aide-libelle">{{ t.notifications.ajout.libelleAide }}</p>
+  </form>
+</div>
+
+<!-- ========================================================================
+     LISTE
+     ======================================================================== -->
+@if (chargement()) {
+  <p class="notifications__vide" role="status">{{ t.table.chargement }}</p>
+} @else if (destinataires().length === 0) {
+  <!-- Une liste vide n'est pas un etat neutre : personne ne sera prevenu. On
+       le dit, plutot que d'afficher un tableau vide. -->
+  <p class="notifications__vide">{{ t.notifications.vide }}</p>
+} @else {
+  <div class="notifications__cadre">
+    <table class="table notifications__table">
+      <thead>
+        <tr>
+          <th scope="col">{{ t.notifications.colonnes.email }}</th>
+          <th scope="col">{{ t.notifications.colonnes.libelle }}</th>
+          <th scope="col">{{ t.notifications.colonnes.ajout }}</th>
+          <th scope="col"><span class="visually-hidden">Actions</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (destinataire of destinataires(); track destinataire.id) {
+          <tr>
+            <td><strong>{{ destinataire.email }}</strong></td>
+            <td>
+              @if (destinataire.libelle) {
+                {{ destinataire.libelle }}
+              } @else {
+                <span class="notifications__sans">&mdash;</span>
+              }
+            </td>
+            <td class="notifications__date">{{ dateCourte(destinataire.dateAjout) }}</td>
+            <td class="text-end">
+              <button
+                class="btn btn-sm btn-outline-danger"
+                type="button"
+                (click)="demanderRetrait(destinataire)"
+              >
+                {{ t.notifications.retirer }}
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}
+
+<!-- ========================================================================
+     CONFIRMATION DE RETRAIT
+     ======================================================================== -->
+@if (retraitAConfirmer(); as cible) {
+  <div class="confirmation-retrait" role="alertdialog" aria-labelledby="titre-retrait">
+    <h2 class="confirmation-retrait__titre" id="titre-retrait">
+      {{ t.notifications.confirmation.titre }}
+    </h2>
+    <p class="confirmation-retrait__cible"><strong>{{ cible.email }}</strong></p>
+    <p>{{ t.notifications.confirmation.texte }}</p>
+    <div class="confirmation-retrait__actions">
+      <button class="btn btn-danger" type="button" (click)="confirmerRetrait()">
+        {{ t.notifications.confirmation.confirmer }}
+      </button>
+      <button class="btn btn-outline-secondary" type="button" (click)="annulerRetrait()">
+        {{ t.notifications.confirmation.annuler }}
+      </button>
+    </div>
+  </div>
+}

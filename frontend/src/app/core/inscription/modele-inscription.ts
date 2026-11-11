@@ -35,6 +35,16 @@ export interface Prefecture {
   readonly prefecture: string;
   readonly tribunalJudiciaire: string;
   readonly barreauRequis: string;
+  /** Precision du client sur une correspondance qui pourrait surprendre. */
+  readonly note: string | null;
+  /**
+   * Date de confrontation de la ligne aux annuaires officiels. NULLE tant que
+   * le client ne l a pas faite : la validation juridique de la grille lui
+   * appartient, nous ne la certifions pas (CLAUDE.md §7). Son absence doit se
+   * voir sur la page publique, une date inventee donnerait une fausse
+   * assurance.
+   */
+  readonly dateDerniereVerification: string | null;
 }
 
 export interface DemandeInscription {

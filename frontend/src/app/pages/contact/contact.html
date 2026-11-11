@@ -1,0 +1,255 @@
+<!-- Page de contact. Aucun libelle ecrit ici : tout vient de
+     content/fr/contact.json. Aucune couleur : classes Bootstrap et variables
+     du fichier de theme unique (CLAUDE.md §14). -->
+
+<header class="bandeau bandeau--compact">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-8">
+        <p class="surtitre">{{ t.surtitre }}</p>
+        <h1 class="bandeau__titre">{{ t.titre }}</h1>
+        <div class="bandeau__chapo">
+          @for (paragraphe of t.introduction; track $index) {
+            <p class="chapo">{{ paragraphe }}</p>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="contact" aria-labelledby="titre-formulaire">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div class="contact__panneau">
+          @switch (etape()) {
+            <!-- ============================================================
+                 ACCUSE DE RECEPTION
+                 ------------------------------------------------------------
+                 Affiche UNIQUEMENT quand le serveur a confirme que le message
+                 est parti. Rien n'est enregistre : un « message envoye »
+                 affiche sur la foi d'un clic ferait attendre une reponse qui
+                 ne viendrait jamais.
+                 ============================================================ -->
+            @case ('envoye') {
+              <div class="confirmation" role="status">
+                <h2 class="confirmation__titre" id="titre-formulaire">
+                  {{ t.succes.titre }}
+                </h2>
+                <p class="mb-0">{{ t.succes.texte }}</p>
+              </div>
+            }
+
+            @case ('formulaire') {
+              <h2 class="contact__titre" id="titre-formulaire">{{ t.titre }}</h2>
+
+              <form class="row g-3" [formGroup]="formulaire" (ngSubmit)="envoyer()" novalidate>
+                @if (erreurGlobale(); as message) {
+                  <div class="col-12">
+                    <div class="alert alert-danger" role="alert">
+                      <h3 class="alert-titre">{{ t.erreurs.titre }}</h3>
+                      <p class="mb-0">
+                        <app-texte-avec-liens [texte]="message" />
+                      </p>
+                    </div>
+                  </div>
+                }
+
+                <div class="col-12 col-sm-6">
+                  <label class="form-label" for="prenom">{{ t.champs.prenom.libelle }}</label>
+                  <input
+                    id="prenom"
+                    class="form-control"
+                    type="text"
+                    autocomplete="given-name"
+                    required
+                    formControlName="prenom"
+                    [class.is-invalid]="enErreur('prenom')"
+                  />
+                  @if (messageErreur('prenom'); as message) {
+                    <p class="invalid-feedback d-block">{{ message }}</p>
+                  }
+                </div>
+
+                <div class="col-12 col-sm-6">
+                  <label class="form-label" for="nom">{{ t.champs.nom.libelle }}</label>
+                  <input
+                    id="nom"
+                    class="form-control"
+                    type="text"
+                    autocomplete="family-name"
+                    required
+                    formControlName="nom"
+                    [class.is-invalid]="enErreur('nom')"
+                  />
+                  @if (messageErreur('nom'); as message) {
+                    <p class="invalid-feedback d-block">{{ message }}</p>
+                  }
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label" for="email">{{ t.champs.email.libelle }}</label>
+                  <input
+                    id="email"
+                    class="form-control"
+                    type="email"
+                    inputmode="email"
+                    autocomplete="email"
+                    required
+                    formControlName="email"
+                    [class.is-invalid]="enErreur('email')"
+                    aria-describedby="aide-email"
+                  />
+                  <p class="form-text" id="aide-email">{{ t.champs.email.aide }}</p>
+                  @if (messageErreur('email'); as message) {
+                    <p class="invalid-feedback d-block">{{ message }}</p>
+                  }
+                </div>
+
+                <!-- Telephone. AUCUNE mention « facultatif », a la demande
+                     expresse du client. Les quatre autres champs portent
+                     l'attribut « required », donc les lecteurs d'ecran les
+                     annoncent comme obligatoires : l'absence de marque ici
+                     suffit a dire que celui-ci ne l'est pas, sans l'ecrire. -->
+                <div class="col-12">
+                  <label class="form-label" for="telephone">
+                    {{ t.champs.telephone.libelle }}
+                  </label>
+                  <input
+                    id="telephone"
+                    class="form-control"
+                    type="tel"
+                    inputmode="tel"
+                    autocomplete="tel"
+                    formControlName="telephone"
+                    [class.is-invalid]="enErreur('telephone')"
+                  />
+                  @if (messageErreur('telephone'); as message) {
+                    <p class="invalid-feedback d-block">{{ message }}</p>
+                  }
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label" for="message">{{ t.champs.message.libelle }}</label>
+                  <textarea
+                    id="message"
+                    class="form-control contact__message"
+                    rows="7"
+                    required
+                    formControlName="message"
+                    (input)="surSaisieMessage()"
+                    [class.is-invalid]="enErreur('message')"
+                    aria-describedby="aide-message"
+                  ></textarea>
+
+                  <!-- L'avertissement du client, repris tel quel, pose SOUS le
+                       champ : a cet endroit il est lu avant d'ecrire, et c'est
+                       la qu'il sert. -->
+                  <p class="form-text" id="aide-message">{{ t.rgpd.avertissement }}</p>
+
+                  <!-- Le compteur n'apparait qu'a l'approche de la limite :
+                       affiche en permanence, il transformerait une question en
+                       exercice de concision. -->
+                  @if (caracteresRestants() < 500) {
+                    <p class="contact__compteur" role="status">
+                      {{ caracteresRestants() }} {{ t.champs.message.compteur }}
+                    </p>
+                  }
+
+                  @if (messageErreur('message'); as message) {
+                    <p class="invalid-feedback d-block">{{ message }}</p>
+                  }
+                </div>
+
+                <!-- ========================================================
+                     CHAMP PIEGE
+                     --------------------------------------------------------
+                     Invisible a l'oeil, present pour les robots, qui
+                     remplissent tous les champs qu'ils trouvent. S'il arrive
+                     rempli, le serveur ecarte le message en silence.
+
+                     Masque par « visually-hidden » de Bootstrap et non par
+                     type="hidden" : un champ cache par le type est ignore des
+                     robots les plus simples. Il reste lisible par les lecteurs
+                     d'ecran, qui annoncent son libelle, « Laissez ce champ
+                     vide ». C'est volontaire : mieux vaut une consigne claire
+                     qu'un champ muet.
+
+                     Hors du flux de tabulation : personne n'y arrive au
+                     clavier par accident. -->
+                <div class="col-12 visually-hidden" aria-hidden="false">
+                  <label class="form-label" for="piege">{{ t.piege.libelle }}</label>
+                  <input
+                    id="piege"
+                    class="form-control"
+                    type="text"
+                    tabindex="-1"
+                    autocomplete="off"
+                    formControlName="piege"
+                  />
+                </div>
+
+                <!-- ========================================================
+                     PROTECTION DES DONNEES PERSONNELLES
+                     --------------------------------------------------------
+                     Mention FOURNIE PAR LE CLIENT, section 1 de son document,
+                     integree telle quelle (CLAUDE.md §3).
+
+                     En clair avant le bouton d'envoi, pas repliee :
+                     l'information doit etre donnee AU MOMENT de la collecte.
+                     ======================================================== -->
+                <div class="col-12">
+                  <section class="rgpd" aria-labelledby="titre-rgpd">
+                    <h3 class="rgpd__titre" id="titre-rgpd">{{ t.rgpd.titre }}</h3>
+                    <p class="rgpd__texte rgpd__texte--dernier">
+                      <app-texte-avec-liens
+                        [texte]="t.rgpd.mention"
+                        [lienInterne]="lienPolitique"
+                      />
+                    </p>
+                  </section>
+                </div>
+
+                <div class="col-12">
+                  <button
+                    class="btn btn-primary btn-lg"
+                    type="submit"
+                    [disabled]="envoiEnCours()"
+                  >
+                    @if (envoiEnCours()) {
+                      {{ t.actions.envoiEnCours }}
+                    } @else {
+                      {{ t.actions.envoyer }}
+                    }
+                  </button>
+                </div>
+              </form>
+            }
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================================
+     VERS LA FORMATION
+     -------------------------------------------------------------------------
+     Chaque page doit avoir UN objectif. Celui-ci est de lever une objection,
+     donc de ramener a l'inscription : beaucoup de questions trouvent deja leur
+     reponse sur la page de la formation.
+     ========================================================================= -->
+<aside class="cloture">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8 text-center">
+        <h2 class="cloture__titre">{{ t.versFormation.titre }}</h2>
+        <p class="cloture__texte">{{ t.versFormation.texte }}</p>
+        <a class="btn btn-vif btn-lg" [routerLink]="versLignesRouges">
+          {{ t.versFormation.libelle }}
+        </a>
+      </div>
+    </div>
+  </div>
+</aside>

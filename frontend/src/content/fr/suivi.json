@@ -1,0 +1,113 @@
+{
+  "$commentaire": [
+    "Libelles de la page de suivi des inscriptions (CLAUDE.md §5.7).",
+    "Textes d interface, produits d apres le cahier des charges, pas fournis par",
+    "le client. Ici et non dans les composants, pour une version anglaise plus",
+    "tard sans refactorisation (CLAUDE.md §13).",
+    "Pas de tiret cadratin (CLAUDE.md §3)."
+  ],
+  "titre": "Suivi des inscriptions",
+  "connexion": {
+    "titre": "Accès réservé",
+    "aide": "Cette page est réservée à la gestion des inscriptions.",
+    "identifiant": "Identifiant",
+    "motDePasse": "Mot de passe",
+    "valider": "Se connecter",
+    "enCours": "Connexion en cours",
+    "echec": "Identifiant ou mot de passe incorrect."
+  },
+  "table": {
+    "vide": "Aucune inscription confirmée pour le moment.",
+    "chargement": "Chargement des inscriptions",
+    "total": "inscription(s) confirmée(s)",
+    "colonnes": {
+      "validation": "Validée le",
+      "stagiaire": "Stagiaire",
+      "contact": "Contact",
+      "residence": "Résidence",
+      "titre": "Titre de séjour",
+      "prefecture": "Préfecture",
+      "barreau": "Barreau requis",
+      "presence": "Formation suivie",
+      "actions": "Actions"
+    }
+  },
+  "residence": {
+    "ResidentEnFrance": "En France",
+    "ResidentALEtranger": "À l’étranger"
+  },
+  "presence": {
+    "nonRenseignee": "Non renseignée",
+    "oui": "A suivi",
+    "non": "N’a pas suivi",
+    "marquerOui": "Marquer comme suivie",
+    "marquerNon": "Marquer comme non suivie",
+    "reinitialiser": "Remettre à non renseignée"
+  },
+  "actions": {
+    "exporter": "Exporter en CSV",
+    "exportEnCours": "Export en cours",
+    "deconnexion": "Se déconnecter",
+    "rafraichir": "Actualiser",
+    "supprimer": "Supprimer"
+  },
+  "suppression": {
+    "titre": "Supprimer cette inscription ?",
+    "texte": "Cette action est définitive. L’inscription sera effacée de notre base. La trace du paiement reste chez notre prestataire pour la comptabilité.",
+    "confirmer": "Oui, supprimer",
+    "annuler": "Annuler",
+    "indisponible": "La suppression n’est possible qu’une fois la formation marquée comme suivie."
+  },
+  "erreurs": {
+    "session": "Votre session a expiré. Reconnectez-vous.",
+    "action": "L’action n’a pas abouti. Réessayez.",
+    "export": "L’export n’a pas pu être téléchargé."
+  },
+  "barreau": {
+    "aide": "Le barreau est calculé à partir de la préfecture. Le choix de l’avocat reste manuel : le site ne propose et ne désigne jamais personne."
+  },
+  "menu": {
+    "inscriptions": "Inscriptions",
+    "referentiel": "Référentiel territorial",
+    "notifications": "Notifications"
+  },
+  "referentiel": {
+    "aide": "Grille de référence, en lecture seule. Elle se modifie dans le fichier versionné du projet, pas depuis cet écran."
+  },
+  "notifications": {
+    "$commentaire": [
+      "Ecran de gestion des adresses prevenues d un paiement confirme.",
+      "Ajout hors contrat initial, demande explicitement et accepte en V1."
+    ],
+    "aide": "Ces adresses reçoivent un message à chaque paiement confirmé. Ce sont des adresses internes, pas celles des stagiaires.",
+    "vide": "Aucune adresse enregistrée. Personne ne sera prévenu des nouveaux paiements.",
+    "colonnes": {
+      "email": "Adresse",
+      "libelle": "Qui",
+      "ajout": "Ajoutée le",
+      "actions": ""
+    },
+    "ajout": {
+      "titre": "Ajouter une adresse",
+      "email": "Adresse email",
+      "libelle": "Qui est-ce ?",
+      "libelleFacultatif": "facultatif",
+      "libelleAide": "Par exemple : Marie, commerciale. Utile quand la liste s’allonge.",
+      "valider": "Ajouter",
+      "enCours": "Ajout en cours"
+    },
+    "retirer": "Retirer",
+    "confirmation": {
+      "titre": "Retirer cette adresse ?",
+      "texte": "Elle ne recevra plus de notification. Vous pourrez la rajouter à tout moment.",
+      "confirmer": "Oui, retirer",
+      "annuler": "Annuler"
+    },
+    "erreurs": {
+      "invalide": "Cette adresse email ne semble pas valide.",
+      "dejaPresent": "Cette adresse est déjà dans la liste.",
+      "action": "L’action n’a pas abouti. Réessayez.",
+      "modeleManquant": "Aucun modèle d’email de notification n’est configuré : les messages ne partiront pas tant que ce n’est pas fait."
+    }
+  }
+}

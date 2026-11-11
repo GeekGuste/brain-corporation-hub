@@ -1,0 +1,35 @@
+<!-- Page publique du referentiel territorial (CLAUDE.md §5.8).
+     Le tableau lui-meme est dans un composant partage, utilise aussi par
+     l'ecran d'administration : c'est la meme grille. -->
+
+<header class="bandeau bandeau--compact">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-8">
+        <p class="surtitre">{{ t.surtitre }}</p>
+        <h1 class="bandeau__titre">{{ t.titre }}</h1>
+        <div class="bandeau__chapo">
+          @for (paragraphe of t.introduction; track $index) {
+            <p class="chapo">{{ paragraphe }}</p>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container referentiel-page">
+  <!-- Ce que la grille n'est pas. Pose AVANT le tableau : la precision doit
+       etre lue avant qu'on en tire une conclusion (CLAUDE.md §6). -->
+  <div class="referentiel-page__encart">
+    <h2 class="referentiel-page__encart-titre">{{ t.avertissement.titre }}</h2>
+    <p class="mb-0">{{ t.avertissement.texte }}</p>
+  </div>
+
+  <app-tableau-referentiel />
+
+  <div class="referentiel-page__encart referentiel-page__encart--apres">
+    <h2 class="referentiel-page__encart-titre">{{ t.verification.titre }}</h2>
+    <p class="mb-0">{{ t.verification.texte }}</p>
+  </div>
+</div>

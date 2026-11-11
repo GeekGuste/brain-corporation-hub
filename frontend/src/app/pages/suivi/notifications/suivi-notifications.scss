@@ -1,0 +1,97 @@
+// Adresses de notification.
+//
+// Aucune couleur ni taille de caractere ici : tout vient du fichier de theme
+// unique et des classes Bootstrap (CLAUDE.md §14).
+
+.notifications {
+  &__aide {
+    max-width: var(--bch-mesure);
+    margin-block-end: 1.5rem;
+  }
+
+  &__ajout {
+    padding: 1.5rem;
+    background-color: var(--bch-papier);
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    border-inline-start: 3px solid var(--bch-seuil);
+    margin-block-end: 2rem;
+  }
+
+  &__titre {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    margin-block-end: 1rem;
+  }
+
+  &__facultatif {
+    font-weight: 400;
+    font-size: 0.875rem;
+    color: var(--bs-secondary-color);
+
+    &::before { content: '('; }
+    &::after { content: ')'; }
+  }
+
+  // Une liste vide n'est pas neutre : personne ne sera prevenu.
+  &__vide {
+    padding: 2rem;
+    text-align: center;
+    color: var(--bs-secondary-color);
+    background-color: var(--bch-papier);
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+  }
+
+  &__cadre {
+    overflow-x: auto;
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+  }
+
+  &__table {
+    margin: 0;
+    font-size: 0.9375rem;
+    vertical-align: middle;
+
+    th {
+      white-space: nowrap;
+      background-color: var(--bch-papier);
+    }
+  }
+
+  &__date {
+    white-space: nowrap;
+    color: var(--bs-secondary-color);
+  }
+
+  &__sans {
+    color: var(--bs-secondary-color);
+  }
+}
+
+.confirmation-retrait {
+  max-width: var(--bch-mesure);
+  margin-block-start: 1.5rem;
+  padding: 1.5rem;
+  background-color: var(--bs-body-bg);
+  border: 1px solid var(--bs-danger-border-subtle);
+  border-radius: var(--bs-border-radius);
+  border-inline-start: 3px solid var(--bs-danger);
+
+  &__titre {
+    font-size: var(--bch-h3);
+    margin-block-end: 0.75rem;
+  }
+
+  &__cible {
+    margin-block-end: 0.75rem;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-block-start: 1.25rem;
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$commentaire": [
+    "Libelles de la page publique du referentiel territorial (CLAUDE.md §5.8).",
+    "",
+    "CES TEXTES NE VIENNENT PAS DU DOCUMENT DU CLIENT. Ils sont produits d apres",
+    "le cahier des charges, §6 et §7, et sont a faire valider, comme les blocs",
+    "« faitsCles » et « inscription » de la page de vente.",
+    "",
+    "Aucune affirmation inventee : la page dit ce que la grille EST (prefecture,",
+    "tribunal judiciaire de reference, barreau requis), qui en repond (le client),",
+    "et ce qu elle n est pas (une designation d avocat).",
+    "Pas de tiret cadratin (CLAUDE.md §3)."
+  ],
+  "surtitre": "RÉFÉRENTIEL TERRITORIAL",
+  "titre": "Préfecture, tribunal judiciaire et barreau requis",
+  "introduction": [
+    "Chaque avocat formateur intervient auprès des stagiaires dont la préfecture relève du ressort de la cour d’appel de son barreau d’inscription. Cette grille indique, pour chaque département, la ville-préfecture, le tribunal judiciaire de référence et le barreau requis.",
+    "La correspondance porte sur la ville-préfecture, et non sur toutes les communes du département."
+  ],
+  "avertissement": {
+    "titre": "Ce que cette page n’indique pas",
+    "texte": "Cette grille relie une préfecture à un barreau. Elle ne désigne aucun avocat : le choix de l’intervenant est fait manuellement, après l’inscription."
+  },
+  "verification": {
+    "titre": "Vérification",
+    "texte": "La grille est susceptible d’évoluer : regroupements de barreaux, modifications de ressort. La date indiquée est celle de la dernière confrontation de la ligne aux annuaires officiels.",
+    "jamais": "Non vérifiée"
+  },
+  "recherche": {
+    "libelle": "Rechercher un département, une préfecture ou un barreau",
+    "invite": "Par exemple : 75, Lyon, Val-d’Oise",
+    "effacer": "Effacer",
+    "resultats": "ligne(s) affichée(s) sur",
+    "aucun": "Aucune ligne ne correspond à votre recherche."
+  },
+  "colonnes": {
+    "departement": "Département",
+    "prefecture": "Préfecture",
+    "tribunal": "Tribunal judiciaire de référence",
+    "barreau": "Barreau requis",
+    "verification": "Dernière vérification"
+  },
+  "erreur": "La grille n’a pas pu être chargée. Rechargez la page."
+}

@@ -1,0 +1,118 @@
+{
+  "$commentaire": [
+    "Conditions generales de vente. LE CLIENT NE LES A PAS ENCORE FOURNIES.",
+    "",
+    "La page existe des maintenant dans l arborescence, avec des contenus",
+    "marques « [A FOURNIR PAR LE CLIENT] » (CLAUDE.md §16).",
+    "",
+    "Deux mentions NE SONT PAS des textes de remplacement : la TVA non",
+    "applicable et le delai de retractation de quatorze jours. Elles ne",
+    "viennent pas d un document du client mais du cahier des charges",
+    "(CLAUDE.md §4), qui les impose, et elles decrivent exactement ce que le",
+    "site fait deja : la mention de TVA figure au point de paiement et sur le",
+    "recu Stripe, et la formation ne se deroule jamais avant l expiration du",
+    "delai. Elles restent evidemment a valider par le client, qui est juriste.",
+    "",
+    "Le prix et la duree sont ceux du cahier des charges, pas une invention."
+  ],
+  "titre": "Conditions générales de vente",
+  "$aDemanderAuClient": [
+    "Les CGV sont un document juridique que nous n ecrivons pas : le client est",
+    "juriste et leur formulation l engage (CLAUDE.md §3). Ce dont elles doivent",
+    "parler, pour une vente a des particuliers a distance :",
+    "  - identite du vendeur et coordonnees de reclamation ;",
+    "  - objet, contenu et modalites de la prestation ;",
+    "  - prix, et la mention « TVA non applicable, article 293 B du CGI » ;",
+    "  - modalites de paiement et justificatif remis (le recu Stripe) ;",
+    "  - droit de retractation de quatorze jours, ses modalites d exercice et",
+    "    le formulaire type de retractation ;",
+    "  - ce qui se passe si une session n a pas lieu : c est exactement le",
+    "    point ouvert du §17 de CLAUDE.md, remboursement ou report, et il",
+    "    conditionne la redaction de cet article ;",
+    "  - garanties legales, mediation de la consommation, droit applicable.",
+    "",
+    "Tant que ces CGV ne sont pas fournies, le site encaisse sans conditions",
+    "de vente publiees. A SIGNALER AU CLIENT avant la mise en production."
+  ],
+  "sections": [
+    {
+      "titre": "Objet",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "[À FOURNIR PAR LE CLIENT]"
+        }
+      ]
+    },
+    {
+      "titre": "La formation vendue",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "[À FOURNIR PAR LE CLIENT]"
+        }
+      ]
+    },
+    {
+      "titre": "Prix et paiement",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "La formation Lignes Rouges est vendue au prix de 100 € TTC par stagiaire, pour une séance de 1 h 30 à distance."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "TVA non applicable, article 293 B du CGI."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Le paiement se fait par carte bancaire, au moment de l’inscription. Le reçu délivré par notre prestataire de paiement vaut justificatif."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "[À FOURNIR PAR LE CLIENT]"
+        }
+      ]
+    },
+    {
+      "titre": "Droit de rétractation",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Vous disposez d’un délai de rétractation de quatorze jours à compter de votre inscription. La formation ne se déroule jamais avant l’expiration de ce délai."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "[À FOURNIR PAR LE CLIENT]"
+        }
+      ]
+    },
+    {
+      "titre": "Déroulement de la session",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "[À FOURNIR PAR LE CLIENT]"
+        }
+      ]
+    },
+    {
+      "titre": "Réclamations et médiation",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "[À FOURNIR PAR LE CLIENT]"
+        }
+      ]
+    },
+    {
+      "titre": "Données personnelles",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Le traitement de vos données personnelles est décrit dans notre Politique de confidentialité."
+        }
+      ]
+    }
+  ]
+}

@@ -22,6 +22,65 @@
       "cle": "lignes-rouges",
       "chemin": "lignes-rouges",
       "indexable": true
+    },
+    {
+      "$commentaire": [
+        "Page de contact. HORS DU PERIMETRE du §5, demandee explicitement et",
+        "acceptee en V1. Indexable : « contacter Brain Corporation Hub » est une",
+        "recherche legitime, et la page porte l adresse de la marque."
+      ],
+      "cle": "contact",
+      "chemin": "contact",
+      "indexable": true
+    },
+    {
+      "$commentaire": [
+        "Pages legales (CLAUDE.md §16). Indexables : une page legale doit etre",
+        "trouvable, c est ce qui prouve qu elle est publiee. Elles sont liees",
+        "depuis le pied de page, donc depuis toutes les pages du site."
+      ],
+      "cle": "mentions-legales",
+      "chemin": "mentions-legales",
+      "indexable": true
+    },
+    {
+      "cle": "politique-confidentialite",
+      "chemin": "politique-confidentialite",
+      "indexable": true
+    },
+    {
+      "cle": "conditions-generales-de-vente",
+      "chemin": "conditions-generales-de-vente",
+      "indexable": true
+    },
+    {
+      "$commentaire": [
+        "Page publique du referentiel territorial (CLAUDE.md §5.8).",
+        "Consultation UNIQUEMENT : aucun ajout, retrait ni modification. L interface",
+        "d administration du referentiel est hors perimetre V1 (§8).",
+        "Indexable : c est du contenu public utile, et il repond a une question que",
+        "les visiteurs se posent."
+      ],
+      "cle": "referentiel-territorial",
+      "chemin": "referentiel-territorial",
+      "indexable": true
+    },
+    {
+      "$commentaire": [
+        "Page de suivi des inscriptions (CLAUDE.md §5.7).",
+        "indexable a FAUX : elle ne doit jamais entrer dans un moteur de recherche",
+        "ni dans le sitemap (CLAUDE.md §12). Elle n apparait pas non plus dans la",
+        "navigation du site : on y accede par son URL, et elle est protegee par mot",
+        "de passe.",
+        "",
+        "enfants : cette page a des ecrans enfants (/suivi/referentiel). Le",
+        "serveur accepte donc ses sous-chemins. Sans ce drapeau, toute URL sous",
+        "une page declaree passerait pour valide et repondrait 200."
+      ],
+      "cle": "suivi",
+      "chemin": "suivi",
+      "indexable": false,
+      "enfants": true
     }
   ]
 }

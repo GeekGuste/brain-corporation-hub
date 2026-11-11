@@ -32,6 +32,13 @@ services:
     container_name: brainhub-preprod-ssr
     restart: unless-stopped
     env_file: .env
+    environment:
+      # Pendant le rendu serveur, Node ne sait pas resoudre une URL relative :
+      # le conteneur de rendu joint donc celui de l API par le reseau interne
+      # de Docker, sans repasser par Apache. Sans cela, toute page qui depend
+      # de l API serait rendue VIDE, et c est ce HTML que verraient les moteurs
+      # de recherche.
+      SITE_API_INTERNE: http://api:8080
     ports:
       - '127.0.0.1:${PORT_SSR_HOTE}:3000'
     networks:

@@ -8,25 +8,41 @@
     "n'est jamais recopie ici."
   ],
   "lienEvitement": "Aller au contenu principal",
+  "indications": {
+    "$commentaire": [
+      "Indications lues par les lecteurs d ecran, invisibles a l ecran.",
+      "Un lien EXTERNE ouvre un onglet neuf et doit le dire : sinon la personne",
+      "ne comprend pas pourquoi le bouton « page precedente » ne la ramene plus",
+      "(CLAUDE.md §13). Les liens internes au site, eux, restent dans l onglet",
+      "courant et n ont donc rien a annoncer."
+    ],
+    "nouvelleFenetre": "nouvelle fenêtre"
+  },
   "marque": "Brain Corporation Hub",
   "logo": {
     "$commentaire": [
-      "Logo livre par le graphiste le 12 octobre 2026 (charte « Identite Visuelle",
-      "LIGNES ROUGES », docs/).",
+      "Logo de BRAIN CORPORATION HUB, la plateforme, livre le 27 octobre 2026.",
       "",
-      "Le fichier d origine, Logo_Principal.png, est un carre de 1024 dont le",
-      "dessin n occupe que 709 x 412 au centre : affiche a 40 px de haut, il n en",
-      "serait reste que 16. Celui-ci est recadre sur son contenu, et la zone de",
-      "respiration est donnee par la CSS autour (variable --bch-hauteur-logo du",
-      "fichier de theme). Les originaux sont conserves a cote.",
+      "C est bien celui-ci qui va dans l en-tete, et non celui de Lignes Rouges :",
+      "la plateforme porte le domaine et la page d accueil, le programme est une",
+      "de ses offres (CLAUDE.md §2). Le logo Lignes Rouges s affiche sur la page",
+      "du programme.",
       "",
-      "largeur et hauteur sont les dimensions INTRINSEQUES du fichier, posees en",
-      "attributs pour reserver la place avant chargement."
+      "Le fichier d origine, brain-corporation-hub-logo.jpeg, est un carre de",
+      "1254 px pesant 123 Ko, avec une large marge blanche : le dessin n en occupe",
+      "que 1060 x 845. Celui-ci est recadre sur son contenu et reduit a la",
+      "resolution utile pour un en-tete, soit 16 Ko. L original est conserve a cote.",
+      "",
+      "Le nom de la marque est ecrit A COTE du logo, en vraies lettres : le dessin",
+      "contient des mots qui deviennent illisibles a 40 px de haut.",
+      "",
+      "A DEMANDER AU GRAPHISTE : un SVG, net a toute taille et quelques kilo-octets,",
+      "et une version sur fond colore pour le pied de page."
     ],
-    "fichier": "/visuels/logo-lignes-rouges.png",
-    "largeur": 709,
-    "hauteur": 412,
-    "texteAlternatif": "Lignes Rouges"
+    "fichier": "/visuels/logo-brain-corporation-hub.png",
+    "largeur": 151,
+    "hauteur": 120,
+    "texteAlternatif": ""
   },
   "liens": [
     {
@@ -40,10 +56,75 @@
     {
       "cle": "lignes-rouges",
       "libelle": "Lignes Rouges"
+    },
+    {
+      "cle": "contact",
+      "libelle": "Contact"
     }
   ],
   "piedDePage": {
+    "$commentaire": [
+      "Liens du pied de page. Les pages legales sont ici, et non dans la",
+      "navigation de tete : elles doivent etre atteignables depuis toutes les",
+      "pages, mais elles ne sont pas un chemin de lecture.",
+      "",
+      "Le referentiel territorial y figure aussi. C est une page publique et",
+      "indexable (CLAUDE.md §5.8) : sans un lien depuis le site, elle n etait",
+      "atteignable que par son URL, ce qui la rendait introuvable pour un",
+      "visiteur comme pour un moteur de recherche.",
+      "",
+      "La cle renvoie a seo/routes.config.json : le chemin d URL n est jamais",
+      "recopie ici."
+    ],
     "mention": "Brain Corporation Hub",
-    "liens": []
+    "liens": [
+      {
+        "cle": "mentions-legales",
+        "libelle": "Mentions légales"
+      },
+      {
+        "cle": "politique-confidentialite",
+        "libelle": "Politique de confidentialité"
+      },
+      {
+        "cle": "conditions-generales-de-vente",
+        "libelle": "Conditions générales de vente"
+      },
+      {
+        "cle": "referentiel-territorial",
+        "libelle": "Référentiel territorial"
+      }
+    ]
+  },
+  "pagesLegales": {
+    "$commentaire": [
+      "Libelles du gabarit des pages legales. Ici et non dans les fichiers de",
+      "contenu : ils appartiennent a l interface, pas aux textes du client, et",
+      "ils seraient recopies trois fois."
+    ],
+    "sommaire": "Sommaire"
+  },
+  "mentionCookies": {
+    "$commentaire": [
+      "Mention d INFORMATION sur les cookies, et non bandeau de consentement.",
+      "",
+      "Le site ne depose que des cookies strictement necessaires : aucun cookie",
+      "de mesure d audience, aucun cookie publicitaire, aucun suivi d un site a",
+      "l autre. Les seuls poses sont celui de la session de la page de suivi et",
+      "ceux de notre prestataire de paiement, qui servent a detecter la fraude",
+      "et se chargent uniquement quand le cadre de paiement s affiche.",
+      "",
+      "Ces cookies-la sont dispenses de consentement. Demander un accord dont on",
+      "n a pas besoin serait trompeur, et un bouton « Refuser » qui ne refuse",
+      "rien l est encore plus. La mention informe, elle ne demande rien : il n y",
+      "a donc qu un bouton, et il ne fait que ranger la mention.",
+      "",
+      "Le texte est volontairement explicite sur ce que le site NE fait pas :",
+      "c est un signal de confiance avant un paiement, pour un public qui confie",
+      "des informations sur sa situation administrative (CLAUDE.md §15)."
+    ],
+    "texte": "Ce site ne dépose que les cookies nécessaires à son fonctionnement et au paiement sécurisé. Il ne mesure pas votre audience, ne vous montre aucune publicité et ne vous suit pas d’un site à l’autre. Pour en savoir plus, consultez notre Politique de confidentialité.",
+    "fermer": "J’ai compris",
+    "etiquette": "Information sur les cookies"
   }
 }

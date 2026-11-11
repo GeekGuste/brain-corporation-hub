@@ -1,12 +1,33 @@
 using System.Threading.RateLimiting;
+using BrainHub.Api.Contact;
+using BrainHub.Api.Emails;
 using BrainHub.Api.Inscriptions;
 using BrainHub.Api.Paiement;
+using BrainHub.Api.Suivi;
 using BrainHub.Infrastructure;
 using BrainHub.Infrastructure.Persistence;
 using BrainHub.Infrastructure.Persistence.Seed;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
+
+// -----------------------------------------------------------------------------
+// Production d'un condensat de mot de passe
+// -----------------------------------------------------------------------------
+// Avant toute mise en route : l'application sait produire le condensat du mot
+// de passe administrateur, pour que personne n'ait a installer un outil tiers
+// ni a coller un mot de passe dans un service en ligne (CLAUDE.md §15).
+//
+//   dotnet run -- --hash-mot-de-passe "le mot de passe choisi"
+//
+// Le resultat se pose dans Administration__HashMotDePasse, cote serveur. Le mot
+// de passe en clair n'est jamais stocke nulle part.
+if (args is [.., "--hash-mot-de-passe", var motDePasseAHacher])
+{
+    Console.WriteLine(ServiceAuthentification.Hacher(motDePasseAHacher));
+    return;
+}
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,8 +66,73 @@ builder.Services
     .ValidateDataAnnotations()
     .ValidateOnStart();
 
+// Les modeles d'email vivent dans Mailjet, ou le client les personnalise. Le
+// back appelle un modele par son identifiant et lui passe des variables : aucun
+// texte d'email n'est ecrit dans le code (CLAUDE.md §16).
+builder.Services
+    .AddOptions<OptionsEmail>()
+    .Bind(builder.Configuration.GetSection(OptionsEmail.Section))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+
 builder.Services.AddScoped<ServicePaiement>();
 builder.Services.AddScoped<ServiceInscription>();
+
+// Delai court : le webhook doit repondre vite a Stripe, et un envoi d'email qui
+// traine ne doit pas faire expirer la livraison de l'evenement.
+builder.Services
+    .AddHttpClient<ServiceEmail>(client => client.Timeout = TimeSpan.FromSeconds(10));
+
+// Purge des inscriptions restees en attente de paiement (CLAUDE.md §9).
+builder.Services.AddHostedService<ServicePurge>();
+
+// -----------------------------------------------------------------------------
+// Page de suivi : compte administrateur unique
+// -----------------------------------------------------------------------------
+// Un seul compte, pas de roles, pas d'inscription : la gestion de comptes
+// utilisateurs est hors perimetre V1 (CLAUDE.md §5.7 et §8).
+builder.Services
+    .AddOptions<OptionsAdministration>()
+    .Bind(builder.Configuration.GetSection(OptionsAdministration.Section))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+
+builder.Services.AddScoped<ServiceAuthentification>();
+
+builder.Services
+    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.Name = "brainhub.suivi";
+        // Inaccessible au JavaScript : meme en cas de faille d'injection sur
+        // le site, le cookie de session ne peut pas etre lu.
+        options.Cookie.HttpOnly = true;
+        // Jamais transmis en clair en ligne. En developpement local, le site
+        // tourne en HTTP : exiger HTTPS y rendrait la connexion impossible.
+        options.Cookie.SecurePolicy = builder.Environment.IsDevelopment()
+            ? CookieSecurePolicy.SameAsRequest
+            : CookieSecurePolicy.Always;
+        // Le cookie ne part pas avec une requete venue d'un autre site : c'est
+        // ce qui ferme la falsification de requete intersite sur les deux
+        // actions d'ecriture.
+        options.Cookie.SameSite = SameSiteMode.Strict;
+        options.SlidingExpiration = true;
+
+        // Une API ne redirige pas vers une page de connexion : elle repond 401
+        // et 403, et c'est le front qui decide quoi afficher.
+        options.Events.OnRedirectToLogin = contexte =>
+        {
+            contexte.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            return Task.CompletedTask;
+        };
+        options.Events.OnRedirectToAccessDenied = contexte =>
+        {
+            contexte.Response.StatusCode = StatusCodes.Status403Forbidden;
+            return Task.CompletedTask;
+        };
+    });
+
+builder.Services.AddAuthorization();
 
 // -----------------------------------------------------------------------------
 // Limitation de debit
@@ -62,6 +148,20 @@ builder.Services.AddRateLimiter(options =>
 {
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
 
+    // Connexion a la page de suivi : cinq essais par minute et par adresse.
+    // C est la seule porte vers des donnees sensibles par nature, et sans
+    // limite un mot de passe faible tomberait en quelques heures
+    // (CLAUDE.md §15).
+    options.AddPolicy(EndpointsSuivi.LimiteConnexion, contexte =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: contexte.Connection.RemoteIpAddress?.ToString() ?? "inconnu",
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 5,
+                Window = TimeSpan.FromMinutes(1),
+                QueueLimit = 0,
+            }));
+
     options.AddPolicy(EndpointsInscription.LimiteVerificationEmail, contexte =>
         RateLimitPartition.GetFixedWindowLimiter(
             partitionKey: contexte.Connection.RemoteIpAddress?.ToString() ?? "inconnu",
@@ -72,6 +172,24 @@ builder.Services.AddRateLimiter(options =>
                 // en dessous de ce qu'exige un balayage de liste.
                 PermitLimit = 10,
                 Window = TimeSpan.FromMinutes(1),
+                QueueLimit = 0,
+            }));
+
+    // Formulaire de contact : huit envois par dix minutes et par adresse.
+    //
+    // Le compte inclut les envois REFUSES, parce que le limiteur s execute
+    // avant la validation : une personne qui corrige son adresse email deux
+    // fois a deja consomme trois jetons. Huit laisse donc la place aux
+    // corrections, et laisse aussi passer deux adresses derriere un meme
+    // routeur, sans pour autant permettre d inonder les boites internes. Le
+    // champ piege arrete de son cote la plupart des robots.
+    options.AddPolicy(EndpointsContact.LimiteEnvoi, contexte =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: contexte.Connection.RemoteIpAddress?.ToString() ?? "inconnu",
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 8,
+                Window = TimeSpan.FromMinutes(10),
                 QueueLimit = 0,
             }));
 });
@@ -189,6 +307,11 @@ app.UseCors(PolitiqueCors);
 // et non sur celle du proxy.
 app.UseRateLimiter();
 
+// Avant les endpoints, et apres CORS : l identite doit etre etablie avant que
+// l autorisation ne la verifie.
+app.UseAuthentication();
+app.UseAuthorization();
+
 // -----------------------------------------------------------------------------
 // Endpoints
 // -----------------------------------------------------------------------------
@@ -196,8 +319,12 @@ app.UseRateLimiter();
 // preprod et en production (ProxyPass /api/ vers la racine du conteneur), et le
 // proxy de ng serve fait de meme en local. Le navigateur, lui, appelle toujours
 // /api/... (CLAUDE.md §11).
+app.MapperWebhookStripe();
+app.MapperSuivi();
+app.MapperNotifications();
 app.MapperReferentiels();
 app.MapperInscriptions();
+app.MapperContact();
 
 app.MapHealthChecks("/sante/vivant", new()
 {

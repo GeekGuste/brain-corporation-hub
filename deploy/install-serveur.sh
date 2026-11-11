@@ -166,9 +166,24 @@ ConnectionStrings__BrainHub=Host=$passerelle;Port=5432;Database=$base;Username=$
 # --- A completer aux etapes suivantes -----------------------------------------
 # Stripe__ClePubliable=
 # Stripe__CleSecrete=
+#
+# Secret de signature du webhook. Il est PROPRE A CET ENVIRONNEMENT : Stripe en
+# genere un par endpoint declare. Il y en a trois en tout, avec celui du Stripe
+# CLI en local (CLAUDE.md §9). Ne jamais recopier celui d un autre.
+# L URL a declarer dans Stripe : https://<domaine>/api/webhooks/stripe
 # Stripe__SecretWebhook=
+#
 # Mailjet__CleApi=
 # Mailjet__CleSecrete=
+#
+# Identifiant du modele Mailjet de confirmation, cree par le client. Zero ou
+# absent : l envoi est ignore avec une trace, et la confirmation du paiement
+# aboutit quand meme.
+# Mailjet__ModeleConfirmation=0
+#
+# Bac a sable Mailjet : la requete est validee mais AUCUN email ne part.
+# A laisser a true en preprod, a false en production.
+# Mailjet__BacASable=true
 # Administration__Identifiant=
 # Administration__HachageMotDePasse=
 EOF

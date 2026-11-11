@@ -1,0 +1,127 @@
+{
+  "$commentaire": [
+    "Page de contact. HORS DU PERIMETRE du §5 de CLAUDE.md, demandee",
+    "explicitement et acceptee en V1 : les visiteurs ont des questions avant de",
+    "s inscrire, et la foire aux questions n y repond pas toujours.",
+    "",
+    "Les libelles de l interface sont produits ici, ils ne viennent pas du",
+    "client. La mention de protection des donnees, elle, est SON texte, repris",
+    "tel quel : voir le bloc rgpd.",
+    "",
+    "Aucune promesse de delai de reponse : nous n en connaissons aucun, et le",
+    "client ne s est pas engage. « Nous vous repondrons par email » dit ce qui",
+    "est vrai, sans annoncer un jour ni une heure."
+  ],
+  "surtitre": "Une question avant de vous inscrire",
+  "titre": "Nous écrire",
+  "introduction": [
+    "Vous hésitez, vous ne savez pas si la formation correspond à votre situation, ou vous voulez vérifier un point avant de payer : écrivez-nous.",
+    "Nous vous répondrons par email."
+  ],
+  "champs": {
+    "prenom": {
+      "libelle": "Prénom"
+    },
+    "nom": {
+      "libelle": "Nom"
+    },
+    "email": {
+      "libelle": "Adresse email",
+      "aide": "Exemple : nom@exemple.com"
+    },
+    "telephone": {
+      "$commentaire": [
+        "AUCUNE mention « facultatif » sur ce champ, a la demande expresse du",
+        "client. Les quatre autres champs portent l attribut « required », donc",
+        "les lecteurs d ecran les annoncent comme obligatoires : l absence de",
+        "marque sur celui-ci suffit a dire qu il ne l est pas, sans l ecrire."
+      ],
+      "libelle": "Téléphone"
+    },
+    "message": {
+      "libelle": "Votre question",
+      "$commentaire": [
+        "Pas d aide ici : c est l avertissement du client, rgpd.avertissement, qui",
+        "est affiche sous ce champ. Il est repris tel quel et n existe qu une fois."
+      ],
+      "compteur": "caractères restants"
+    }
+  },
+  "piege": {
+    "$commentaire": [
+      "Champ CACHE, qu un humain ne voit jamais et ne remplit jamais. Les robots",
+      "remplissent tous les champs qu ils trouvent : s il arrive rempli, le",
+      "serveur ecarte le message en silence.",
+      "",
+      "Pas de captcha : il faudrait envoyer l adresse IP du visiteur a un",
+      "service exterieur, et il est infranchissable pour une partie du public",
+      "(CLAUDE.md §13).",
+      "",
+      "Le libelle existe pour les lecteurs d ecran, qui lisent le champ meme",
+      "masque a l oeil : il leur dit de le laisser vide."
+    ],
+    "libelle": "Laissez ce champ vide"
+  },
+  "actions": {
+    "envoyer": "Envoyer ma question",
+    "envoiEnCours": "Envoi en cours"
+  },
+  "succes": {
+    "titre": "Votre question est partie",
+    "texte": "Nous l’avons bien reçue et nous vous répondrons par email à l’adresse que vous avez indiquée."
+  },
+  "erreurs": {
+    "$commentaire": [
+      "Les messages d erreur disent QUOI corriger, et ils sont propres au champ :",
+      "« Ce champ est obligatoire » quatre fois de suite n aide personne",
+      "(CLAUDE.md §13).",
+      "",
+      "Ceux du bloc champs sont les messages du NAVIGATEUR. Le serveur renvoie",
+      "les siens, par champ, et ils prennent le dessus : la validation qui compte",
+      "est la sienne (CLAUDE.md §15)."
+    ],
+    "titre": "Votre question n’a pas pu être envoyée",
+    "introduction": "Corrigez les points suivants, puis réessayez :",
+    "requis": "Ce champ est obligatoire.",
+    "emailInvalide": "Cette adresse email ne semble pas valide. Vérifiez qu’elle contient un arobase et un point.",
+    "champs": {
+      "prenom": "Indiquez votre prénom.",
+      "nom": "Indiquez votre nom.",
+      "email": "Indiquez votre adresse email.",
+      "message": "Écrivez votre question."
+    },
+    "reseau": "Nous n’avons pas pu joindre le serveur. Vérifiez votre connexion, puis réessayez.",
+    "serveur": "Une erreur est survenue de notre côté. Réessayez dans un instant.",
+    "envoiImpossible": "Votre message n’a pas pu être transmis et il n’a pas été conservé. Écrivez-nous directement à contact@braincorporationhub.com.",
+    "tropDeMessages": "Vous avez envoyé plusieurs messages à la suite. Patientez quelques minutes, puis réessayez."
+  },
+  "rgpd": {
+    "$commentaire": [
+      "Mentions de protection des donnees personnelles, FOURNIES PAR LE CLIENT",
+      "(docs/Mentions_RGPD_formulaires_Brain_Corporation_Hub.pdf, recu le",
+      "28 octobre 2026), section 1 « Formulaire de contact et de demande",
+      "d information ».",
+      "",
+      "Texte integre TEL QUEL (CLAUDE.md §3). Seules les apostrophes droites",
+      "sont passees en apostrophes typographiques, comme partout ailleurs.",
+      "",
+      "La seconde phrase du client, rgpd.avertissement, est affichee SOUS le champ",
+      "de message et non dans le bloc de mentions : a cet endroit elle est lue",
+      "avant d ecrire, et c est la qu elle sert. Elle est reprise telle quelle."
+    ],
+    "titre": "Vos données personnelles",
+    "mention": "Les informations recueillies dans ce formulaire sont utilisées par Brain Corporation Hub pour répondre à votre demande et, si vous le souhaitez, vous renseigner sur nos formations. Ce traitement repose sur les mesures précontractuelles prises à votre demande ou, selon la nature du message, sur notre intérêt légitime à répondre aux sollicitations reçues. Les données sont accessibles aux seules personnes habilitées et aux prestataires techniques autorisés. En l’absence d’inscription, elles sont conservées au maximum trois ans à compter de votre dernier contact. Vous pouvez exercer vos droits en écrivant à contact@braincorporationhub.com. Pour en savoir plus, consultez notre Politique de confidentialité.",
+    "avertissement": "N’indiquez pas de données médicales ou de détails confidentiels sur votre situation administrative dans votre message."
+  },
+  "versFormation": {
+    "$commentaire": [
+      "Chaque page doit avoir UN objectif. Celui de la page de contact est de",
+      "repondre a une objection, donc de ramener a l inscription : beaucoup de",
+      "questions trouvent leur reponse dans la foire aux questions, juste",
+      "au-dessus du formulaire d inscription."
+    ],
+    "titre": "Votre réponse est peut-être déjà écrite",
+    "texte": "La page de la formation répond aux questions les plus fréquentes : ce qu’elle contient, à qui elle s’adresse, et comment se passe l’inscription.",
+    "libelle": "Voir la formation Lignes Rouges"
+  }
+}

@@ -1,0 +1,20 @@
+<!-- Mention d'information, pas un bandeau de consentement : un seul bouton,
+     qui ne fait que la ranger. Aucun libelle ecrit ici, tout vient de
+     navigation.json.
+
+     « region » et non « dialog » : elle n'attend aucune reponse et ne bloque
+     rien. Elle ne capture donc pas le focus, et la page reste utilisable sans
+     passer par elle. -->
+@if (affichee()) {
+  <aside class="cookies" role="region" [attr.aria-label]="t.etiquette">
+    <div class="container cookies__contenu">
+      <p class="cookies__texte">
+        <app-texte-avec-liens [texte]="t.texte" [lienInterne]="lienPolitique" />
+      </p>
+
+      <button class="btn btn-vif cookies__bouton" type="button" (click)="ranger()">
+        {{ t.fermer }}
+      </button>
+    </div>
+  </aside>
+}
