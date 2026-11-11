@@ -12,8 +12,14 @@
 // -----------------------------------------------------------------------------
 // LA PALETTE DE LA CHARTE, ET CE QUE CHAQUE COULEUR PEUT PORTER
 // -----------------------------------------------------------------------------
-// La charte donne cinq couleurs. Elle ne dit pas lesquelles peuvent porter du
-// texte : c'est une question de contraste, pas de gout, et le §13 impose des
+// La charte distingue deux rangs, ce que ce fichier ne disait pas jusqu'ici :
+//
+//   PRINCIPALES  #0B8E6D vert        #5BA4DB bleu clair
+//   SECONDAIRES  #0B6380 bleu profond  #BCFF80 vert clair  #FFFFFF blanc
+//
+// Elle ne dit pas lesquelles peuvent porter du TEXTE, et c'est une autre
+// question : une couleur de marque et une couleur lisible ne sont pas la meme
+// chose. C'est une affaire de contraste, pas de gout, et le §13 impose des
 // contrastes accessibles. Rapports mesures sur fond blanc :
 //
 //   #0B6380  bleu-vert profond   6,84:1   OK pour du texte de toute taille
@@ -134,7 +140,7 @@
   $line-height-base: 1.75,
   $headings-font-weight: 700,
   $headings-line-height: 1.15,
-  $headings-color: #0d2a33,
+  $headings-color: #5ba4db,
   // Les tailles reelles sont posees plus bas, en variables CSS, parce qu'elles
   // varient selon la largeur de l'ecran. Ces valeurs servent de repli.
   $h1-font-size: 2.5rem,
@@ -193,6 +199,10 @@
   // qu'une teinte fixe : ils restent justes si la surface change de valeur.
   --bch-aplat-sur-encre: rgb(255 255 255 / 6%);
   --bch-filet-sur-encre: rgb(255 255 255 / 20%);
+  // Voile pose SOUS une legende, par-dessus une photographie. Du noir dilue
+  // et non une teinte de la charte : il doit rester lisible quel que soit le
+  // cliche pose dessous, clair ou sombre.
+  --bch-voile-sur-image: rgb(0 0 0 / 55%);
   // Filet de marque. Le vert de la charte. DECORATIF UNIQUEMENT : il ne porte
   // jamais de texte, il n'est donc pas soumis a un rapport de contraste. C'est
   // lui qui decline le motif du seuil sur tout le site.
